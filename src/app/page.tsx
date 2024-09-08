@@ -22,13 +22,14 @@ export default function MarketPage() {
 
   useEffect(() => {
     // Проверяем, доступен ли объект Telegram
+    const bot = window.Telegram.WebApp
     if (typeof window.Telegram !== 'undefined' && window.Telegram.WebApp) {
-      window.Telegram.WebApp.ready(); // Инициализация
+      bot.ready();
 
       // Установка цветов интерфейса
-      window.Telegram.WebApp.setHeaderColor('#FF5733'); // Цвет заголовка
-      window.Telegram.WebApp.setBackgroundColor('#FFFFFF'); // Цвет фона
-      window.Telegram.WebApp.setBottomBarColor('#4CAF50'); // Цвет нижней панели
+      bot.setHeaderColor('#000')
+      bot.setBackgroundColor('#000')
+      bot.setBottomBarColor('#000')
 
       // Пример получения текущих значений
       console.log('Header color:', window.Telegram.WebApp.themeParams.bg_color);
@@ -37,7 +38,7 @@ export default function MarketPage() {
     } else {
       console.warn('window.Telegram is not available. Running locally.');
       // Устанавливаем стили по умолчанию для локальной разработки
-      document.body.style.backgroundColor = '#ffffff';
+      document.body.style.backgroundColor = '#000';
     }
   }, []);
 

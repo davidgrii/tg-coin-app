@@ -9,7 +9,7 @@ interface TelegramWebApp {
   setBottomBarColor: (color: string) => void;  // Метод для установки цвета нижней панели
   themeParams: {
     bg_color: string;                           // Цвет фона
-    secondary_bg_color: string;                 // Вторичный цвет фона
+    secondary_bg_color: string;
   };
 }
 
