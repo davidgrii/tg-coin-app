@@ -22,13 +22,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html className={'bg-background min-h-screen'} lang="en">
-      <body
-        className={cn(`min-h-screen bg-background ${inter.className}`)}
-      >
-        {children}
-      <MainNav/>
-      </body>
+    <html lang="en">
+    <head>
+      {/* Подключаем скрипт telegram-web-app.js */}
+      <script src="https://telegram.org/js/telegram-web-app.js" defer></script>
+    </head>
+    <body
+      className={cn(`min-h-screen bg-background ${inter.className}`)}
+    >
+    {children}
+    <MainNav />
+    </body>
     </html>
   );
 }

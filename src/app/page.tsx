@@ -23,15 +23,25 @@ export default function MarketPage() {
   useEffect(() => {
     // Проверяем, доступен ли объект Telegram
     if (typeof window.Telegram !== 'undefined' && window.Telegram.WebApp) {
-      window.Telegram.WebApp.ready();
+      window.Telegram.WebApp.ready(); // Инициализация
 
-      // Установка цветовой схемы
-      document.body.style.backgroundColor = "#000";
-      window.Telegram.WebApp.setHeaderColor("#000");
-      window.Telegram.WebApp.setFooterColor("#000");
+      // Проверяем, развернуто ли приложение
+      if (!window.Telegram.WebApp.isExpanded) {
+        // Если не развернуто, развернуть его
+        window.Telegram.WebApp.expand();
+      }
+
+      // Установка цветов интерфейса
+      window.Telegram.WebApp.setHeaderColor('#FF5733');
+      window.Telegram.WebApp.setBackgroundColor('#FFFFFF');
+      window.Telegram.WebApp.setBottomBarColor('#4CAF50');
+
+      // Пример получения текущих значений
+      console.log('Is expanded:', window.Telegram.WebApp.isExpanded);
+    } else {
       console.warn('window.Telegram is not available. Running locally.');
-      // Здесь можно установить стили по умолчанию или другие настройки для локальной разработки
-      document.body.style.backgroundColor = "#000"; // Например, белый фон
+      // Устанавливаем стили по умолчанию для локальной разработки
+      document.body.style.backgroundColor = '#ffffff';
     }
   }, []);
 
