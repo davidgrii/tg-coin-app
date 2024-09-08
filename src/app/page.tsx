@@ -31,6 +31,10 @@ export default function MarketPage() {
       bot.setBackgroundColor('#000')
       bot.setBottomBarColor('#000')
 
+      if (!bot.isExpanded) {
+        bot.expand();
+      }
+
       // Пример получения текущих значений
       console.log('Header color:', window.Telegram.WebApp.themeParams.bg_color);
       console.log('Background color:', window.Telegram.WebApp.themeParams.bg_color);
