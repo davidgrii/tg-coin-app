@@ -26,10 +26,9 @@ export default function MarketPage() {
       window.Telegram.WebApp.ready();
 
       // Установка цветовой схемы
-      document.body.style.backgroundColor = "#000"; // Замените на нужный цвет
-      window.Telegram.WebApp.setHeaderColor("#000"); // Замените на нужный цвет
-      window.Telegram.WebApp.setFooterColor("#000"); // Замените на нужный цвет
-    } else {
+      document.body.style.backgroundColor = "#000";
+      window.Telegram.WebApp.setHeaderColor("#000");
+      window.Telegram.WebApp.setFooterColor("#000");
       console.warn('window.Telegram is not available. Running locally.');
       // Здесь можно установить стили по умолчанию или другие настройки для локальной разработки
       document.body.style.backgroundColor = "#000"; // Например, белый фон
