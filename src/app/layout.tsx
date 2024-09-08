@@ -22,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html className={'bg-background min-h-screen'} lang="en">
       <body
         className={cn(`min-h-screen bg-background ${inter.className}`)}
       >

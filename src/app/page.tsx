@@ -93,10 +93,8 @@ export default function MarketPage() {
                   <StarIcon />
                 </button>
               )}
-
             </div>
           </CardContent>
-
         ))}
       </Card>
     </Container>
