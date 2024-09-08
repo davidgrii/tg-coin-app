@@ -2,7 +2,7 @@
 import { Container } from '@/components'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { useEffect, useState } from 'react'
-import { useCryptoStore } from '@/store/cryptoStore'
+import { useCryptoStore, useInitializeCryptoStore } from '@/store/cryptoStore'
 import { StarFavoriteIcon, StarIcon } from '@/components/icons/icons'
 
 interface ICrypto {
@@ -15,6 +15,8 @@ interface ICrypto {
 }
 
 export default function MarketPage() {
+  useInitializeCryptoStore();
+
   const [cryptoData, setCryptoData] = useState<ICrypto[]>([])
   const {favorites, addFavorite, removeFavorite  } = useCryptoStore()
 
