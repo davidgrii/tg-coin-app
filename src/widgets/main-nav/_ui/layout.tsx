@@ -8,7 +8,7 @@ interface IProps {
 
 export const Layout: React.FC<IProps> = ({ nav, className }) => {
   return (
-    <div className={className}>
+    <div className={'my-8'}>
       {nav}
     </div>
   )

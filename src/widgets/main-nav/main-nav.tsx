@@ -1,6 +1,6 @@
 import React from 'react'
-import { Layout } from '@/widgets/nav/_ui/layout'
-import { Navbar } from '@/widgets/nav/_ui/navbar'
+import { Layout } from '@/widgets/main-nav/_ui/layout'
+import { Navbar } from '@/widgets/main-nav/_ui/navbar'
 import { FavoritesIcon, MarketIcon, PortfolioIcon, SearchIcon } from '@/components/icons'
 
 interface IProps {
@@ -10,8 +10,8 @@ interface IProps {
 const NAV_ITEMS = [
   {
     label: 'Market',
-    href: '/market',
-    exact: true,
+    href: '/',
+    exact: false,
     icon: <MarketIcon />,
   },
   {
@@ -23,7 +23,7 @@ const NAV_ITEMS = [
   {
     label: 'Portfolio',
     href: '/portfolio',
-    exact: true,
+    exact: false,
     icon: <PortfolioIcon />,
   },
   {
@@ -34,7 +34,7 @@ const NAV_ITEMS = [
   },
 ]
 
-export const Nav: React.FC<IProps> = ({ className }) => {
+export const MainNav: React.FC<IProps> = ({ className }) => {
   return (
     <Layout nav={<Navbar navItems={NAV_ITEMS}/>} />
   );
