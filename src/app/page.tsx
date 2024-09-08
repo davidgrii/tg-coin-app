@@ -21,6 +21,22 @@ export default function MarketPage() {
   const { favorites, addFavorite, removeFavorite } = useCryptoStore()
 
   useEffect(() => {
+    // Проверяем, доступен ли объект Telegram
+    if (typeof window.Telegram !== 'undefined' && window.Telegram.WebApp) {
+      window.Telegram.WebApp.ready();
+
+      // Установка цветовой схемы
+      document.body.style.backgroundColor = "#000"; // Замените на нужный цвет
+      window.Telegram.WebApp.setHeaderColor("#000"); // Замените на нужный цвет
+      window.Telegram.WebApp.setFooterColor("#000"); // Замените на нужный цвет
+    } else {
+      console.warn('window.Telegram is not available. Running locally.');
+      // Здесь можно установить стили по умолчанию или другие настройки для локальной разработки
+      document.body.style.backgroundColor = "#000"; // Например, белый фон
+    }
+  }, []);
+
+  useEffect(() => {
     const fetchCryptoData = async () => {
       const res = await fetch('/api/crypto-data')
       const data = await res.json()
