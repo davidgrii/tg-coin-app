@@ -17,7 +17,7 @@ export const Navbar: React.FC<IProps> = ({ navItems, className }) => {
 
   return (
     <nav>
-      <ul className={'flex justify-center gap-14'}>
+      <ul className={'grid grid-cols-4 gap-8'}>
         {navItems.map(({ href, label, exact, icon }) => (
           <li key={label}>
             <Link
@@ -30,7 +30,7 @@ export const Navbar: React.FC<IProps> = ({ navItems, className }) => {
               )}
             >
               {icon}
-              <span className={'text-sm'}>
+              <span className={'text-xs'}>
                 {label}
               </span>
             </Link>

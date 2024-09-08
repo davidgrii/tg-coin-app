@@ -57,7 +57,7 @@ export default function MarketPage() {
         </div>
       </div>
 
-      <Card className={'bg-background grid gap-8 border-0'}>
+      <Card className={'bg-background grid gap-7 border-0'}>
         {cryptoData.map((crypto, index) => (
           <CardContent key={crypto.id} className={'p-0 flex justify-between'}>
 

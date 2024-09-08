@@ -1,5 +1,5 @@
 export const MarketIcon = () => (
-  <svg width="23" height="23" viewBox="0 0 62 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="21" height="21" viewBox="0 0 62 52" fill="none" xmlns="http://www.w3.org/2000/svg">
     <mask id="path-1-inside-1_29_148" fill="white">
       <rect x="38" y="20" width="24" height="32" rx="5" />
     </mask>
@@ -18,7 +18,7 @@ export const MarketIcon = () => (
 )
 
 export const FavoritesIcon = () => (
-  <svg width="23" height="23" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="21" height="21" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M43.0792 51.5189L27.8164 43.4303L12.7955 52L15.4313 34.3127L3 22.0137L19.8917 19.1709L27.2297 3L35.0336 18.9303L52 21.2352L39.9313 33.9235L43.0792 51.5189Z"
       stroke="#9A9A9A" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
@@ -26,7 +26,7 @@ export const FavoritesIcon = () => (
 )
 
 export const PortfolioIcon = () => (
-  <svg width="23" height="23" viewBox="0 0 64 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="21" height="21" viewBox="0 0 64 44" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="3" y="3" width="51" height="38" rx="5" stroke="#9D9D9D" strokeWidth="6" />
     <rect x="35" y="17.7736" width="27" height="8.45283" rx="4.22642" stroke="#9D9D9D" strokeWidth="4" />
     <path
@@ -36,7 +36,7 @@ export const PortfolioIcon = () => (
 )
 
 export const SearchIcon = () => (
-  <svg width="23" height="23" viewBox="0 0 55 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg width="21" height="21" viewBox="0 0 55 54" fill="none" xmlns="http://www.w3.org/2000/svg">
     <circle cx="21.6316" cy="21.6316" r="18.6316" stroke="#9D9D9D" strokeWidth="6" />
     <path d="M35.2266 34.1088L51.9997 50.8819" stroke="#9D9D9D" strokeWidth="6" strokeLinecap="round" />
   </svg>
