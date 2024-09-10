@@ -1,45 +1,25 @@
 'use client'
-import { useEffect, useState } from 'react'
-import { useCryptoStore, useInitializeCryptoStore } from '@/store/cryptoStore'
+
+import { useCryptoStore, useInitializeCryptoStore } from '@/store/crypto/cryptoStore'
 import { Container } from '@/components'
 import { Card, CardContent } from '@/components/ui/card'
 import { StarFavoriteIcon, StarIcon } from '@/components/icons/icons'
-
-interface ICrypto {
-  id: string;
-  name: string;
-  symbol: string;
-  image: string;
-  current_price: number;
-  price_change_percentage_24h: number;
-}
+import { CryptoTableHeader } from '@/components/crypto-table-header'
+import { useFavoritesCrypto } from '@/hooks'
 
 
 export default function FavoritesPage() {
   useInitializeCryptoStore()
-  const [favoriteCryptoData, setFavoriteCryptoData] = useState<ICrypto[]>([])
+
   const { favorites, addFavorite, removeFavorite } = useCryptoStore()
 
-  useEffect(() => {
-    const fetchFavoriteCryptoData = async () => {
-      if (favorites.length === 0) {
-        setFavoriteCryptoData([])
-        return
-      }
-
-      const res = await fetch('/api/crypto-data')
-      const allCryptoData = await res.json()
-
-      // Фильтруем данные для получения только избранных криптовалют
-      const filteredFavorites = allCryptoData.filter((crypto: any) => favorites.includes(crypto.id))
-      setFavoriteCryptoData(filteredFavorites)
-    }
-
-    fetchFavoriteCryptoData()
-  }, [favorites])
+  const {favoriteCryptoData, isLoading} = useFavoritesCrypto()
 
   return (
-    <Container>
+    <Container className={'pt-0 mb-20'}>
+
+      <CryptoTableHeader />
+
       <Card className={'bg-background grid gap-7 border-0'}>
         {favoriteCryptoData.length === 0 ? (
           <p className={'text-center'}>No favorite cryptocurrencies found.</p>

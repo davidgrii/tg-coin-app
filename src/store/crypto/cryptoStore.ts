@@ -9,9 +9,8 @@ interface ICryptoStore {
 }
 
 export const useCryptoStore = create<ICryptoStore>((set) => ({
-  favorites: [], // Изначально пустой массив
+  favorites: [],
 
-  // Загрузка избранных элементов из localStorage на клиенте
   initializeFavorites: () => {
     const storedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]');
     set({ favorites: storedFavorites });
@@ -30,7 +29,6 @@ export const useCryptoStore = create<ICryptoStore>((set) => ({
   })
 }));
 
-// Хук для инициализации хранилища
 export const useInitializeCryptoStore = () => {
   const initializeFavorites = useCryptoStore((state) => state.initializeFavorites);
 

@@ -2,7 +2,6 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { cn } from '@/components/ui/utils'
-import { MainNav } from '@/widgets/main-nav/main-nav'
 import React from 'react'
 
 const inter = Inter({
@@ -30,7 +29,6 @@ export default function RootLayout({
       className={cn(`min-h-screen bg-background ${inter.className}`)}
     >
     {children}
-    <MainNav />
     </body>
     </html>
   );
