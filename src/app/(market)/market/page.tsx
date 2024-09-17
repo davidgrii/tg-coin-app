@@ -9,26 +9,6 @@ import { motion } from 'framer-motion'
 import { useCrypto, useCryptoFilter } from '@/hooks'
 import { SearchInput } from '@/components/market'
 
-const container = {
-  hidden: { opacity: 1, scale: 0 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      delayChildren: 0.3,
-      staggerChildren: 0.2
-    }
-  }
-}
-
-const item = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1
-  }
-}
-
 export default function MarketPage() {
   useInitializeCryptoStore()
 
@@ -88,14 +68,14 @@ export default function MarketPage() {
           ))}
         </div>
         : <motion.div
-          variants={container}
-          initial="hidden"
-          animate="visible"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
         >
           <Card className={'bg-background grid gap-8 border-0'}>
             {filteredCryptoData.length > 0 && (
               filteredCryptoData.map((crypto, index) => (
-                <motion.div key={crypto.id} variants={item}>
+                <motion.div key={crypto.id}>
                   <CardContent className={'p-0 flex justify-between'}>
                     <div className="flex items-center gap-2">
                       <span className={'w-5 text-sm text-muted-foreground'}>{index + 1}</span>

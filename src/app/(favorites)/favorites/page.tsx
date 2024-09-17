@@ -8,26 +8,6 @@ import { useFavoritesCrypto } from '@/hooks'
 import { EmptyFavorites } from '@/components/favorites'
 import { motion } from 'framer-motion'
 
-const container = {
-  hidden: { opacity: 1, scale: 0 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      delayChildren: 0.3,
-      staggerChildren: 0.2
-    }
-  }
-}
-
-const item = {
-  hidden: { y: 20, opacity: 0 },
-  visible: {
-    y: 0,
-    opacity: 1
-  }
-}
-
 export default function FavoritesPage() {
   useInitializeCryptoStore()
 
@@ -53,64 +33,64 @@ export default function FavoritesPage() {
             <CryptoSkeleton key={index} />
           ))}
         </div>
-          : <motion.div
-            variants={container}
-            initial="hidden"
-            animate="visible"
-          >
-            <Card className={'bg-background grid gap-8 border-0'}>
-              {favoriteCryptoData.length === 0 ? (
-                <EmptyFavorites isFavoritesEmpty={favoriteCryptoData.length === 0} />
-              ) : (
-                favoriteCryptoData.map((crypto, index) => (
-                  <motion.div key={crypto.id} variants={item}>
-                    <CardContent className={'p-0 flex justify-between'}>
+        : <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Card className={'bg-background grid gap-8 border-0'}>
+            {favoriteCryptoData.length === 0 ? (
+              <EmptyFavorites isFavoritesEmpty={favoriteCryptoData.length === 0} />
+            ) : (
+              favoriteCryptoData.map((crypto, index) => (
+                <motion.div key={crypto.id} >
+                  <CardContent className={'p-0 flex justify-between'}>
 
-                      <div className="flex items-center gap-2">
-                        <span className={'w-5 text-sm text-muted-foreground'}>{index + 1}</span>
-                        <div className="h-9 w-9">
-                          <img src={crypto.image} alt="Avatar" />
-                        </div>
-                        <div className="grid gap-0.5">
-                          <p className="text-sm leading-none">
-                            {crypto.symbol.toUpperCase()}
-                          </p>
-                          <p className="text-[8.5px] font-semibold text-muted-foreground">
-                            {crypto.name}
-                          </p>
-                        </div>
+                    <div className="flex items-center gap-2">
+                      <span className={'w-5 text-sm text-muted-foreground'}>{index + 1}</span>
+                      <div className="h-9 w-9">
+                        <img src={crypto.image} alt="Avatar" />
                       </div>
-
-                      <div className={'flex items-center'}>
-                        <p
-                          className={`${crypto.current_price.toString().length > 8 ? 'text-[12px]' : 'text-sm'} text-muted-foreground mr-4 ml-2 whitespace-nowrap`}>
-                          {formatPrice(crypto.current_price)} $
+                      <div className="grid gap-0.5">
+                        <p className="text-sm leading-none">
+                          {crypto.symbol.toUpperCase()}
                         </p>
-
-                        <div
-                          className={`${crypto.price_change_percentage_24h.toString().includes('-')
-                            ? 'text-secondary'
-                            : 'text-primary'} w-16 text-sm text-right font-semibold mr-3`}
-                        >
-                          {crypto.price_change_percentage_24h.toFixed(2)} %
-                        </div>
-
-                        {favorites.includes(crypto.id) ? (
-                          <button className={'p-1 pb-[6px]'} onClick={() => removeFavorite(crypto.id)}>
-                            <StarFavoriteIcon />
-                          </button>
-                        ) : (
-                          <button className={'p-1 pb-[6px'} onClick={() => addFavorite(crypto.id)}>
-                            <StarIcon />
-                          </button>
-                        )}
+                        <p className="text-[8.5px] font-semibold text-muted-foreground">
+                          {crypto.name}
+                        </p>
                       </div>
-                    </CardContent>
-                  </motion.div>
-                ))
-              )}
-            </Card>
-          </motion.div>
+                    </div>
+
+                    <div className={'flex items-center'}>
+                      <p
+                        className={`${crypto.current_price.toString().length > 8 ? 'text-[12px]' : 'text-sm'} text-muted-foreground mr-4 ml-2 whitespace-nowrap`}>
+                        {formatPrice(crypto.current_price)} $
+                      </p>
+
+                      <div
+                        className={`${crypto.price_change_percentage_24h.toString().includes('-')
+                          ? 'text-secondary'
+                          : 'text-primary'} w-16 text-sm text-right font-semibold mr-3`}
+                      >
+                        {crypto.price_change_percentage_24h.toFixed(2)} %
+                      </div>
+
+                      {favorites.includes(crypto.id) ? (
+                        <button className={'p-1 pb-[6px]'} onClick={() => removeFavorite(crypto.id)}>
+                          <StarFavoriteIcon />
+                        </button>
+                      ) : (
+                        <button className={'p-1 pb-[6px'} onClick={() => addFavorite(crypto.id)}>
+                          <StarIcon />
+                        </button>
+                      )}
+                    </div>
+                  </CardContent>
+                </motion.div>
+              ))
+            )}
+          </Card>
+        </motion.div>
       }
 
     </Container>
