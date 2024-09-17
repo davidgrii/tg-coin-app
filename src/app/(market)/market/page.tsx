@@ -22,24 +22,24 @@ export default function MarketPage() {
   const { filteredCryptoData } = useCryptoFilter(cryptoData, searchValue)
 
   useEffect(() => {
-    const bot = window.Telegram.WebApp
+    if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
+      const bot = window.Telegram.WebApp;
 
-    if (typeof window.Telegram !== 'undefined' && window.Telegram.WebApp) {
-      bot.ready()
+      bot.ready();
+      bot.setHeaderColor('#000');
+      bot.setBackgroundColor('#000');
+      bot.setBottomBarColor('#000');
 
-      bot.setHeaderColor('#000')
-      bot.setBackgroundColor('#000')
-      bot.setBottomBarColor('#000')
-
-      bot.isVerticalSwipesEnabled = false
+      bot.isVerticalSwipesEnabled = false;
 
       if (!bot.isExpanded) {
-        bot.expand()
+        bot.expand();
       }
+
     } else {
-      document.body.style.backgroundColor = '#000'
+      document.body.style.backgroundColor = '#000';
     }
-  }, [])
+  }, []);
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('en-US', {
