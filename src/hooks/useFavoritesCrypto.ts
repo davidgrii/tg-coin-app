@@ -12,6 +12,7 @@ export const useFavoritesCrypto = () => {
 
   useEffect(() => {
     const fetchFavoriteCryptoData = async () => {
+      if (isLoading) return
       if (favorites.length === 0) {
         setFavoriteCryptoData([])
         return
@@ -22,7 +23,7 @@ export const useFavoritesCrypto = () => {
     }
 
     fetchFavoriteCryptoData()
-  }, [favorites, cryptoData])
+  }, [favorites, cryptoData, isLoading])
 
   return { favoriteCryptoData, isLoading }
 }

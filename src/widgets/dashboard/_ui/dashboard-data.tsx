@@ -33,11 +33,11 @@ export const DashboardData: React.FC<IProps> = ({ className }) => {
   }
 
   return (
-    <Card className={cn('flex py-4 px-6 items-center justify-between rounded-xl border-0', className)}>
+    <Card className={cn('flex py-4 pl-6 pr-9 items-center justify-between rounded-xl border-0', className)}>
       <CardHeader className={'p-0 space-y-0.5'}>
-        <CardTitle className={'text-sm'}>Market Cap</CardTitle>
-        <CardDescription className={'text-xs text-muted-foreground font-semibold'}>
-          {totalMarketCapUSD.toLocaleString().split('.')[0]} $
+        <CardTitle className={'text-xs'}>Market Cap</CardTitle>
+        <CardDescription className={'text-sm text-muted-foreground font-bold'}>
+          {totalMarketCapUSD.toLocaleString().split('.')[0].replace(/,/g, ',')} $
         </CardDescription>
       </CardHeader>
       <CardContent className={'p-0'}>

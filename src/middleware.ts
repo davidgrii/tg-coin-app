@@ -5,7 +5,7 @@ export function middleware(req: NextRequest) {
 
  if (url.pathname === '/') {
    url.pathname = '/market'
-   return NextResponse.redirect(url)
+   return NextResponse.redirect(new URL('/market', req.url))
  }
 
  return NextResponse.next()

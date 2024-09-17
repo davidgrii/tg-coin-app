@@ -10,7 +10,10 @@ export const CryptoSkeleton: React.FC<IProps> = ({ className }) => {
     <div className="flex items-center justify-center space-x-3">
       <Skeleton className="h-[40px] w-[40px] rounded-full" />
 
-      <Skeleton className="h-7 w-[230px] rounded" />
+      <div className={'flex flex-col gap-1'}>
+        <Skeleton className="h-3 w-[210px] rounded-[2px]" />
+        <Skeleton className="h-2 w-[110px] rounded-[2px]" />
+      </div>
 
     </div>
   )

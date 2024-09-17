@@ -1,0 +1,1 @@
+export { EmptyFavorites } from './_ui/empty-favorites'

@@ -6,15 +6,16 @@ interface IProps {
 
 export const CryptoTableHeader: React.FC<IProps> = ({ className }) => {
   return (
-    <div className={'flex justify-between text-sm font-medium text-muted-foreground mt-3 mb-4'}>
+    <div className={'flex justify-between text-[12.5px] font-medium text-muted-foreground mt-3 mb-4'}>
       <div className={'flex gap-5'}>
         <div>#</div>
         <div>Coin</div>
       </div>
-      <div className={'flex gap-9 mr-10'}>
+      <div className={'flex gap-10 mr-9'}>
         <div>Price</div>
         <div>24h %</div>
       </div>
     </div>
-  );
+)
+
 };

@@ -1,2 +1,3 @@
-export { useCryptoStore } from './crypto/cryptoStore'
-export { useSearchStore } from './search/searchStore'
+export { useCryptoStore, useInitializeCryptoStore } from './crypto/crypto.store'
+export { useSearchStore } from './search/search.store'
+export { usePortfolioStore } from './portfolio/portfolio.store'

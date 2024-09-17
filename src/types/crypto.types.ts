@@ -3,8 +3,20 @@ export interface ICrypto {
   name: string;
   symbol: string;
   image: string;
+  quantity: number
   current_price: number;
   price_change_percentage_24h: number;
+}
+
+export interface IPortfolio {
+  portfolio: ICrypto[]
+  totalBalance: number
+  totalPercentageChange: number;
+  addCrypto: (crypto: ICrypto) => void
+  updateCrypto: (index: number, updatedCrypto: ICrypto) => void
+  deleteCrypto: (index: number) => void
+  calculateTotalBalance: () => void
+  calculateTotalPercentageChange: () => void
 }
 
 export interface IGlobalMarketData {
