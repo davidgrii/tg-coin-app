@@ -3,7 +3,7 @@ export interface ICrypto {
   name: string;
   symbol: string;
   image: string;
-  quantity: number
+  quantity?: number
   current_price: number;
   price_change_percentage_24h: number;
 }
