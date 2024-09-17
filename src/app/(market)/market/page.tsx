@@ -23,23 +23,23 @@ export default function MarketPage() {
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
-      const bot = window.Telegram.WebApp;
+      const bot = window.Telegram.WebApp
 
-      bot.ready();
-      bot.setHeaderColor('#000');
-      bot.setBackgroundColor('#000');
-      bot.setBottomBarColor('#000');
+      bot.ready()
+      bot.setHeaderColor('#000')
+      bot.setBackgroundColor('#000')
+      bot.setBottomBarColor('#000')
 
-      bot.isVerticalSwipesEnabled = false;
+      bot.isVerticalSwipesEnabled = false
 
       if (!bot.isExpanded) {
-        bot.expand();
+        bot.expand()
       }
 
     } else {
-      document.body.style.backgroundColor = '#000';
+      document.body.style.backgroundColor = '#000'
     }
-  }, []);
+  }, [])
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -81,7 +81,7 @@ export default function MarketPage() {
                     <div className="flex items-center gap-2">
                       <span className={'w-5 text-sm text-muted-foreground'}>{index + 1}</span>
                       <div className="h-9 w-9">
-                        <img src={crypto.image} alt={crypto.name}  />
+                        <img src={crypto.image} alt={crypto.name} />
                       </div>
                       <div className="grid gap-0.5">
                         <p className="text-sm leading-none">
@@ -95,8 +95,8 @@ export default function MarketPage() {
 
                     <div className={'flex items-center'}>
                       <p
-                        className={`${crypto.current_price.toString().length > 8 
-                          ? 'text-[12px]' 
+                        className={`${crypto.current_price.toString().length > 8
+                          ? 'text-[12px]'
                           : 'text-sm'
                         } text-muted-foreground mr-4 ml-2.5 whitespace-nowrap`}>
                         {formatPrice(crypto.current_price)} $
