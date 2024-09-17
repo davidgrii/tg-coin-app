@@ -22,8 +22,9 @@ export default function MarketPage() {
   const { filteredCryptoData } = useCryptoFilter(cryptoData, searchValue)
 
   useEffect(() => {
+    const bot = window.Telegram.WebApp
+
     if (typeof window.Telegram !== 'undefined' && window.Telegram.WebApp) {
-      const bot = window.Telegram.WebApp
       bot.ready()
 
       bot.setHeaderColor('#000')
