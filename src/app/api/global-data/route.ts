@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 
 export async function GET() {
   try {
-    const url = 'http://localhost:5000/api/global';
+    const url = 'https://twenty-pugs-invite.loca.lt/api/global';
 
     const res = await fetch(url, {
       method: 'GET'
