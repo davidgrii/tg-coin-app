@@ -41,7 +41,7 @@ export const DashboardData: React.FC<IProps> = ({ className }) => {
       <CardHeader className={'p-0 space-y-0.5'}>
         <CardTitle className={'text-xs'}>Market Cap</CardTitle>
         <CardDescription className={'text-sm text-muted-foreground font-bold'}>
-          {totalMarketCapUSD.toLocaleString().split('.')[0].replace(/,/g, ',')} $
+          {formatNumberWithCommas(totalMarketCapUSD)} $
         </CardDescription>
       </CardHeader>
       <CardContent className={'p-0'}>
