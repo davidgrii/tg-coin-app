@@ -23,7 +23,7 @@ export const DashboardUserBalance: React.FC<IProps> = ({ className }) => {
       <CardHeader className={'p-0 space-y-0.5'}>
         <CardTitle className={'text-xs text-muted-foreground'}>My balance</CardTitle>
         <CardDescription className={'text-sm text-foreground font-bold'}>
-          {totalBalance.toLocaleString().split('.')[0].replace(/,/g, ',')} $
+          {totalBalance.toLocaleString('en-US').split('.')[0].replace(/,/g, ',')} $
         </CardDescription>
       </CardHeader>
       <CardContent className={'p-0'}>
