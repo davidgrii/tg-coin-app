@@ -24,7 +24,7 @@ export const DashboardData: React.FC<IProps> = ({ className }) => {
     fetchGlobalCryptoData()
   }, [])
 
-  const totalMarketCapUSD = Math.floor(dashboardData?.total_market_cap?.usd || 0) // Преобразуем в целое
+  const totalMarketCapUSD = Math.floor(dashboardData?.total_market_cap?.usd || 0)
   const marketCapChange24h = dashboardData?.market_cap_change_percentage_24h_usd || null
 
   const getMarketCapChangeClass = () => {
@@ -32,7 +32,7 @@ export const DashboardData: React.FC<IProps> = ({ className }) => {
     return marketCapChange24h < 0 ? 'text-secondary' : 'text-primary';
   }
 
-  const formatNumberWithCommas = (num) => {
+  const formatNumberWithCommas = (num: number) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
 
@@ -41,7 +41,7 @@ export const DashboardData: React.FC<IProps> = ({ className }) => {
       <CardHeader className={'p-0 space-y-0.5'}>
         <CardTitle className={'text-xs'}>Market Cap</CardTitle>
         <CardDescription className={'text-sm text-muted-foreground font-bold'}>
-          {formatNumberWithCommas(totalMarketCapUSD)} $
+          {totalMarketCapUSD.toLocaleString().split('.')[0].replace(/,/g, ',')} $
         </CardDescription>
       </CardHeader>
       <CardContent className={'p-0'}>
