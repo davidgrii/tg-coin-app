@@ -24,7 +24,7 @@ export const DashboardData: React.FC<IProps> = ({ className }) => {
     fetchGlobalCryptoData()
   }, [])
 
-  const totalMarketCapUSD = Math.floor(dashboardData?.total_market_cap?.usd || 0)
+  const totalMarketCapUSD = Math.floor(dashboardData?.total_market_cap?.usd || 0) // Преобразуем в целое
   const marketCapChange24h = dashboardData?.market_cap_change_percentage_24h_usd || null
 
   const getMarketCapChangeClass = () => {
