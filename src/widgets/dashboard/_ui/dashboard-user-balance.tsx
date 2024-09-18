@@ -12,12 +12,12 @@ interface IProps {
 export const DashboardUserBalance: React.FC<IProps> = ({ className }) => {
   const { totalBalance, totalPercentageChange } = usePortfolioStore()
 
+
   const getMarketCapChangeClass = () => {
     if (totalPercentageChange === 0) return 'text-muted'
     return totalPercentageChange < 0 ? 'text-secondary' : 'text-primary'
   }
 
-  // Функция для форматирования чисел с запятыми
   const formatNumberWithCommas = (num) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   };
