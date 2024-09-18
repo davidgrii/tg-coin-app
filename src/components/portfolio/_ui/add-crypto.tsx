@@ -17,9 +17,9 @@ interface IProps {
 
 export const AddCrypto: React.FC<IProps> = ({ onAddCrypto, isOpen, setIsOpen, isEmpty }) => {
   const { cryptoData } = useCrypto()
-  const [searchValue, setSearchValue] = useState('') // Состояние для поиска
-  const [selectedCrypto, setSelectedCrypto] = useState<ICrypto | null>(null) // Состояние для выбранной криптовалюты
-  const [quantity, setQuantity] = useState('') // Количество криптовалюты
+  const [searchValue, setSearchValue] = useState('')
+  const [selectedCrypto, setSelectedCrypto] = useState<ICrypto | null>(null)
+  const [quantity, setQuantity] = useState('')
 
   const { filteredCryptoData } = useCryptoFilter(cryptoData, searchValue)
 
@@ -62,7 +62,6 @@ export const AddCrypto: React.FC<IProps> = ({ onAddCrypto, isOpen, setIsOpen, is
           }
         </SheetHeader>
 
-        {/* Отображение выбранной крипты */}
         {selectedCrypto ? (
           <div className="flex items-center justify-between w-full py-4 px-4 bg-[#282828] rounded-xl">
             <div className="flex items-center gap-3">
