@@ -44,9 +44,9 @@ export default function MarketPage() {
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'decimal',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2
-    }).format(price)
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 6
+    }).format(price);
   }
 
   return (
