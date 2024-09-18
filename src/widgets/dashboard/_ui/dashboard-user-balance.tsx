@@ -18,16 +18,12 @@ export const DashboardUserBalance: React.FC<IProps> = ({ className }) => {
     return totalPercentageChange < 0 ? 'text-secondary' : 'text-primary'
   }
 
-  const formatNumberWithCommas = (num) => {
-    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  };
-
   return (
     <Card className={'flex py-4 pl-6 pr-9 items-center justify-between rounded-xl border-0'}>
       <CardHeader className={'p-0 space-y-0.5'}>
         <CardTitle className={'text-xs text-muted-foreground'}>My balance</CardTitle>
         <CardDescription className={'text-sm text-foreground font-bold'}>
-          {formatNumberWithCommas(totalBalance)} $
+          {totalBalance.toLocaleString().split('.')[0].replace(/,/g, ',')} $
         </CardDescription>
       </CardHeader>
       <CardContent className={'p-0'}>
