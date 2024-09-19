@@ -11,8 +11,8 @@ import { motion } from 'framer-motion'
 export default function FavoritesPage() {
   useInitializeCryptoStore()
 
-  const { favorites, addFavorite, removeFavorite, isLoading } = useCryptoStore()
-  const { favoriteCryptoData } = useFavoritesCrypto()
+  const { favorites, addFavorite, removeFavorite } = useCryptoStore()
+  const { favoriteCryptoData, isLoading } = useFavoritesCrypto()
 
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('en-US', {

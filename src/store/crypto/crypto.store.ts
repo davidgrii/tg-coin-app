@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 
 interface ICryptoStore {
   favorites: string[]
-  isLoading: boolean 
+  isLoading: boolean
   addFavorite: (id: string) => void
   removeFavorite: (id: string) => void
   initializeFavorites: () => void
