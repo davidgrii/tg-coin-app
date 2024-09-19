@@ -15,10 +15,10 @@ export default function MarketPage() {
   const [searchValue, setSearchValue] = useState('')
   const inputRef = useRef<HTMLInputElement | null>(null)
 
-  const { favorites, addFavorite, removeFavorite } = useCryptoStore()
+  const { favorites, addFavorite, removeFavorite, isLoading } = useCryptoStore()
   const { isSearchOpen } = useSearchStore()
 
-  const { cryptoData = [], isLoading } = useCrypto()
+  const { cryptoData = []} = useCrypto()
   const { filteredCryptoData } = useCryptoFilter(cryptoData, searchValue)
 
   useEffect(() => {
