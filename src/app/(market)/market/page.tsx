@@ -15,10 +15,10 @@ export default function MarketPage() {
   const [searchValue, setSearchValue] = useState('')
   const inputRef = useRef<HTMLInputElement | null>(null)
 
-  const { favorites, addFavorite, removeFavorite } = useCryptoStore()
+  const { favorites, addFavorite, removeFavorite, isLoading } = useCryptoStore()
   const { isSearchOpen } = useSearchStore()
 
-  const { cryptoData = [], isLoading } = useCrypto()
+  const { cryptoData = []} = useCrypto()
   const { filteredCryptoData } = useCryptoFilter(cryptoData, searchValue)
 
   useEffect(() => {
@@ -47,6 +47,16 @@ export default function MarketPage() {
       minimumFractionDigits: 0,
       maximumFractionDigits: 6
     }).format(price);
+  }
+
+  const getDynamicFontSize = (priceLength: number) => {
+    if (priceLength > 5 && priceLength <= 8) {
+      return 'text-[12px]'
+    } else if (priceLength > 8) {
+      return 'text-[11px]'
+    } else {
+      return 'text-sm'
+    }
   }
 
   return (
@@ -80,7 +90,7 @@ export default function MarketPage() {
                   <div className="flex items-center gap-2">
                     <span className={'w-5 text-sm text-muted-foreground'}>{index + 1}</span>
                     <div className="h-9 w-9">
-                      <img src={crypto.image} alt={crypto.name} />
+                      <img className={'h-full'} src={crypto.image} alt={crypto.name} />
                     </div>
                     <div className="grid gap-0.5">
                       <p className="text-sm leading-none">
@@ -94,10 +104,7 @@ export default function MarketPage() {
 
                   <div className={'flex items-center'}>
                     <p
-                      className={`${crypto.current_price.toString().length > 8
-                        ? 'text-[12px]'
-                        : 'text-sm'
-                      } text-muted-foreground mr-4 ml-2.5 whitespace-nowrap`}>
+                      className={`${getDynamicFontSize(crypto.current_price.toString().length)} text-muted-foreground mr-4 ml-2.5 whitespace-nowrap`}>
                       {formatPrice(crypto.current_price)} $
                     </p>
 
