@@ -109,12 +109,12 @@ export default function MarketPage() {
                     </p>
 
                     <div
-                      className={`${crypto.price_change_percentage_24h.toString().includes('-')
+                      className={`${(crypto.price_change_percentage_24h ?? 0).toString().includes('-')
                         ? 'text-secondary'
                         : 'text-primary'} w-16 text-sm text-right font-bold mr-3`}
                     >
                         <span className={'font-semibold'}>
-                        {crypto.price_change_percentage_24h.toFixed(2)} %
+                          {(crypto.price_change_percentage_24h ?? 0).toFixed(2)} %
                         </span>
                     </div>
 
