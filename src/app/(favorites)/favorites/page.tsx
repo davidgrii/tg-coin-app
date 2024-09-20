@@ -12,8 +12,7 @@ export default function FavoritesPage() {
 
   const { favorites, addFavorite, removeFavorite, isLoading } = useCryptoStore()
   const { favoriteCryptoData } = useFavoritesCrypto()
-
-
+  
   return (
     <Container className={'pt-0 mb-20'}>
 

@@ -58,25 +58,41 @@ export default function MarketPage() {
         transition={{ duration: 0.7 }}
       >
         {isLoading ?
-          <div className={'grid justify-start gap-8'}>
+          <motion.div
+            key="skeletons"
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+            className={'grid justify-start gap-8'}
+          >
             {new Array(10).fill(null).map((_, index) => (
               <CryptoSkeleton key={index} />
             ))}
-          </div>
-          : <Card className={'bg-background grid gap-8 border-0'}>
-            {filteredCryptoData.length > 0 && (
-              filteredCryptoData.map((crypto, index) => (
-                <CryptoItem
-                  key={crypto.id}
-                  crypto={crypto}
-                  index={index}
-                  favorites={favorites}
-                  addFavorite={addFavorite}
-                  removeFavorite={removeFavorite}
-                />
-              ))
-            )}
-          </Card>
+          </motion.div>
+          :
+          <motion.div
+            key="crypto-items"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Card className={'bg-background grid gap-8 border-0'}>
+              {filteredCryptoData.length > 0 && (
+                filteredCryptoData.map((crypto, index) => (
+                  <CryptoItem
+                    key={crypto.id}
+                    crypto={crypto}
+                    index={index}
+                    favorites={favorites}
+                    addFavorite={addFavorite}
+                    removeFavorite={removeFavorite}
+                  />
+                ))
+              )}
+            </Card>
+          </motion.div>
         }
       </motion.div>
     </Container>

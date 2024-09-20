@@ -8,16 +8,18 @@ export const useCrypto = () => {
 
   useEffect(() => {
     const fetchCryptoData = async () => {
+      setIsLoading(true)
+
       try {
         const res = await fetch('/api/crypto-data')
         if (!res.ok) {
           throw new Error('Failed to fetch crypto data')
         }
         const data = await res.json()
-        setCryptoData(data);
+        setCryptoData(data)
       } catch (err: unknown) {
-        const errorMessage = err instanceof Error ? err.message : 'Something went wrong';
-        setError(errorMessage);
+        const errorMessage = err instanceof Error ? err.message : 'Something went wrong'
+        setError(errorMessage)
       } finally {
         setIsLoading(false)
       }
