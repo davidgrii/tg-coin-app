@@ -19,16 +19,20 @@ export const CryptoItem: React.FC<IProps> = (
     index,
     favorites,
     addFavorite,
-    removeFavorite,
+    removeFavorite
   }) => {
 
+  const isFavorite = favorites.includes(crypto.id)
+  const priceChange = crypto.price_change_percentage_24h ?? 0
+  const isPricePositive = !priceChange.toString().includes('-')
+
   return (
-    <CardContent className={'p-0 flex justify-between'}>
+    <CardContent className="p-0 flex justify-between items-center">
+
       <div className="flex items-center gap-2">
-        <span className={'w-5 text-sm text-muted-foreground'}>{index + 1}</span>
-        <div className="h-9 w-9">
-          <img className={'h-full'} src={crypto.image} alt={crypto.name} />
-        </div>
+        <span className="w-5 text-sm text-muted-foreground">{index + 1}</span>
+        <img className="h-9 w-9" src={crypto.image} alt={crypto.name} />
+
         <div className="grid gap-0.5">
           <p className="text-sm leading-none">
             {crypto.symbol.toUpperCase()}
@@ -39,32 +43,22 @@ export const CryptoItem: React.FC<IProps> = (
         </div>
       </div>
 
-      <div className={'flex items-center'}>
+      <div className="flex items-center gap-4">
         <p
-          className={`${getDynamicFontSize(crypto.current_price.toString().length)} text-foreground font-bold mr-4 whitespace-nowrap`}>
+          className={`${getDynamicFontSize(crypto.current_price.toString().length)} text-foreground font-bold whitespace-nowrap`}>
           {formatPrice(crypto.current_price)} $
         </p>
 
         <div
-          className={`${(crypto.price_change_percentage_24h ?? 0).toString().includes('-')
-            ? 'text-secondary'
-            : 'text-primary'} w-16 text-[13px] text-right mr-2`
-          }
+          className={`w-16 text-[13px] text-right ${isPricePositive ? 'text-primary' : 'text-secondary'}`}
         >
-        <span className={'font-semibold'}>
-          {(crypto.price_change_percentage_24h ?? 0).toFixed(2)} %
-        </span>
+          <span className="font-semibold">{priceChange.toFixed(2)} %</span>
         </div>
 
-        {favorites.includes(crypto.id) ? (
-          <button className={'p-1 flex pb-[6px]'} onClick={() => removeFavorite(crypto.id)}>
-            <StarFavoriteIcon />
-          </button>
-        ) : (
-          <button className={'p-1 pb-[6px'} onClick={() => addFavorite(crypto.id)}>
-            <StarIcon />
-          </button>
-        )}
+        <button className="p-1 pb-[6px]"
+                onClick={() => isFavorite ? removeFavorite(crypto.id) : addFavorite(crypto.id)}>
+          {isFavorite ? <StarFavoriteIcon /> : <StarIcon />}
+        </button>
       </div>
     </CardContent>
   )
