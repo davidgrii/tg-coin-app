@@ -71,17 +71,24 @@ export default function PortfolioPage() {
         : <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           transition={{ duration: 0.7 }}
         >
           <Card className={'bg-background grid gap-8 border-0'}>
             {portfolio.map((crypto, index) => (
-              <PortfolioItem
-                key={index}
-                crypto={crypto}
-                index={index}
-                onEdit={handleEditCrypto}
-                onDelete={handleDeleteCrypto}
-              />
+              <motion.div
+                key={crypto.id}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5 }}
+              >
+                <PortfolioItem
+                  crypto={crypto}
+                  index={index}
+                  onEdit={handleEditCrypto}
+                  onDelete={handleDeleteCrypto}
+                />
+              </motion.div>
             ))}
           </Card>
         </motion.div>

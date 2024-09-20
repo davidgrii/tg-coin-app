@@ -6,34 +6,55 @@ import { Card } from '@/components/ui/card'
 import { useFavoritesCrypto } from '@/hooks'
 import { EmptyFavorites } from '@/components/favorites'
 import { motion } from 'framer-motion'
+import { useEffect, useState } from 'react'
 
 export default function FavoritesPage() {
   useInitializeCryptoStore()
 
   const { favorites, addFavorite, removeFavorite, isLoading } = useCryptoStore()
   const { favoriteCryptoData } = useFavoritesCrypto()
-  
+
+  const [showEmptyMessage, setShowEmptyMessage] = useState(false)
+
+  useEffect(() => {
+    if (!isLoading && favoriteCryptoData.length === 0) {
+      const timer = setTimeout(() => {
+        setShowEmptyMessage(true)
+      }, 300)
+
+      return () => clearTimeout(timer)
+    }
+
+    setShowEmptyMessage(false)
+  }, [isLoading, favoriteCryptoData])
+
   return (
     <Container className={'pt-0 mb-20'}>
-
       <CryptoTableHeader />
 
-      {isLoading ?
-        <div className={'grid justify-start gap-8'}>
+      {isLoading ? (
+        <motion.div
+          className={'grid justify-start gap-8'}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
           {new Array(10).fill(null).map((_, index) => (
             <CryptoSkeleton key={index} />
           ))}
-        </div>
-        : <motion.div
+        </motion.div>
+      ) : (
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           transition={{ duration: 0.7 }}
         >
           <Card className={'bg-background grid gap-8 border-0'}>
-            {favoriteCryptoData && favoriteCryptoData.length === 0 ? (
-              <EmptyFavorites isFavoritesEmpty={favoriteCryptoData.length === 0} />
+            {showEmptyMessage ? (
+              <EmptyFavorites isFavoritesEmpty={true} />
             ) : (
-              favoriteCryptoData && favoriteCryptoData.map((crypto, index) => (
+              favoriteCryptoData.map((crypto, index) => (
                 <CryptoItem
                   key={crypto.id}
                   crypto={crypto}
@@ -46,8 +67,7 @@ export default function FavoritesPage() {
             )}
           </Card>
         </motion.div>
-      }
-
+      )}
     </Container>
   )
 }

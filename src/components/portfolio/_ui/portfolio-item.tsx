@@ -34,9 +34,7 @@ export const PortfolioItem: React.FC<IProps> = ({ crypto, index, onEdit, onDelet
       <div className={'flex items-center'}>
         <div className={'mr-4'}>
           <p
-            className={`${crypto.current_price.toString().length > 8
-              ? 'text-[12px]'
-              : 'text-sm'} text-foreground font-semibold  whitespace-nowrap`}>
+            className={`text-sm text-foreground font-semibold  whitespace-nowrap`}>
             {formatPrice(crypto.current_price)} $
           </p>
           <p
@@ -51,7 +49,7 @@ export const PortfolioItem: React.FC<IProps> = ({ crypto, index, onEdit, onDelet
         <div className={'w-24 mr-3'}>
           <p
             className={`${crypto.current_price.toString().length > 8
-              ? 'text-[12px]'
+              ? 'text-[13px]'
               : 'text-sm'
             } text-foreground font-bold text-right  whitespace-nowrap`}
           >
@@ -85,5 +83,5 @@ export const PortfolioItem: React.FC<IProps> = ({ crypto, index, onEdit, onDelet
         </DropdownMenu>
       </div>
     </CardContent>
-  );
-};
+  )
+}
