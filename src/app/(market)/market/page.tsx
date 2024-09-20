@@ -14,10 +14,10 @@ export default function MarketPage() {
   const [searchValue, setSearchValue] = useState('')
   const inputRef = useRef<HTMLInputElement | null>(null)
 
-  const { favorites, addFavorite, removeFavorite, isLoading } = useCryptoStore()
+  const { favorites, addFavorite, removeFavorite } = useCryptoStore()
   const { isSearchOpen } = useSearchStore()
 
-  const { cryptoData = [], isLoadingData } = useCrypto()
+  const { cryptoData = [], isLoading } = useCrypto()
   const { filteredCryptoData } = useCryptoFilter(cryptoData, searchValue)
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export default function MarketPage() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.7 }}
       >
-        {isLoadingData ?
+        {isLoading ?
           <div className={'grid justify-start gap-8'}>
             {new Array(10).fill(null).map((_, index) => (
               <CryptoSkeleton key={index} />

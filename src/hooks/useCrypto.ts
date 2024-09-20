@@ -3,7 +3,7 @@ import { ICrypto } from '@/types'
 
 export const useCrypto = () => {
   const [cryptoData, setCryptoData] = useState<ICrypto[]>([])
-  const [isLoadingData, setIsLoadingData] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
@@ -19,12 +19,12 @@ export const useCrypto = () => {
         const errorMessage = err instanceof Error ? err.message : 'Something went wrong';
         setError(errorMessage);
       } finally {
-        setIsLoadingData(false)
+        setIsLoading(false)
       }
     }
 
     fetchCryptoData()
   }, [])
 
-  return { cryptoData, isLoadingData, error }
+  return { cryptoData, isLoading, error }
 };
