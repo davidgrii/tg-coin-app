@@ -8,7 +8,7 @@ interface IProps {
 
 export const Container: React.FC<IProps> = ({ className, children }) => {
     return (
-        <div className={cn('mx-auto max-w-3xl p-4', className)}>
+        <div className={cn('mx-auto max-w-3xl p-3.5', className)}>
             {children}
         </div>
     )
