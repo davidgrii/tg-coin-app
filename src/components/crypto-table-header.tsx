@@ -11,7 +11,7 @@ export const CryptoTableHeader: React.FC<IProps> = ({ className }) => {
         <div>#</div>
         <div>Coin</div>
       </div>
-      <div className={'flex gap-10 mr-9'}>
+      <div className={'flex gap-10 mr-8'}>
         <div>Price</div>
         <div>24h %</div>
       </div>
