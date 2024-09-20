@@ -13,6 +13,7 @@ export default function FavoritesPage() {
   const { favorites, addFavorite, removeFavorite, isLoading } = useCryptoStore()
   const { favoriteCryptoData } = useFavoritesCrypto()
 
+
   return (
     <Container className={'pt-0 mb-20'}>
 
@@ -30,10 +31,10 @@ export default function FavoritesPage() {
           transition={{ duration: 0.7 }}
         >
           <Card className={'bg-background grid gap-8 border-0'}>
-            {favoriteCryptoData.length === 0 ? (
+            {favoriteCryptoData && favoriteCryptoData.length === 0 ? (
               <EmptyFavorites isFavoritesEmpty={favoriteCryptoData.length === 0} />
             ) : (
-              favoriteCryptoData.map((crypto, index) => (
+              favoriteCryptoData && favoriteCryptoData.map((crypto, index) => (
                 <CryptoItem
                   key={crypto.id}
                   crypto={crypto}
