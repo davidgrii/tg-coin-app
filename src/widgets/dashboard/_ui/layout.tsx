@@ -7,7 +7,7 @@ interface IProps {
 
 export const Layout: React.FC<IProps> = ({ dashboard, className }) => {
   return (
-    <div className={'max-w-3xl mx-auto p-3.5'}>
+    <div className={'max-w-3xl mx-auto p-3'}>
       {dashboard}
     </div>
   );

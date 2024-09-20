@@ -41,7 +41,7 @@ export const CryptoItem: React.FC<IProps> = (
 
       <div className={'flex items-center'}>
         <p
-          className={`${getDynamicFontSize(crypto.current_price.toString().length)} text-foreground font-bold mr-4 ml-2.5 whitespace-nowrap`}>
+          className={`${getDynamicFontSize(crypto.current_price.toString().length)} text-foreground font-bold mr-4 whitespace-nowrap`}>
           {formatPrice(crypto.current_price)} $
         </p>
 
@@ -57,7 +57,7 @@ export const CryptoItem: React.FC<IProps> = (
         </div>
 
         {favorites.includes(crypto.id) ? (
-          <button className={'p-1 pb-[6px]'} onClick={() => removeFavorite(crypto.id)}>
+          <button className={'p-1 flex pb-[6px]'} onClick={() => removeFavorite(crypto.id)}>
             <StarFavoriteIcon />
           </button>
         ) : (
