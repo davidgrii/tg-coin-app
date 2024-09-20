@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 
 export async function GET() {
   try {
-    const url = 'https://two-memes-find.loca.lt/api/cryptos';
+    const url = 'https://sixty-buckets-happen.loca.lt//api/cryptos';
     const res = await fetch(url, {
       method: 'GET',
       headers: {

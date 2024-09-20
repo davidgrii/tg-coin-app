@@ -49,16 +49,6 @@ export default function MarketPage() {
     }).format(price);
   }
 
-  const getDynamicFontSize = (priceLength: number) => {
-    if (priceLength > 5 && priceLength <= 8) {
-      return 'text-[12px]'
-    } else if (priceLength > 8) {
-      return 'text-[11px]'
-    } else {
-      return 'text-sm'
-    }
-  }
-
   return (
     <Container className={'pt-0 mb-20'}>
 
@@ -97,14 +87,14 @@ export default function MarketPage() {
                         {crypto.symbol.toUpperCase()}
                       </p>
                       <p className="text-[8.5px] font-semibold text-muted-foreground truncate">
-                        {crypto.name}
+                        {crypto.name.length > 10 ? `${crypto.name.slice(0, 14)}...` : crypto.name}
                       </p>
                     </div>
                   </div>
 
                   <div className={'flex items-center'}>
                     <p
-                      className={`${getDynamicFontSize(crypto.current_price.toString().length)} text-muted-foreground mr-4 ml-2.5 whitespace-nowrap`}>
+                      className={`text-sm text-muted-foreground mr-4 ml-2 whitespace-nowrap`}>
                       {formatPrice(crypto.current_price)} $
                     </p>
 
