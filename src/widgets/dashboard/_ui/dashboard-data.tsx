@@ -41,7 +41,7 @@ export const DashboardData: React.FC<IProps> = ({ className }) => {
   return (
     <Card className={cn('flex py-4 pl-6 pr-9 items-center justify-between rounded-xl border-0', className)}>
       <CardHeader className={'p-0 space-y-0.5'}>
-        <CardTitle className={'text-xs text-muted-foreground'}>{t('market_cap')}</CardTitle>
+        <CardTitle className={'text-xs text-muted-foreground'}>{t('dashboard.market_cap')}</CardTitle>
         <CardDescription className={'text-sm text-foreground font-bold'}>
           {formatNumberWithCommas(totalMarketCapUSD)} $
         </CardDescription>

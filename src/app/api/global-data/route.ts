@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 
 export async function GET() {
   try {
-    const url = 'https://funny-bugs-burn.loca.lt/api/global';
+    const url = 'https://real-singers-cough.loca.lt/api/global';
 
     const res = await fetch(url, {
       method: 'GET',

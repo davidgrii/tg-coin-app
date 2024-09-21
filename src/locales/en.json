@@ -3,6 +3,34 @@
   "favorites": "Favorites",
   "portfolio": "Portfolio",
   "search": "Search",
-  "market_cap": "Market Cap",
-  "n_a": "N/A"
+  "table_header": {
+    "rank": "#",
+    "coin": "Coin",
+    "price": "Price",
+    "change": "24h %"
+  },
+  "dashboard": {
+    "market_cap": "Market Cap",
+    "n_a": "N/A"
+  },
+  "dashboard_balance": {
+    "my_balance": "My balance",
+    "24h": "24h"
+  },
+  "empty_favorites": {
+    "no_coins": "No coins yet.",
+    "add_first": "Add your first one from the market"
+  },
+  "add_crypto": {
+    "add_coin": "Add your coin",
+    "add_coin_desc": "Add crypto that you own and monitor your portfolio balance in USD with real-time updates",
+    "choose": "Choose coin",
+    "quantity": "Quantity",
+    "btn": "Add"
+  },
+  "edit_crypto": {
+    "edit_coin": "Edit your coin",
+    "quantity": "Quantity",
+    "btn": "Edit"
+  }
 }

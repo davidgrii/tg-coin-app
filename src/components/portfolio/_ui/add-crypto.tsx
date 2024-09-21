@@ -7,6 +7,7 @@ import { useCrypto } from '@/hooks/useCrypto'
 import { ClearIcon } from '@/components/icons'
 import { useCryptoFilter } from '@/hooks'
 import { ICrypto } from '@/types'
+import { useTranslation } from 'react-i18next'
 
 interface IProps {
   isOpen: boolean
@@ -20,6 +21,8 @@ export const AddCrypto: React.FC<IProps> = ({ onAddCrypto, isOpen, setIsOpen, is
   const [searchValue, setSearchValue] = useState('')
   const [selectedCrypto, setSelectedCrypto] = useState<ICrypto | null>(null)
   const [quantity, setQuantity] = useState('')
+
+  const { t } = useTranslation()
 
   const { filteredCryptoData } = useCryptoFilter(cryptoData, searchValue)
 
@@ -46,7 +49,8 @@ export const AddCrypto: React.FC<IProps> = ({ onAddCrypto, isOpen, setIsOpen, is
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
         <button className={'bg-background/0'}>
-          <CirclePlus className={'w-9 h-9 cursor-pointer text-foreground transition-colors hover:text-muted-foreground'} />
+          <CirclePlus
+            className={'w-9 h-9 cursor-pointer text-foreground transition-colors hover:text-muted-foreground'} />
         </button>
       </SheetTrigger>
       <SheetContent
@@ -54,10 +58,10 @@ export const AddCrypto: React.FC<IProps> = ({ onAddCrypto, isOpen, setIsOpen, is
         className={'bg-card rounded-2xl border-0 flex flex-col gap-6 items-center pt-10 pb-8'}
       >
         <SheetHeader className={`${searchValue && 'mt-16'} text-center mb-4`}>
-          <SheetTitle className={'text-2xl'}>Add your coin</SheetTitle>
+          <SheetTitle className={'text-2xl'}>{t('add_crypto.add_coin')}</SheetTitle>
           {isEmpty &&
             <SheetDescription className={'text-sm pt-3 font-medium mx-auto'}>
-              Add crypto that you own and monitor your portfolio balance in USD with real-time updates
+              {t('add_crypto.add_coin_desc')}
             </SheetDescription>
           }
         </SheetHeader>
@@ -79,7 +83,7 @@ export const AddCrypto: React.FC<IProps> = ({ onAddCrypto, isOpen, setIsOpen, is
           <div className="relative w-full">
             <Input
               type={'text'}
-              placeholder={'Choose Coin'}
+              placeholder={t('add_crypto.choose')}
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
               className={'font-medium py-8 px-6 rounded-xl text-xs bg-[#282828] border-0'}
@@ -106,7 +110,7 @@ export const AddCrypto: React.FC<IProps> = ({ onAddCrypto, isOpen, setIsOpen, is
 
         <Input
           type={'number'}
-          placeholder={'Quantity'}
+          placeholder={t('add_crypto.quantity')}
           value={quantity}
           onChange={(e) => setQuantity(e.target.value)}
           className={'font-medium py-8 px-6 rounded-xl text-xs bg-[#282828] border-0'}
@@ -116,7 +120,7 @@ export const AddCrypto: React.FC<IProps> = ({ onAddCrypto, isOpen, setIsOpen, is
           onClick={handleSubmit}
           className={'bg-foreground py-8 rounded-xl text-lg text-background font-semibold mx-auto w-full transition-colors hover:bg-foreground/75'}
         >
-          Add
+          placeholder={t('add_crypto.btn')}
         </Button>
       </SheetContent>
     </Sheet>

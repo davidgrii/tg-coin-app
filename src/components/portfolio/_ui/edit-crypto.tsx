@@ -4,6 +4,7 @@ import { ClearIcon } from '@/components/icons'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { ICrypto } from '@/types'
+import { useTranslation } from 'react-i18next'
 
 interface IProps {
   isOpen: boolean
@@ -16,6 +17,8 @@ interface IProps {
 export const EditCrypto: React.FC<IProps> = ({ isOpen, setIsOpen, crypto, onEditCrypto, className }) => {
   const [selectedCrypto, setSelectedCrypto] = useState<ICrypto>(crypto)
   const [quantity, setQuantity] = useState(crypto?.quantity)
+
+  const {t} = useTranslation()
 
   const handleSubmit= () => {
     const updatedCrypto = {
@@ -38,7 +41,7 @@ export const EditCrypto: React.FC<IProps> = ({ isOpen, setIsOpen, crypto, onEdit
         className={'bg-card rounded-2xl border-0 flex flex-col gap-6 items-center pt-10 pb-8'}
       >
         <SheetHeader className={'text-center mb-4'}>
-          <SheetTitle className={'text-2xl'}>Edit your coin</SheetTitle>
+          <SheetTitle className={'text-2xl'}>{t('edit_crypto.edit_coin')}</SheetTitle>
         </SheetHeader>
 
         {selectedCrypto && (
@@ -58,7 +61,7 @@ export const EditCrypto: React.FC<IProps> = ({ isOpen, setIsOpen, crypto, onEdit
 
         <Input
           type={'number'}
-          placeholder={'Quantity'}
+          placeholder={t('edit_crypto.quantity')}
           onChange={(e) => setQuantity(Number(e.target.value))}
           className={'font-medium py-8 px-6 rounded-xl text-xs bg-[#282828] border-0'}
         />

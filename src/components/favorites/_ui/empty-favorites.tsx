@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { MarketIcon } from '@/components/icons'
+import { useTranslation } from 'react-i18next'
 
 interface IProps {
   isFavoritesEmpty: boolean
@@ -8,6 +9,8 @@ interface IProps {
 }
 
 export const EmptyFavorites: React.FC<IProps> = ({ isFavoritesEmpty, className }) => {
+  const { t } = useTranslation()
+
   if (isFavoritesEmpty) {
     return (
       <motion.div
@@ -16,10 +19,10 @@ export const EmptyFavorites: React.FC<IProps> = ({ isFavoritesEmpty, className }
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
       >
-        <p>No coins yet.</p>
+        <p>{t('empty_favorites.no_coins')}</p>
 
         <div className={'flex justify-center gap-3.5 mt-1.5'}>
-          Add your first one from the market <MarketIcon />
+          {t('empty_favorites.add_first')} <MarketIcon />
         </div>
       </motion.div>
     )
