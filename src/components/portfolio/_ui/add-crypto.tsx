@@ -57,7 +57,7 @@ export const AddCrypto: React.FC<IProps> = ({ onAddCrypto, isOpen, setIsOpen, is
         side={'top'}
         className={'bg-card rounded-2xl border-0 flex flex-col gap-6 items-center pt-10 pb-8'}
       >
-        <SheetHeader className={`${searchValue && 'mt-16'} text-center mb-4`}>
+        <SheetHeader className={`${searchValue && filteredCryptoData.length > 0 && 'mt-16'} text-center mb-4`}>
           <SheetTitle className={'text-2xl'}>{t('add_crypto.add_coin')}</SheetTitle>
           {isEmpty &&
             <SheetDescription className={'text-sm pt-3 font-medium mx-auto'}>

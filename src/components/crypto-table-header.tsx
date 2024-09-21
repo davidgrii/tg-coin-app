@@ -14,9 +14,9 @@ export const CryptoTableHeader: React.FC<IProps> = ({ className }) => {
         <div>{t('table_header.rank')}</div>
         <div>{t('table_header.coin')}</div>
       </div>
-      <div className="flex gap-10 mr-6">
+      <div className="flex gap-8 mr-6">
         <div>{t('table_header.price')}</div>
-        <div>{t('table_header.change')}</div>
+        <div className={'w-12 text-right'}>{t('table_header.change')}</div>
       </div>
     </div>
   );

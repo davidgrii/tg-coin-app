@@ -14,7 +14,7 @@ export const BalanceTableHeader: React.FC<IProps> = ({ className }) => {
       </span>
       <div className={'flex gap-12 mr-9'}>
         <div>{t('balance_table_header.price')}</div>
-        <div>{t('balance_table_header.value')}</div>
+        <div className={'w-16 text-right'}>{t('balance_table_header.value')}</div>
       </div>
     </div>
   );
