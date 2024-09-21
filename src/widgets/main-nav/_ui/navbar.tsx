@@ -12,7 +12,7 @@ interface IProps {
   className?: string
 }
 
-export const Navbar: React.FC<IProps> = ({ navItems, className }) => {
+export const Navbar: React.FC<IProps> = ({ className }) => {
   const { isSearchOpen, toggleSearch, closeSearch } = useSearchStore()
   const router = useRouter()
   const currentPage = usePathname()
