@@ -5,6 +5,9 @@ declare module 'i18next' {
     defaultNamespace: 'translation';
     resources: {
       translation: {
+        market: string;          
+        favorites: string;
+        portfolio: string;
         market_cap: string;
         n_a: string;
       };
