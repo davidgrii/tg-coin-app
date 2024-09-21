@@ -120,7 +120,7 @@ export const AddCrypto: React.FC<IProps> = ({ onAddCrypto, isOpen, setIsOpen, is
           onClick={handleSubmit}
           className={'bg-foreground py-8 rounded-xl text-lg text-background font-semibold mx-auto w-full transition-colors hover:bg-foreground/75'}
         >
-          placeholder={t('add_crypto.btn')}
+          {t('add_crypto.btn')}
         </Button>
       </SheetContent>
     </Sheet>

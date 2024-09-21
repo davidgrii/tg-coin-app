@@ -9,6 +9,11 @@
     "price": "Price",
     "change": "24h %"
   },
+  "balance_table_header": {
+    "coin": "Coin",
+    "price": "Price / 24h",
+    "value": "USD value"
+  },
   "dashboard": {
     "market_cap": "Market Cap",
     "n_a": "N/A"
@@ -20,6 +25,10 @@
   "empty_favorites": {
     "no_coins": "No coins yet.",
     "add_first": "Add your first one from the market"
+  },
+  "my_portfolio_page": {
+    "edit": "Edit",
+    "delete": "Delete"
   },
   "add_crypto": {
     "add_coin": "Add your coin",

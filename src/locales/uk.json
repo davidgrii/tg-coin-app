@@ -9,6 +9,11 @@
     "price": "Ціна",
     "change": "24г %"
   },
+  "balance_table_header": {
+    "coin": "Монета",
+    "price": "Ціна / за 24г",
+    "value": "Вартість"
+  },
   "dashboard": {
     "market_cap": "Ринкова капіталізація",
     "n_a": "Н/Д"
@@ -20,6 +25,10 @@
   "empty_favorites": {
     "no_coins": "Монет поки що немає.",
     "add_first": "Додайте свою першу монету з ринку"
+  },
+  "portfolio_page": {
+    "edit": "Редагувати",
+    "delete": "Видалити"
   },
   "add_crypto": {
     "add_coin": "Додайте свою монету",

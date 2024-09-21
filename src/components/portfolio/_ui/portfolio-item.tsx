@@ -5,6 +5,7 @@ import { DeleteIcon, EditIcon, EditV2Icon } from '@/components/icons'
 import { Separator } from '@/components/ui/separator'
 import React from 'react'
 import { ICrypto } from '@/types'
+import { useTranslation } from 'react-i18next'
 
 interface IProps {
   crypto: ICrypto;
@@ -15,6 +16,7 @@ interface IProps {
 }
 
 export const PortfolioItem: React.FC<IProps> = ({ crypto, index, onEdit, onDelete, className }) => {
+  const { t } = useTranslation()
   return (
     <CardContent key={index} className={'p-0 flex justify-between'}>
       <div className={'flex items-center gap-2'}>
@@ -70,14 +72,14 @@ export const PortfolioItem: React.FC<IProps> = ({ crypto, index, onEdit, onDelet
             <DropdownMenuItem
               onClick={() => onEdit(index)}
               className={'flex text-xs text-foreground/85 justify-between cursor-pointer'}>
-              Edit <EditV2Icon />
+              {t('my_portfolio_page.edit')} <EditV2Icon />
             </DropdownMenuItem>
             <Separator className={'bg-foreground/10 my-0.5'} />
             <DropdownMenuItem
               className={'flex text-xs text-[#E40505] justify-between cursor-pointer '}
               onClick={() => onDelete(index)}
             >
-              Delete <DeleteIcon />
+              {t('my_portfolio_page.delete')} <DeleteIcon />
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

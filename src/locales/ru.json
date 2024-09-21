@@ -9,6 +9,11 @@
     "price": "Цена",
     "change": "24ч %"
   },
+  "balance_table_header": {
+    "coin": "Монета",
+    "price": "Цена / за 24ч",
+    "value": "Стоимость"
+  },
   "dashboard": {
     "market_cap": "Рыночная капитализация",
     "n_a": "Н/Д"
@@ -20,6 +25,10 @@
   "empty_favorites": {
     "no_coins": "Монет еще нет.",
     "add_first": "Добавьте свою первую монету с рынка"
+  },
+  "portfolio_page": {
+    "edit": "Редактировать",
+    "delete": "Удалить"
   },
   "add_crypto": {
     "add_coin": "Добавьте свою монету",

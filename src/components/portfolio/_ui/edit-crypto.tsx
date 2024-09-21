@@ -70,7 +70,7 @@ export const EditCrypto: React.FC<IProps> = ({ isOpen, setIsOpen, crypto, onEdit
           onClick={handleSubmit}
           className={'bg-foreground py-8 rounded-xl text-lg text-background font-semibold mx-auto w-full transition-colors hover:bg-foreground/75'}
         >
-          Edit
+          {t('edit_crypto.btn')}
         </Button>
       </SheetContent>
     </Sheet>
