@@ -7,48 +7,53 @@ import { Container, CryptoItem, CryptoSkeleton, CryptoTableHeader } from '@/comp
 import { motion } from 'framer-motion'
 import { Card } from '@/components/ui/card'
 import { SearchInput } from '@/components/market'
+import i18n from '@/i18n'
 
 export default function MarketPage() {
-  useInitializeCryptoStore();
+  useInitializeCryptoStore()
 
-  const [searchValue, setSearchValue] = useState('');
-  const inputRef = useRef<HTMLInputElement | null>(null);
+  const [searchValue, setSearchValue] = useState('')
+  const inputRef = useRef<HTMLInputElement | null>(null)
 
-  const { favorites, addFavorite, removeFavorite } = useCryptoStore();
-  const { isSearchOpen } = useSearchStore();
-  const { cryptoData = [], isLoading } = useCrypto();
-  const { filteredCryptoData } = useCryptoFilter(cryptoData, searchValue);
+  const { favorites, addFavorite, removeFavorite } = useCryptoStore()
+  const { isSearchOpen } = useSearchStore()
+  const { cryptoData = [], isLoading } = useCrypto()
+  const { filteredCryptoData } = useCryptoFilter(cryptoData, searchValue)
 
-  const [loadingStartTime, setLoadingStartTime] = useState<number | null>(null);
-  const [itemsToShow, setItemsToShow] = useState(10);
-  const [isEndOfList, setIsEndOfList] = useState(false);
+  const [loadingStartTime, setLoadingStartTime] = useState<number | null>(null)
+  const [itemsToShow, setItemsToShow] = useState(10)
+  const [isEndOfList, setIsEndOfList] = useState(false)
 
   useEffect(() => {
     if (isLoading && loadingStartTime === null) {
-      setLoadingStartTime(Date.now());
+      setLoadingStartTime(Date.now())
     }
     if (!isLoading) {
-      setLoadingStartTime(null);
+      setLoadingStartTime(null)
     }
-  }, [isLoading, loadingStartTime]);
+  }, [isLoading, loadingStartTime])
 
-  const isShortLoading = loadingStartTime && (Date.now() - loadingStartTime < 200);
+  const isShortLoading = loadingStartTime && (Date.now() - loadingStartTime < 200)
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
       const bot = window.Telegram.WebApp;
-      bot.ready();
-      bot.setHeaderColor('#000');
-      bot.setBackgroundColor('#000');
-      bot.setBottomBarColor('#000');
-      bot.isVerticalSwipesEnabled = false;
+      bot.ready()
+      bot.setHeaderColor('#000')
+      bot.setBackgroundColor('#000')
+      bot.setBottomBarColor('#000')
+      bot.isVerticalSwipesEnabled = false
       if (!bot.isExpanded) {
-        bot.expand();
+        bot.expand()
       }
+
+      const userLanguage = bot.initDataUnsafe?.user?.language_code || 'en'
+      i18n.changeLanguage(userLanguage)
     } else {
-      document.body.style.backgroundColor = '#000';
+      document.body.style.backgroundColor = '#000'
     }
-  }, []);
+  }, [])
+
 
 
   const handleScroll = () => {
@@ -57,17 +62,17 @@ export default function MarketPage() {
       document.documentElement.offsetHeight - 200
     ) {
       if (itemsToShow < filteredCryptoData.length) {
-        setItemsToShow((prev) => prev + 10);
+        setItemsToShow((prev) => prev + 10)
       } else {
-        setIsEndOfList(true);
+        setIsEndOfList(true)
       }
     }
-  };
+  }
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [itemsToShow, filteredCryptoData.length]);
+  }, [itemsToShow, filteredCryptoData.length])
 
   return (
     <Container className={'pt-0 mb-20'}>
