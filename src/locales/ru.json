@@ -26,7 +26,7 @@
     "no_coins": "Монет еще нет.",
     "add_first": "Добавьте свою первую монету с рынка"
   },
-  "portfolio_page": {
+  "my_portfolio_page": {
     "edit": "Редактировать",
     "delete": "Удалить"
   },
@@ -41,5 +41,9 @@
     "edit_coin": "Редактировать вашу монету",
     "quantity": "Quantity",
     "btn": "Редактировать"
+  },
+  "input_search": {
+    "search": "Найти монету...",
+    "cancel": "Отмена"
   }
 }

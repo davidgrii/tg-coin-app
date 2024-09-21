@@ -48,6 +48,10 @@ declare module 'i18next' {
           quantity: string
           btn: string
         }
+        input_search: {
+          search: string
+          cancel: string
+        }
       }
     }
   }

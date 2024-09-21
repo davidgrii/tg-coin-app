@@ -7,6 +7,7 @@ import { Search } from 'lucide-react'
 import { cn } from '@/components/ui/utils'
 import { ClearIcon } from '@/components/icons'
 import { useSearchStore } from '@/store'
+import { useTranslation } from 'react-i18next'
 
 interface IProps {
   searchValue: string
@@ -17,6 +18,7 @@ interface IProps {
 
 export const SearchInput: React.FC<IProps> = ({ searchValue, setSearchValue, inputRef, className }) => {
   const { toggleSearch } = useSearchStore()
+  const { t } = useTranslation()
   const clearInput = () => {
     setSearchValue('')
     inputRef.current?.focus()
@@ -36,7 +38,7 @@ export const SearchInput: React.FC<IProps> = ({ searchValue, setSearchValue, inp
           <Input
             ref={inputRef}
             type="search"
-            placeholder="Search coin..."
+            placeholder={t('input_search.search')}
             className="font-medium pl-8 w-full bg-[#282828] rounded-xl border-0"
             value={searchValue}
             onChange={(e) => setSearchValue(e.target.value)}
@@ -65,7 +67,7 @@ export const SearchInput: React.FC<IProps> = ({ searchValue, setSearchValue, inp
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.3 }}
       >
-        Cancel
+        {t('input_search.cancel')}
       </motion.span>
     </div>
   )

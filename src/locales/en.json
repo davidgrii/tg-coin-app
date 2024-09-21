@@ -41,5 +41,9 @@
     "edit_coin": "Edit your coin",
     "quantity": "Quantity",
     "btn": "Edit"
+  },
+  "input_search": {
+    "search": "Search coin...",
+    "cancel": "Cancel"
   }
 }
