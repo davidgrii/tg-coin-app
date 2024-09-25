@@ -19,16 +19,12 @@ export default function PortfolioPage() {
   const {
     isLoading,
     portfolio,
-    cryptoData,
     addCrypto,
     updateCrypto,
     deleteCrypto,
     calculateTotalBalance,
     calculateTotalPercentageChange
   } = usePortfolioStore()
-
-  console.log(portfolio)
-  console.log(cryptoData)
 
   const handleUpdateCrypto = (index: number, updatedCrypto: ICrypto) => {
     updateCrypto(index, updatedCrypto)
