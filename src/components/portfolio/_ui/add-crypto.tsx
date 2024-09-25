@@ -8,6 +8,7 @@ import { ClearIcon } from '@/components/icons'
 import { useCryptoFilter } from '@/hooks'
 import { ICrypto } from '@/types'
 import { useTranslation } from 'react-i18next'
+import Image from 'next/image'
 
 interface IProps {
   isOpen: boolean
@@ -69,7 +70,14 @@ export const AddCrypto: React.FC<IProps> = ({ onAddCrypto, isOpen, setIsOpen, is
         {selectedCrypto ? (
           <div className="flex items-center justify-between w-full py-4 px-4 bg-[#282828] rounded-xl">
             <div className="flex items-center gap-3">
-              <img src={selectedCrypto.image} alt={selectedCrypto.name} className="w-8 h-8" />
+              <Image
+                width={32}
+                height={32}
+                src={selectedCrypto.image}
+                alt={selectedCrypto.name}
+                className="w-8 h-8"
+              />
+
               <div className={'flex-col'}>
                 <p className="text-sm text-foreground ">{selectedCrypto.symbol.toUpperCase()}</p>
                 <p className="text-[8px] text-muted-foreground">{selectedCrypto.name}</p>
@@ -98,8 +106,18 @@ export const AddCrypto: React.FC<IProps> = ({ onAddCrypto, isOpen, setIsOpen, is
                       className="flex items-center gap-3 px-4 py-2 hover:bg-muted-foreground rounded-lg cursor-pointer"
                       onClick={() => handleCryptoSelect(crypto)}
                     >
-                      <img src={crypto.image} alt={crypto.name} className="w-6 h-6" />
-                      <p className="text-sm">{crypto.name} ({crypto.symbol.toUpperCase()})</p>
+                      <Image
+                        width={24}
+                        height={24}
+                        src={crypto.image}
+                        alt={crypto.name}
+                        className="w-6 h-6"
+                      />
+
+                      <p
+                        className="text-[13px] text-nowrap">
+                        {crypto.name.slice(0, 18) + '...'} ({crypto.symbol.toUpperCase()})
+                      </p>
                     </div>
                   ))}
                 </div>

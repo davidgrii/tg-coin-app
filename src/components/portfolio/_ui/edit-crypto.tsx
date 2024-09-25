@@ -4,6 +4,7 @@ import { ClearIcon } from '@/components/icons'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import { ICrypto } from '@/types'
+import Image from 'next/image'
 import { useTranslation } from 'react-i18next'
 
 interface IProps {
@@ -47,7 +48,14 @@ export const EditCrypto: React.FC<IProps> = ({ isOpen, setIsOpen, crypto, onEdit
         {selectedCrypto && (
           <div className="flex items-center justify-between w-full py-4 px-4 bg-[#282828] rounded-xl">
             <div className="flex items-center gap-3">
-              <img src={selectedCrypto.image} alt={selectedCrypto.name} className="w-8 h-8" />
+              <Image
+                width={32}
+                height={32}
+                src={selectedCrypto.image}
+                alt={selectedCrypto.name}
+                className="w-8 h-8"
+              />
+
               <div className={'flex-col'}>
                 <p className="text-sm text-foreground ">{selectedCrypto.symbol.toUpperCase()}</p>
                 <p className="text-[8px] text-muted-foreground">{selectedCrypto.name}</p>

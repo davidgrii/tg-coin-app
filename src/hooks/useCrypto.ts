@@ -6,27 +6,37 @@ export const useCrypto = () => {
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  useEffect(() => {
-    const fetchCryptoData = async () => {
-      setIsLoading(true)
+  const fetchCryptoData = async () => {
+    setIsLoading(true)
 
-      try {
-        const res = await fetch('/api/crypto-data')
-        if (!res.ok) {
-          throw new Error('Failed to fetch crypto data')
+    try {
+      const res = await fetch('/api/crypto-data', {
+        headers: {
+          'Cache-Control': 'no-store',
         }
-        const data = await res.json()
-        setCryptoData(data)
-      } catch (err: unknown) {
-        const errorMessage = err instanceof Error ? err.message : 'Something went wrong'
-        setError(errorMessage)
-      } finally {
-        setIsLoading(false)
-      }
-    }
+      })
 
+      if (!res.ok) {
+        throw new Error('Failed to fetch crypto data')
+      }
+
+      const data = await res.json()
+      setCryptoData(data)
+    } catch (err: unknown) {
+      const errorMessage = err instanceof Error ? err.message : 'Something went wrong'
+      setError(errorMessage)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
     fetchCryptoData()
+
+    const interval = setInterval(fetchCryptoData, 60000)
+
+    return () => clearInterval(interval)
   }, [])
 
   return { cryptoData, isLoading, error }
-};
+}

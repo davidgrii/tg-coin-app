@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 
 export async function GET() {
   try {
-    const url = 'https://stale-brooms-rule.loca.lt/api/cryptos';
+    const url = `http://priceme.store:5000/api/cryptos?ts=${Date.now()}`
     const res = await fetch(url, {
       method: 'GET',
       headers: {

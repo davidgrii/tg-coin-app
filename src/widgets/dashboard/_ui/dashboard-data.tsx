@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { cn } from '@/components/ui/utils'
 import { IGlobalMarketData } from '@/types'
@@ -14,17 +14,35 @@ export const DashboardData: React.FC<IProps> = ({ className }) => {
   const [dashboardData, setDashboardData] = useState<IGlobalMarketData | null>(null)
 
   const { t } = useTranslation()
-  useEffect(() => {
-    const fetchGlobalCryptoData = async () => {
-      const res = await fetch('/api/global-data')
-      const response = await res.json()
 
+  const fetchGlobalCryptoData = useCallback(async () => {
+    try {
+      const res = await fetch(`https://priceme.store/api/global`, {
+        cache: 'no-store',
+      })
+
+      if (!res.ok) {
+        console.error('Ошибка при получении данных:', res.statusText)
+        return
+      }
+
+      const response = await res.json()
       const { data } = response
       setDashboardData(data)
+    } catch (error) {
+      console.error('Произошла ошибка:', error)
     }
-
-    fetchGlobalCryptoData()
   }, [])
+
+  useEffect(() => {
+    fetchGlobalCryptoData()
+
+    const interval = setInterval(() => {
+      fetchGlobalCryptoData()
+    }, 60000)
+
+    return () => clearInterval(interval)
+  }, [fetchGlobalCryptoData])
 
   const totalMarketCapUSD = Math.floor(dashboardData?.total_market_cap?.usd || 0)
   const marketCapChange24h = dashboardData?.market_cap_change_percentage_24h_usd || null

@@ -1,11 +1,13 @@
 import { create } from 'zustand'
 import { useEffect } from 'react'
-import { IPortfolio } from '@/types/crypto.types'
+import { ICrypto, IPortfolio } from '@/types/crypto.types'
 
 interface IPortfolioStore extends IPortfolio {
   isLoading: boolean
+  portfolio: ICrypto[]
   initializePortfolio: () => void
   savePortfolio: () => void
+  updatePortfolioFromCryptoData: (cryptoData: ICrypto[]) => void
 }
 
 export const usePortfolioStore = create<IPortfolioStore>((set) => ({
@@ -19,6 +21,23 @@ export const usePortfolioStore = create<IPortfolioStore>((set) => ({
     const storedPortfolio = JSON.parse(localStorage.getItem('portfolio') || '[]')
     set({ portfolio: storedPortfolio, isLoading: false })
   },
+
+  updatePortfolioFromCryptoData: (cryptoData: ICrypto[]) => set((state) => {
+    const updatedPortfolio = state.portfolio.map((crypto) => {
+      const updatedCryptoData = cryptoData.find(data => data.id === crypto.id);
+      if (updatedCryptoData) {
+        return {
+          ...crypto,
+          current_price: updatedCryptoData.current_price,
+          price_change_percentage_24h: updatedCryptoData.price_change_percentage_24h,
+        };
+      }
+      return crypto;
+    });
+
+    localStorage.setItem('portfolio', JSON.stringify(updatedPortfolio));
+    return { portfolio: updatedPortfolio };
+  }),
 
   savePortfolio: () => {
     set((state) => {

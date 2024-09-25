@@ -7,6 +7,7 @@ import { useFavoritesCrypto } from '@/hooks'
 import { EmptyFavorites } from '@/components/favorites'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import i18n from '@/i18n'
 
 export default function FavoritesPage() {
   useInitializeCryptoStore()
@@ -27,6 +28,13 @@ export default function FavoritesPage() {
 
     setShowEmptyMessage(false)
   }, [isLoading, favoriteCryptoData])
+
+  useEffect(() => {
+    const bot = window.Telegram.WebApp
+
+    const userLanguage = bot.initDataUnsafe?.user?.language_code || 'en'
+    i18n.changeLanguage(userLanguage)
+  }, [])
 
   return (
     <Container className={'pt-0 mb-20'}>

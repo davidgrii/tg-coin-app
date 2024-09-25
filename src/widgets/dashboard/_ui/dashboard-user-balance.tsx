@@ -15,18 +15,22 @@ export const DashboardUserBalance: React.FC<IProps> = ({ className }) => {
 
   const { t } = useTranslation()
 
-
   const getMarketCapChangeClass = () => {
     if (totalPercentageChange === 0) return 'text-muted'
     return totalPercentageChange < 0 ? 'text-secondary' : 'text-primary'
   }
+
+  const formattedBalance = totalBalance.toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
 
   return (
     <Card className={'flex py-4 pl-6 pr-9 items-center justify-between rounded-xl border-0'}>
       <CardHeader className={'p-0 space-y-0.5'}>
         <CardTitle className={'text-xs text-muted-foreground'}>{t('dashboard_balance.my_balance')}</CardTitle>
         <CardDescription className={'text-sm text-foreground font-bold'}>
-          {totalBalance.toLocaleString().split('.')[0].replace(/,/g, ',')} $
+          {formattedBalance} $
         </CardDescription>
       </CardHeader>
       <CardContent className={'p-0'}>

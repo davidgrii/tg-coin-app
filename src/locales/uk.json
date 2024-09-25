@@ -11,8 +11,8 @@
   },
   "balance_table_header": {
     "coin": "Монета",
-    "price": "Ціна / за 24г",
-    "value": "Вартість"
+    "price": "Ціна / 24г",
+    "value": "Володію"
   },
   "dashboard": {
     "market_cap": "Ринкова капіталізація",
@@ -27,7 +27,7 @@
     "add_first": "Додайте свою першу монету з ринку"
   },
   "my_portfolio_page": {
-    "edit": "Редагувати",
+    "edit": "Змінити",
     "delete": "Видалити"
   },
   "add_crypto": {

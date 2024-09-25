@@ -5,6 +5,7 @@ import { DeleteIcon, EditIcon, EditV2Icon } from '@/components/icons'
 import { Separator } from '@/components/ui/separator'
 import React from 'react'
 import { ICrypto } from '@/types'
+import Image from 'next/image'
 import { useTranslation } from 'react-i18next'
 
 interface IProps {
@@ -20,9 +21,15 @@ export const PortfolioItem: React.FC<IProps> = ({ crypto, index, onEdit, onDelet
   return (
     <CardContent key={index} className={'p-0 flex justify-between'}>
       <div className={'flex items-center gap-2'}>
-        <div className="h-9 w-9">
-          <img src={crypto.image} alt={crypto.name} />
-        </div>
+        <Image
+          width={36}
+          height={36}
+          src={crypto.image}
+          alt={crypto.name}
+          className="h-9 w-9"
+        />
+
+
         <div className="grid gap-0.5">
           <p className="text-sm leading-none">
             {crypto.symbol.toUpperCase()}
@@ -40,11 +47,11 @@ export const PortfolioItem: React.FC<IProps> = ({ crypto, index, onEdit, onDelet
             {formatPrice(crypto.current_price)} $
           </p>
           <p
-            className={`${crypto.price_change_percentage_24h.toString().includes('-')
+            className={`${crypto.price_change_percentage_24h?.toString().includes('-')
               ? 'text-secondary'
               : 'text-primary'}  text-[8.7px] text-right font-semibold`}
           >
-            {crypto.price_change_percentage_24h.toFixed(2)} %
+            {crypto.price_change_percentage_24h?.toFixed(2)} %
           </p>
         </div>
 
@@ -60,7 +67,7 @@ export const PortfolioItem: React.FC<IProps> = ({ crypto, index, onEdit, onDelet
           <p
             className={'text-muted-foreground text-[8.7px] text-right font-semibold'}
           >
-            {crypto.quantity}
+            {formatPrice(crypto.quantity)}
           </p>
         </div>
 

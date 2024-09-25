@@ -3,6 +3,7 @@ import { CardContent } from '@/components/ui/card'
 import { StarFavoriteIcon, StarIcon } from '@/components/icons'
 import { ICrypto } from '@/types'
 import { formatPrice, getDynamicFontSize } from '@/components/utils/utils'
+import Image from 'next/image'
 
 interface IProps {
   index: number
@@ -31,7 +32,14 @@ export const CryptoItem: React.FC<IProps> = (
 
       <div className="flex items-center gap-2">
         <span className="w-5 text-sm text-muted-foreground">{index + 1}</span>
-        <img className="h-9 w-9" src={crypto.image} alt={crypto.name} />
+
+        <Image
+          width={36}
+          height={36}
+          className="h-9 w-9"
+          src={crypto.image}
+          alt={crypto.name}
+        />
 
         <div className="grid gap-0.5">
           <p className="text-sm leading-none">

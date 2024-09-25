@@ -7,6 +7,7 @@ import { motion } from 'framer-motion'
 import { AddCrypto, BalanceTableHeader, EditCrypto, PortfolioItem } from '@/components/portfolio'
 import { ICrypto } from '@/types'
 import { useInitializePortfolioStore, usePortfolioStore } from '@/store/portfolio/portfolio.store'
+import i18n from '@/i18n'
 
 export default function PortfolioPage() {
   useInitializePortfolioStore()
@@ -18,6 +19,7 @@ export default function PortfolioPage() {
   const {
     isLoading,
     portfolio,
+    cryptoData,
     addCrypto,
     updateCrypto,
     deleteCrypto,
@@ -25,13 +27,16 @@ export default function PortfolioPage() {
     calculateTotalPercentageChange
   } = usePortfolioStore()
 
+  console.log(portfolio)
+  console.log(cryptoData)
+
   const handleUpdateCrypto = (index: number, updatedCrypto: ICrypto) => {
     updateCrypto(index, updatedCrypto)
     calculateTotalBalance()
     calculateTotalPercentageChange()
   }
 
-  const handleAddCrypto = (newCrypto: any) => {
+  const handleAddCrypto = (newCrypto: ICrypto) => {
     addCrypto(newCrypto)
     calculateTotalBalance()
     calculateTotalPercentageChange()
@@ -48,6 +53,13 @@ export default function PortfolioPage() {
     setActiveCryptoIndex(index)
     setIsEditCryptoOpen(true)
   }
+
+  useEffect(() => {
+    const bot = window.Telegram.WebApp
+
+    const userLanguage = bot.initDataUnsafe?.user?.language_code || 'en'
+    i18n.changeLanguage(userLanguage)
+  }, [])
 
   useEffect(() => {
     if (!isLoading && portfolio.length === 0) {

@@ -11,8 +11,8 @@
   },
   "balance_table_header": {
     "coin": "Монета",
-    "price": "Цена / за 24ч",
-    "value": "Стоимость"
+    "price": "Цена / 24ч",
+    "value": "Владею"
   },
   "dashboard": {
     "market_cap": "Рыночная капитализация",
@@ -27,7 +27,7 @@
     "add_first": "Добавьте свою первую монету с рынка"
   },
   "my_portfolio_page": {
-    "edit": "Редактировать",
+    "edit": "Изменить",
     "delete": "Удалить"
   },
   "add_crypto": {
@@ -39,7 +39,7 @@
   },
   "edit_crypto": {
     "edit_coin": "Редактировать вашу монету",
-    "quantity": "Quantity",
+    "quantity": "Количество",
     "btn": "Изменить"
   },
   "input_search": {
