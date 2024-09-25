@@ -3,7 +3,6 @@ import { Button } from '@/components/ui/button'
 import { CirclePlus } from 'lucide-react'
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Input } from '@/components/ui/input'
-import { useCrypto } from '@/hooks/useCrypto'
 import { ClearIcon } from '@/components/icons'
 import { useCryptoFilter } from '@/hooks'
 import { ICrypto } from '@/types'
@@ -12,13 +11,13 @@ import Image from 'next/image'
 
 interface IProps {
   isOpen: boolean
+  cryptoData: ICrypto[]
   setIsOpen: (state: boolean) => void
   isEmpty: boolean
   onAddCrypto: any
 }
 
-export const AddCrypto: React.FC<IProps> = ({ onAddCrypto, isOpen, setIsOpen, isEmpty }) => {
-  const { cryptoData } = useCrypto()
+export const AddCrypto: React.FC<IProps> = ({cryptoData, onAddCrypto, isOpen, setIsOpen, isEmpty }) => {
   const [searchValue, setSearchValue] = useState('')
   const [selectedCrypto, setSelectedCrypto] = useState<ICrypto | null>(null)
   const [quantity, setQuantity] = useState('')

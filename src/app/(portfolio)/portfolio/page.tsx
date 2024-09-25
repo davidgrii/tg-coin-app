@@ -1,20 +1,21 @@
 'use client'
 
-import { Container, CryptoSkeleton } from '@/components'
 import React, { useEffect, useState } from 'react'
+import { Container, CryptoSkeleton } from '@/components'
 import { Card } from '@/components/ui/card'
 import { motion } from 'framer-motion'
 import { AddCrypto, BalanceTableHeader, EditCrypto, PortfolioItem } from '@/components/portfolio'
 import { ICrypto } from '@/types'
 import { useInitializePortfolioStore, usePortfolioStore } from '@/store/portfolio/portfolio.store'
 import i18n from '@/i18n'
+import { useCryptoStore } from '@/store'
 
 export default function PortfolioPage() {
-  useInitializePortfolioStore()
+  useInitializePortfolioStore();
 
-  const [isAddCryptoOpen, setIsAddCryptoOpen] = useState<boolean>(false)
-  const [isEditCryptoOpen, setIsEditCryptoOpen] = useState<boolean>(false)
-  const [activeCryptoIndex, setActiveCryptoIndex] = useState<number | null>(null)
+  const [isAddCryptoOpen, setIsAddCryptoOpen] = useState<boolean>(false);
+  const [isEditCryptoOpen, setIsEditCryptoOpen] = useState<boolean>(false);
+  const [activeCryptoIndex, setActiveCryptoIndex] = useState<number | null>(null);
 
   const {
     isLoading,
@@ -23,60 +24,66 @@ export default function PortfolioPage() {
     updateCrypto,
     deleteCrypto,
     calculateTotalBalance,
-    calculateTotalPercentageChange
+    calculateTotalPercentageChange,
   } = usePortfolioStore()
 
-  const handleUpdateCrypto = (index: number, updatedCrypto: ICrypto) => {
-    updateCrypto(index, updatedCrypto)
+  const { cryptoData } = useCryptoStore()
+
+
+  useEffect(() => {
     calculateTotalBalance()
     calculateTotalPercentageChange()
-  }
+  }, [portfolio, calculateTotalBalance, calculateTotalPercentageChange])
+
+  const handleUpdateCrypto = (index: number, updatedCrypto: ICrypto) => {
+    updateCrypto(index, updatedCrypto);
+    calculateTotalBalance();
+    calculateTotalPercentageChange();
+  };
 
   const handleAddCrypto = (newCrypto: ICrypto) => {
     addCrypto(newCrypto)
     calculateTotalBalance()
     calculateTotalPercentageChange()
     setIsAddCryptoOpen(false)
-  }
+  };
 
   const handleDeleteCrypto = (index: number) => {
     deleteCrypto(index)
     calculateTotalPercentageChange()
     calculateTotalBalance()
-  }
+  };
 
   const handleEditCrypto = (index: number) => {
     setActiveCryptoIndex(index)
     setIsEditCryptoOpen(true)
-  }
+  };
 
   useEffect(() => {
-    const bot = window.Telegram.WebApp
+    const bot = window.Telegram.WebApp;
 
-    const userLanguage = bot.initDataUnsafe?.user?.language_code || 'en'
-    i18n.changeLanguage(userLanguage)
-  }, [])
+    const userLanguage = bot.initDataUnsafe?.user?.language_code || 'en';
+    i18n.changeLanguage(userLanguage);
+  }, []);
 
   useEffect(() => {
     if (!isLoading && portfolio.length === 0) {
       setIsAddCryptoOpen(true)
     }
-
-    calculateTotalBalance();
-    calculateTotalPercentageChange();
-  }, [portfolio.length, isLoading, calculateTotalBalance, calculateTotalPercentageChange])
+  }, [portfolio.length, isLoading])
 
   return (
     <Container className={'pt-0 mb-20'}>
       <BalanceTableHeader />
 
-      {isLoading ?
+      {isLoading ? (
         <div className={'grid justify-start gap-8'}>
           {new Array(10).fill(null).map((_, index) => (
             <CryptoSkeleton key={index} />
           ))}
         </div>
-        : <motion.div
+      ) : (
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -100,7 +107,7 @@ export default function PortfolioPage() {
             ))}
           </Card>
         </motion.div>
-      }
+      )}
 
       <div className={'flex flex-col items-center justify-center mt-10'}>
         {activeCryptoIndex !== null && (
@@ -113,6 +120,7 @@ export default function PortfolioPage() {
         )}
 
         <AddCrypto
+          cryptoData={cryptoData} 
           onAddCrypto={handleAddCrypto}
           isOpen={isAddCryptoOpen}
           setIsOpen={setIsAddCryptoOpen}
@@ -120,5 +128,5 @@ export default function PortfolioPage() {
         />
       </div>
     </Container>
-  )
+  );
 }

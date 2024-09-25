@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { useCryptoStore, useInitializeCryptoStore, usePortfolioStore, useSearchStore } from '@/store'
+import { useCryptoStore, useInitializeCryptoStore, useSearchStore } from '@/store'
 import { useCryptoFilter } from '@/hooks'
 import { Container, CryptoItem, CryptoSkeleton, CryptoTableHeader } from '@/components'
 import { motion } from 'framer-motion'
@@ -18,7 +18,6 @@ export default function CryptoClient({ initialCryptoData }: CryptoClientProps) {
   useInitializeCryptoStore()
 
   const setCryptoData = useCryptoStore((state) => state.setCryptoData)
-  const updatePortfolioFromCryptoData = usePortfolioStore((state) => state.updatePortfolioFromCryptoData)
 
   const [searchValue, setSearchValue] = useState('')
   const inputRef = useRef<HTMLInputElement | null>(null)
@@ -60,9 +59,8 @@ export default function CryptoClient({ initialCryptoData }: CryptoClientProps) {
   useEffect(() => {
     if (initialCryptoData) {
       setCryptoData(initialCryptoData)
-      updatePortfolioFromCryptoData(initialCryptoData)
     }
-  }, [initialCryptoData, setCryptoData, updatePortfolioFromCryptoData])
+  }, [initialCryptoData, setCryptoData])
 
   // Логика для Telegram WebApp
   useEffect(() => {
