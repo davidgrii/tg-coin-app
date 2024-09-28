@@ -123,3 +123,11 @@ export const ClearIcon = () => (
     <circle cx="24.5" cy="24.5" r="22.5" fill="#1C1C1E" fillOpacity="0.5" stroke="#9D9D9D" strokeWidth="4" />
   </svg>
 )
+
+export const SearchV2Icon = () => (
+  <svg width="15  " height="15" viewBox="0 0 35 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="15.3915" cy="15.3915" r="13.3915" fill="#1C1C1E" fillOpacity="0.5" stroke="#007BFF" strokeWidth="4" />
+    <path d="M26.0645 25.2695L33 32" stroke="#007BFF" strokeWidth="4" strokeLinecap="round" />
+  </svg>
+
+)

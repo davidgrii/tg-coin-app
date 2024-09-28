@@ -1,11 +1,10 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import { cn } from '@/components/ui/utils'
-import { usePathname, useRouter } from 'next/navigation'
-import { FavoritesIcon, MarketIcon, PortfolioIcon, SearchIcon } from '@/components/icons'
-import { useSearchStore } from '@/store'
+import { usePathname } from 'next/navigation'
+import { FavoritesIcon, MarketIcon, PortfolioIcon } from '@/components/icons'
 import { useTranslation } from 'react-i18next'
 
 interface IProps {
@@ -13,25 +12,12 @@ interface IProps {
 }
 
 export const Navbar: React.FC<IProps> = ({ className }) => {
-  const { isSearchOpen, toggleSearch, closeSearch } = useSearchStore()
-  const router = useRouter()
   const currentPage = usePathname()
   const { t } = useTranslation()
-
-  const handleSearchClick = () => {
-    router.push('/')
-    setTimeout(() => {
-      toggleSearch(true)
-    }, 500)
-  }
-
-  useEffect(() => {
-    closeSearch()
-  }, [currentPage, closeSearch])
-
+  
   return (
     <nav>
-      <ul className={'grid grid-cols-4 gap-8'}>
+      <ul className={'grid grid-cols-3 gap-16'}>
         <li>
           <Link
             href={'/market'}
@@ -61,16 +47,6 @@ export const Navbar: React.FC<IProps> = ({ className }) => {
             <PortfolioIcon />
             <span className={'text-xs'}>{t('portfolio')}</span>
           </Link>
-        </li>
-        <li>
-          <button
-            onClick={handleSearchClick}
-            className={cn(isSearchOpen ? 'text-foreground' : 'text-muted-foreground',
-              'flex flex-col items-center gap-1 font-semibold transition hover:text-foreground')}
-          >
-            <SearchIcon />
-            <span className={'text-xs'}>{t('search')}</span>
-          </button>
         </li>
       </ul>
     </nav>

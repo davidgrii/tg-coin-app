@@ -8,6 +8,7 @@ import { useCryptoFilter } from '@/hooks'
 import { ICrypto } from '@/types'
 import { useTranslation } from 'react-i18next'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 
 interface IProps {
   isOpen: boolean
@@ -17,7 +18,7 @@ interface IProps {
   onAddCrypto: any
 }
 
-export const AddCrypto: React.FC<IProps> = ({cryptoData, onAddCrypto, isOpen, setIsOpen, isEmpty }) => {
+export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, setIsOpen, isEmpty }) => {
   const [searchValue, setSearchValue] = useState('')
   const [selectedCrypto, setSelectedCrypto] = useState<ICrypto | null>(null)
   const [quantity, setQuantity] = useState('')
@@ -48,10 +49,16 @@ export const AddCrypto: React.FC<IProps> = ({cryptoData, onAddCrypto, isOpen, se
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <button className={'bg-background/0'}>
-          <CirclePlus
-            className={'w-9 h-9 cursor-pointer text-foreground transition-colors hover:text-muted-foreground'} />
-        </button>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.9 }}
+        >
+          <button className={'bg-background/0'}>
+            <CirclePlus
+              className={'w-9 h-9 cursor-pointer text-foreground transition-colors hover:text-muted-foreground'} />
+          </button>
+        </motion.div>
       </SheetTrigger>
       <SheetContent
         side={'top'}
@@ -96,32 +103,46 @@ export const AddCrypto: React.FC<IProps> = ({cryptoData, onAddCrypto, isOpen, se
               className={'font-medium py-8 px-6 rounded-xl text-xs bg-[#282828] border-0'}
             />
 
-            {searchValue && filteredCryptoData.length > 0 && (
-              <div className="absolute bottom-full mb-2 w-full z-10">
-                <div className={'bg-[#282828] rounded-xl shadow-md max-h-52 overflow-y-auto'}>
-                  {filteredCryptoData.slice(0, 4).map((crypto) => (
-                    <div
-                      key={crypto.id}
-                      className="flex items-center gap-3 px-4 py-2 hover:bg-muted-foreground rounded-lg cursor-pointer"
-                      onClick={() => handleCryptoSelect(crypto)}
-                    >
-                      <Image
-                        width={24}
-                        height={24}
-                        src={crypto.image}
-                        alt={crypto.name}
-                        className="w-6 h-6"
-                      />
 
-                      <p
-                        className="text-[13px] text-nowrap">
-                        {crypto.name.slice(0, 18) + '...'} ({crypto.symbol.toUpperCase()})
-                      </p>
-                    </div>
-                  ))}
+            {searchValue && filteredCryptoData.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.2 }}
+              >
+                <div className="absolute bottom-full mb-2 w-full z-10">
+                  <div className={'bg-[#282828] rounded-xl shadow-md max-h-52 overflow-y-auto'}>
+                    {filteredCryptoData.slice(0, 4).map((crypto) => (
+                      <motion.div
+                        key={crypto.id}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.8 }}
+                      >
+                        <div
+                          className="flex items-center gap-3 px-4 py-2 hover:bg-muted-foreground rounded-lg cursor-pointer"
+                          onClick={() => handleCryptoSelect(crypto)}
+                        >
+                          <Image
+                            width={24}
+                            height={24}
+                            src={crypto.image}
+                            alt={crypto.name}
+                            className="w-6 h-6"
+                          />
+
+                          <p
+                            className="text-[13px] text-nowrap">
+                            {crypto.name.length > 18 ? crypto.name.slice(0, 18) + '...' : crypto.name} ({crypto.symbol.toUpperCase()})
+                          </p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </motion.div>
             )}
+
           </div>
         )}
 

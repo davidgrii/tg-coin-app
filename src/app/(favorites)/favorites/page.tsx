@@ -1,13 +1,14 @@
 'use client'
 
 import { useCryptoStore, useInitializeCryptoStore } from '@/store'
-import { Container, CryptoItem, CryptoSkeleton, CryptoTableHeader } from '@/components'
+import { Container, CryptoItem, CryptoSkeleton } from '@/components'
 import { Card } from '@/components/ui/card'
 import { useFavoritesCrypto } from '@/hooks'
 import { EmptyFavorites } from '@/components/favorites'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import i18n from '@/i18n'
+import { FavoritesTableHeader } from '@/components/favorites/_ui/favorites-table-header'
 
 export default function FavoritesPage() {
   useInitializeCryptoStore()
@@ -38,7 +39,7 @@ export default function FavoritesPage() {
 
   return (
     <Container className={'pt-0 mb-20'}>
-      <CryptoTableHeader />
+      <FavoritesTableHeader />
 
       {isLoading ? (
         <motion.div

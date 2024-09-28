@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Input } from '@/components/ui/input'
 import { Search } from 'lucide-react'
 import { cn } from '@/components/ui/utils'
@@ -19,56 +19,65 @@ interface IProps {
 export const SearchInput: React.FC<IProps> = ({ searchValue, setSearchValue, inputRef, className }) => {
   const { toggleSearch } = useSearchStore()
   const { t } = useTranslation()
+
   const clearInput = () => {
     setSearchValue('')
     inputRef.current?.focus()
   }
 
   return (
-    <div className={'flex'}>
+    <div className="flex">
       <div className={cn(className, 'relative w-full md:grow-0')}>
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.3 }}
-        >
-          <Search className={'absolute left-2.5 top-3 h-4 w-4 text-muted-foreground'} />
-
-          <Input
-            ref={inputRef}
-            type="search"
-            placeholder={t('input_search.search')}
-            className="font-medium pl-8 w-full bg-[#282828] rounded-xl border-0"
-            value={searchValue}
-            onChange={(e) => setSearchValue(e.target.value)}
-          />
-
-          {searchValue && (
-            <motion.button
-              className="absolute right-2.5 top-3"
-              onClick={clearInput}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0 }}
-              transition={{ duration: 0.2 }}
+        <AnimatePresence>
+          {searchValue !== undefined && (
+            <motion.div
+              initial={{ opacity: 0, y: -15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.3 }}
             >
-              <ClearIcon />
-            </motion.button>
+              <Search className="absolute left-2.5 top-3 h-4 w-4 text-muted-foreground" />
+
+              <Input
+                ref={inputRef}
+                type="search"
+                placeholder={t('input_search.search')}
+                className="font-medium pl-8 w-full bg-[#282828] rounded-xl border-0"
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+              />
+
+              {searchValue && (
+                <motion.button
+                  className="absolute right-3 top-3"
+                  onClick={clearInput}
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <ClearIcon />
+                </motion.button>
+              )}
+            </motion.div>
           )}
-        </motion.div>
+        </AnimatePresence>
       </div>
 
-      <motion.span
-        className={'p-2.5 text-sm text-[#007BFF] font-medium cursor-pointer'}
-        onClick={() => toggleSearch(false)}
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -20 }}
-        transition={{ duration: 0.3 }}
-      >
-        {t('input_search.cancel')}
-      </motion.span>
+      <AnimatePresence>
+        {searchValue !== undefined && (
+          <motion.span
+            className="p-2.5 text-sm text-[#007BFF] font-medium cursor-pointer"
+            onClick={() => toggleSearch(false)}
+            initial={{ opacity: 0, y: -15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.3 }}
+          >
+            {t('input_search.cancel')}
+          </motion.span>
+        )}
+      </AnimatePresence>
     </div>
   )
 }

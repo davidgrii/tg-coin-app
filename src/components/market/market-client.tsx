@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useCryptoStore, useInitializeCryptoStore, useSearchStore } from '@/store'
 import { useCryptoFilter } from '@/hooks'
-import { Container, CryptoItem, CryptoSkeleton, CryptoTableHeader } from '@/components'
+import { Container, CryptoItem, CryptoSkeleton, MarketTableHeader } from '@/components'
 import { motion } from 'framer-motion'
 import { Card } from '@/components/ui/card'
 import { SearchInput } from '@/components/market/index'
@@ -14,7 +14,7 @@ interface CryptoClientProps {
   initialCryptoData: ICrypto[]
 }
 
-export default function CryptoClient({ initialCryptoData }: CryptoClientProps) {
+export default function MarketClient({ initialCryptoData }: CryptoClientProps) {
   useInitializeCryptoStore()
 
   const setCryptoData = useCryptoStore((state) => state.setCryptoData)
@@ -93,11 +93,12 @@ export default function CryptoClient({ initialCryptoData }: CryptoClientProps) {
         />
       )}
 
-      <CryptoTableHeader />
+      <MarketTableHeader />
 
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
         transition={{ duration: 0.7 }}
       >
         <Card className={'bg-background grid gap-8 border-0'}>

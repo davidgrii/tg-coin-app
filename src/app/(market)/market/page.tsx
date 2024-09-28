@@ -1,4 +1,4 @@
-import CryptoClient from '@/components/market/crypto-client'
+import MarketClient from '@/components/market/market-client'
 import { ICrypto } from '@/types'
 
 const fetchCryptoData = async (): Promise<ICrypto[]> => {
@@ -20,5 +20,5 @@ export default async function MarketPage() {
     console.error('Ошибка при загрузке данных', error)
   }
 
-  return <CryptoClient initialCryptoData={cryptoData} />
+  return <MarketClient initialCryptoData={cryptoData} />
 }

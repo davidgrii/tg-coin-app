@@ -5,7 +5,7 @@ interface IProps {
   className?: string
 }
 
-export const CryptoTableHeader: React.FC<IProps> = ({ className }) => {
+export const FavoritesTableHeader: React.FC<IProps> = ({ className }) => {
   const { t } = useTranslation()
 
   return (
