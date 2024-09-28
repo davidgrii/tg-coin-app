@@ -35,7 +35,7 @@ export const MarketTableHeader: React.FC<IProps> = ({ className }) => {
           transition={{ duration: 0.8 }}
         >
           <Link
-            className={clsx(isSearchOpen ? 'opacity-0' : 'opacity-100', 'transform transition-all hover:scale-105')}
+            className={clsx(isSearchOpen ? 'hidden' : 'visible', 'transform transition-all hover:scale-105')}
             onClick={() => toggleSearch(true)} href={''}
           >
             <SearchV2Icon />
