@@ -8,12 +8,7 @@ interface IPortfolioStore extends IPortfolio {
   portfolio: ICrypto[]
   initializePortfolio: () => void
   savePortfolio: () => void
-  addCrypto: (crypto: ICrypto) => void
-  updateCrypto: (index: number, updatedCrypto: ICrypto) => void
-  deleteCrypto: (index: number) => void
   updateCryptoData: (data: ICrypto[]) => void
-  calculateTotalBalance: () => void
-  calculateTotalPercentageChange: () => void
 }
 
 export const usePortfolioStore = create<IPortfolioStore>((set) => ({
@@ -22,28 +17,12 @@ export const usePortfolioStore = create<IPortfolioStore>((set) => ({
   totalPercentageChange: 0,
   isLoading: true,
 
-  // Инициализация портфолио с бэкенда
-  initializePortfolio: async () => {
+  initializePortfolio: () => {
     set({ isLoading: true })
-
-    try {
-      const userId = 'USER_ID' // Замените на реальный userId или получите его из контекста
-      const response = await fetch(`https://your-api.com/api/portfolio/${userId}`)
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch portfolio')
-      }
-
-      const portfolio = await response.json()
-      set({ portfolio, isLoading: false })
-
-    } catch (error) {
-      console.error('Error fetching portfolio:', error)
-      set({ isLoading: false })
-    }
+    const storedPortfolio = JSON.parse(localStorage.getItem('portfolio') || '[]')
+    set({ portfolio: storedPortfolio, isLoading: false })
   },
 
-  // Сохранение в localStorage, если нужно
   savePortfolio: () => {
     set((state) => {
       localStorage.setItem('portfolio', JSON.stringify(state.portfolio))
@@ -53,6 +32,7 @@ export const usePortfolioStore = create<IPortfolioStore>((set) => ({
 
   addCrypto: (crypto) => set((state) => {
     const newPortfolio = [...state.portfolio, crypto]
+    localStorage.setItem('portfolio', JSON.stringify(newPortfolio))
     return { portfolio: newPortfolio }
   }),
 
@@ -60,11 +40,13 @@ export const usePortfolioStore = create<IPortfolioStore>((set) => ({
     const newPortfolio = state.portfolio.map((crypto, i) =>
       i === index ? { ...crypto, ...updatedCrypto } : crypto
     )
+    localStorage.setItem('portfolio', JSON.stringify(newPortfolio))
     return { portfolio: newPortfolio }
   }),
 
   deleteCrypto: (index) => set((state) => {
     const newPortfolio = state.portfolio.filter((_, i) => i !== index)
+    localStorage.setItem('portfolio', JSON.stringify(newPortfolio))
     return { portfolio: newPortfolio }
   }),
 
@@ -104,10 +86,10 @@ export const useInitializePortfolioStore = () => {
   const { cryptoData } = useCryptoStore()
 
   useEffect(() => {
-    initializePortfolio() // Инициализация данных с бэкенда
+    initializePortfolio()
   }, [initializePortfolio])
 
   useEffect(() => {
-    updateCryptoData(cryptoData) // Обновление данных криптовалют
+    updateCryptoData(cryptoData)
   }, [cryptoData, updateCryptoData])
 }

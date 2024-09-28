@@ -8,9 +8,9 @@ interface ICryptoStore {
   favorites: string[]
   isLoading: boolean
   cryptoData: ICrypto[]
-  addFavorite: (id: string) => void
-  removeFavorite: (id: string) => void
-  initializeFavorites: () => void
+  addFavorite: (userId: string, id: string) => Promise<void>
+  removeFavorite: (userId: string, id: string) => Promise<void>
+  initializeFavorites: (userId: string) => Promise<void>
   setCryptoData: (data: ICrypto[]) => void
 }
 
@@ -19,32 +19,77 @@ export const useCryptoStore = create<ICryptoStore>((set) => ({
   isLoading: true,
   cryptoData: [],
 
-  initializeFavorites: () => {
+  initializeFavorites: async (userId: string) => {
     set({ isLoading: true })
 
-    const storedFavorites = JSON.parse(localStorage.getItem('favorites') || '[]')
-    set({ favorites: storedFavorites, isLoading: false })
+    try {
+      const res = await fetch(`http://priceme.store:5000/api/users/${userId}/favorites`, {})
+
+      if (res.ok) {
+        const data = await res.json()
+        set({ favorites: data.favorites, isLoading: false })
+      } else {
+        console.error('Error fetching favorites:', res.statusText)
+        set({ isLoading: false })
+      }
+
+    } catch (error) {
+      console.error('Error fetching favorites', error)
+      set({ isLoading: false })
+    }
   },
 
-  addFavorite: (id: string) => set((state) => {
-    const updatedFavorites = Array.from(new Set([...state.favorites, id]))
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites))
-    return { favorites: updatedFavorites }
-  }),
+  addFavorite: async (userId: string, id: string) => {
+    try {
+      const res = await fetch(`http://priceme.store:5000/api/users/${userId}/favorites`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ cryptoId: id })
+      })
 
-  removeFavorite: (id: string) => set((state) => {
-    const updatedFavorites = state.favorites.filter((fav) => fav !== id)
-    localStorage.setItem('favorites', JSON.stringify(updatedFavorites))
-    return { favorites: updatedFavorites }
-  }),
+      if (res.ok) {
+        const updatedUser = await res.json()
+        set({ favorites: updatedUser.favorites })
+      } else {
+        console.error('Error adding favorite:', res.statusText)
+      }
+    } catch (error) {
+      console.error('Error adding favorite:', error)
+    }
+  },
 
-  setCryptoData: (data: ICrypto[]) => set({ cryptoData: data }),
+  removeFavorite: async (userId: string, id: string) => {
+    try {
+      const res = await fetch(`http://priceme.store:5000/api/users/${userId}/favorites`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ cryptoId: id })
+      })
+
+      if (res.ok) {
+        const updatedUser = await res.json()
+        set({ favorites: updatedUser.favorites })
+      } else {
+        console.error('Error removing favorite:', res.statusText)
+      }
+    } catch (error) {
+      console.error('Error removing favorite:', error)
+    }
+  },
+
+  setCryptoData: (data: ICrypto[]) => set({ cryptoData: data })
 }))
 
-export const useInitializeCryptoStore = () => {
+export const useInitializeCryptoStore = (userId: string) => {
   const initializeFavorites = useCryptoStore((state) => state.initializeFavorites)
 
   useEffect(() => {
-    initializeFavorites()
-  }, [initializeFavorites])
+    if (userId) {
+      initializeFavorites(userId)
+    }
+  }, [initializeFavorites, userId])
 }

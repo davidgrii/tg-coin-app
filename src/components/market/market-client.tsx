@@ -15,7 +15,11 @@ interface CryptoClientProps {
 }
 
 export default function MarketClient({ initialCryptoData }: CryptoClientProps) {
-  useInitializeCryptoStore()
+  const isBrowser = typeof window !== 'undefined'
+  const bot = isBrowser ? window.Telegram.WebApp : null
+  const userId = isBrowser ? String(bot?.initDataUnsafe?.user?.id || '1422316270') : 'defaultUserId'
+
+  useInitializeCryptoStore(userId)
 
   const setCryptoData = useCryptoStore((state) => state.setCryptoData)
 
@@ -64,8 +68,7 @@ export default function MarketClient({ initialCryptoData }: CryptoClientProps) {
 
   // Логика для Telegram WebApp
   useEffect(() => {
-    if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
-      const bot = window.Telegram.WebApp
+    if (isBrowser && bot) {
       bot.ready()
       bot.setHeaderColor('#000')
       bot.setBackgroundColor('#000')
@@ -81,7 +84,7 @@ export default function MarketClient({ initialCryptoData }: CryptoClientProps) {
     } else {
       document.body.style.backgroundColor = '#000'
     }
-  }, [])
+  }, [isBrowser, bot])
 
   return (
     <Container className={'pt-0 mb-20'}>
@@ -104,6 +107,7 @@ export default function MarketClient({ initialCryptoData }: CryptoClientProps) {
         <Card className={'bg-background grid gap-8 border-0'}>
           {filteredCryptoData.slice(0, itemsToShow).map((crypto, index) => (
             <CryptoItem
+              userId={userId}
               key={crypto.id}
               crypto={crypto}
               index={index}

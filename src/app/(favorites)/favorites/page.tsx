@@ -11,7 +11,11 @@ import i18n from '@/i18n'
 import { FavoritesTableHeader } from '@/components/favorites/_ui/favorites-table-header'
 
 export default function FavoritesPage() {
-  useInitializeCryptoStore()
+  const isBrowser = typeof window !== 'undefined'
+  const bot = isBrowser ? window.Telegram.WebApp : null
+  const userId = isBrowser ? String(bot?.initDataUnsafe?.user?.id || '1422316270') : 'defaultUserId'
+
+  useInitializeCryptoStore(userId)
 
   const { favorites, addFavorite, removeFavorite, isLoading } = useCryptoStore()
   const { favoriteCryptoData } = useFavoritesCrypto()
@@ -31,9 +35,7 @@ export default function FavoritesPage() {
   }, [isLoading, favoriteCryptoData])
 
   useEffect(() => {
-    const bot = window.Telegram.WebApp
-
-    const userLanguage = bot.initDataUnsafe?.user?.language_code || 'en'
+    const userLanguage = bot?.initDataUnsafe?.user?.language_code || 'en'
     i18n.changeLanguage(userLanguage)
   }, [])
 
@@ -65,6 +67,7 @@ export default function FavoritesPage() {
             ) : (
               favoriteCryptoData.map((crypto, index) => (
                 <CryptoItem
+                  userId={userId}
                   key={crypto.id}
                   crypto={crypto}
                   index={index}

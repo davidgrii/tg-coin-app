@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { CardContent } from '@/components/ui/card'
 import { StarFavoriteIcon, StarIcon } from '@/components/icons'
 import { ICrypto } from '@/types'
@@ -6,16 +6,18 @@ import { formatPrice, getDynamicFontSize } from '@/components/utils/utils'
 import Image from 'next/image'
 
 interface IProps {
+  userId: string
   index: number
   crypto: ICrypto
   favorites: string[]
-  addFavorite: (id: string) => void
-  removeFavorite: (id: string) => void
+  addFavorite: (userId: string, id: string) => Promise<void>
+  removeFavorite: (userId: string, id: string) => Promise<void>
   className?: string
 }
 
 export const CryptoItem: React.FC<IProps> = (
   {
+    userId,
     crypto,
     index,
     favorites,
@@ -23,9 +25,26 @@ export const CryptoItem: React.FC<IProps> = (
     removeFavorite
   }) => {
 
+  const [loading, setLoading] = useState(false)
   const isFavorite = favorites.includes(crypto.id)
   const priceChange = crypto.price_change_percentage_24h ?? 0
   const isPricePositive = !priceChange.toString().includes('-')
+
+  const handleFavoriteToggle = async () => {
+    setLoading(true)
+    try {
+      if (isFavorite) {
+        await removeFavorite(userId, crypto.id)
+      } else {
+        await addFavorite(userId, crypto.id)
+      }
+
+    } catch (error) {
+      console.error('Error toggling favorite:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
     <CardContent className="p-0 flex justify-between items-center">
@@ -63,8 +82,10 @@ export const CryptoItem: React.FC<IProps> = (
           <span className="font-semibold">{priceChange.toFixed(2)} %</span>
         </div>
 
-        <button className="p-1 pb-[6px]"
-                onClick={() => isFavorite ? removeFavorite(crypto.id) : addFavorite(crypto.id)}>
+        <button
+          className="p-1 pb-[6px]"
+          onClick={handleFavoriteToggle}
+        >
           {isFavorite ? <StarFavoriteIcon /> : <StarIcon />}
         </button>
       </div>
