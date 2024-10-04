@@ -6,16 +6,19 @@ interface IProps {
 }
 
 export const BalanceTableHeader: React.FC<IProps> = ({ className }) => {
-  const {t} = useTranslation()
+  const { t } = useTranslation()
+
   return (
     <div className={'flex justify-between text-[12.5px] font-medium text-muted-foreground mt-3 mb-4'}>
-      <span>
-        <div>{t('balance_table_header.coin')}</div>
-      </span>
+      <h2>{t('balance_table_header.coin')}</h2>
+
       <div className={'flex gap-12 mr-9'}>
-        <div>{t('balance_table_header.price')}</div>
-        <div className={'w-16 text-right'}>{t('balance_table_header.value')}</div>
+        <span>{t('balance_table_header.price')}</span>
+
+        <span className={'w-16 text-right'}>
+          {t('balance_table_header.value')}
+        </span>
       </div>
     </div>
-  );
-};
+  )
+}

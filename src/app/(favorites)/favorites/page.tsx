@@ -1,7 +1,7 @@
 'use client'
 
 import { useCryptoStore, useInitializeCryptoStore } from '@/store'
-import { Container, CryptoItem, CryptoSkeleton } from '@/components'
+import { Container, CryptoItem } from '@/components'
 import { Card } from '@/components/ui/card'
 import { useFavoritesCrypto } from '@/hooks'
 import { EmptyFavorites } from '@/components/favorites'
@@ -37,7 +37,7 @@ export default function FavoritesPage() {
   useEffect(() => {
     const userLanguage = bot?.initDataUnsafe?.user?.language_code || 'en'
     i18n.changeLanguage(userLanguage)
-  }, [])
+  }, [bot?.initDataUnsafe?.user?.language_code])
 
   return (
     <Container className={'pt-0 mb-20'}>
@@ -50,9 +50,9 @@ export default function FavoritesPage() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          {new Array(10).fill(null).map((_, index) => (
-            <CryptoSkeleton key={index} />
-          ))}
+          {/*{new Array(10).fill(null).map((_, index) => (*/}
+          {/*  <CryptoSkeleton key={index} />*/}
+          {/*))}*/}
         </motion.div>
       ) : (
         <motion.div

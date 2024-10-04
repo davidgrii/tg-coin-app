@@ -15,28 +15,42 @@ interface IProps {
   cryptoData: ICrypto[]
   setIsOpen: (state: boolean) => void
   isEmpty: boolean
-  onAddCrypto: any
+  onAddCrypto: (cryptoId: string, quantity: number, purchase: number, notice?: string) => void
 }
 
 export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, setIsOpen, isEmpty }) => {
+  const [quantity, setQuantity] = useState('')
+  const [purchase, setPurchase] = useState('')
+  const [notice, setNotice] = useState('')
   const [searchValue, setSearchValue] = useState('')
   const [selectedCrypto, setSelectedCrypto] = useState<ICrypto | null>(null)
-  const [quantity, setQuantity] = useState('')
 
   const { t } = useTranslation()
 
   const { filteredCryptoData } = useCryptoFilter(cryptoData, searchValue)
 
-  const handleCryptoSelect = (crypto: any) => {
+  const handleCryptoSelect = (crypto: ICrypto) => {
     setSelectedCrypto(crypto)
     setSearchValue('')
   }
 
   const handleSubmit = () => {
-    if (selectedCrypto && quantity) {
-      onAddCrypto({ ...selectedCrypto, quantity })
+    if (selectedCrypto && quantity && purchase) {
+      const cryptoId = selectedCrypto.id
+      const numericQuantity = Number(quantity)
+      const purchasePrice = Number(purchase)
+
+      if (isNaN(numericQuantity) || numericQuantity <= 0 || isNaN(purchasePrice) || purchasePrice <= 0) {
+        console.error('Invalid quantity or purchase price')
+        return
+      }
+
+      onAddCrypto(cryptoId, numericQuantity, purchasePrice, notice)
+
       setSelectedCrypto(null)
+      setPurchase('')
       setQuantity('')
+      setNotice('')
       setIsOpen(false)
     }
   }
@@ -146,12 +160,30 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
           </div>
         )}
 
+        <div className={'flex  w-full gap-6'}>
+          <Input
+            type={'number'}
+            placeholder={t('add_crypto.quantity')}
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+            className={'font-medium py-8 px-6 rounded-xl text-xs bg-accent border-0'}
+          />
+
+          <Input
+            type={'number'}
+            placeholder={t('add_crypto.purchase')}
+            value={purchase}
+            onChange={(e) => setPurchase(e.target.value)}
+            className={'font-medium py-8 px-6 rounded-xl text-xs bg-accent border-0'}
+          />
+        </div>
+
         <Input
-          type={'number'}
-          placeholder={t('add_crypto.quantity')}
-          value={quantity}
-          onChange={(e) => setQuantity(e.target.value)}
-          className={'font-medium py-8 px-6 rounded-xl text-xs bg-[#282828] border-0'}
+          type={'text'}
+          placeholder={t('add_crypto.note')}
+          value={notice}
+          onChange={(e) => setNotice(e.target.value)}
+          className={'font-medium py-8 px-6 rounded-xl text-xs bg-accent border-0'}
         />
 
         <Button

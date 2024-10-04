@@ -1,22 +1,42 @@
 export interface ICrypto {
-  id: string;
-  name: string;
-  symbol: string;
-  image: string;
-  quantity: number
-  current_price: number;
-  price_change_percentage_24h: number;
+  _id: string
+  id: string
+  name: string
+  symbol: string
+  image: string
+  current_price: number
+  price_change_percentage_24h: number
+  price_change_24h: number
 }
 
-export interface IPortfolio {
-  portfolio: ICrypto[]
+export interface IPortfolioItem {
+  _id: string
+  cryptoId: string
+  quantity: number
+  purchasePrice: number
+  notice?: string
+  crypto: ICrypto
+}
+
+export interface IPortfolioStore {
+  portfolio: IPortfolioItem[]
+  cryptoData: ICrypto[]
   totalBalance: number
-  totalPercentageChange: number;
-  addCrypto: (crypto: ICrypto) => void
-  updateCrypto: (index: number, updatedCrypto: ICrypto) => void
-  deleteCrypto: (index: number) => void
+  totalProfitLoss: number
+  totalPriceChange24h: number
+  totalProfitLossPercentage: number
+  totalPercentageChange24h: number
+  isLoading: boolean
+  initializePortfolio: (userId: string) => Promise<void>
+  addCrypto: (userId: string, cryptoId: string, quantity: number, purchase: number, notice?: string) => Promise<void>
+  updateCrypto: (userId: string, cryptoId: string, updatedData: IPortfolioItem) => Promise<void>
+  deleteCrypto: (userId: string, cryptoId: string) => Promise<void>
+  updateCryptoData: (data: ICrypto[]) => void
   calculateTotalBalance: () => void
-  calculateTotalPercentageChange: () => void
+  calculateTotalPercentageChange24h: () => void
+  calculateTotalProfitLossPercentage: () => void
+  calculateTotalProfitLoss: () => void
+  calculateTotalPriceChange24h: () => void
 }
 
 export interface IGlobalMarketData {

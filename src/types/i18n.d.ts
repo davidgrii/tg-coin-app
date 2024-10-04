@@ -27,6 +27,7 @@ declare module 'i18next' {
         dashboard_balance: {
           my_balance: string
           '24h': string
+          'over_time': string
         }
         empty_favorites: {
           no_coins: string
@@ -41,6 +42,8 @@ declare module 'i18next' {
           add_coin_desc: string
           choose: string
           quantity: string
+          'purchase': string,
+          'note': string,
           btn: string
         }
         edit_crypto: {

@@ -1,93 +1,198 @@
 import { create } from 'zustand'
 import { useEffect } from 'react'
-import { ICrypto, IPortfolio } from '@/types/crypto.types'
 import { useCryptoStore } from '@/store'
-
-interface IPortfolioStore extends IPortfolio {
-  isLoading: boolean
-  portfolio: ICrypto[]
-  initializePortfolio: () => void
-  savePortfolio: () => void
-  updateCryptoData: (data: ICrypto[]) => void
-}
+import { IPortfolioItem, IPortfolioStore } from '@/types/crypto.types'
 
 export const usePortfolioStore = create<IPortfolioStore>((set) => ({
   portfolio: [],
+  cryptoData: [],
   totalBalance: 0,
-  totalPercentageChange: 0,
+  totalPercentageChange24h: 0,
+  totalPriceChange24h: 0,
+  totalProfitLossPercentage: 0,
+  totalProfitLoss: 0,
   isLoading: true,
 
-  initializePortfolio: () => {
+  initializePortfolio: async (userId) => {
     set({ isLoading: true })
-    const storedPortfolio = JSON.parse(localStorage.getItem('portfolio') || '[]')
-    set({ portfolio: storedPortfolio, isLoading: false })
+    try {
+      const res = await fetch(`http://priceme.store:5000/api/users/${userId}/portfolio`)
+      const data = await res.json()
+
+      const portfolio: IPortfolioItem[] = data.portfolio.map((item: any) => ({
+        _id: item._id,
+        cryptoId: item.cryptoId,
+        quantity: item.quantity,
+        purchasePrice: item.purchasePrice,
+        notice: item.notice,
+        crypto: item.crypto,
+        profitLoss: (item.crypto.current_price - item.purchasePrice) * item.quantity
+      }))
+
+      set({ portfolio, isLoading: false })
+    } catch (error) {
+      console.error('Ошибка при загрузке портфолио:', error)
+      set({ isLoading: false })
+    }
   },
 
-  savePortfolio: () => {
-    set((state) => {
-      localStorage.setItem('portfolio', JSON.stringify(state.portfolio))
-      return state
-    })
+  addCrypto: async (userId, cryptoId, quantity, purchasePrice, notice) => {
+    try {
+      const res = await fetch(`http://priceme.store:5000/api/users/${userId}/portfolio`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ cryptoId, quantity, purchasePrice, notice })
+      })
+
+      const updatedPortfolio = await res.json()
+      set((state) => {
+        const cryptoDetails = state.cryptoData.find(crypto => crypto.id === cryptoId)
+        const fullCrypto = { ...updatedPortfolio, ...cryptoDetails }
+        return { portfolio: [...state.portfolio, fullCrypto] }
+      })
+    } catch (error) {
+      console.error('Ошибка при добавлении криптовалюты:', error)
+    }
   },
 
-  addCrypto: (crypto) => set((state) => {
-    const newPortfolio = [...state.portfolio, crypto]
-    localStorage.setItem('portfolio', JSON.stringify(newPortfolio))
-    return { portfolio: newPortfolio }
-  }),
+  updateCrypto: async (userId, _id, updatedData) => {
+    try {
+      const { _id: ignoredId, ...dataWithoutId } = updatedData
+      const res = await fetch(`http://priceme.store:5000/api/users/${userId}/portfolio`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ _id, ...dataWithoutId })
+      })
 
-  updateCrypto: (index, updatedCrypto) => set((state) => {
-    const newPortfolio = state.portfolio.map((crypto, i) =>
-      i === index ? { ...crypto, ...updatedCrypto } : crypto
-    )
-    localStorage.setItem('portfolio', JSON.stringify(newPortfolio))
-    return { portfolio: newPortfolio }
-  }),
+      const updatedPortfolio = await res.json()
+      set((state) => ({
+        portfolio: state.portfolio.map(crypto => crypto._id === _id
+          ? { ...crypto, ...updatedData } : crypto
+        )
+      }))
+    } catch (error) {
+      console.error('Ошибка при обновлении криптовалюты:', error)
+    }
+  },
 
-  deleteCrypto: (index) => set((state) => {
-    const newPortfolio = state.portfolio.filter((_, i) => i !== index)
-    localStorage.setItem('portfolio', JSON.stringify(newPortfolio))
-    return { portfolio: newPortfolio }
-  }),
+  deleteCrypto: async (userId, _id) => {
+    try {
+      const res = await fetch(`http://priceme.store:5000/api/users/${userId}/portfolio`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ _id })
+      })
+
+      const updatedPortfolio = await res.json()
+
+      if (updatedPortfolio.portfolio) {
+        set({ portfolio: updatedPortfolio.portfolio })
+      } else {
+        console.error('Unexpected portfolio structure:', updatedPortfolio)
+      }
+    } catch (error) {
+      console.error('Ошибка при удалении криптовалюты:', error)
+    }
+  },
 
   updateCryptoData: (data) => set((state) => ({
     portfolio: state.portfolio.map((crypto) => {
-      const updatedCrypto = data.find(c => c.id === crypto.id)
+      const updatedCrypto = data.find(c => c._id === crypto._id)
       return updatedCrypto ? { ...crypto, ...updatedCrypto } : crypto
     })
   })),
 
   calculateTotalBalance: () => set((state) => {
     const total = state.portfolio.reduce(
-      (acc, crypto) => acc + crypto.current_price * crypto.quantity, 0
+      (acc, crypto) => {
+        if (crypto.crypto && crypto.quantity) {
+          return acc + crypto.crypto.current_price * crypto.quantity
+        }
+        return acc
+      }, 0
     )
-    return { totalBalance: total };
+    return { totalBalance: total }
   }),
 
-  calculateTotalPercentageChange: () => set((state) => {
-    const totalPercentageChange = state.portfolio.reduce((acc, crypto) => {
-      const cryptoValue = crypto.current_price * crypto.quantity
-      const percentageContribution = (crypto.price_change_percentage_24h / 100) * cryptoValue
-      return acc + percentageContribution;
+  calculateTotalProfitLoss: () => set((state) => {
+    const totalProfitLoss = state.portfolio.reduce((acc, crypto) => {
+      if (crypto.crypto && crypto.quantity) {
+        return acc + ((crypto.crypto.current_price - crypto.purchasePrice) * crypto.quantity)
+      }
+      return acc
     }, 0)
 
-    const totalBalance = state.portfolio.reduce(
-      (acc, crypto) => acc + crypto.current_price * crypto.quantity, 0
+    return { totalProfitLoss }
+  }),
+
+  calculateTotalProfitLossPercentage: () => set((state) => {
+    const totalInvested = state.portfolio.reduce((acc, crypto) => {
+      if (crypto.purchasePrice && crypto.quantity) {
+        return acc + crypto.purchasePrice * crypto.quantity;
+      }
+      return acc;
+    }, 0);
+
+    const totalProfitLoss = state.portfolio.reduce((acc, crypto) => {
+      if (crypto.crypto && crypto.quantity) {
+        return acc + ((crypto.crypto.current_price - crypto.purchasePrice) * crypto.quantity);
+      }
+      return acc;
+    }, 0);
+
+    const profitLossPercentage = totalInvested > 0 ? (totalProfitLoss / totalInvested) * 100 : 0;
+    return { totalProfitLossPercentage: profitLossPercentage };
+  }),
+
+  calculateTotalPercentageChange24h: () => set((state) => {
+    const totalPercentageChange = state.portfolio.reduce((acc, crypto) => {
+      if (crypto.crypto && crypto.quantity) {
+        const cryptoValue = crypto.crypto.current_price * crypto.quantity
+        const percentageContribution = (crypto.crypto.price_change_percentage_24h / 100) * cryptoValue
+        return acc + percentageContribution
+      }
+      return acc
+    }, 0)
+
+    const totalBalance = state.portfolio.reduce((acc, crypto) => {
+        if (crypto.crypto && crypto.quantity) {
+          return acc + crypto.crypto.current_price * crypto.quantity
+        }
+        return acc
+      }, 0
     )
 
     const overallPercentageChange = totalBalance > 0 ? (totalPercentageChange / totalBalance) * 100 : 0
-    return { totalPercentageChange: overallPercentageChange }
+    return { totalPercentageChange24h: overallPercentageChange }
+  }),
+
+  calculateTotalPriceChange24h: () => set((state) => {
+    const totalPriceChange24h = state.portfolio.reduce((acc, crypto) => {
+      if (crypto.crypto && crypto.quantity) {
+        const priceChange = crypto.crypto.price_change_24h * crypto.quantity
+        return acc + priceChange;
+      }
+      return acc
+    }, 0)
+
+    return { totalPriceChange24h }
   }),
 }))
 
-export const useInitializePortfolioStore = () => {
+export const useInitializePortfolioStore = (userId: string) => {
   const initializePortfolio = usePortfolioStore((state) => state.initializePortfolio)
   const updateCryptoData = usePortfolioStore((state) => state.updateCryptoData)
   const { cryptoData } = useCryptoStore()
 
   useEffect(() => {
-    initializePortfolio()
-  }, [initializePortfolio])
+    initializePortfolio(userId)
+  }, [initializePortfolio, userId])
 
   useEffect(() => {
     updateCryptoData(cryptoData)

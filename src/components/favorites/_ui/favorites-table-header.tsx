@@ -11,12 +11,16 @@ export const FavoritesTableHeader: React.FC<IProps> = ({ className }) => {
   return (
     <div className={`flex justify-between text-[12.5px] font-medium text-muted-foreground mt-3 mb-4 mr-3.5 ${className}`}>
       <div className="flex gap-5">
-        <div>{t('table_header.rank')}</div>
-        <div>{t('table_header.coin')}</div>
+        <span>{t('table_header.rank')}</span>
+        <span>{t('table_header.coin')}</span>
       </div>
+
       <div className="flex gap-8 mr-6">
-        <div>{t('table_header.price')}</div>
-        <div className={'w-12 text-right'}>{t('table_header.change')}</div>
+        <span>{t('table_header.price')}</span>
+
+        <span className={'w-12 text-right'}>
+          {t('table_header.change')}
+        </span>
       </div>
     </div>
   );

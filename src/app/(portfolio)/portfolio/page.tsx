@@ -1,70 +1,116 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { Container, CryptoSkeleton } from '@/components'
+import { Container } from '@/components'
 import { Card } from '@/components/ui/card'
 import { motion } from 'framer-motion'
 import { AddCrypto, BalanceTableHeader, EditCrypto, PortfolioItem } from '@/components/portfolio'
-import { ICrypto } from '@/types'
 import { useInitializePortfolioStore, usePortfolioStore } from '@/store/portfolio/portfolio.store'
 import i18n from '@/i18n'
 import { useCryptoStore } from '@/store'
+import { IPortfolioItem } from '@/types/crypto.types'
+import { Accordion } from '@/components/ui/accordion'
 
 export default function PortfolioPage() {
-  useInitializePortfolioStore();
+  const isBrowser = typeof window !== 'undefined'
+  const bot = isBrowser ? window.Telegram.WebApp : null
+  const userId = isBrowser ? String(bot?.initDataUnsafe?.user?.id || '1422316270') : 'defaultUserId'
 
-  const [isAddCryptoOpen, setIsAddCryptoOpen] = useState<boolean>(false);
-  const [isEditCryptoOpen, setIsEditCryptoOpen] = useState<boolean>(false);
-  const [activeCryptoIndex, setActiveCryptoIndex] = useState<number | null>(null);
+  useInitializePortfolioStore(userId)
+
+  const [isAddCryptoOpen, setIsAddCryptoOpen] = useState<boolean>(false)
+  const [isEditCryptoOpen, setIsEditCryptoOpen] = useState<boolean>(false)
+  const [activeCryptoId, setActiveCryptoId] = useState<string | null>(null)
 
   const {
     isLoading,
     portfolio,
     addCrypto,
     updateCrypto,
+    initializePortfolio,
     deleteCrypto,
     calculateTotalBalance,
-    calculateTotalPercentageChange,
+    calculateTotalPercentageChange24h,
+    calculateTotalProfitLoss,
+    calculateTotalProfitLossPercentage,
+    calculateTotalPriceChange24h
   } = usePortfolioStore()
 
   const { cryptoData } = useCryptoStore()
 
-
   useEffect(() => {
-    calculateTotalBalance()
-    calculateTotalPercentageChange()
-  }, [portfolio, calculateTotalBalance, calculateTotalPercentageChange])
+      if (portfolio.length > 0) {
+        calculateTotalBalance()
+        calculateTotalProfitLoss()
+        calculateTotalProfitLossPercentage()
+        calculateTotalPercentageChange24h()
+        calculateTotalPriceChange24h()
+      }
+    },
+    [portfolio,
+      calculateTotalBalance,
+      calculateTotalPercentageChange24h,
+      calculateTotalProfitLoss,
+      calculateTotalProfitLossPercentage,
+      calculateTotalPriceChange24h
+    ]
+  )
 
-  const handleUpdateCrypto = (index: number, updatedCrypto: ICrypto) => {
-    updateCrypto(index, updatedCrypto);
-    calculateTotalBalance();
-    calculateTotalPercentageChange();
-  };
+  const handleAddCrypto = async (cryptoId: string, quantity: number, purchase: number, notice?: string) => {
+    await addCrypto(userId, cryptoId, quantity, purchase, notice)
+    await initializePortfolio(userId)
 
-  const handleAddCrypto = (newCrypto: ICrypto) => {
-    addCrypto(newCrypto)
     calculateTotalBalance()
-    calculateTotalPercentageChange()
+    calculateTotalProfitLoss()
+    calculateTotalProfitLossPercentage()
+    calculateTotalPercentageChange24h()
+    calculateTotalPriceChange24h()
     setIsAddCryptoOpen(false)
-  };
+  }
 
-  const handleDeleteCrypto = (index: number) => {
-    deleteCrypto(index)
-    calculateTotalPercentageChange()
+  const handleUpdateCrypto = async (userId: string, _id: string, updatedCrypto: IPortfolioItem) => {
+    await updateCrypto(userId, _id, updatedCrypto)
+    await initializePortfolio(userId)
+
     calculateTotalBalance()
-  };
+    calculateTotalProfitLoss()
+    calculateTotalProfitLossPercentage()
+    calculateTotalPercentageChange24h()
+    calculateTotalPriceChange24h()
+  }
 
-  const handleEditCrypto = (index: number) => {
-    setActiveCryptoIndex(index)
-    setIsEditCryptoOpen(true)
-  };
+  const handleDeleteCrypto = async (_id: string) => {
+    await deleteCrypto(userId, _id)
+
+    if (activeCryptoId === _id) {
+      setActiveCryptoId(null)
+      setIsEditCryptoOpen(false)
+    }
+
+    await initializePortfolio(userId)
+
+    calculateTotalBalance()
+    calculateTotalProfitLoss()
+    calculateTotalProfitLossPercentage()
+    calculateTotalPercentageChange24h()
+    calculateTotalPriceChange24h()
+  }
+
+  const handleEditCrypto = (_id: string) => {
+    const cryptoToEdit = portfolio.find(crypto => crypto._id === _id)
+
+    if (cryptoToEdit) {
+      setActiveCryptoId(cryptoToEdit._id)
+      setIsEditCryptoOpen(true)
+    }
+  }
 
   useEffect(() => {
-    const bot = window.Telegram.WebApp;
+    const bot = window.Telegram.WebApp
 
-    const userLanguage = bot.initDataUnsafe?.user?.language_code || 'en';
-    i18n.changeLanguage(userLanguage);
-  }, []);
+    const userLanguage = bot.initDataUnsafe?.user?.language_code || 'en'
+    i18n.changeLanguage(userLanguage)
+  }, [])
 
   useEffect(() => {
     if (!isLoading && portfolio.length === 0) {
@@ -77,11 +123,16 @@ export default function PortfolioPage() {
       <BalanceTableHeader />
 
       {isLoading ? (
-        <div className={'grid justify-start gap-8'}>
-          {new Array(10).fill(null).map((_, index) => (
-            <CryptoSkeleton key={index} />
-          ))}
-        </div>
+        <motion.div
+          className={'grid justify-start gap-8'}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          {/*{new Array(10).fill(null).map((_, index) => (*/}
+          {/*  <CryptoSkeleton key={index} />*/}
+          {/*))}*/}
+        </motion.div>
       ) : (
         <motion.div
           initial={{ opacity: 0 }}
@@ -89,38 +140,39 @@ export default function PortfolioPage() {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.7 }}
         >
-          <Card className={'bg-background grid gap-8 border-0'}>
-            {portfolio.map((crypto, index) => (
-              <motion.div
-                key={crypto.id}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.7 }}
-              >
-                <PortfolioItem
-                  crypto={crypto}
-                  index={index}
-                  onEdit={handleEditCrypto}
-                  onDelete={handleDeleteCrypto}
-                />
-              </motion.div>
-            ))}
+          <Card className={'bg-background grid border-0'}>
+            <Accordion type="single" collapsible className="w-full">
+              {portfolio.map((item) => (
+                <motion.div
+                  key={item.cryptoId}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.7 }}
+                >
+                  <PortfolioItem
+                    item={item}
+                    onEdit={handleEditCrypto}
+                    onDelete={handleDeleteCrypto}
+                  />
+                </motion.div>
+              ))}
+            </Accordion>
           </Card>
         </motion.div>
       )}
 
       <div className={'flex flex-col items-center justify-center mt-10'}>
-        {activeCryptoIndex !== null && (
+        {activeCryptoId !== null && (
           <EditCrypto
             isOpen={isEditCryptoOpen}
             setIsOpen={setIsEditCryptoOpen}
-            onEditCrypto={(updatedCrypto) => handleUpdateCrypto(activeCryptoIndex!, updatedCrypto)}
-            crypto={portfolio[activeCryptoIndex]}
+            onEditCrypto={(updatedCrypto) => handleUpdateCrypto(userId, activeCryptoId!, updatedCrypto)}
+            item={portfolio.find(crypto => crypto._id === activeCryptoId)}
           />
         )}
 
         <AddCrypto
-          cryptoData={cryptoData} 
+          cryptoData={cryptoData}
           onAddCrypto={handleAddCrypto}
           isOpen={isAddCryptoOpen}
           setIsOpen={setIsAddCryptoOpen}
@@ -128,5 +180,5 @@ export default function PortfolioPage() {
         />
       </div>
     </Container>
-  );
+  )
 }

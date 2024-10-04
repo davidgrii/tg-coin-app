@@ -12,7 +12,7 @@
   "balance_table_header": {
     "coin": "Coin",
     "price": "Price / 24h",
-    "value": "USD value"
+    "value": "Value USD"
   },
   "dashboard": {
     "market_cap": "Market Cap",
@@ -20,7 +20,8 @@
   },
   "dashboard_balance": {
     "my_balance": "My balance",
-    "24h": "24h"
+    "24h": "P/L 24h",
+    "over_time": "P/L Over Time"
   },
   "empty_favorites": {
     "no_coins": "No coins yet.",
@@ -35,6 +36,8 @@
     "add_coin_desc": "Add crypto that you own and monitor your portfolio balance in USD with real-time updates",
     "choose": "Choose coin",
     "quantity": "Quantity",
+    "purchase": "Purchase Price",
+    "note": "Add a note (optional)",
     "btn": "Add"
   },
   "edit_crypto": {
