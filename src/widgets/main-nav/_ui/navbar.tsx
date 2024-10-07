@@ -17,7 +17,7 @@ export const Navbar: React.FC<IProps> = ({ className }) => {
   
   return (
     <nav>
-      <ul className={'grid grid-cols-3 gap-16'}>
+      <ul className={'grid grid-cols-3 gap-12 text-nowrap'}>
         <li>
           <Link
             href={'/market'}

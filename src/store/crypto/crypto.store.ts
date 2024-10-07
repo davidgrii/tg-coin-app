@@ -23,7 +23,7 @@ export const useCryptoStore = create<ICryptoStore>((set) => ({
     set({ isLoading: true })
 
     try {
-      const res = await fetch(`http://priceme.store:5000/api/users/${userId}/favorites`, {})
+      const res = await fetch(`https://priceme.store/api/users/${userId}/favorites`, {})
 
       if (res.ok) {
         const data = await res.json()
@@ -41,7 +41,7 @@ export const useCryptoStore = create<ICryptoStore>((set) => ({
 
   addFavorite: async (userId: string, id: string) => {
     try {
-      const res = await fetch(`http://priceme.store:5000/api/users/${userId}/favorites`, {
+      const res = await fetch(`https://priceme.store/api/users/${userId}/favorites`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -62,7 +62,7 @@ export const useCryptoStore = create<ICryptoStore>((set) => ({
 
   removeFavorite: async (userId: string, id: string) => {
     try {
-      const res = await fetch(`http://priceme.store:5000/api/users/${userId}/favorites`, {
+      const res = await fetch(`https://priceme.store/api/users/${userId}/favorites`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'

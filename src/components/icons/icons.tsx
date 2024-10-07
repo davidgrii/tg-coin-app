@@ -29,6 +29,14 @@ export const FavoritesIcon = () => (
   </svg>
 )
 
+export const FavoritesIconSmall = () => (
+  <svg width="13" height="13" viewBox="0 0 55 55" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M43.0792 51.5189L27.8164 43.4303L12.7955 52L15.4313 34.3127L3 22.0137L19.8917 19.1709L27.2297 3L35.0336 18.9303L52 21.2352L39.9313 33.9235L43.0792 51.5189Z"
+      stroke="currentColor" strokeWidth="6" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+)
+
 export const PortfolioIcon = () => (
   <svg width="21" height="21" viewBox="0 0 64 44" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="3" y="3" width="51" height="38" rx="5" stroke="currentColor" strokeWidth="6" />

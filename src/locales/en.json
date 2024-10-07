@@ -1,39 +1,43 @@
 {
   "market": "Market",
   "favorites": "Favorites",
-  "portfolio": "Portfolio",
+  "portfolio": "My Assets",
   "search": "Search",
   "table_header": {
     "rank": "#",
-    "coin": "Coin",
+    "coin": "Coins",
     "price": "Price",
     "change": "24h %"
   },
   "balance_table_header": {
-    "coin": "Coin",
+    "coin": "Coins",
     "price": "Price / 24h",
-    "value": "Value USD"
+    "value": "Balance USD"
   },
   "dashboard": {
     "market_cap": "Market Cap",
     "n_a": "N/A"
   },
   "dashboard_balance": {
-    "my_balance": "My balance",
-    "24h": "P/L 24h",
-    "over_time": "P/L Over Time"
+    "my_balance": "My Balance",
+    "24h": "Profit 24h",
+    "over_time": "Total Profit"
   },
   "empty_favorites": {
     "no_coins": "No coins yet.",
-    "add_first": "Add your first one from the market"
+    "add_first_tap": "Tap",
+    "add_first": "Tap ⭐ in the Market to add your first cryptocurrency"
   },
   "my_portfolio_page": {
     "edit": "Edit",
-    "delete": "Delete"
+    "delete": "Delete",
+    "purchase": "Purchase Price",
+    "invested": "Invested USD",
+    "over_entry": "Total Profit"
   },
   "add_crypto": {
     "add_coin": "Add your coin",
-    "add_coin_desc": "Add crypto that you own and monitor your portfolio balance in USD with real-time updates",
+    "add_coin_desc": "Add the crypto you own to track your assets balance in USD and see how your profit changes with real-time updates",
     "choose": "Choose coin",
     "quantity": "Quantity",
     "purchase": "Purchase Price",

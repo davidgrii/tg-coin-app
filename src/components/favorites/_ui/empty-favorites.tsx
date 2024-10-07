@@ -1,6 +1,5 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { MarketIcon } from '@/components/icons'
 import { useTranslation } from 'react-i18next'
 
 interface IProps {
@@ -21,13 +20,15 @@ export const EmptyFavorites: React.FC<IProps> = ({ isFavoritesEmpty, className }
       >
         <p>{t('empty_favorites.no_coins')}</p>
 
-        <div className={'flex justify-center gap-3.5 mt-1.5'}>
-          {t('empty_favorites.add_first')} <MarketIcon />
+        <div className={'flex justify-center gap-1.5 mt-0.5 items-center flex-wrap'}>
+          {t('empty_favorites.add_first')}
         </div>
+        {/*<div className={'flex justify-center gap-1.5 mt-0.5 items-center flex-wrap'}>*/}
+        {/*  {t('empty_favorites.add_first_tap')}<FavoritesIconSmall />{t('empty_favorites.add_first')}*/}
+        {/*</div>*/}
       </motion.div>
     )
   }
-
   return
 
 }

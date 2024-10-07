@@ -37,8 +37,8 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
   const handleSubmit = () => {
     if (selectedCrypto && quantity && purchase) {
       const cryptoId = selectedCrypto.id
-      const numericQuantity = Number(quantity)
-      const purchasePrice = Number(purchase)
+      const numericQuantity = Number(quantity?.replace(',', '.'))
+      const purchasePrice = Number(purchase?.replace(',', '.'))
 
       if (isNaN(numericQuantity) || numericQuantity <= 0 || isNaN(purchasePrice) || purchasePrice <= 0) {
         console.error('Invalid quantity or purchase price')

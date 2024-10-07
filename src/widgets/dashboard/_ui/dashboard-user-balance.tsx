@@ -36,22 +36,22 @@ export const DashboardUserBalance: React.FC<IProps> = ({ className }) => {
   return (
     <Card className={'py-4 pl-6 pr-9 items-center justify-between rounded-xl border-0'}>
       <CardHeader className={'flex flex-row items-center justify-between p-0 space-y-0 mb-3.5'}>
-        <CardTitle className={'text-xs text-muted-foreground'}>
+        <CardTitle className={'text-sm text-muted-foreground font-bold'}>
           {t('dashboard_balance.my_balance')}
         </CardTitle>
-        <CardDescription className={'text-sm text-foreground font-bold mr-[92px]'}>
+        <CardDescription className={'text-sm text-foreground font-bold mr-[85px]'}>
           {formattedBalance} $
         </CardDescription>
       </CardHeader>
       <CardContent className={'flex flex-col gap-1 p-0'}>
-        <div className={'flex justify-between'}>
+        <div className={'flex justify-between items-end'}>
           <p className={'text-xs w-24 text-muted-foreground font-medium'}>
             {t('dashboard_balance.24h')}
           </p>
 
-          <div className={'flex gap-3'}>
+          <div className={'flex gap-1.5'}>
             <p className={cn(getClassedBasedOnValue(totalPriceChange24h), 'text-sm font-semibold transition-colors')}>
-              {formatPrice(totalPriceChange24h)} $
+              {formatPrice(Number(totalPriceChange24h.toFixed(2)))} $
             </p>
             <p
               className={cn(getClassedBasedOnValue(totalPercentageChange24h, true), 'text-sm font-semibold w-20 text-right transition-colors')}>
@@ -62,16 +62,16 @@ export const DashboardUserBalance: React.FC<IProps> = ({ className }) => {
 
         <Separator className={'opacity-30'} />
 
-        <div className={'flex justify-between'}>
-          <p className={'text-xs w-24 text-muted-foreground font-medium'}>
+        <div className={'flex justify-between items-end'}>
+          <p className={'text-xs w-24 text-muted-foreground font-medium text-nowrap'}>
             {t('dashboard_balance.over_time')}
           </p>
 
-          <div className={'flex gap-3'}>
+          <div className={'flex gap-1.5'}>
             <p className={cn(getClassedBasedOnValue(totalProfitLoss),
               'text-sm font-semibold transition-colors')}
             >
-              {formatPrice(totalProfitLoss)} $
+              {formatPrice(Number(totalProfitLoss.toFixed(2)))} $
             </p>
             <p
               className={cn(getClassedBasedOnValue(totalProfitLossPercentage, true),

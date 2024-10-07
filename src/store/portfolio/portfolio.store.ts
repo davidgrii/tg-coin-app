@@ -16,7 +16,7 @@ export const usePortfolioStore = create<IPortfolioStore>((set) => ({
   initializePortfolio: async (userId) => {
     set({ isLoading: true })
     try {
-      const res = await fetch(`http://priceme.store:5000/api/users/${userId}/portfolio`)
+      const res = await fetch(`https://priceme.store/api/users/${userId}/portfolio`)
       const data = await res.json()
 
       const portfolio: IPortfolioItem[] = data.portfolio.map((item: any) => ({
@@ -38,7 +38,7 @@ export const usePortfolioStore = create<IPortfolioStore>((set) => ({
 
   addCrypto: async (userId, cryptoId, quantity, purchasePrice, notice) => {
     try {
-      const res = await fetch(`http://priceme.store:5000/api/users/${userId}/portfolio`, {
+      const res = await fetch(`https://priceme.store/api/users/${userId}/portfolio`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -60,7 +60,7 @@ export const usePortfolioStore = create<IPortfolioStore>((set) => ({
   updateCrypto: async (userId, _id, updatedData) => {
     try {
       const { _id: ignoredId, ...dataWithoutId } = updatedData
-      const res = await fetch(`http://priceme.store:5000/api/users/${userId}/portfolio`, {
+      const res = await fetch(`https://priceme.store/api/users/${userId}/portfolio`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -81,7 +81,7 @@ export const usePortfolioStore = create<IPortfolioStore>((set) => ({
 
   deleteCrypto: async (userId, _id) => {
     try {
-      const res = await fetch(`http://priceme.store:5000/api/users/${userId}/portfolio`, {
+      const res = await fetch(`https://priceme.store/api/users/${userId}/portfolio`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'

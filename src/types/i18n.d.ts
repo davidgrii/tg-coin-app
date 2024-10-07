@@ -31,11 +31,15 @@ declare module 'i18next' {
         }
         empty_favorites: {
           no_coins: string
+          add_first_tap: string
           add_first: string
         }
         my_portfolio_page: {
           edit: string
           delete: string
+          "purchase": string,
+          "invested": string,
+          "over_entry": string
         }
         add_crypto: {
           add_coin: string

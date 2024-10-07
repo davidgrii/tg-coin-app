@@ -114,26 +114,26 @@ export const PortfolioItem: React.FC<IProps> = ({ item, onEdit, onDelete }) => {
             </DropdownMenu>
 
             <div className={'w-full text-[12px] font-medium text-muted-foreground mr-9'}>
-              <div className={'flex justify-between pb-0.5 border-b-[0.5px] border-border/20'}>
-                <p>Purchase Price</p>
+              <div className={'flex justify-between pb-0.5 border-b border-border/30'}>
+                <p>{t('my_portfolio_page.purchase')}</p>
                 <p className={'text-foreground font-bold'}>
                   {formatPrice(purchasePrice)}
                 </p>
               </div>
-              <div className={'flex justify-between  border-b-[0.5px] border-border/20'}>
-                <p>Invested USD</p>
+              <div className={'flex justify-between  border-b border-border/30'}>
+                <p>{t('my_portfolio_page.invested')}</p>
                 <p className={'text-foreground font-bold'}>
                   {formatPrice(investedUSD)} $
                 </p>
               </div>
-              <div className={'flex justify-between border-b-[0.5px] border-border/20'}>
-                <p>P/L Over Entry $</p>
+              <div className={'flex justify-between border-b border-border/30'}>
+                <p>{t('my_portfolio_page.over_entry')} $</p>
                 <p className={cn(profitLossUSD > 0 ? 'text-primary' : 'text-secondary', 'font-bold')}>
                   {formatPrice(profitLossUSD)} $
                 </p>
               </div>
               <div className={'flex justify-between '}>
-                <p>P/L Over Entry %</p>
+                <p>{t('my_portfolio_page.over_entry')} %</p>
                 <p className={cn(profitLossPercentage > 0 ? 'text-primary' : 'text-secondary', 'font-bold')}>
                   {formatPrice(Number(profitLossPercentage.toFixed(2)))} %
                 </p>

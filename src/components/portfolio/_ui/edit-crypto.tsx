@@ -81,12 +81,14 @@ export const EditCrypto: React.FC<IProps> = ({ isOpen, setIsOpen, item, onEditCr
           <Input
             type={'number'}
             placeholder={t('edit_crypto.quantity')}
+            defaultValue={quantity}
             onChange={(e) => setQuantity(Number(e.target.value))}
             className={'font-medium py-8 px-6 rounded-xl text-xs bg-accent border-0'}
           />
 
           <Input
             type={'number'}
+            defaultValue={purchase}
             placeholder={t('add_crypto.purchase')}
             onChange={(e) => setPurchase(Number(e.target.value))}
             className={'font-medium py-8 px-6 rounded-xl text-xs bg-accent border-0'}
@@ -96,6 +98,7 @@ export const EditCrypto: React.FC<IProps> = ({ isOpen, setIsOpen, item, onEditCr
         <Input
           type={'text'}
           placeholder={t('add_crypto.note')}
+          defaultValue={notice ? notice : ''}
           onChange={(e) => setNotice(e.target.value)}
           className={'font-medium py-8 px-6 rounded-xl text-xs bg-accent border-0'}
         />
