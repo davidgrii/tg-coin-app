@@ -5,16 +5,14 @@ const useDisableZoom = () => {
     const handleFocus = (event: Event) => {
       const target = event.target as HTMLInputElement | HTMLTextAreaElement;
       if (target) {
-        // Устанавливаем стиль для предотвращения зума
-        target.style.fontSize = '16px'; // Убедитесь, что этот размер шрифта соответствует вашему базовому стилю
+        target.style.fontSize = '16px'; // Установка размера шрифта на время фокуса
       }
     };
 
     const handleBlur = (event: Event) => {
       const target = event.target as HTMLInputElement | HTMLTextAreaElement;
       if (target) {
-        // Восстанавливаем оригинальный стиль после потери фокуса
-        target.style.fontSize = '';
+        target.style.fontSize = '12px'; // Восстановление оригинального размера шрифта
       }
     };
 
