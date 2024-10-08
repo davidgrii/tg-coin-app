@@ -59,15 +59,13 @@ input[type="number"]::-webkit-inner-spin-button {
     margin: 0;
 }
 
-input[type="text"], input[type="number"], textarea {
-    touch-action: manipulation;
-    -webkit-text-size-adjust: 100%;
-}
-
-input,
-select,
+input[type="text"],
+input[type="number"],
 textarea {
-    touch-action: manipulation;
+    -webkit-text-size-adjust: 100%; /* Отключение автоматического изменения размера текста */
+    font-size: inherit; /* Использование наследуемого размера шрифта */
+    touch-action: manipulation; /* Предотвращение зума */
+    font-size: 12px; /* Ваш текущий размер текста */
 }
 
 input[type="number"] {
