@@ -34,8 +34,8 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
     setSearchValue('')
   }
 
-  const handleFocus = (e) => {
-    e.target.style.fontSize = '16px'; // Принудительно устанавливаем размер шрифта
+  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    e.target.style.fontSize = '16px'
   };
 
 
