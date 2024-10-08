@@ -115,7 +115,7 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
               placeholder={t('add_crypto.choose')}
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
-              className={'font-medium py-8 px-6 rounded-xl text-xs bg-[#282828] border-0'}
+              className={'font-medium py-8 px-6 rounded-xl text-[16px] bg-[#282828] border-0'}
             />
 
 
@@ -171,15 +171,17 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
             className={'font-medium py-8 px-4 rounded-xl text-[16px] bg-accent border-0'}
           />
 
-          <Input
-            type={'number'}
-            inputMode={'decimal'}
-            placeholder={t('add_crypto.purchase')}
-            value={purchase}
-            onChange={(e) => setPurchase(e.target.value)}
-            className={'font-medium py-8 px-4 rounded-xl text-[16px] bg-accent border-0'}
-          />
         </div>
+
+
+        <Input
+          type={'number'}
+          inputMode={'decimal'}
+          placeholder={t('add_crypto.purchase')}
+          value={purchase}
+          onChange={(e) => setPurchase(e.target.value)}
+          className={'font-medium py-8 px-4 rounded-xl text-[16px] bg-accent border-0'}
+        />
 
         <Input
           type={'text'}
