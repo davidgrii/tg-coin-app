@@ -61,7 +61,6 @@ input[type="number"]::-webkit-inner-spin-button {
 
 input[type="text"], input[type="number"], textarea {
     touch-action: manipulation;
-    font-size: inherit;
     -webkit-text-size-adjust: 100%;
 }
 
