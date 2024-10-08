@@ -20,7 +20,7 @@ export const EmptyFavorites: React.FC<IProps> = ({ isFavoritesEmpty, className }
       >
         <p>{t('empty_favorites.no_coins')}</p>
 
-        <div className={'flex justify-center gap-1.5 mt-0.5 items-center flex-wrap'}>
+        <div className={'flex justify-center gap-1.5 mt-0.5 items-center flex-wrap max-w-60'}>
           {t('empty_favorites.add_first')}
         </div>
         {/*<div className={'flex justify-center gap-1.5 mt-0.5 items-center flex-wrap'}>*/}

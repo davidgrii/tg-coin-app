@@ -59,12 +59,14 @@ input[type="number"]::-webkit-inner-spin-button {
     margin: 0;
 }
 
-input[type="number"] {
-    -moz-appearance: textfield;
+input[type="text"], input[type="number"], textarea {
+    touch-action: manipulation; /* Предотвращение зума */
+    font-size: inherit; /* Использование наследуемого размера шрифта */
+    -webkit-text-size-adjust: 100%; /* Отключение автоматического изменения размера текста */
 }
 
-input {
-    touch-action: manipulation;
+input[type="number"] {
+    -moz-appearance: textfield;
 }
 
 .scrollbar::-webkit-scrollbar {
@@ -83,6 +85,12 @@ input {
 
 .scrollbar::-webkit-scrollbar-thumb:hover {
     background: #dbdadd;
+}
+
+html, body {
+    touch-action: manipulation;
+    -ms-touch-action: manipulation;
+    overscroll-behavior: none;
 }
 
 body {
