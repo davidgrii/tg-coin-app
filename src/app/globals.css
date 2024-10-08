@@ -64,6 +64,12 @@ input[type="text"], input[type="number"], textarea {
     -webkit-text-size-adjust: 100%;
 }
 
+input,
+select,
+textarea {
+    touch-action: manipulation;
+}
+
 input[type="number"] {
     -moz-appearance: textfield;
 }

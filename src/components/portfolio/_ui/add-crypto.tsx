@@ -111,6 +111,7 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
           <div className="relative w-full">
             <Input
               type={'text'}
+              inputMode={'decimal'}
               placeholder={t('add_crypto.choose')}
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
@@ -163,6 +164,7 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
         <div className={'flex  w-full gap-6'}>
           <Input
             type={'number'}
+            inputMode={'decimal'}
             placeholder={t('add_crypto.quantity')}
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
@@ -171,6 +173,7 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
 
           <Input
             type={'number'}
+            inputMode={'decimal'}
             placeholder={t('add_crypto.purchase')}
             value={purchase}
             onChange={(e) => setPurchase(e.target.value)}
@@ -180,6 +183,7 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
 
         <Input
           type={'text'}
+          inputMode={'decimal'}
           placeholder={t('add_crypto.note')}
           value={notice}
           onChange={(e) => setNotice(e.target.value)}
