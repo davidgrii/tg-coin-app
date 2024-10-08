@@ -98,6 +98,7 @@ html, body {
 
 body {
     font-weight: 600;
+    touch-action: pan-y;
 }
 
 @layer utilities {
