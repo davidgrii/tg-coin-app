@@ -3,11 +3,10 @@ import { useEffect } from 'react'
 const useDisableZoom = () => {
   useEffect(() => {
     const handleFocus = (event: Event) => {
-      // Проверяем, что целевой элемент является инпутом или текстовой областью
       const target = event.target as HTMLInputElement | HTMLTextAreaElement;
       if (target) {
         // Устанавливаем стиль для предотвращения зума
-        target.style.fontSize = '16px';
+        target.style.fontSize = '16px'; // Убедитесь, что этот размер шрифта соответствует вашему базовому стилю
       }
     };
 
