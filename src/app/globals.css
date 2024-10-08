@@ -59,15 +59,6 @@ input[type="number"]::-webkit-inner-spin-button {
     margin: 0;
 }
 
-input[type="text"],
-input[type="number"],
-textarea {
-    -webkit-text-size-adjust: 100%; /* Отключение автоматического изменения размера текста */
-    font-size: inherit; /* Использование наследуемого размера шрифта */
-    touch-action: manipulation; /* Предотвращение зума */
-    font-size: 12px; /* Ваш текущий размер текста */
-}
-
 input[type="number"] {
     -moz-appearance: textfield;
 }
@@ -90,15 +81,8 @@ input[type="number"] {
     background: #dbdadd;
 }
 
-html, body {
-    touch-action: manipulation;
-    -ms-touch-action: manipulation;
-    overscroll-behavior: none;
-}
-
 body {
     font-weight: 600;
-    touch-action: pan-y;
 }
 
 @layer utilities {
