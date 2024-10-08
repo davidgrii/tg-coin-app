@@ -9,7 +9,7 @@ import { ICrypto } from '@/types'
 import { useTranslation } from 'react-i18next'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import useDisabledZoom from '@/hooks/useDisabledZoom'
+import useDisableZoom from '@/hooks/useDisabledZoom'
 
 interface IProps {
   isOpen: boolean
@@ -27,7 +27,7 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
   const [selectedCrypto, setSelectedCrypto] = useState<ICrypto | null>(null)
 
   const { t } = useTranslation()
-  useDisabledZoom()
+  useDisableZoom()
 
   const { filteredCryptoData } = useCryptoFilter(cryptoData, searchValue)
 
