@@ -60,9 +60,8 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 input[type="text"], input[type="number"], textarea {
-    touch-action: manipulation; /* Предотвращение зума */
-    font-size: inherit; /* Использование наследуемого размера шрифта */
-    -webkit-text-size-adjust: 100%; /* Отключение автоматического изменения размера текста */
+    touch-action: manipulation;
+    -webkit-text-size-adjust: 100%;
 }
 
 input[type="number"] {
