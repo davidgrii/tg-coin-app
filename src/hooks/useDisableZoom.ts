@@ -4,28 +4,28 @@ const useDisableZoom = () => {
   useEffect(() => {
     const handleFocus = (event: FocusEvent) => {
       const target = event.target as HTMLInputElement | HTMLTextAreaElement;
-      if (target) {
-        target.style.fontSize = '16px'; // Установите шрифт при фокусе
-      }
+      target.style.fontSize = '16px'; // Увеличиваем размер шрифта при фокусе
     };
 
     const handleBlur = (event: FocusEvent) => {
       const target = event.target as HTMLInputElement | HTMLTextAreaElement;
-      if (target) {
-        target.style.fontSize = '12px'; // Восстановите шрифт после потери фокуса
-      }
+      target.style.fontSize = '12px'; // Восстанавливаем размер шрифта после потери фокуса
     };
 
+    // Получаем все инпуты и текстовые области
     const inputs = document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea');
+
+    // Применяем обработчики событий
     inputs.forEach((input) => {
-      input.addEventListener('focus', handleFocus);
-      input.addEventListener('blur', handleBlur);
+      input.addEventListener('focus', handleFocus as EventListener);
+      input.addEventListener('blur', handleBlur as EventListener);
     });
 
+    // Удаляем обработчики при размонтировании
     return () => {
       inputs.forEach((input) => {
-        input.removeEventListener('focus', handleFocus);
-        input.removeEventListener('blur', handleBlur);
+        input.removeEventListener('focus', handleFocus as EventListener);
+        input.removeEventListener('blur', handleBlur as EventListener);
       });
     };
   }, []);
