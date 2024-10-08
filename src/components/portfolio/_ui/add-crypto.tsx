@@ -168,7 +168,7 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
             placeholder={t('add_crypto.quantity')}
             value={quantity}
             onChange={(e) => setQuantity(e.target.value)}
-            className={'font-medium py-7 px-5 rounded-xl text-sm bg-accent border-0'}
+            className={'font-medium py-8 px-4 rounded-xl text-[16px] bg-accent border-0'}
           />
 
           <Input
@@ -177,7 +177,7 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
             placeholder={t('add_crypto.purchase')}
             value={purchase}
             onChange={(e) => setPurchase(e.target.value)}
-            className={'font-medium py-7 px-5 rounded-xl text-sm bg-accent border-0'}
+            className={'font-medium py-8 px-4 rounded-xl text-[16px] bg-accent border-0'}
           />
         </div>
 
@@ -187,7 +187,7 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
           placeholder={t('add_crypto.note')}
           value={notice}
           onChange={(e) => setNotice(e.target.value)}
-          className={'font-medium py-7 px-5 rounded-xl text-sm bg-accent border-0'}
+          className={'font-medium py-8 px-4 rounded-xl text-[16px] bg-accent border-0'}
         />
 
         <Button
