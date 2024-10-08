@@ -2,30 +2,28 @@ import { useEffect } from 'react'
 
 const useDisableZoom = () => {
   useEffect(() => {
-    const handleFocus = (event: Event) => {
+    const handleFocus = (event: FocusEvent) => {
       const target = event.target as HTMLInputElement | HTMLTextAreaElement;
       if (target) {
-        target.style.fontSize = '16px'; // Установка размера шрифта на время фокуса
+        target.style.fontSize = '16px'; // Установите шрифт при фокусе
       }
     };
 
-    const handleBlur = (event: Event) => {
+    const handleBlur = (event: FocusEvent) => {
       const target = event.target as HTMLInputElement | HTMLTextAreaElement;
       if (target) {
-        target.style.fontSize = '12px'; // Восстановление оригинального размера шрифта
+        target.style.fontSize = '12px'; // Восстановите шрифт после потери фокуса
       }
     };
 
-    // Добавляем обработчики для инпутов и текстовых областей
     const inputs = document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input, textarea');
-    inputs.forEach(input => {
+    inputs.forEach((input) => {
       input.addEventListener('focus', handleFocus);
       input.addEventListener('blur', handleBlur);
     });
 
-    // Удаляем обработчики при размонтировании
     return () => {
-      inputs.forEach(input => {
+      inputs.forEach((input) => {
         input.removeEventListener('focus', handleFocus);
         input.removeEventListener('blur', handleBlur);
       });
