@@ -9,7 +9,7 @@ import { ICrypto } from '@/types'
 import { useTranslation } from 'react-i18next'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import useDisableZoom from '@/hooks/useDisabledZoom'
+import useDisableZoom from '@/hooks/useDisableZoom'
 
 interface IProps {
   isOpen: boolean

@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 const useDisableZoom = () => {
   useEffect(() => {
-    const handleFocus = (event: FocusEvent) => {
+    const handleFocus = (event: Event) => {
       // Проверяем, что целевой элемент является инпутом или текстовой областью
       const target = event.target as HTMLInputElement | HTMLTextAreaElement;
       if (target) {
@@ -11,7 +11,7 @@ const useDisableZoom = () => {
       }
     };
 
-    const handleBlur = (event: FocusEvent) => {
+    const handleBlur = (event: Event) => {
       const target = event.target as HTMLInputElement | HTMLTextAreaElement;
       if (target) {
         // Восстанавливаем оригинальный стиль после потери фокуса
