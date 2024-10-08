@@ -9,7 +9,6 @@ import { ICrypto } from '@/types'
 import { useTranslation } from 'react-i18next'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import useDisableZoom from '@/hooks/useDisableZoom'
 
 interface IProps {
   isOpen: boolean
@@ -27,7 +26,6 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
   const [selectedCrypto, setSelectedCrypto] = useState<ICrypto | null>(null)
 
   const { t } = useTranslation()
-  useDisableZoom()
 
   const { filteredCryptoData } = useCryptoFilter(cryptoData, searchValue)
 
@@ -35,6 +33,11 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
     setSelectedCrypto(crypto)
     setSearchValue('')
   }
+
+  const handleFocus = (e) => {
+    e.target.style.fontSize = '16px'; // Принудительно устанавливаем размер шрифта
+  };
+
 
   const handleSubmit = () => {
     if (selectedCrypto && quantity && purchase) {
@@ -169,6 +172,7 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
             inputMode={'decimal'}
             placeholder={t('add_crypto.quantity')}
             value={quantity}
+            onFocus={handleFocus}
             onChange={(e) => setQuantity(e.target.value)}
             className={'font-medium py-8 px-6 rounded-xl text-xs bg-accent border-0'}
           />
@@ -178,6 +182,7 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
             inputMode={'decimal'}
             placeholder={t('add_crypto.purchase')}
             value={purchase}
+            onFocus={handleFocus}
             onChange={(e) => setPurchase(e.target.value)}
             className={'font-medium py-8 px-6 rounded-xl text-xs bg-accent border-0'}
           />
@@ -188,6 +193,7 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
           inputMode={'decimal'}
           placeholder={t('add_crypto.note')}
           value={notice}
+          onFocus={handleFocus}
           onChange={(e) => setNotice(e.target.value)}
           className={'font-medium py-8 px-6 rounded-xl text-xs bg-accent border-0'}
         />

@@ -24,7 +24,7 @@ export default function RootLayout({
     <html lang="en">
     <head>
       <script src="https://telegram.org/js/telegram-web-app.js" defer></script>
-      <meta name="viewport" content="width=640px, initial-scale=.5, maximum-scale=.5" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     </head>
     <body
       className={cn(`min-h-screen bg-background ${inter.className}`)}
