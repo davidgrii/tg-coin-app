@@ -131,7 +131,7 @@ export const PortfolioItem: React.FC<IProps> = ({ item, onEdit, onDelete }) => {
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel
-                  className={'bg-[#1C1C1E] border-0 text-foreground w-20 h-9  hover:bg-card hover:text-foreground rounded-lg'}
+                  className={'bg-[#1C1C1E] border-0 text-foreground w-20 h-9 hover:bg-card hover:text-foreground rounded-lg'}
                 >
                   No
                 </AlertDialogCancel>
