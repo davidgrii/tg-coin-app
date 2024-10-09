@@ -100,7 +100,7 @@ export const EditCrypto: React.FC<IProps> = ({ isOpen, setIsOpen, item, onEditCr
           placeholder={t('edit_crypto.quantity')}
           value={quantity}
           onChange={handleChangeQuantity}
-          className={'font-medium py-8 px-6 rounded-xl text-xs bg-accent border-0'}
+          className={'font-medium py-8 px-6 rounded-xl text-[16px] bg-accent border-0'}
         />
 
         <Input
@@ -108,7 +108,7 @@ export const EditCrypto: React.FC<IProps> = ({ isOpen, setIsOpen, item, onEditCr
           value={purchase}
           placeholder={t('add_crypto.purchase')}
           onChange={handleChangePurchase}
-          className={'font-medium py-8 px-6 rounded-xl text-xs bg-accent border-0'}
+          className={'font-medium py-8 px-6 rounded-xl text-[16px] bg-accent border-0'}
         />
 
         <Input
@@ -116,7 +116,7 @@ export const EditCrypto: React.FC<IProps> = ({ isOpen, setIsOpen, item, onEditCr
           placeholder={t('add_crypto.note')}
           value={notice ? notice : ''}
           onChange={(e) => setNotice(e.target.value)}
-          className={'font-medium py-8 px-6 rounded-xl text-xs bg-accent border-0'}
+          className={'font-medium py-8 px-6 rounded-xl text-[16px] bg-accent border-0'}
         />
 
         <Button

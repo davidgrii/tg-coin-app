@@ -26,18 +26,24 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
   const [selectedCrypto, setSelectedCrypto] = useState<ICrypto | null>(null)
 
   const { t } = useTranslation()
-
+  
   const { filteredCryptoData } = useCryptoFilter(cryptoData, searchValue)
 
   const formatNumber = (value: string) => {
-    let cleanedValue = value.replace(/,/g, '')
+    // Заменяем запятую на точку
+    let cleanedValue = value.replace(/,/g, '.');
 
-    const [integerPart, decimalPart] = cleanedValue.split('.')
+    // Удаляем все пробелы
+    cleanedValue = cleanedValue.replace(/\s/g, '');
 
-    const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    const [integerPart, decimalPart] = cleanedValue.split('.');
 
-    return decimalPart !== undefined ? `${formattedInteger}.${decimalPart}` : formattedInteger
-  }
+    // Разделяем тысячи пробелами
+    const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
+    // Возвращаем число с разделителем, либо только целую часть
+    return decimalPart !== undefined ? `${formattedInteger}.${decimalPart}` : formattedInteger;
+  };
 
   const handleChangeQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
