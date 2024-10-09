@@ -114,7 +114,7 @@ export const PortfolioItem: React.FC<IProps> = ({ item, onEdit, onDelete }) => {
             </DropdownMenu>
 
             <div className={'w-full text-[12px] font-medium text-muted-foreground mr-9'}>
-              <div className={'flex justify-between pb-0.5 border-b border-border/30'}>
+              <div className={'flex justify-between pb-0 border-b border-border/30'}>
                 <p>{t('my_portfolio_page.purchase')}</p>
                 <p className={'text-foreground font-bold'}>
                   {formatPrice(purchasePrice)}
