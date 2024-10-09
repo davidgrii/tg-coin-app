@@ -142,7 +142,6 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
               className={'font-medium py-8 px-6 rounded-xl text-[16px] bg-[#282828] border-0'}
             />
 
-
             {searchValue && filteredCryptoData.length > 0 && (
               <motion.div
                 initial={{ opacity: 0 }}
