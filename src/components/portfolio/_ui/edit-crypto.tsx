@@ -16,11 +16,30 @@ interface IProps {
 
 export const EditCrypto: React.FC<IProps> = ({ isOpen, setIsOpen, item, onEditCrypto }) => {
   const [selectedCrypto, setSelectedCrypto] = useState<IPortfolioItem | undefined>(item)
-  const [quantity, setQuantity] = useState<number | undefined>(item?.quantity)
-  const [purchase, setPurchase] = useState<number | undefined>(item?.purchasePrice)
+  const [quantity, setQuantity] = useState<string | undefined>(item?.quantity?.toString() || '')
+  const [purchase, setPurchase] = useState<string | undefined>(item?.purchasePrice?.toString() || '')
   const [notice, setNotice] = useState<string>(item?.notice || '')
 
   const { t } = useTranslation()
+
+  const formatNumber = (value: string) => {
+    let cleanedValue = value.replace(/,/g, '')
+    const [integerPart, decimalPart] = cleanedValue.split('.')
+    const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+    return decimalPart !== undefined ? `${formattedInteger}.${decimalPart}` : formattedInteger
+  }
+
+  const handleChangeQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target
+    const formattedValue = formatNumber(value)
+    setQuantity(formattedValue)
+  }
+
+  const handleChangePurchase = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target
+    const formattedValue = formatNumber(value)
+    setPurchase(formattedValue)
+  }
 
   const handleSubmit = () => {
     if (!selectedCrypto) return
@@ -28,8 +47,8 @@ export const EditCrypto: React.FC<IProps> = ({ isOpen, setIsOpen, item, onEditCr
     const updatedCrypto = {
       _id: selectedCrypto._id,
       cryptoId: selectedCrypto.cryptoId,
-      quantity: Number(quantity) || 0,
-      purchasePrice: Number(purchase),
+      quantity: Number(quantity?.replace(/,/g, '')) || 0,
+      purchasePrice: Number(purchase?.replace(/,/g, '')),
       notice: notice.trim() || '',
       crypto: selectedCrypto.crypto
     }
@@ -40,8 +59,8 @@ export const EditCrypto: React.FC<IProps> = ({ isOpen, setIsOpen, item, onEditCr
 
   useEffect(() => {
     setSelectedCrypto(item)
-    setQuantity(item?.quantity)
-    setPurchase(item?.purchasePrice)
+    setQuantity(item?.quantity?.toString() || '')
+    setPurchase(item?.purchasePrice?.toString() || '')
     setNotice(item?.notice || '')
   }, [item])
 
@@ -65,7 +84,6 @@ export const EditCrypto: React.FC<IProps> = ({ isOpen, setIsOpen, item, onEditCr
                 alt={selectedCrypto.crypto.name}
                 className="w-8 h-8"
               />
-
               <div className={'flex-col'}>
                 <p className="text-sm text-foreground ">{selectedCrypto.crypto.symbol.toUpperCase()}</p>
                 <p className="text-[8px] text-muted-foreground">{selectedCrypto.crypto.name}</p>
@@ -77,32 +95,29 @@ export const EditCrypto: React.FC<IProps> = ({ isOpen, setIsOpen, item, onEditCr
           </div>
         )}
 
-        <div className={'flex  w-full gap-6'}>
-          <Input
-            type={'number'}
-            placeholder={t('edit_crypto.quantity')}
-            defaultValue={quantity}
-            onChange={(e) => setQuantity(Number(e.target.value))}
-            className={'font-medium py-8 px-6 rounded-xl text-xs bg-accent border-0'}
-          />
+        <Input
+          type={'text'}
+          placeholder={t('edit_crypto.quantity')}
+          value={quantity}
+          onChange={handleChangeQuantity}
+          className={'font-medium py-8 px-6 rounded-xl text-xs bg-accent border-0'}
+        />
 
-          <Input
-            type={'number'}
-            defaultValue={purchase}
-            placeholder={t('add_crypto.purchase')}
-            onChange={(e) => setPurchase(Number(e.target.value))}
-            className={'font-medium py-8 px-6 rounded-xl text-xs bg-accent border-0'}
-          />
-        </div>
+        <Input
+          type={'text'}
+          value={purchase}
+          placeholder={t('add_crypto.purchase')}
+          onChange={handleChangePurchase}
+          className={'font-medium py-8 px-6 rounded-xl text-xs bg-accent border-0'}
+        />
 
         <Input
           type={'text'}
           placeholder={t('add_crypto.note')}
-          defaultValue={notice ? notice : ''}
+          value={notice ? notice : ''}
           onChange={(e) => setNotice(e.target.value)}
           className={'font-medium py-8 px-6 rounded-xl text-xs bg-accent border-0'}
         />
-
 
         <Button
           onClick={handleSubmit}

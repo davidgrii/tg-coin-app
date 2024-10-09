@@ -29,16 +29,45 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
 
   const { filteredCryptoData } = useCryptoFilter(cryptoData, searchValue)
 
+  const formatNumber = (value: string) => {
+    let cleanedValue = value.replace(/,/g, '')
+
+    const [integerPart, decimalPart] = cleanedValue.split('.')
+
+    const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
+    return decimalPart !== undefined ? `${formattedInteger}.${decimalPart}` : formattedInteger
+  }
+
+  const handleChangeQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target
+    const formattedValue = formatNumber(value)
+
+    setQuantity(formattedValue)
+  }
+
+  const handleChangePurchase = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target
+    const formattedValue = formatNumber(value)
+
+    setPurchase(formattedValue)
+  }
+
   const handleCryptoSelect = (crypto: ICrypto) => {
     setSelectedCrypto(crypto)
+    setSearchValue('')
+  }
+
+  const handleRemoveCrypto = () => {
+    setSelectedCrypto(null)
     setSearchValue('')
   }
 
   const handleSubmit = () => {
     if (selectedCrypto && quantity && purchase) {
       const cryptoId = selectedCrypto.id
-      const numericQuantity = Number(quantity?.replace(',', '.'))
-      const purchasePrice = Number(purchase?.replace(',', '.'))
+      const numericQuantity = Number(quantity?.replace(',', ''))
+      const purchasePrice = Number(purchase?.replace(',', ''))
 
       if (isNaN(numericQuantity) || numericQuantity <= 0 || isNaN(purchasePrice) || purchasePrice <= 0) {
         console.error('Invalid quantity or purchase price')
@@ -53,11 +82,6 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
       setNotice('')
       setIsOpen(false)
     }
-  }
-
-  const handleRemoveCrypto = () => {
-    setSelectedCrypto(null)
-    setSearchValue('')
   }
 
   return (
@@ -161,25 +185,21 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
           </div>
         )}
 
-        <div className={'flex  w-full gap-6'}>
-          <Input
-            type={'number'}
-            inputMode={'decimal'}
-            placeholder={t('add_crypto.quantity')}
-            value={quantity}
-            onChange={(e) => setQuantity(e.target.value)}
-            className={'font-medium py-8 px-6 rounded-xl text-[16px] bg-accent border-0'}
-          />
-
-        </div>
-
+        <Input
+          type={'text'}
+          inputMode={'decimal'}
+          placeholder={t('add_crypto.quantity')}
+          value={quantity}
+          onChange={handleChangeQuantity}
+          className={'font-medium py-8 px-6 rounded-xl text-[16px] bg-accent border-0'}
+        />
 
         <Input
-          type={'number'}
+          type={'text'}
           inputMode={'decimal'}
           placeholder={t('add_crypto.purchase')}
           value={purchase}
-          onChange={(e) => setPurchase(e.target.value)}
+          onChange={handleChangePurchase}
           className={'font-medium py-8 px-6 rounded-xl text-[16px] bg-accent border-0'}
         />
 
