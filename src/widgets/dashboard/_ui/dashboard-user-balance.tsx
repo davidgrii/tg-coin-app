@@ -7,6 +7,7 @@ import { usePortfolioStore } from '@/store'
 import { useTranslation } from 'react-i18next'
 import { Separator } from '@/components/ui/separator'
 import { formatPrice } from '@/components/utils/utils'
+import { motion } from 'framer-motion'
 
 interface IProps {
   className?: string
@@ -39,9 +40,15 @@ export const DashboardUserBalance: React.FC<IProps> = ({ className }) => {
         <CardTitle className={'text-sm text-muted-foreground font-bold'}>
           {t('dashboard_balance.my_balance')}
         </CardTitle>
-        <CardDescription className={'text-sm text-foreground font-bold mr-[85px]'}>
-          {formattedBalance} $
-        </CardDescription>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.1 }}
+        >
+          <CardDescription className={'text-sm text-foreground font-bold mr-[85px]'}>
+            {formattedBalance} $
+          </CardDescription>
+        </motion.div>
       </CardHeader>
       <CardContent className={'flex flex-col gap-1 p-0'}>
         <div className={'flex justify-between items-end'}>
@@ -49,7 +56,12 @@ export const DashboardUserBalance: React.FC<IProps> = ({ className }) => {
             {t('dashboard_balance.24h')}
           </p>
 
-          <div className={'flex gap-1.5'}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.1 }}
+            className={'flex gap-1.5'}
+          >
             <p className={cn(getClassedBasedOnValue(totalPriceChange24h), 'text-sm font-semibold transition-colors')}>
               {formatPrice(Number(totalPriceChange24h.toFixed(2)))} $
             </p>
@@ -57,7 +69,7 @@ export const DashboardUserBalance: React.FC<IProps> = ({ className }) => {
               className={cn(getClassedBasedOnValue(totalPercentageChange24h, true), 'text-sm font-semibold w-20 text-right transition-colors')}>
               {totalPercentageChange24h !== null ? totalPercentageChange24h.toFixed(2) : 'N/A'} %
             </p>
-          </div>
+          </motion.div>
         </div>
 
         <Separator className={'opacity-30'} />
@@ -67,7 +79,12 @@ export const DashboardUserBalance: React.FC<IProps> = ({ className }) => {
             {t('dashboard_balance.over_time')}
           </p>
 
-          <div className={'flex gap-1.5'}>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.1 }}
+            className={'flex gap-1.5'}
+          >
             <p className={cn(getClassedBasedOnValue(totalProfitLoss),
               'text-sm font-semibold transition-colors')}
             >
@@ -79,7 +96,8 @@ export const DashboardUserBalance: React.FC<IProps> = ({ className }) => {
             >
               {totalProfitLossPercentage !== null ? totalProfitLossPercentage.toFixed(2) : 'N/A'} %
             </p>
-          </div>
+          </motion.div>
+
         </div>
       </CardContent>
     </Card>

@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useEffect, useState } from 'react'
-import { Container } from '@/components'
+import { Container, CryptoSkeleton } from '@/components'
 import { Card } from '@/components/ui/card'
 import { motion } from 'framer-motion'
 import { AddCrypto, BalanceTableHeader, EditCrypto, PortfolioItem } from '@/components/portfolio'
@@ -21,6 +21,8 @@ export default function PortfolioPage() {
   const [isAddCryptoOpen, setIsAddCryptoOpen] = useState<boolean>(false)
   const [isEditCryptoOpen, setIsEditCryptoOpen] = useState<boolean>(false)
   const [activeCryptoId, setActiveCryptoId] = useState<string | null>(null)
+
+  const [showSkeletons, setShowSkeletons] = useState<boolean>(false)
 
   const {
     isLoading,
@@ -118,20 +120,36 @@ export default function PortfolioPage() {
     }
   }, [portfolio.length, isLoading])
 
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+
+    if (isLoading) {
+      timer = setTimeout(() => {
+        setShowSkeletons(true);
+      }, 500);
+    } else {
+      setShowSkeletons(false);
+    }
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [isLoading]);
+
   return (
     <Container className={'pt-0 mb-20'}>
       <BalanceTableHeader />
 
-      {isLoading ? (
+      {showSkeletons ? (
         <motion.div
-          className={'grid justify-start gap-8'}
+          className={'grid justify-start gap-8 pt-4'}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          {/*{new Array(10).fill(null).map((_, index) => (*/}
-          {/*  <CryptoSkeleton key={index} />*/}
-          {/*))}*/}
+          {new Array(10).fill(null).map((_, index) => (
+            <CryptoSkeleton key={index} />
+          ))}
         </motion.div>
       ) : (
         <motion.div
