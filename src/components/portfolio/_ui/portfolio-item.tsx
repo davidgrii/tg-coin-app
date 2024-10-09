@@ -96,16 +96,16 @@ export const PortfolioItem: React.FC<IProps> = ({ item, onEdit, onDelete }) => {
               <DropdownMenuTrigger className={'p-1'}>
                 <EditIcon />
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-card border-0 backdrop-blur min-w-[7rem]">
+              <DropdownMenuContent className="bg-card border-0 backdrop-blur min-w-[8rem]">
                 <DropdownMenuItem
                   onClick={() => onEdit(item._id)}
-                  className={'flex text-xs text-foreground/85 justify-between cursor-pointer'}
+                  className={'flex text-sm text-foreground/85 justify-between cursor-pointer'}
                 >
                   {t('my_portfolio_page.edit')} <EditV2Icon />
                 </DropdownMenuItem>
-                <Separator className={'bg-foreground/10 my-0.5'} />
+                <Separator className={'bg-foreground/10 my-1'} />
                 <DropdownMenuItem
-                  className={'flex text-xs text-[#E40505] justify-between cursor-pointer '}
+                  className={'flex text-sm text-[#E40505] justify-between cursor-pointer '}
                   onClick={() => onDelete(item._id)}
                 >
                   {t('my_portfolio_page.delete')} <DeleteIcon />
