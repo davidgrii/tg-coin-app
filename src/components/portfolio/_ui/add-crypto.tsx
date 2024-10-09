@@ -135,6 +135,7 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
           <div className="relative w-full">
             <Input
               type={'text'}
+              inputMode={'text'}
               placeholder={t('add_crypto.choose')}
               value={searchValue}
               onChange={(e) => setSearchValue(e.target.value)}
@@ -203,6 +204,7 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
 
         <Input
           type={'text'}
+          inputMode={'text'}
           placeholder={t('add_crypto.note')}
           value={notice}
           onChange={(e) => setNotice(e.target.value)}
