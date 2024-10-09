@@ -115,7 +115,8 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
         side={'top'}
         className={'bg-card rounded-2xl border-0 flex flex-col gap-6 items-center pt-10 pb-8'}
       >
-        <SheetClose  className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
+        <SheetClose
+          className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
           {!isEmpty && <X className="h-5 w-5" />}
         </SheetClose>
         <SheetHeader className={`${searchValue && filteredCryptoData.length > 0 && 'mt-16'} text-center`}>
@@ -153,6 +154,7 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
               inputMode={'text'}
               placeholder={t('add_crypto.choose')}
               value={searchValue}
+              lang={'en'}
               onChange={(e) => setSearchValue(e.target.value)}
               className={'font-medium py-8 px-6 rounded-xl text-[16px] bg-[#282828] border-0'}
             />
