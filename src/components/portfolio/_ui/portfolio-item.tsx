@@ -28,7 +28,7 @@ interface IProps {
 export const PortfolioItem: React.FC<IProps> = ({ item, onEdit, onDelete }) => {
   const { t } = useTranslation()
 
-  const [agreeOpen, setAgreeOpen] = useState(false)
+  const [open, setOpen] = useState(false)
 
   if (!item || !item.crypto) {
     return null
@@ -103,7 +103,6 @@ export const PortfolioItem: React.FC<IProps> = ({ item, onEdit, onDelete }) => {
           </CardContent>
         </AccordionTrigger>
         <AccordionContent className={'flex gap-3.5 pl-1 items-start'}>
-
           <DropdownMenu>
             <DropdownMenuTrigger className={'p-1'}>
               <EditIcon />
@@ -118,14 +117,14 @@ export const PortfolioItem: React.FC<IProps> = ({ item, onEdit, onDelete }) => {
               <Separator className={'bg-foreground/10 my-1'} />
               <DropdownMenuItem
                 className={'flex text-sm text-[#E40505] justify-between cursor-pointer '}
-                onClick={() => setAgreeOpen(!open)}
+                onClick={() => setOpen(!open)}
               >
                 {t('my_portfolio_page.delete')} <DeleteIcon />
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
-          <AlertDialog open={agreeOpen} onOpenChange={() => setAgreeOpen(false)}>
+          <AlertDialog open={open} onOpenChange={() => setOpen(false)}>
             <AlertDialogContent>
               <AlertDialogHeader>
                 <AlertDialogTitle className={'text-center text-[16px]'}>Are you sure?</AlertDialogTitle>
