@@ -102,7 +102,7 @@ export const PortfolioItem: React.FC<IProps> = ({ item, onEdit, onDelete }) => {
             </div>
           </CardContent>
         </AccordionTrigger>
-        <AccordionContent className={'flex gap-3.5 pl-1 items-start'}>
+        <AccordionContent className={'flex gap-2.5 pl-0.5 items-start'}>
           <DropdownMenu>
             <DropdownMenuTrigger className={'p-1'}>
               <EditIcon />
@@ -145,26 +145,26 @@ export const PortfolioItem: React.FC<IProps> = ({ item, onEdit, onDelete }) => {
             </AlertDialogContent>
           </AlertDialog>
 
-          <div className={'w-full text-[12px] font-medium text-muted-foreground mr-9'}>
-            <div className={'flex justify-between pb-0 border-b border-border/30'}>
+          <div className={'w-full text-sm font-medium text-muted-foreground mr-9'}>
+            <div className={'flex justify-between mb-0.5 border-b border-border/30'}>
               <p>{t('my_portfolio_page.purchase')}</p>
               <p className={'text-foreground font-bold'}>
-                {formatPrice(purchasePrice)}
+                {formatPrice(purchasePrice)} $
               </p>
             </div>
-            <div className={'flex justify-between  border-b border-border/30'}>
+            <div className={'flex justify-between mb-0.5 border-b border-border/30'}>
               <p>{t('my_portfolio_page.invested')}</p>
               <p className={'text-foreground font-bold'}>
                 {formatPrice(investedUSD)} $
               </p>
             </div>
-            <div className={'flex justify-between border-b border-border/30'}>
+            <div className={'flex justify-between mb-0.5 border-b border-border/30'}>
               <p>{t('my_portfolio_page.over_entry')} $</p>
               <p className={cn(profitLossUSD > 0 ? 'text-primary' : 'text-secondary', 'font-bold')}>
                 {formatPrice(profitLossUSD)} $
               </p>
             </div>
-            <div className={'flex justify-between '}>
+            <div className={'flex justify-between'}>
               <p>{t('my_portfolio_page.over_entry')} %</p>
               <p className={cn(profitLossPercentage > 0 ? 'text-primary' : 'text-secondary', 'font-bold')}>
                 {formatPrice(Number(profitLossPercentage.toFixed(2)))} %
