@@ -1,7 +1,15 @@
 import React, { useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { CirclePlus } from 'lucide-react'
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
+import { CirclePlus, X } from 'lucide-react'
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger
+} from '@/components/ui/sheet'
 import { Input } from '@/components/ui/input'
 import { ClearIcon } from '@/components/icons'
 import { useCryptoFilter } from '@/hooks'
@@ -26,24 +34,22 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
   const [selectedCrypto, setSelectedCrypto] = useState<ICrypto | null>(null)
 
   const { t } = useTranslation()
-  
+
   const { filteredCryptoData } = useCryptoFilter(cryptoData, searchValue)
 
   const formatNumber = (value: string) => {
-    // Заменяем запятую на точку
-    let cleanedValue = value.replace(/,/g, '.');
 
-    // Удаляем все пробелы
-    cleanedValue = cleanedValue.replace(/\s/g, '');
+    let cleanedValue = value.replace(/,/g, '.')
 
-    const [integerPart, decimalPart] = cleanedValue.split('.');
+    cleanedValue = cleanedValue.replace(/\s/g, '')
 
-    // Разделяем тысячи пробелами
-    const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+    const [integerPart, decimalPart] = cleanedValue.split('.')
 
-    // Возвращаем число с разделителем, либо только целую часть
-    return decimalPart !== undefined ? `${formattedInteger}.${decimalPart}` : formattedInteger;
-  };
+    const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+
+
+    return decimalPart !== undefined ? `${formattedInteger}.${decimalPart}` : formattedInteger
+  }
 
   const handleChangeQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
@@ -104,10 +110,14 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
           </button>
         </motion.div>
       </SheetTrigger>
+
       <SheetContent
         side={'top'}
         className={'bg-card rounded-2xl border-0 flex flex-col gap-6 items-center pt-10 pb-8'}
       >
+        <SheetClose  className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
+          {!isEmpty && <X className="h-5 w-5" />}
+        </SheetClose>
         <SheetHeader className={`${searchValue && filteredCryptoData.length > 0 && 'mt-16'} text-center mb-4`}>
           <SheetTitle className={'text-2xl'}>{t('add_crypto.add_coin')}</SheetTitle>
           {isEmpty &&
@@ -116,7 +126,6 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
             </SheetDescription>
           }
         </SheetHeader>
-
         {selectedCrypto ? (
           <div className="flex items-center justify-between w-full py-4 px-4 bg-[#282828] rounded-xl">
             <div className="flex items-center gap-3">

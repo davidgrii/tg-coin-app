@@ -23,9 +23,16 @@ export const EditCrypto: React.FC<IProps> = ({ isOpen, setIsOpen, item, onEditCr
   const { t } = useTranslation()
 
   const formatNumber = (value: string) => {
-    let cleanedValue = value.replace(/,/g, '')
+
+    let cleanedValue = value.replace(/,/g, '.')
+
+    cleanedValue = cleanedValue.replace(/\s/g, '')
+
     const [integerPart, decimalPart] = cleanedValue.split('.')
-    const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+
+    const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+
+
     return decimalPart !== undefined ? `${formattedInteger}.${decimalPart}` : formattedInteger
   }
 
@@ -97,6 +104,7 @@ export const EditCrypto: React.FC<IProps> = ({ isOpen, setIsOpen, item, onEditCr
 
         <Input
           type={'text'}
+          inputMode={'text'}
           placeholder={t('edit_crypto.quantity')}
           value={quantity}
           onChange={handleChangeQuantity}
@@ -105,6 +113,7 @@ export const EditCrypto: React.FC<IProps> = ({ isOpen, setIsOpen, item, onEditCr
 
         <Input
           type={'text'}
+          inputMode={'decimal'}
           value={purchase}
           placeholder={t('add_crypto.purchase')}
           onChange={handleChangePurchase}
@@ -113,6 +122,7 @@ export const EditCrypto: React.FC<IProps> = ({ isOpen, setIsOpen, item, onEditCr
 
         <Input
           type={'text'}
+          inputMode={'decimal'}
           placeholder={t('add_crypto.note')}
           value={notice ? notice : ''}
           onChange={(e) => setNotice(e.target.value)}
