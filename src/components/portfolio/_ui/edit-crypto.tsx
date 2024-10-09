@@ -77,7 +77,7 @@ export const EditCrypto: React.FC<IProps> = ({ isOpen, setIsOpen, item, onEditCr
         side={'top'}
         className={'bg-card rounded-2xl border-0 flex flex-col gap-6 items-center pt-10 pb-8'}
       >
-        <SheetHeader className={'text-center mb-4'}>
+        <SheetHeader className={'text-center'}>
           <SheetTitle className={'text-2xl'}>{t('edit_crypto.edit_coin')}</SheetTitle>
         </SheetHeader>
 

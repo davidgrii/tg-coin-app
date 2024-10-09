@@ -118,10 +118,10 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
         <SheetClose  className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
           {!isEmpty && <X className="h-5 w-5" />}
         </SheetClose>
-        <SheetHeader className={`${searchValue && filteredCryptoData.length > 0 && 'mt-16'} text-center mb-4`}>
+        <SheetHeader className={`${searchValue && filteredCryptoData.length > 0 && 'mt-16'} text-center`}>
           <SheetTitle className={'text-2xl'}>{t('add_crypto.add_coin')}</SheetTitle>
           {isEmpty &&
-            <SheetDescription className={'text-sm pt-3 font-medium mx-auto'}>
+            <SheetDescription className={'text-sm font-medium mx-auto'}>
               {t('add_crypto.add_coin_desc')}
             </SheetDescription>
           }
