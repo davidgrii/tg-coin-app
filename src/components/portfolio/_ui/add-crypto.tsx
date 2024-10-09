@@ -34,9 +34,6 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
   const [searchValue, setSearchValue] = useState('')
   const [selectedCrypto, setSelectedCrypto] = useState<ICrypto | null>(null)
 
-  const isBrowser = typeof window !== 'undefined'
-  const bot = isBrowser ? window.Telegram.WebApp : null
-
   const { t } = useTranslation()
 
   const { filteredCryptoData } = useCryptoFilter(cryptoData, searchValue)
@@ -229,7 +226,6 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
 
           <Input
             type={'text'}
-            lang={bot !== undefined ? 'en' : bot?.initDataUnsafe.user.language_code}
             inputMode={'text'}
             placeholder={t('add_crypto.note')}
             value={notice}
