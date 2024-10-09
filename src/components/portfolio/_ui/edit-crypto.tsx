@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet'
+import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet'
 import { ClearIcon } from '@/components/icons'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
 import Image from 'next/image'
 import { useTranslation } from 'react-i18next'
 import { IPortfolioItem } from '@/types/crypto.types'
+import { X } from 'lucide-react'
 
 interface IProps {
   isOpen: boolean
@@ -77,6 +78,10 @@ export const EditCrypto: React.FC<IProps> = ({ isOpen, setIsOpen, item, onEditCr
         side={'top'}
         className={'bg-card rounded-2xl border-0 flex flex-col gap-6 items-center pt-10 pb-8'}
       >
+        <SheetClose
+          className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
+          <X className="h-5 w-5" />
+        </SheetClose>
         <SheetHeader className={'text-center'}>
           <SheetTitle className={'text-2xl'}>{t('edit_crypto.edit_coin')}</SheetTitle>
         </SheetHeader>

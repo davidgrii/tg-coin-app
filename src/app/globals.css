@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
+html, body {
+    overscroll-behavior: none;
     scroll-behavior: smooth;
 }
 
@@ -78,6 +79,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 body {
+    touch-action: manipulation;
     font-weight: 600;
 }
 
