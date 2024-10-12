@@ -80,9 +80,9 @@ input[type="number"]::-webkit-inner-spin-button {
 body {
     font-weight: 600;
     box-sizing: border-box;
-    overflow-y: hidden;
-    overflow-x: hidden;
-    height: 100vh;
+    /*overflow-y: hidden;*/
+    /*overflow-x: hidden;*/
+    /*height: 100vh;*/
     text-rendering: optimizeSpeed;
 }
 
