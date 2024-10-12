@@ -10,11 +10,11 @@ import { SearchInput } from '@/components/market/index'
 import i18n from '@/i18n'
 import { ICrypto } from '@/types'
 
-interface CryptoClientProps {
+interface ICryptoClientProps {
   initialCryptoData: ICrypto[]
 }
 
-export default function MarketClient({ initialCryptoData }: CryptoClientProps) {
+export default function MarketClient({ initialCryptoData }: ICryptoClientProps) {
   const isBrowser = typeof window !== 'undefined'
   const bot = isBrowser ? window.Telegram.WebApp : null
   const userId = isBrowser ? String(bot?.initDataUnsafe?.user?.id || '1422316270') : 'defaultUserId'
@@ -58,7 +58,7 @@ export default function MarketClient({ initialCryptoData }: CryptoClientProps) {
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [itemsToShow, filteredCryptoData.length])
+  }, [itemsToShow, filteredCryptoData.length, handleScroll])
 
   useEffect(() => {
     if (initialCryptoData) {
@@ -68,22 +68,24 @@ export default function MarketClient({ initialCryptoData }: CryptoClientProps) {
 
   // Логика для Telegram WebApp
   useEffect(() => {
-    if (isBrowser && bot) {
-      bot.ready()
-      bot.setHeaderColor('#000')
-      bot.setBackgroundColor('#000')
-      bot.setBottomBarColor('#000')
-      bot.isVerticalSwipesEnabled = false
+    const timer = setTimeout(() => {
+      if (isBrowser && bot) {
+        bot.ready()
+        // bot.setHeaderColor('#000')
+        // bot.setBackgroundColor('#000')
+        // bot.setBottomBarColor('#000')
+        // bot.isVerticalSwipesEnabled = false
 
-      if (!bot.isExpanded) {
-        bot.expand()
+        if (!bot.isExpanded) {
+          bot.expand()
+        }
+
+        const userLanguage = bot.initDataUnsafe?.user?.language_code || 'en'
+        i18n.changeLanguage(userLanguage)
       }
+    }, 100)
 
-      const userLanguage = bot.initDataUnsafe?.user?.language_code || 'en'
-      i18n.changeLanguage(userLanguage)
-    } else {
-      document.body.style.backgroundColor = '#000'
-    }
+    return () => clearTimeout(timer)
   }, [isBrowser, bot])
 
   return (
@@ -100,7 +102,7 @@ export default function MarketClient({ initialCryptoData }: CryptoClientProps) {
 
       <motion.div
         initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
+        animate={{ opacity: filteredCryptoData.length > 0 ? 1 : 0 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.7 }}
       >
@@ -133,5 +135,5 @@ export default function MarketClient({ initialCryptoData }: CryptoClientProps) {
         </Card>
       </motion.div>
     </Container>
-  );
+  )
 }

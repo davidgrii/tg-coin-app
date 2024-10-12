@@ -37,9 +37,12 @@ declare module 'i18next' {
         my_portfolio_page: {
           edit: string
           delete: string
-          "purchase": string,
-          "invested": string,
-          "over_entry": string
+          'purchase': string,
+          'invested': string,
+          'over_entry': string
+          'are_agree': string,
+          'agree_btn': string,
+          'disagree': string
         }
         add_crypto: {
           add_coin: string

@@ -33,7 +33,10 @@
     "delete": "Удалить",
     "purchase": "Цена покупки",
     "invested": "Инвестировано USD",
-    "over_entry": "Общая прибыль"
+    "over_entry": "Общая прибыль",
+    "are_agree": "Вы уверены?",
+    "agree_btn": "Да",
+    "disagree": "Нет"
   },
   "add_crypto": {
     "add_coin": "Добавьте свою монету",

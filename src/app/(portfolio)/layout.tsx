@@ -8,9 +8,11 @@ export default function Layout({ children }: {
 }) {
   return (
     <>
-      <Dashboard variant={'portfolio'} />
-      {children}
-      <NavMenu />
+      <div className={'overflow-y-auto h-full'}>
+        <Dashboard variant={'portfolio'} />
+        {children}
+        <NavMenu />
+      </div>
     </>
   )
 };

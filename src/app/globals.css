@@ -79,6 +79,11 @@ input[type="number"]::-webkit-inner-spin-button {
 
 body {
     font-weight: 600;
+    box-sizing: border-box;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    height: 100vh;
+    text-rendering: optimizeSpeed;
 }
 
 @layer utilities {
@@ -95,4 +100,24 @@ body {
     body {
         @apply bg-background text-foreground;
     }
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(90, 90, 90, 0.3) transparent;
+}
+
+*::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background-color: rgba(90, 90, 90, 0.3);
+}
+
+*::-webkit-scrollbar-corner {
+    background-color: transparent;
 }

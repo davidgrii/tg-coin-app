@@ -10,7 +10,7 @@ const fetchCryptoData = async (): Promise<ICrypto[]> => {
     throw new Error('Ошибка при загрузке данных')
   }
   return res.json()
-};
+}
 
 export default async function MarketPage() {
   let cryptoData: ICrypto[] = []

@@ -40,7 +40,7 @@ export default function FavoritesPage() {
   }, [bot?.initDataUnsafe?.user?.language_code])
 
   return (
-    <Container className={'pt-0 mb-20'}>
+    <Container className={'pt-0'}>
       <FavoritesTableHeader />
 
       {isLoading ? (

@@ -4,7 +4,7 @@ import { ICrypto } from '@/types'
 export const useCryptoFilter = (cryptoData: ICrypto[], searchValue: string) => {
 
   const filteredCryptoData = useMemo(() => {
-    if (!Array.isArray(cryptoData)) {
+    if (!cryptoData || cryptoData.length === 0) {
       return []
     }
 

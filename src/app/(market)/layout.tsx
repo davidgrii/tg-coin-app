@@ -9,11 +9,12 @@ export default function Layout({ children }: {
   return (
     <>
       <StrictMode>
-        <Dashboard variant={'public'} />
-        {children}
-        <NavMenu />
+        <body className={'overflow-y-auto h-full'}>
+          <Dashboard variant={'public'} />
+          {children}
+          <NavMenu />
+        </body>
       </StrictMode>
-
     </>
   )
-};
+}

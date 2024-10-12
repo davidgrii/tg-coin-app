@@ -88,8 +88,12 @@ export const useInitializeCryptoStore = (userId: string) => {
   const initializeFavorites = useCryptoStore((state) => state.initializeFavorites)
 
   useEffect(() => {
-    if (userId) {
-      initializeFavorites(userId)
+    const fetchFavorites = async () => {
+      if (userId) {
+        await initializeFavorites(userId)
+      }
     }
+
+    fetchFavorites()
   }, [initializeFavorites, userId])
 }

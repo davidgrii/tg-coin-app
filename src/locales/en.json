@@ -33,7 +33,10 @@
     "delete": "Delete",
     "purchase": "Purchase Price",
     "invested": "Invested USD",
-    "over_entry": "Total Profit"
+    "over_entry": "Total Profit",
+    "are_agree": "Are you sure?",
+    "agree_btn": "Yes",
+    "disagree": "No"
   },
   "add_crypto": {
     "add_coin": "Add your coin",
