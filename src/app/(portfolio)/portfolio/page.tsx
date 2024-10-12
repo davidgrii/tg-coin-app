@@ -137,7 +137,7 @@ export default function PortfolioPage() {
   }, [isLoading]);
 
   return (
-    <Container className={'pt-0 mb-20'}>
+    <Container className={'pt-0'}>
       <BalanceTableHeader />
 
       {showSkeletons ? (

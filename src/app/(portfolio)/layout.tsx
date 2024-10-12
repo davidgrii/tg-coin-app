@@ -8,7 +8,7 @@ export default function Layout({ children }: {
 }) {
   return (
     <section className={'h-screen overflow-x-hidden overflow-y-hidden'}>
-      <div className={'overflow-y-auto h-full'}>
+      <div className={'overflow-y-auto h-full pb-[89px]'}>
         <Dashboard variant={'portfolio'} />
         {children}
         <NavMenu />
