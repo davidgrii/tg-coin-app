@@ -9,6 +9,7 @@ import { Card } from '@/components/ui/card'
 import { SearchInput } from '@/components/market/index'
 import i18n from '@/i18n'
 import { ICrypto } from '@/types'
+import InfiniteScroll from 'react-infinite-scroll-component'
 
 interface ICryptoClientProps {
   initialCryptoData: ICrypto[]
@@ -106,6 +107,14 @@ export default function MarketClient({ initialCryptoData }: ICryptoClientProps) 
         exit={{ opacity: 0 }}
         transition={{ duration: 0.7 }}
       >
+        <InfiniteScroll
+          dataLength={itemsToShow}
+          next={loadMoreItems}
+          hasMore={itemsToShow < filteredCryptoData.length}
+          loader={<div className="grid justify-start gap-8">{isLoading && <CryptoSkeleton />}</div>}
+          endMessage={<p>No more items to load</p>}
+          scrollThreshold={0.9}
+        >
         <Card className={'bg-background grid gap-8 border-0'}>
           {filteredCryptoData.slice(0, itemsToShow).map((crypto, index) => (
             <CryptoItem
@@ -133,6 +142,7 @@ export default function MarketClient({ initialCryptoData }: ICryptoClientProps) 
             </motion.div>
           )}
         </Card>
+        </InfiniteScroll>
       </motion.div>
     </Container>
   )
