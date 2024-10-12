@@ -9,11 +9,11 @@ export default function Layout({ children }: {
   return (
     <>
       <StrictMode>
-        <body className={'overflow-y-auto h-full'}>
+        <div className={'overflow-y-auto h-full'}>
           <Dashboard variant={'public'} />
           {children}
           <NavMenu />
-        </body>
+        </div>
       </StrictMode>
     </>
   )
