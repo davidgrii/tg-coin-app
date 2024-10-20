@@ -18,10 +18,10 @@ export const EmptyProfile: React.FC<IProps> = ({ isProfileEmpty, className }) =>
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, ease: 'easeOut' }}
       >
-        <p>{t('empty_favorites.no_coins')}</p>
+        <p>{('empty_favorites.no_coins')}</p>
 
         <div className={'flex justify-center gap-1.5 mt-0.5 items-center flex-wrap max-w-60'}>
-          {t('empty_favorites.add_first')}
+          {('empty_favorites.add_first')}
         </div>
       </motion.div>
     )

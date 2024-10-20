@@ -3,7 +3,6 @@
 import React, { useEffect } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { cn } from '@/components/ui/utils'
-import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
 import { LogoIcon } from '@/components/icons/icons'
 import { UserAvatar } from '@/components/profile/_ui/avatar'
@@ -16,8 +15,6 @@ interface IProps {
 }
 
 export const DashboardProfile: React.FC<IProps> = ({ className }) => {
-
-  const { t } = useTranslation()
 
   const { username, coins, fetchUserProfile, getTitleByCoins } = useUserStore()
   const title = getTitleByCoins(coins)
