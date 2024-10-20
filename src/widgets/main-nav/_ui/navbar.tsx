@@ -48,6 +48,16 @@ export const Navbar: React.FC<IProps> = ({ className }) => {
             <span className={'text-xs'}>{t('portfolio')}</span>
           </Link>
         </li>
+        {/*<li>*/}
+        {/*  <Link*/}
+        {/*    href={'/profile'}*/}
+        {/*    className={cn(currentPage === '/profile' ? 'text-foreground' : 'text-muted-foreground',*/}
+        {/*      'flex flex-col items-center gap-1 font-semibold transition hover:text-foreground')}*/}
+        {/*  >*/}
+        {/*    <PortfolioIcon />*/}
+        {/*    <span className={'text-xs'}>{t('profile')}</span>*/}
+        {/*  </Link>*/}
+        {/*</li>*/}
       </ul>
     </nav>
   )

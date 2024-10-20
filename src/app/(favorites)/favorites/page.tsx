@@ -7,13 +7,11 @@ import { useFavoritesCrypto } from '@/hooks'
 import { EmptyFavorites } from '@/components/favorites'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import i18n from '@/i18n'
 import { FavoritesTableHeader } from '@/components/favorites/_ui/favorites-table-header'
+import { useTelegramStore } from '@/store/telegram/telegram.store'
 
 export default function FavoritesPage() {
-  const isBrowser = typeof window !== 'undefined'
-  const bot = isBrowser ? window.Telegram.WebApp : null
-  const userId = isBrowser ? String(bot?.initDataUnsafe?.user?.id || '1422316270') : 'defaultUserId'
+  const userId = useTelegramStore(state => state.userId)
 
   useInitializeCryptoStore(userId)
 
@@ -33,11 +31,6 @@ export default function FavoritesPage() {
 
     setShowEmptyMessage(false)
   }, [isLoading, favoriteCryptoData])
-
-  useEffect(() => {
-    const userLanguage = bot?.initDataUnsafe?.user?.language_code || 'en'
-    i18n.changeLanguage(userLanguage)
-  }, [bot?.initDataUnsafe?.user?.language_code])
 
   return (
     <Container className={'pt-0'}>

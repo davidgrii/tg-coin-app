@@ -5,7 +5,7 @@
   "search": "Поиск",
   "table_header": {
     "rank": "#",
-    "coins": "Монеты",
+    "coin": "Монеты",
     "price": "Цена",
     "change": "24ч %"
   },

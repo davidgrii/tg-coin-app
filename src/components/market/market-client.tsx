@@ -1,24 +1,25 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useCryptoStore, useInitializeCryptoStore, useSearchStore } from '@/store'
 import { useCryptoFilter } from '@/hooks'
 import { Container, CryptoItem, CryptoSkeleton, MarketTableHeader } from '@/components'
 import { motion } from 'framer-motion'
 import { Card } from '@/components/ui/card'
 import { SearchInput } from '@/components/market/index'
-import i18n from '@/i18n'
 import { ICrypto } from '@/types'
 import InfiniteScroll from 'react-infinite-scroll-component'
+import { useTelegramStore } from '@/store/telegram/telegram.store'
 
 interface ICryptoClientProps {
   initialCryptoData: ICrypto[]
 }
 
 export default function MarketClient({ initialCryptoData }: ICryptoClientProps) {
-  const isBrowser = typeof window !== 'undefined'
-  const bot = isBrowser ? window.Telegram.WebApp : null
-  const userId = isBrowser ? String(bot?.initDataUnsafe?.user?.id || '1422316270') : 'defaultUserId'
+
+  const { bot, userId, initializeBot, recordVisit } = useTelegramStore()
+
+  console.log('mounted')
 
   useInitializeCryptoStore(userId)
 
@@ -35,7 +36,7 @@ export default function MarketClient({ initialCryptoData }: ICryptoClientProps) 
 
   const { filteredCryptoData } = useCryptoFilter(initialCryptoData, searchValue)
 
-  const handleScroll = () => {
+  const handleScroll = useCallback(() => {
     if (
       window.innerHeight + document.documentElement.scrollTop >=
       document.documentElement.offsetHeight - 200
@@ -46,7 +47,7 @@ export default function MarketClient({ initialCryptoData }: ICryptoClientProps) 
         setIsEndOfList(true)
       }
     }
-  }
+  }, [itemsToShow, filteredCryptoData.length, isLoading])
 
   const loadMoreItems = () => {
     setIsLoading(true)
@@ -69,25 +70,47 @@ export default function MarketClient({ initialCryptoData }: ICryptoClientProps) 
 
   // Логика для Telegram WebApp
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (isBrowser && bot) {
-        bot.ready()
-        // bot.setHeaderColor('#000')
-        // bot.setBackgroundColor('#000')
-        // bot.setBottomBarColor('#000')
-        // bot.isVerticalSwipesEnabled = false
+    const handleInitializeBot = async () => {
+      await initializeBot()
+    }
 
-        if (!bot.isExpanded) {
-          bot.expand()
-        }
+    handleInitializeBot().catch(error => {
+      console.error('Ошибка при инициализации бота:', error)
+    })
+  }, [initializeBot])
 
-        const userLanguage = bot.initDataUnsafe?.user?.language_code || 'en'
-        i18n.changeLanguage(userLanguage)
+  useEffect(() => {
+    const handleRecordVisit = async () => {
+      if (bot) {
+        await recordVisit(userId)
       }
-    }, 100)
+    }
 
-    return () => clearTimeout(timer)
-  }, [isBrowser, bot])
+    handleRecordVisit().catch(error => {
+      console.error('Ошибка при записи визита:', error)
+    })
+  }, [bot, userId, recordVisit])
+
+  // useEffect(() => {
+  //   const recordVisit = async () => {
+  //     if (hasRecordedVisit.current) return
+  //     hasRecordedVisit.current = true
+  //
+  //     try {
+  //       await fetch(`https://priceme.store/api/users/${userId}/visits`, {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json'
+  //         },
+  //         body: JSON.stringify({ userId })
+  //       })
+  //     } catch (error) {
+  //       console.error('Ошибка при записи визита:', error)
+  //     }
+  //   }
+  //
+  //   recordVisit()
+  // }, [])
 
   return (
     <Container className={'pt-0 mb-20'}>
@@ -115,33 +138,33 @@ export default function MarketClient({ initialCryptoData }: ICryptoClientProps) 
           endMessage={<p>No more items to load</p>}
           scrollThreshold={0.9}
         >
-        <Card className={'bg-background grid gap-8 border-0'}>
-          {filteredCryptoData.slice(0, itemsToShow).map((crypto, index) => (
-            <CryptoItem
-              userId={userId}
-              key={crypto.id}
-              crypto={crypto}
-              index={index}
-              favorites={favorites}
-              addFavorite={addFavorite}
-              removeFavorite={removeFavorite}
-            />
-          ))}
+          <Card className={'bg-background grid gap-8 border-0'}>
+            {filteredCryptoData.slice(0, itemsToShow).map((crypto, index) => (
+              <CryptoItem
+                userId={userId}
+                key={crypto.id}
+                crypto={crypto}
+                index={index}
+                favorites={favorites}
+                addFavorite={addFavorite}
+                removeFavorite={removeFavorite}
+              />
+            ))}
 
-          {isLoading && (
-            <motion.div
-              className={'grid justify-start gap-8'}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              {new Array(10).fill(null).map((_, index) => (
-                <CryptoSkeleton key={index} />
-              ))}
-            </motion.div>
-          )}
-        </Card>
+            {isLoading && (
+              <motion.div
+                className={'grid justify-start gap-8'}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                {new Array(10).fill(null).map((_, index) => (
+                  <CryptoSkeleton key={index} />
+                ))}
+              </motion.div>
+            )}
+          </Card>
         </InfiniteScroll>
       </motion.div>
     </Container>

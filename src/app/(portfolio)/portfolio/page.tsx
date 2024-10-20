@@ -10,11 +10,10 @@ import i18n from '@/i18n'
 import { useCryptoStore } from '@/store'
 import { IPortfolioItem } from '@/types/crypto.types'
 import { Accordion } from '@/components/ui/accordion'
+import { useTelegramStore } from '@/store/telegram/telegram.store'
 
 export default function PortfolioPage() {
-  const isBrowser = typeof window !== 'undefined'
-  const bot = isBrowser ? window.Telegram.WebApp : null
-  const userId = isBrowser ? String(bot?.initDataUnsafe?.user?.id || '1422316270') : 'defaultUserId'
+  const userId = useTelegramStore(state => state.userId)
 
   useInitializePortfolioStore(userId)
 

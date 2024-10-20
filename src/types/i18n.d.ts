@@ -8,6 +8,7 @@ declare module 'i18next' {
         market: string
         favorites: string
         portfolio: string
+        profile: string
         search: string
         table_header: {
           rank: string

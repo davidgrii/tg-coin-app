@@ -28,7 +28,7 @@ export default function RootLayout(
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     </head>
     <body
-      className={cn(`bg-background ${inter.className}`)}
+      className={cn(`bg-background  ${inter.className}`)}
     >
       {children}
     </body>

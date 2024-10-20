@@ -1,4 +1,4 @@
-import React, { StrictMode } from 'react'
+import React from 'react'
 import { Dashboard } from '@/widgets/dashboard'
 import { NavMenu } from '@/widgets/main-nav'
 
@@ -8,13 +8,9 @@ export default function Layout({ children }: {
 }) {
   return (
     <>
-      <StrictMode>
-        <div className={''}>
-          <Dashboard variant={'public'} />
-          {children}
-          <NavMenu />
-        </div>
-      </StrictMode>
+      <Dashboard variant={'public'} />
+      {children}
+      <NavMenu />
     </>
   )
 }

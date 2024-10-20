@@ -20,6 +20,8 @@ interface TelegramWebApp {
     bg_color: string
     secondary_bg_color: string;
   }
+
+  sendData: (data: string) => void
 }
 
 interface Window {
