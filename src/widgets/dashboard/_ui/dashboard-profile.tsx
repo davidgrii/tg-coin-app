@@ -7,7 +7,7 @@ import { motion } from 'framer-motion'
 import { LogoIcon } from '@/components/icons/icons'
 import { UserAvatar } from '@/components/profile/_ui/avatar'
 import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select'
-import { useUserStore } from '@/store/profile/useUserStore'
+import { useUserStore } from '@/store'
 import { titles } from '@/utils/constants'
 
 interface IProps {
@@ -19,6 +19,17 @@ export const DashboardProfile: React.FC<IProps> = ({ className }) => {
   const { username, coins, fetchUserProfile, getTitleByCoins } = useUserStore()
   const title = getTitleByCoins(coins)
 
+  const formatCoins = (value: number) => {
+    if (value === Infinity) {
+      return '+'
+    } else if (value >= 1000000) {
+      return (value / 1000000).toFixed(1) + 'M'
+    } else if (value >= 1000) {
+      return (value / 1000).toFixed(1) + 'k'
+    } else {
+      return value.toString()
+    }
+  }
   useEffect(() => {
     const userId = '1422316270'
 
@@ -34,21 +45,31 @@ export const DashboardProfile: React.FC<IProps> = ({ className }) => {
       >
         <CardHeader className={'p-0 flex flex-row items-center gap-2'}>
 
-          <UserAvatar name={'aleko'} size={50} className={'rounded-full'} />
+          <UserAvatar name={username} size={50} className={'rounded-full'} />
 
           <div className={'flex flex-col gap-0.5'}>
             <CardTitle className={'text-foreground text-xs'}>
               {username}
             </CardTitle>
 
-            <Select>
+            <Select value={title}>
               <SelectTrigger className={'flex gap-1.5 items-center text-xs text-[#01B2AA] h-full p-0 bg-card border-0'}>
                 {title}
               </SelectTrigger>
 
-              <SelectContent className={'bg-card text-foreground rounded-lg'}>
+              <SelectContent className={'bg-card pl-0 text-foreground rounded-lg h-full'}>
                 {titles.map((item) => (
-                  <SelectItem key={item.title} value="imortal">{item.title}</SelectItem>
+                  <SelectItem
+                    className={cn('rounded-sm font-medium', title == item.title && 'border font-bold')}
+                    style={{ color: item.color, borderColor: item.color }}
+                    key={item.title}
+                    value={item.title}
+                  >
+                    <span>{item.title}</span>
+                    <span className={'text-foreground absolute right-1.5 top-1.5'}>
+                      {formatCoins(item.coins.min)}
+                    </span>
+                  </SelectItem>
                 ))}
               </SelectContent>
             </Select>

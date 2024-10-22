@@ -16,19 +16,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { UserAvatar } from '@/components/profile/_ui/avatar'
 import { EmptyProfile } from '@/components/profile/_ui/empty-profile'
-import { useLeaderboardStore } from '@/store/profile/useLeaderboardStore'
 import { cn } from '@/components/ui/utils'
-import { useUserStore } from '@/store/profile/useUserStore'
+import { useLeaderboardStore, useUserStore } from '@/store'
+import FlyingCoins from '@/components/gift-coins'
 
 export default function PortfolioPage() {
 
   const { users, totalUsers, fetchLeaderboard } = useLeaderboardStore()
-  const { rank, fetchUserProfile } = useUserStore()
+  const { rank, referralCode, invitedUsers, fetchUserProfile } = useUserStore()
 
-  console.log(rank)
-
-  const friendsCount = 1
-  
   const getMedal = (index: number) => {
     switch (index) {
       case 0:
@@ -43,7 +39,7 @@ export default function PortfolioPage() {
   }
 
   const copyToClipboard = async () => {
-    const inviteLink = `${window.location.origin}/invite?ref=your-referral-code`
+    const inviteLink = `${window.location.origin}/invite?ref=${referralCode}`
 
     try {
       await navigator.clipboard.writeText(inviteLink)
@@ -65,6 +61,8 @@ export default function PortfolioPage() {
   return (
     <Container className={'flex h-full flex-col items-center justify-between gap-10 pb-[100px] -mb-[100px]'}>
 
+      <FlyingCoins/>
+
       <Tabs defaultValue="invited" className="w-full flex flex-col items-center">
         <TabsList className="grid w-full grid-cols-2 border rounded-lg">
           <TabsTrigger className={'rounded-l-lg rounded-r-none'} value="invited">Invited</TabsTrigger>
@@ -72,18 +70,18 @@ export default function PortfolioPage() {
         </TabsList>
 
         <TabsContent className={'w-full'} value="invited">
-          {friendsCount > 0 ?
+          {invitedUsers.length > 0 ?
             <Card className={'border-0 bg-background'}>
               <CardHeader className={'p-3.5 pl-6 pr-8 flex flex-row justify-between'}>
-                <CardTitle className={'text-lg'}>{friendsCount} friends</CardTitle>
+                <CardTitle className={'text-lg'}>{invitedUsers.length} friends</CardTitle>
                 <CardDescription>You #{rank}</CardDescription>
               </CardHeader>
               <CardContent className={'text-sm pl-6 pr-8'}>
                 <div className={'flex justify-between items-center'}>
                   <div className={'flex items-center gap-2'}>
-                    <UserAvatar name={'David Gri'} size={50} className={'rounded-full'} />
+                    <UserAvatar name={invitedUsers[0].username || 'unknown'} size={50} className={'rounded-full'} />
 
-                    <span>aleko so</span>
+                    <span>{invitedUsers[0].username || 'unknown'}</span>
                   </div>
 
                   <span>+111 Coins</span>
@@ -95,20 +93,20 @@ export default function PortfolioPage() {
 
         <TabsContent className={'w-full'} value="leaderboard">
           <Card className={'border-0 bg-background'}>
-            <CardHeader className={'p-3.5 pl-6  pr-8 '}>
+            <CardHeader className={'p-3.5 pl-6 pr-8 '}>
               <CardTitle className={'text-lg'}>{totalUsers.toLocaleString()} Users 🎉</CardTitle>
             </CardHeader>
-            <CardContent className={'flex flex-col text-sm pl-6 pr-8 gap-4'}>
+            <CardContent className={'flex flex-col text-sm pl-6 pr-8 gap-5'}>
               {users.map((user, index) => (
                 <div
                   key={index}
                   className={'flex items-center gap-2 justify-between'}
                 >
                   <div className={'flex gap-2 items-center text-xs items-left'}>
-                    <UserAvatar name={user.username.toString()} size={50} className={'rounded-full'} />
+                    <UserAvatar name={user.username?.toString() || 'unknown'} size={50} className={'rounded-full'} />
 
                     <div className={'flex flex-col'}>
-                      <span className={''}>{user.username}</span>
+                      <span className={''}>{user.username || 'unknown'}</span>
                       <span className={'text-muted-foreground'}>{user.coins}</span>
                     </div>
                   </div>

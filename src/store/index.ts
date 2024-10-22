@@ -1,3 +1,6 @@
 export { useCryptoStore, useInitializeCryptoStore } from './crypto/crypto.store'
 export { useSearchStore } from './search/search.store'
 export { usePortfolioStore } from './portfolio/portfolio.store'
+export { useTelegramStore,  } from './telegram/telegram.store'
+export { useLeaderboardStore } from './profile/useLeaderboardStore'
+export { useUserStore } from './profile/useUserStore'
