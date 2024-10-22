@@ -76,15 +76,17 @@ export default function PortfolioPage() {
                 <CardDescription>You #{rank}</CardDescription>
               </CardHeader>
               <CardContent className={'text-sm pl-6 pr-8'}>
-                <div className={'flex justify-between items-center'}>
-                  <div className={'flex items-center gap-2'}>
-                    <UserAvatar name={invitedUsers[0].username || 'unknown'} size={50} className={'rounded-full'} />
+                {invitedUsers.map((user, index) => (
+                  <div key={index} className={'flex justify-between items-center'}>
+                    <div className={'flex items-center gap-2'}>
+                      <UserAvatar name={user.username || 'unknown'} size={50} className={'rounded-full'} />
 
-                    <span>{invitedUsers[0].username || 'unknown'}</span>
+                      <span>{user.username || 'unknown'}</span>
+                    </div>
+
+                    <span>+111 Coins</span>
                   </div>
-
-                  <span>+111 Coins</span>
-                </div>
+                ))}
               </CardContent>
             </Card> : <EmptyProfile isProfileEmpty={true} />}
 
