@@ -39,8 +39,7 @@ export default function PortfolioPage() {
   }
 
   const copyToClipboard = async () => {
-    const inviteLink = `${window.location.origin}/invite?ref=${referralCode}`
-
+    const inviteLink = `https://t.me/coinshouse_bot?start=ref=${referralCode}`
     try {
       await navigator.clipboard.writeText(inviteLink)
     } catch (error) {
