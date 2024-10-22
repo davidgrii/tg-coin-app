@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container } from '@/components'
 import { Button } from '@/components/ui/button'
 import {
@@ -24,6 +24,8 @@ export default function PortfolioPage() {
 
   const { users, totalUsers, fetchLeaderboard } = useLeaderboardStore()
   const { rank, referralCode, invitedUsers, fetchUserProfile } = useUserStore()
+
+  const [selectedTab, setSelectedTab] = useState('invited')
 
   const getMedal = (index: number) => {
     switch (index) {
@@ -62,20 +64,20 @@ export default function PortfolioPage() {
 
       <FlyingCoins/>
 
-      <Tabs defaultValue="invited" className="w-full flex flex-col items-center">
+      <Tabs defaultValue="invited" value={selectedTab} onValueChange={setSelectedTab} className="w-full flex flex-col items-center">
         <TabsList className="grid w-full grid-cols-2 border rounded-lg">
           <TabsTrigger className={'rounded-l-lg rounded-r-none'} value="invited">Invited</TabsTrigger>
           <TabsTrigger className={'rounded-r-lg rounded-l-none'} value="leaderboard">Leaderboard</TabsTrigger>
         </TabsList>
 
-        <TabsContent className={'w-full'} value="invited">
+        <TabsContent className={'w-full pb-36'} value="invited">
           {invitedUsers.length > 0 ?
             <Card className={'border-0 bg-background'}>
               <CardHeader className={'p-3.5 pl-6 pr-8 flex flex-row justify-between'}>
                 <CardTitle className={'text-lg'}>{invitedUsers.length} friends</CardTitle>
                 <CardDescription>You #{rank}</CardDescription>
               </CardHeader>
-              <CardContent className={'text-sm pl-6 pr-8'}>
+              <CardContent className={'flex flex-col gap-5 text-sm pl-6 pr-8'}>
                 {invitedUsers.map((user, index) => (
                   <div key={index} className={'flex justify-between items-center'}>
                     <div className={'flex items-center gap-2'}>
@@ -92,11 +94,12 @@ export default function PortfolioPage() {
 
         </TabsContent>
 
-        <TabsContent className={'w-full'} value="leaderboard">
+        <TabsContent className={'w-full pb-20'} value="leaderboard">
           <Card className={'border-0 bg-background'}>
             <CardHeader className={'p-3.5 pl-6 pr-8 '}>
               <CardTitle className={'text-lg'}>{totalUsers.toLocaleString()} Users 🎉</CardTitle>
             </CardHeader>
+
             <CardContent className={'flex flex-col text-sm pl-6 pr-8 gap-5'}>
               {users.map((user, index) => (
                 <div
@@ -122,11 +125,12 @@ export default function PortfolioPage() {
 
       <AlertDialog>
         <AlertDialogTrigger asChild>
-          <Button
-            className={'bg-foreground py-7 rounded-xl text-lg text-background font-semibold mx-auto w-full transition-colors hover:bg-foreground/75'}
+          {selectedTab === 'invited' && <Button
+            className={`bg-foreground fixed bottom-24 max-w-3xl py-7 rounded-xl text-lg text-background font-semibold w-[97%] transition-transform transform hover:bg-foreground/75 active:scale-95`}
           >
             Invite
-          </Button>
+          </Button>}
+
         </AlertDialogTrigger>
 
         <AlertDialogContent className={'max-w-60 px-8'}>
