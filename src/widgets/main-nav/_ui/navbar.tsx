@@ -1,12 +1,13 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { cn } from '@/components/ui/utils'
 import { usePathname } from 'next/navigation'
 import { FavoritesIcon, MarketIcon, PortfolioIcon } from '@/components/icons'
 import { useTranslation } from 'react-i18next'
 import { Gift } from 'lucide-react'
+import { FriendsIcon } from '@/components/icons/icons'
 
 interface IProps {
   className?: string
@@ -14,9 +15,21 @@ interface IProps {
 
 export const Navbar: React.FC<IProps> = ({ className }) => {
 
-  const [show, setShow] = useState(true)
+  const [show, setShow] = useState(false)
   const currentPage = usePathname()
   const { t } = useTranslation()
+
+  useEffect(() => {
+    const giftShown = localStorage.getItem('giftShown')
+
+    if (!giftShown && currentPage !== '/friends') {
+      setShow(true)
+    }
+
+    if (currentPage === '/friends' && !giftShown) {
+      localStorage.setItem('giftShown', 'true')
+    }
+  }, [currentPage])
 
   return (
     <nav>
@@ -53,10 +66,8 @@ export const Navbar: React.FC<IProps> = ({ className }) => {
         </li>
         <li className={'relative'}>
           {show &&
-            <div className={'absolute animate-bounce bg-background/10 backdrop-blur-sm rounded-full p-1 -left-1 -top-6 text-sm flex items-center gap-0.5'}>
-
-
-              +300 <Gift width={15} height={15} />
+            <div className={'absolute animate-bounce bg-background/10 backdrop-blur-sm rounded-full p-1 -left-3 -top-6 text-sm flex items-center gap-0.5'}>
+              +3000 <Gift width={14} height={14} />
               <div className="relative -top-2 flex h-1.5 w-1.5">
                 <span
                   className="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
@@ -65,12 +76,12 @@ export const Navbar: React.FC<IProps> = ({ className }) => {
             </div>
           }
           <Link
-            href={'/profile'}
-            className={cn(currentPage === '/profile' ? 'text-foreground' : 'text-muted-foreground',
+            href={'/friends'}
+            className={cn(currentPage === '/friends' ? 'text-foreground' : 'text-muted-foreground',
               'flex flex-col items-center gap-1 font-semibold transition hover:text-foreground')}
           >
-            <PortfolioIcon />
-            <span className={'text-xs'}>{t('profile')}</span>
+            <FriendsIcon />
+            <span className={'text-xs'}>{t('friends')}</span>
           </Link>
         </li>
       </ul>

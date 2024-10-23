@@ -4,11 +4,12 @@ import React, { useEffect, useState } from 'react'
 import { Container } from '@/components'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useLeaderboardStore, useUserStore } from '@/store'
-import { Leaderboard } from '@/components/profile/_ui/leaderboard'
-import { InvitedUsers } from '@/components/profile/_ui/invited-users'
-import { InviteButton } from '@/components/profile/_ui/invite-button'
+import { Leaderboard } from '@/components/friends/_ui/leaderboard'
+import { InvitedUsers } from '@/components/friends/_ui/invited-users'
+import { InviteButton } from '@/components/friends/_ui/invite-button'
+import { t } from 'i18next'
 
-export default function PortfolioPage() {
+export default function FriendsPage() {
 
   const fetchUserProfile = useUserStore(state => state.fetchUserProfile)
   const fetchLeaderboard = useLeaderboardStore(state => state.fetchLeaderboard)
@@ -34,8 +35,8 @@ export default function PortfolioPage() {
         className="w-full flex flex-col items-center"
       >
         <TabsList className="grid w-full grid-cols-2 border rounded-lg">
-          <TabsTrigger className={'rounded-l-lg rounded-r-none'} value="invited">Invited</TabsTrigger>
-          <TabsTrigger className={'rounded-r-lg rounded-l-none'} value="leaderboard">Leaderboard</TabsTrigger>
+          <TabsTrigger className={'rounded-l-lg rounded-r-none'} value="invited">{t('my_friends_page.invite')}</TabsTrigger>
+          <TabsTrigger className={'rounded-r-lg rounded-l-none'} value="leaderboard">{t('my_friends_page.leaderboard')}</TabsTrigger>
         </TabsList>
 
         <InvitedUsers />

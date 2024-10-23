@@ -5,10 +5,11 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { cn } from '@/components/ui/utils'
 import { motion } from 'framer-motion'
 import { LogoIcon } from '@/components/icons/icons'
-import { UserAvatar } from '@/components/profile/_ui/avatar'
+import { UserAvatar } from '@/components/friends/_ui/avatar'
 import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select'
 import { useUserStore } from '@/store'
 import { titles } from '@/utils/constants'
+import { useTranslation } from 'react-i18next'
 
 interface IProps {
   className?: string
@@ -18,6 +19,8 @@ export const DashboardProfile: React.FC<IProps> = ({ className }) => {
 
   const { username, coins, fetchUserProfile, getTitleByCoins } = useUserStore()
   const title = getTitleByCoins(coins)
+
+  const { t } = useTranslation()
 
   const formatCoins = (value: number) => {
     if (value === Infinity) {
@@ -85,7 +88,7 @@ export const DashboardProfile: React.FC<IProps> = ({ className }) => {
         <CardContent className={'p-0 flex gap-3 text-right items-center'}>
           <div className={'flex flex-col'}>
             <span className={'text-muted-foreground text-xs'}>
-              Coins
+              {t('dashboard_friends.coin')}
             </span>
 
             <span className={'flex gap-1 items-center justify-end text-foreground font-bold text-sm'}>

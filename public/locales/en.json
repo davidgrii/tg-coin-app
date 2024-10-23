@@ -2,7 +2,7 @@
   "market": "Market",
   "favorites": "Favorites",
   "portfolio": "My Assets",
-  "profile": "Profile",
+  "friends": "Friends",
   "search": "Search",
   "table_header": {
     "rank": "#",
@@ -24,10 +24,18 @@
     "24h": "Profit 24h",
     "over_time": "Total Profit"
   },
+  "dashboard_friends": {
+    "coin": "Coins"
+  },
   "empty_favorites": {
     "no_coins": "No coins yet.",
     "add_first_tap": "Tap",
     "add_first": "Tap ⭐ in the Market to add your first cryptocurrency"
+  },
+  "empty_profile": {
+    "no_invited": "You haven't invited anyone yet \uD83D\uDE22",
+    "start_inviting": "Start inviting your friends and earn points for each one! The more friends you invite, the higher your rank will be, unlocking exclusive rewards and status.",
+    "share": "Share your personal link below to get started!"
   },
   "my_portfolio_page": {
     "edit": "Edit",
@@ -38,6 +46,17 @@
     "are_agree": "Are you sure?",
     "agree_btn": "Yes",
     "disagree": "No"
+  },
+  "my_friends_page": {
+    "invite": "Invite",
+    "leaderboard": "Leaderboard",
+    "users": "Users",
+    "you": "You",
+    "friends": "friends",
+    "coin": "Coins",
+    "copy_text": "Invite friends and get more Coins",
+    "copy_link": "Invite",
+    "invite_button": "Invite"
   },
   "add_crypto": {
     "add_coin": "Add your coin",

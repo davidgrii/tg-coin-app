@@ -8,7 +8,7 @@ declare module 'i18next' {
         market: string
         favorites: string
         portfolio: string
-        profile: string
+        friends: string
         search: string
         table_header: {
           rank: string
@@ -30,11 +30,19 @@ declare module 'i18next' {
           '24h': string
           'over_time': string
         }
+        "dashboard_friends": {
+          "coin": string
+        },
         empty_favorites: {
           no_coins: string
           add_first_tap: string
           add_first: string
         }
+        "empty_profile": {
+          "no_invited": string
+          "start_inviting": string
+          "share": string
+        },
         my_portfolio_page: {
           edit: string
           delete: string
@@ -44,6 +52,17 @@ declare module 'i18next' {
           'are_agree': string,
           'agree_btn': string,
           'disagree': string
+        }
+        "my_friends_page": {
+          "invite": string
+          "leaderboard": string
+          "users": string
+          "you": string
+          "friends": string
+          "coin": string
+          "copy_text": string
+          "copy_link": string
+          "invite_button": string
         }
         add_crypto: {
           add_coin: string

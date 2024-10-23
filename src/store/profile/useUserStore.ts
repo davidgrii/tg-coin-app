@@ -20,7 +20,6 @@ interface IUserStore {
   getTitleByCoins: (coins: number) => string
 }
 
-
 export const useUserStore = create<IUserStore>((set) => ({
   username: '',
   userId: '',
