@@ -50,7 +50,7 @@ export const InviteButton: React.FC<IProps> = ({ selectedTab, className }) => {
         <AlertDialogFooter>
           <AlertDialogCancel
             onClick={copyToClipboard}
-            className={'bg-foreground text-background font-bold rounded-lg  hover:bg-foreground/80 transition-transform transform active:scale-95'}>
+            className={'bg-foreground text-background font-bold rounded-lg w-full hover:bg-foreground/80 transition-transform transform active:scale-95'}>
             {t('my_friends_page.copy_link')}
           </AlertDialogCancel>
         </AlertDialogFooter>
