@@ -66,7 +66,7 @@ export const Navbar: React.FC<IProps> = ({ className }) => {
         </li>
         <li className={'relative'}>
           {show &&
-            <div className={'absolute animate-bounce bg-background/10 backdrop-blur-sm rounded-full p-1 -left-3 -top-6 text-sm flex items-center gap-0.5'}>
+            <div className={'absolute animate-bounce bg-background/10 backdrop-blur-sm rounded-full p-1 -left-2.5 -top-6 text-sm flex items-center gap-0.5'}>
               +3000 <Gift width={14} height={14} />
               <div className="relative -top-2 flex h-1.5 w-1.5">
                 <span
