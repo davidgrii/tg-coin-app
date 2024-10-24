@@ -56,6 +56,7 @@
     "coin": "Монет",
     "copy_text": "Пригласи друзей и получи больше Coins",
     "copy_link": "Скопировать ссылку",
+    "copied": "Скопировано ✔",
     "invite_button": "Пригласить"
   },
   "add_crypto": {
@@ -75,5 +76,21 @@
   "input_search": {
     "search": "Найти монету...",
     "cancel": "Отмена"
+  },
+  "titles": {
+    "Beginner": "Начинающий",
+    "Explorer": "Исследователь",
+    "Expert": "Эксперт",
+    "Knight": "Рыцарь",
+    "Leader": "Лидер",
+    "Hero": "Герой",
+    "Master": "Мастер",
+    "Legend": "Легенда",
+    "Titan": "Титан",
+    "Immortal": "Бессмертный",
+    "King": "Король",
+    "Emperor": "Император",
+    "Lord": "Лорд",
+    "The Almighty": "Всемогущий"
   }
 }

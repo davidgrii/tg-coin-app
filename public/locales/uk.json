@@ -56,6 +56,7 @@
     "coin": "Монет",
     "copy_text": "Запроси друзів і отримай більше Coins",
     "copy_link": "Скопіювати",
+    "copied": "Скопійовано ✔",
     "invite_button": "Запросити"
   },
   "add_crypto": {
@@ -75,5 +76,21 @@
   "input_search": {
     "search": "Знайти монету...",
     "cancel": "Скасувати"
+  },
+  "titles": {
+    "Beginner": "Початківець",
+    "Explorer": "Дослідник",
+    "Expert": "Експерт",
+    "Knight": "Лицар",
+    "Leader": "Лідер",
+    "Hero": "Герой",
+    "Master": "Майстер",
+    "Legend": "Легенда",
+    "Titan": "Титан",
+    "Immortal": "Безсмертний",
+    "King": "Король",
+    "Emperor": "Імператор",
+    "Lord": "Лорд",
+    "The Almighty": "Всемогутній"
   }
 }

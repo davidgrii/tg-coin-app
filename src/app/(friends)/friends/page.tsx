@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import { Container } from '@/components'
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { useLeaderboardStore, useUserStore } from '@/store'
+import { useLeaderboardStore, useTelegramStore, useUserStore } from '@/store'
 import { Leaderboard } from '@/components/friends/_ui/leaderboard'
 import { InvitedUsers } from '@/components/friends/_ui/invited-users'
 import { InviteButton } from '@/components/friends/_ui/invite-button'
@@ -11,16 +11,15 @@ import { t } from 'i18next'
 
 export default function FriendsPage() {
 
+  const userId = useTelegramStore(state => state.userId)
   const fetchUserProfile = useUserStore(state => state.fetchUserProfile)
   const fetchLeaderboard = useLeaderboardStore(state => state.fetchLeaderboard)
 
   const [selectedTab, setSelectedTab] = useState('invited')
 
   useEffect(() => {
-    const userId = '1422316270'
-
     fetchUserProfile(userId)
-  }, [fetchUserProfile])
+  }, [fetchUserProfile, userId])
 
   useEffect(() => {
     fetchLeaderboard()

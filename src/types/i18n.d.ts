@@ -62,6 +62,7 @@ declare module 'i18next' {
           "coin": string
           "copy_text": string
           "copy_link": string
+          "copied": string
           "invite_button": string
         }
         add_crypto: {
@@ -81,6 +82,22 @@ declare module 'i18next' {
         input_search: {
           search: string
           cancel: string
+        }
+        "titles": {
+          "Beginner": string
+          "Explorer": string
+          "Expert": string
+          "Knight": string
+          "Leader": string
+          "Hero": string
+          "Master": string
+          "Legend": string
+          "Titan": string
+          "Immortal": string
+          "King": string
+          "Emperor": string
+          "Lord": string
+          "The Almighty": string
         }
       }
     }

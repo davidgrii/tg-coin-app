@@ -52,7 +52,7 @@ export const useUserStore = create<IUserStore>((set) => ({
     const userLevel = titles.find(level =>
       userCoins >= level.coins.min &&
       userCoins <= level.coins.max
-    );
-    return userLevel ? userLevel.title : 'Неизвестный уровень';
+    )
+    return userLevel ? userLevel.key : 'Неизвестный уровень'
   }
 }))

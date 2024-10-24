@@ -6,6 +6,7 @@ import { TabsContent } from '@/components/ui/tabs'
 import { useLeaderboardStore, useUserStore } from '@/store'
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
+import { formatWitDecimals } from '@/components/utils/utils'
 
 interface IProps {
   className?: string
@@ -57,7 +58,7 @@ export const Leaderboard: React.FC<IProps> = ({ className }) => {
 
                   <div className={'flex flex-col'}>
                     <span className={''}>{user.username || 'unknown'}</span>
-                    <span className={'text-muted-foreground'}>{user.coins}</span>
+                    <span className={'text-muted-foreground'}>{formatWitDecimals(user.coins)}</span>
                   </div>
                 </div>
 

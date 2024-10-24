@@ -27,3 +27,11 @@ export const formatPriceWithoutDecimals = (price: number) => {
     maximumFractionDigits: 0
   }).format(price)
 }
+
+export const formatWitDecimals = (price: number) => {
+  return new Intl.NumberFormat('en-US', {
+    style: 'decimal',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0
+  }).format(price)
+}

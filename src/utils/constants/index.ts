@@ -1,33 +1,23 @@
-export const titles = [
-  { title: 'Beginner', coins: { min: 0, max: 3000 }, color: '#808080' },
-  { title: 'Explorer', coins: { min: 3101, max: 6000 }, color: '#90EE90' },
-  { title: 'Expert', coins: { min: 6001, max: 10000 }, color: '#0000FF' },
-  { title: 'Knight', coins: { min: 10001, max: 15000 }, color: '#C0C0C0' },
-  { title: 'Leader', coins: { min: 15001, max: 25000 }, color: '#FFD700' },
-  { title: 'Hero', coins: { min: 25001, max: 50000 }, color: '#FF0000' },
-  { title: 'Master', coins: { min: 50001, max: 100000 }, color: '#800080' },
-  { title: 'Legend', coins: { min: 100001, max: 200000 }, color: '#00008B' },
-  { title: 'Titan', coins: { min: 200001, max: 500000 }, color: '#8B0000' },
-  { title: 'Immortal', coins: { min: 500001, max: 1000000 }, color: '#8A2BE2' },
-  { title: 'King', coins: { min: 1000001, max: 2000000 }, color: '#4169E1' },
-  { title: 'Emperor', coins: { min: 2000001, max: 5000000 }, color: '#B8860B' },
-  { title: 'Lord', coins: { min: 5000001, max: 10000000 }, color: '#FFFFFF' },
-  { title: 'The Almighty', coins: { min: 10000001, max: Infinity }, color: '#FFD700' },
-]
+interface Title {
+  title: string;
+  coins: { min: number; max: number };
+  color: string;
+  key: 'Beginner' | 'Explorer' | 'Expert' | 'Knight' | 'Leader' | 'Hero' | 'Master' | 'Legend' | 'Titan' | 'Immortal' | 'King' | 'Emperor' | 'Lord' | 'The Almighty';
+}
 
-// export const titles = [
-//   { title: 'Новичок (Beginner)', coins: { min: 0, max: 300 } },
-//   { title: 'Исследователь (Explorer)', coins: { min: 301, max: 600 } },
-//   { title: 'Знаток (Expert)', coins: { min: 601, max: 1000 } },
-//   { title: 'Рыцарь (Knight)', coins: { min: 1001, max: 1500 } },
-//   { title: 'Лидер (Leader)', coins: { min: 1501, max: 2500 } },
-//   { title: 'Герой (Hero)', coins: { min: 2501, max: 5000 } },
-//   { title: 'Мастер (Master)', coins: { min: 5001, max: 10000 } },
-//   { title: 'Легенда (Legend)', coins: { min: 10001, max: 20000 } },
-//   { title: 'Титан (Titan)', coins: { min: 20001, max: 50000 } },
-//   { title: 'Бессмертный (Immortal)', coins: { min: 50001, max: 100000 } },
-//   { title: 'Король (King)', coins: { min: 100001, max: 200000 } },
-//   { title: 'Император (Emperor)', coins: { min: 200001, max: 500000 } },
-//   { title: 'Властелин (Lord)', coins: { min: 500001, max: 1000000 } },
-//   { title: 'Всевышний (The Almighty)', coins: { min: 1000001, max: Infinity } },
-// ]
+export const titles: Title[] = [
+  { title: 'Beginner', coins: { min: 0, max: 3000 }, color: '#808080', key: 'Beginner' },
+  { title: 'Explorer', coins: { min: 3101, max: 6000 }, color: '#90EE90', key: 'Explorer' },
+  { title: 'Expert', coins: { min: 6001, max: 10000 }, color: '#f88f07', key: 'Expert' },
+  { title: 'Knight', coins: { min: 10001, max: 15000 }, color: '#C0C0C0', key: 'Knight' },
+  { title: 'Leader', coins: { min: 15001, max: 25000 }, color: '#FFD700', key: 'Leader' },
+  { title: 'Hero', coins: { min: 25001, max: 50000 }, color: '#FF0000', key: 'Hero' },
+  { title: 'Master', coins: { min: 50001, max: 100000 }, color: '#800080', key: 'Master' },
+  { title: 'Legend', coins: { min: 100001, max: 200000 }, color: '#00c441', key: 'Legend' },
+  { title: 'Titan', coins: { min: 200001, max: 500000 }, color: '#f86868', key: 'Titan' },
+  { title: 'King', coins: { min: 1000001, max: 2000000 }, color: '#4169E1', key: 'King' },
+  { title: 'Emperor', coins: { min: 2000001, max: 5000000 }, color: '#B8860B', key: 'Emperor' },
+  { title: 'Lord', coins: { min: 5000001, max: 10000000 }, color: '#FFFFFF', key: 'Lord' },
+  { title: 'Immortal', coins: { min: 10000001, max: Infinity }, color: '#8A2BE2', key: 'Immortal' },
+  { title: 'The Almighty', coins: { min: 10000001, max: Infinity }, color: '#FFD700', key: 'The Almighty' },
+]

@@ -56,6 +56,7 @@
     "coin": "Coins",
     "copy_text": "Invite friends and get more Coins",
     "copy_link": "Copy invite link",
+    "copied": "Copied ✔",
     "invite_button": "Invite"
   },
   "add_crypto": {
@@ -75,5 +76,21 @@
   "input_search": {
     "search": "Search coin...",
     "cancel": "Cancel"
+  },
+  "titles": {
+    "Beginner": "Beginner",
+    "Explorer": "Explorer",
+    "Expert": "Expert",
+    "Knight": "Knight",
+    "Leader": "Leader",
+    "Hero": "Hero",
+    "Master": "Master",
+    "Legend": "Legend",
+    "Titan": "Titan",
+    "Immortal": "Immortal",
+    "King": "King",
+    "Emperor": "Emperor",
+    "Lord": "Lord",
+    "The Almighty": "The Almighty"
   }
 }

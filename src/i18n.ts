@@ -16,9 +16,7 @@ i18n
     lng: 'en',
     fallbackLng: 'en',
     interpolation: { escapeValue: false },
-    react: {
-      useSuspense: false, 
-    },
+    react: { useSuspense: false, },
   })
 
 export default i18n
