@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -11,6 +11,7 @@ import {
 import { Button } from '@/components/ui/button'
 import { useUserStore } from '@/store'
 import { useTranslation } from 'react-i18next'
+import { X } from 'lucide-react'
 
 interface IProps {
   selectedTab: string
@@ -18,6 +19,9 @@ interface IProps {
 }
 
 export const InviteButton: React.FC<IProps> = ({ selectedTab, className }) => {
+
+  const [isOpen, setIsOpen] = useState(false)
+  const contentRef = useRef<HTMLDivElement | null>(null)
 
   const referralCode = useUserStore(state => state.referralCode)
   const { t } = useTranslation()
@@ -39,8 +43,20 @@ export const InviteButton: React.FC<IProps> = ({ selectedTab, className }) => {
     }
   }
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (contentRef.current && !contentRef.current.contains(event.target as Node)) {
+        setIsOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [])
+
   return (
-    <AlertDialog>
+    <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
       <AlertDialogTrigger asChild>
         {selectedTab === 'invited' &&
           <Button
@@ -50,10 +66,9 @@ export const InviteButton: React.FC<IProps> = ({ selectedTab, className }) => {
           >
             {buttonText}
           </Button>}
-
       </AlertDialogTrigger>
 
-      <AlertDialogContent className={'max-w-60 px-8'}>
+      <AlertDialogContent ref={contentRef} className={'max-w-60 px-8 re'}>
         <AlertDialogHeader>
           <AlertDialogTitle className={'text-center'}>{t('my_friends_page.copy_text')}</AlertDialogTitle>
         </AlertDialogHeader>
@@ -63,6 +78,8 @@ export const InviteButton: React.FC<IProps> = ({ selectedTab, className }) => {
             className={'bg-foreground text-background font-bold rounded-lg w-full hover:bg-foreground/80 transition-transform transform active:scale-95'}>
             {t('my_friends_page.copy_link')}
           </AlertDialogCancel>
+
+            <X onClick={() => setIsOpen(!isOpen)} className={'cursor-pointer absolute top-3 right-3 text-muted-foreground transition-transform transform active:scale-95 hover:text-foreground/80'} width={16} height={16}/>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

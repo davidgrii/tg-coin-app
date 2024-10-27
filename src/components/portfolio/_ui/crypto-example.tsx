@@ -32,13 +32,13 @@ const {
   symbol: 'BTC',
   image: '/bitcoin.webp',
   current_price: 58203.69,
-  quantity: 1.50,
+  quantity: 1.5,
   price_change_percentage_24h: 2.3,
-  total_value: 102456.34,
+  total_value: 87305.54,
   purchase_price: 36515,
   profitLossUSD: 32530.54,
   profitLossPercentage: 59.39,
-  notice: 'I bought it on Binance'
+  notice: 'Bought during the dip'
 }
 
 export const CryptoExample: React.FC<IProps> = ({ className, onTriggerClick  }) => {
