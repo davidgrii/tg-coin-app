@@ -19,8 +19,6 @@ export default function MarketClient({ initialCryptoData }: ICryptoClientProps) 
 
   const { bot, userId, initializeBot, recordVisit } = useTelegramStore()
 
-  console.log('mounted')
-
   useInitializeCryptoStore(userId)
 
   const setCryptoData = useCryptoStore((state) => state.setCryptoData)
@@ -90,27 +88,6 @@ export default function MarketClient({ initialCryptoData }: ICryptoClientProps) 
       console.error('Ошибка при записи визита:', error)
     })
   }, [bot, userId, recordVisit])
-
-  // useEffect(() => {
-  //   const recordVisit = async () => {
-  //     if (hasRecordedVisit.current) return
-  //     hasRecordedVisit.current = true
-  //
-  //     try {
-  //       await fetch(`https://priceme.store/api/users/${userId}/visits`, {
-  //         method: 'POST',
-  //         headers: {
-  //           'Content-Type': 'application/json'
-  //         },
-  //         body: JSON.stringify({ userId })
-  //       })
-  //     } catch (error) {
-  //       console.error('Ошибка при записи визита:', error)
-  //     }
-  //   }
-  //
-  //   recordVisit()
-  // }, [])
 
   return (
     <Container className={'pt-0 mb-20'}>

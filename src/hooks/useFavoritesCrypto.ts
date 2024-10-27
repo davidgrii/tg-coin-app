@@ -7,10 +7,10 @@ export const useFavoritesCrypto = () => {
   const [favoriteCryptoData, setFavoriteCryptoData] = useState<ICrypto[]>([])
 
   useEffect(() => {
-    if (isLoading) return;
+    if (isLoading) return
 
     if (favorites.length === 0) {
-      setFavoriteCryptoData([]);
+      setFavoriteCryptoData([])
       return;
     }
 
@@ -19,4 +19,4 @@ export const useFavoritesCrypto = () => {
   }, [favorites, cryptoData, isLoading])
 
   return { favoriteCryptoData }
-};
+}

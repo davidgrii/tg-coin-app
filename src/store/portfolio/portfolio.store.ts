@@ -15,6 +15,7 @@ export const usePortfolioStore = create<IPortfolioStore>((set) => ({
 
   initializePortfolio: async (userId) => {
     set({ isLoading: true })
+
     try {
       const res = await fetch(`https://priceme.store/api/users/${userId}/portfolio`)
       const data = await res.json()

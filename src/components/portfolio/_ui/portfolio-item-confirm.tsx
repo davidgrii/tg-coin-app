@@ -23,7 +23,7 @@ export const PortfolioItemConfirm: React.FC<IProps> = ({ open, setOpen, itemId, 
 
   return (
     <AlertDialog open={open} onOpenChange={() => setOpen(false)}>
-      <AlertDialogContent>
+      <AlertDialogContent className={'max-w-96'}>
         <AlertDialogHeader>
           <AlertDialogTitle className={'text-center text-[16px]'}>
             {t('my_portfolio_page.are_agree')}

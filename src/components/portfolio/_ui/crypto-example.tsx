@@ -1,0 +1,146 @@
+import React from 'react'
+import { motion } from 'framer-motion'
+import { CirclePlus } from 'lucide-react'
+import { ArrowEmptyIcon, EditIcon } from '@/components/icons/icons'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import { CardContent } from '@/components/ui/card'
+import Image from 'next/image'
+import { formatPrice, formatPriceWithoutDecimals } from '@/components/utils/utils'
+import { PortfolioItemDetails } from '@/components/portfolio'
+
+interface IProps {
+  onTriggerClick?: () => void
+  className?: string
+}
+
+const {
+  id,
+  name,
+  symbol,
+  image,
+  current_price,
+  quantity,
+  price_change_percentage_24h,
+  total_value,
+  purchase_price,
+  profitLossUSD,
+  profitLossPercentage,
+  notice
+} = {
+  id: 'bitcoin',
+  name: 'Bitcoin',
+  symbol: 'BTC',
+  image: '/bitcoin.webp',
+  current_price: 58203.69,
+  quantity: 1.50,
+  price_change_percentage_24h: 2.3,
+  total_value: 102456.34,
+  purchase_price: 36515,
+  profitLossUSD: 32530.54,
+  profitLossPercentage: 59.39,
+  notice: 'I bought it on Binance'
+}
+
+export const CryptoExample: React.FC<IProps> = ({ className, onTriggerClick  }) => {
+  return (
+    <motion.div
+      className={'w-full flex justify-center -mt-10'}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.9 }}
+    >
+      <div className={'fixed inset-0 h-screen -mt-60 bg-background/45 opacity-75 z-40'} />
+
+      <div className={'absolute -bottom-32  z-50'}>
+        <div className={'flex items-center justify-center relative mb-7'}>
+          <button onClick={onTriggerClick} className={'bg-background/0'}>
+            <CirclePlus
+              className={'w-9 h-9 cursor-pointer text-foreground transition-colors hover:text-muted-foreground'} />
+          </button>
+
+          <span className={'absolute top-2 right-20'}>
+              <ArrowEmptyIcon />
+        </span>
+        </div>
+
+        <span className={'text-xs flex max-w-96 text-center px-5 font-medium'}>
+          Add the crypto you own to track your assets balance in USD and see how your profit changes with real-time updates
+        </span>
+      </div>
+
+
+      <Accordion value={id} className={'w-full'} type={'single'}>
+        <AccordionItem value={id}>
+          <AccordionTrigger>
+            <CardContent className={'p-0 flex w-full justify-between'}>
+              <div className={'flex items-center gap-2'}>
+                <Image
+                  width={36}
+                  height={36}
+                  src={image}
+                  alt={name}
+                  className="h-9 w-9"
+                />
+
+                <div className="grid gap-0.5 text-left">
+                  <p className="text-sm leading-none">
+                    {symbol}
+                  </p>
+                  <p className="text-[8.5px] font-semibold text-muted-foreground truncate">
+                    {name}
+                  </p>
+                </div>
+              </div>
+
+              <div className={'flex items-center'}>
+                <div className={'mr-4'}>
+                  <p
+                    className={`text-sm text-foreground font-semibold  whitespace-nowrap`}>
+                    {formatPrice(current_price)} $
+                  </p>
+                  <p
+                    className={`${price_change_percentage_24h.toString().includes('-')
+                      ? 'text-secondary'
+                      : 'text-primary'}  text-[8.7px] text-right font-semibold`}
+                  >
+                    {price_change_percentage_24h.toFixed(2)} %
+                  </p>
+                </div>
+
+                <div className={'w-24 mr-6'}>
+                  <p
+                    className={`${current_price.toString().length > 8
+                      ? 'text-[13px]'
+                      : 'text-sm'
+                    } text-foreground font-bold text-right  whitespace-nowrap`}
+                  >
+                    {formatPriceWithoutDecimals(current_price * quantity)} $
+                  </p>
+                  <p
+                    className={'text-muted-foreground text-[8.7px] text-right font-semibold'}
+                  >
+                    {formatPrice(quantity)} {symbol.toUpperCase()}
+                  </p>
+                </div>
+
+              </div>
+            </CardContent>
+          </AccordionTrigger>
+
+          <AccordionContent className={'flex gap-2.5 pl-0.5 items-start'}>
+            <EditIcon />
+
+            <PortfolioItemDetails
+              notice={notice}
+              investedUSD={25000}
+              purchasePrice={purchase_price}
+              profitLossUSD={profitLossUSD}
+              profitLossPercentage={profitLossPercentage}
+            />
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+
+    </motion.div>
+  )
+}

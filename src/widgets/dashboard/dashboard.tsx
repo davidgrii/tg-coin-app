@@ -2,7 +2,7 @@ import React from 'react'
 import { Layout } from '@/widgets/dashboard/_ui/layout'
 import { DashboardData } from '@/widgets/dashboard/_ui/dashboard-data'
 import { DashboardUserBalance } from '@/widgets/dashboard'
-import { DashboardProfile } from '@/widgets/dashboard/_ui/dashboard-profile'
+import { DashboardFriends } from '@/widgets/dashboard/_ui/dashboard-friends'
 
 interface IProps {
   variant: 'public' | 'portfolio' | 'profile'
@@ -14,7 +14,7 @@ export const Dashboard: React.FC<IProps> = ({ variant }) => {
   if (variant === 'portfolio') {
     dashboardContent = <DashboardUserBalance />;
   } else if (variant === 'profile') {
-    dashboardContent = <DashboardProfile />;
+    dashboardContent = <DashboardFriends />;
   } else {
     dashboardContent = <DashboardData />;
   }

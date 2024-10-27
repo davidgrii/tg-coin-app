@@ -57,6 +57,7 @@ export const Navbar: React.FC<IProps> = ({ className }) => {
         <li>
           <Link
             href={'/portfolio'}
+            prefetch
             className={cn(currentPage === '/portfolio' ? 'text-foreground' : 'text-muted-foreground',
               'flex flex-col items-center gap-1 font-semibold transition hover:text-foreground')}
           >

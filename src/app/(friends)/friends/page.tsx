@@ -18,7 +18,15 @@ export default function FriendsPage() {
   const [selectedTab, setSelectedTab] = useState('invited')
 
   useEffect(() => {
-    fetchUserProfile(userId)
+    const loadUserProfile = async () => {
+      try {
+        await fetchUserProfile(userId)
+      } catch (error) {
+        console.error('Ошибка при получении профиля пользователя:', error)
+      }
+    }
+
+    loadUserProfile()
   }, [fetchUserProfile, userId])
 
   useEffect(() => {
@@ -34,13 +42,15 @@ export default function FriendsPage() {
         className="w-full flex flex-col items-center"
       >
         <TabsList className="grid w-full grid-cols-2 border rounded-lg">
-          <TabsTrigger className={'rounded-l-lg rounded-r-none'} value="invited">{t('my_friends_page.invite')}</TabsTrigger>
-          <TabsTrigger className={'rounded-r-lg rounded-l-none'} value="leaderboard">{t('my_friends_page.leaderboard')}</TabsTrigger>
+          <TabsTrigger className={'rounded-l-lg rounded-r-none'}
+                       value="invited">{t('my_friends_page.invite')}</TabsTrigger>
+          <TabsTrigger className={'rounded-r-lg rounded-l-none'}
+                       value="leaderboard">{t('my_friends_page.leaderboard')}</TabsTrigger>
         </TabsList>
 
         <InvitedUsers />
 
-        <Leaderboard/>
+        <Leaderboard />
       </Tabs>
 
       <InviteButton

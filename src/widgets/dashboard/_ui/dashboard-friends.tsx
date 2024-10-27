@@ -17,7 +17,6 @@ interface IProps {
   className?: string
 }
 
-// Функция для плавной анимации числового значения
 const AnimatedCoins = ({ value }: { value: number }) => {
   const props = useSpring({
     from: { number: 0 },
@@ -49,7 +48,7 @@ type TitleKey =
   | 'Lord'
   | 'The Almighty'
 
-export const DashboardProfile: React.FC<IProps> = ({ className }) => {
+export const DashboardFriends: React.FC<IProps> = ({ className }) => {
 
   const { username, coins, getTitleByCoins, loading } = useUserStore()
   const title = getTitleByCoins(coins)
@@ -80,8 +79,8 @@ export const DashboardProfile: React.FC<IProps> = ({ className }) => {
           <UserAvatar name={username} size={50} className={'rounded-full'} />
 
           <div className={'flex flex-col gap-0.5'}>
-            <CardTitle className={'text-foreground text-xs'}>
-              {username}
+            <CardTitle className={cn(loading && 'blur', 'text-foreground text-xs')}>
+              {!loading ? username : 'username'}
             </CardTitle>
 
             <Select value={title}>
@@ -121,8 +120,8 @@ export const DashboardProfile: React.FC<IProps> = ({ className }) => {
             </span>
 
             <span className={'flex gap-1 items-center justify-end text-foreground font-bold text-sm'}>
-  <AnimatedCoins value={coins} />
-</span>
+              <AnimatedCoins value={coins} />
+            </span>
           </div>
 
           <LogoIcon width={24} height={24} />

@@ -113,27 +113,27 @@ export default function PortfolioPage() {
     i18n.changeLanguage(userLanguage)
   }, [])
 
-  useEffect(() => {
-    if (!isLoading && portfolio.length === 0) {
-      setIsAddCryptoOpen(true)
-    }
-  }, [portfolio.length, isLoading])
+  // useEffect(() => {
+  //   if (!isLoading && portfolio.length === 0) {
+  //     setIsAddCryptoOpen(true)
+  //   }
+  // }, [portfolio.length, isLoading])
 
   useEffect(() => {
     let timer: NodeJS.Timeout;
 
     if (isLoading) {
       timer = setTimeout(() => {
-        setShowSkeletons(true);
+        setShowSkeletons(true)
       }, 500);
     } else {
-      setShowSkeletons(false);
+      setShowSkeletons(false)
     }
 
     return () => {
-      clearTimeout(timer);
+      clearTimeout(timer)
     };
-  }, [isLoading]);
+  }, [isLoading])
 
   return (
     <Container className={'pt-0'}>
@@ -159,9 +159,9 @@ export default function PortfolioPage() {
         >
           <Card className={'bg-background grid border-0'}>
             <Accordion type="single" collapsible className="w-full">
-              {portfolio.map((item) => (
+              {portfolio.map((item, index) => (
                 <motion.div
-                  key={item.cryptoId}
+                  key={index}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.7 }}

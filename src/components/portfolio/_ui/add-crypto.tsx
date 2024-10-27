@@ -1,15 +1,7 @@
 import React, { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { CirclePlus, X } from 'lucide-react'
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger
-} from '@/components/ui/sheet'
+import { Sheet, SheetClose, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'
 import { Input } from '@/components/ui/input'
 import { ClearIcon } from '@/components/icons'
 import { useCryptoFilter } from '@/hooks'
@@ -17,7 +9,8 @@ import { ICrypto } from '@/types'
 import { useTranslation } from 'react-i18next'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import Link from 'next/link'
+import { CryptoExample } from '@/components/portfolio/_ui/crypto-example'
+import { formatNumber } from '@/components/utils/utils'
 
 interface IProps {
   isOpen: boolean
@@ -38,18 +31,8 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
 
   const { filteredCryptoData } = useCryptoFilter(cryptoData, searchValue)
 
-  const formatNumber = (value: string) => {
-
-    let cleanedValue = value.replace(/,/g, '.')
-
-    cleanedValue = cleanedValue.replace(/\s/g, '')
-
-    const [integerPart, decimalPart] = cleanedValue.split('.')
-
-    const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-
-
-    return decimalPart !== undefined ? `${formattedInteger}.${decimalPart}` : formattedInteger
+  const handleTriggerClick = () => {
+    setIsOpen(!isOpen)
   }
 
   const handleChangeQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -101,16 +84,21 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
     <>
       <Sheet open={isOpen} onOpenChange={setIsOpen}>
         <SheetTrigger asChild>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.9 }}
-          >
-            <button className={'bg-background/0'}>
-              <CirclePlus
-                className={'w-9 h-9 cursor-pointer text-foreground transition-colors hover:text-muted-foreground'} />
-            </button>
-          </motion.div>
+          {!isEmpty ?
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.9 }}
+            >
+              <button className={'bg-background/0'}>
+                <CirclePlus
+                  className={'w-9 h-9 cursor-pointer text-foreground transition-colors hover:text-muted-foreground'} />
+              </button>
+            </motion.div>
+
+            : <CryptoExample onTriggerClick={handleTriggerClick} />
+          }
+
         </SheetTrigger>
 
         <SheetContent
@@ -118,19 +106,17 @@ export const AddCrypto: React.FC<IProps> = ({ cryptoData, onAddCrypto, isOpen, s
           className={'bg-card rounded-2xl border-0 flex flex-col gap-6 items-center pt-10 pb-8'}
         >
           <SheetClose
-            className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary">
-            {isEmpty
-              ? <Link href={'/market'}> <X className="h-5 w-5" /></Link>
-              : <X className="h-5 w-5" />
-            }
+            className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary"
+          >
+            <X className="h-5 w-5" />
           </SheetClose>
           <SheetHeader className={`${searchValue && filteredCryptoData.length > 0 && 'mt-16'} text-center`}>
             <SheetTitle className={'text-2xl'}>{t('add_crypto.add_coin')}</SheetTitle>
-            {isEmpty &&
-              <SheetDescription className={'text-sm font-medium mx-auto'}>
-                {t('add_crypto.add_coin_desc')}
-              </SheetDescription>
-            }
+            {/*{isEmpty &&*/}
+            {/*  <SheetDescription className={'text-sm font-medium mx-auto'}>*/}
+            {/*    {t('add_crypto.add_coin_desc')}*/}
+            {/*  </SheetDescription>*/}
+            {/*}*/}
           </SheetHeader>
           {selectedCrypto ? (
             <div className="flex items-center justify-between w-full py-4 px-4 bg-[#282828] rounded-xl">

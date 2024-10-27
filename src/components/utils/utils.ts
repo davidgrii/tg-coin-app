@@ -28,6 +28,20 @@ export const formatPriceWithoutDecimals = (price: number) => {
   }).format(price)
 }
 
+export const formatNumber = (value: string) => {
+
+  let cleanedValue = value.replace(/,/g, '.')
+
+  cleanedValue = cleanedValue.replace(/\s/g, '')
+
+  const [integerPart, decimalPart] = cleanedValue.split('.')
+
+  const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+
+
+  return decimalPart !== undefined ? `${formattedInteger}.${decimalPart}` : formattedInteger
+}
+
 export const formatWitDecimals = (price: number) => {
   return new Intl.NumberFormat('en-US', {
     style: 'decimal',

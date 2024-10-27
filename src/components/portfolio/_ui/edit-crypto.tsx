@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { useTranslation } from 'react-i18next'
 import { IPortfolioItem } from '@/types/crypto.types'
 import { X } from 'lucide-react'
+import { formatNumber } from '@/components/utils/utils'
 
 interface IProps {
   isOpen: boolean
@@ -22,20 +23,6 @@ export const EditCrypto: React.FC<IProps> = ({ isOpen, setIsOpen, item, onEditCr
   const [notice, setNotice] = useState<string>(item?.notice || '')
 
   const { t } = useTranslation()
-
-  const formatNumber = (value: string) => {
-
-    let cleanedValue = value.replace(/,/g, '.')
-
-    cleanedValue = cleanedValue.replace(/\s/g, '')
-
-    const [integerPart, decimalPart] = cleanedValue.split('.')
-
-    const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
-
-
-    return decimalPart !== undefined ? `${formattedInteger}.${decimalPart}` : formattedInteger
-  }
 
   const handleChangeQuantity = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
