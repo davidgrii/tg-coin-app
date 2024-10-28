@@ -113,7 +113,7 @@ export const DashboardUserBalance: React.FC<IProps> = ({ className }) => {
               transition={{ duration: 1.1 }}
             >
               <CardDescription className={'text-sm text-foreground font-bold mr-[85px]'}>
-                54,3443 $
+                122,467 $
               </CardDescription>
             </motion.div>
           </CardHeader>
@@ -131,7 +131,7 @@ export const DashboardUserBalance: React.FC<IProps> = ({ className }) => {
                 className={'flex gap-1.5'}
               >
                 <p className={'text-sm text-secondary font-semibold transition-colors'}>
-                  -3,323.92 $
+                  -3,323 $
                 </p>
                 <p
                   className={'text-sm font-semibold w-20 text-right transition-colors text-secondary'}>
@@ -154,10 +154,10 @@ export const DashboardUserBalance: React.FC<IProps> = ({ className }) => {
                 className={'flex gap-1.5'}
               >
                 <p className={'text-sm font-semibold transition-colors text-primary'}>
-                  23,323.94 $
+                  76,572 $
                 </p>
                 <p className={'text-sm text-primary font-semibold w-20 text-right transition-colors'}>
-                  48.39 %
+                  87%
                 </p>
               </motion.div>
 

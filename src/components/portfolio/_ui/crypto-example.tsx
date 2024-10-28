@@ -31,12 +31,12 @@ const {
   name: 'Bitcoin',
   symbol: 'BTC',
   image: '/bitcoin.webp',
-  current_price: 58203.69,
+  current_price: 58203,
   quantity: 1.5,
   price_change_percentage_24h: 2.3,
-  total_value: 87305.54,
+  total_value: 54772,
   purchase_price: 36515,
-  profitLossUSD: 32530.54,
+  profitLossUSD: 32532,
   profitLossPercentage: 59.39,
   notice: 'Bought during the dip'
 }
@@ -67,7 +67,6 @@ export const CryptoExample: React.FC<IProps> = ({ className, onTriggerClick  }) 
           Add the crypto you own to track your assets balance in USD and see how your profit changes with real-time updates
         </span>
       </div>
-
 
       <Accordion value={id} className={'w-full'} type={'single'}>
         <AccordionItem value={id}>
@@ -132,7 +131,7 @@ export const CryptoExample: React.FC<IProps> = ({ className, onTriggerClick  }) 
 
             <PortfolioItemDetails
               notice={notice}
-              investedUSD={25000}
+              investedUSD={total_value}
               purchasePrice={purchase_price}
               profitLossUSD={profitLossUSD}
               profitLossPercentage={profitLossPercentage}

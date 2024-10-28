@@ -19,5 +19,32 @@ export const titles: Title[] = [
   { title: 'Emperor', coins: { min: 2000001, max: 5000000 }, color: '#B8860B', key: 'Emperor' },
   { title: 'Lord', coins: { min: 5000001, max: 10000000 }, color: '#FFFFFF', key: 'Lord' },
   { title: 'Immortal', coins: { min: 10000001, max: Infinity }, color: '#8A2BE2', key: 'Immortal' },
-  { title: 'The Almighty', coins: { min: 10000001, max: Infinity }, color: '#FFD700', key: 'The Almighty' },
+  { title: 'The Almighty', coins: { min: 10000001, max: Infinity }, color: '#FFD700', key: 'The Almighty' }
+]
+
+export const CATEGORIES_NAV_ITEMS = [
+  {
+    label: 'Market',
+    href: '/market',
+    exact: false,
+    active: true
+  },
+  {
+    label: 'Favorites',
+    href: '/favorites',
+    exact: false,
+    active: true
+  },
+  {
+    label: 'Gainers',
+    href: '',
+    exact: false,
+    active: false
+  },
+  {
+    label: 'Trending',
+    href: '',
+    exact: false,
+    active: false
+  }
 ]

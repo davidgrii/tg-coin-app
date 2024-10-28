@@ -39,13 +39,28 @@ export default function FriendsPage() {
         defaultValue="invited"
         value={selectedTab}
         onValueChange={setSelectedTab}
-        className="w-full flex flex-col items-center"
+        className="w-full flex flex-col items-start"
       >
-        <TabsList className="grid w-full grid-cols-2 border rounded-lg">
-          <TabsTrigger className={'rounded-l-lg rounded-r-none'}
-                       value="invited">{t('my_friends_page.invite')}</TabsTrigger>
-          <TabsTrigger className={'rounded-r-lg rounded-l-none'}
-                       value="leaderboard">{t('my_friends_page.leaderboard')}</TabsTrigger>
+        <TabsList className="grid grid-cols-3 gap-1.5">
+          <TabsTrigger
+            className={'border px-6 py-2 rounded-lg'}
+            value="invited"
+          >
+            {t('my_friends_page.invite')}
+          </TabsTrigger>
+          <TabsTrigger
+            className={'border px-6 py-2 rounded-lg'}
+            value="leaderboard"
+          >
+            {t('my_friends_page.leaderboard')}
+          </TabsTrigger>
+          <TabsTrigger
+            disabled={true}
+            className={'border px-6 py-2 rounded-lg opacity-45 cursor-not-allowed'}
+            value="tasks"
+          >
+            Tasks
+          </TabsTrigger>
         </TabsList>
 
         <InvitedUsers />

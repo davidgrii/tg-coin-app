@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { cn } from '@/components/ui/utils'
 import { usePathname } from 'next/navigation'
-import { FavoritesIcon, MarketIcon, PortfolioIcon } from '@/components/icons'
+import { MarketIcon, PortfolioIcon } from '@/components/icons'
 import { useTranslation } from 'react-i18next'
 import { Gift } from 'lucide-react'
 import { FriendsIcon } from '@/components/icons/icons'
@@ -33,7 +33,7 @@ export const Navbar: React.FC<IProps> = ({ className }) => {
 
   return (
     <nav>
-      <ul className={'grid grid-cols-4 gap-10 text-nowrap'}>
+      <ul className={'grid grid-cols-3 gap-10 text-nowrap'}>
         <li>
           <Link
             href={'/market'}
@@ -44,16 +44,16 @@ export const Navbar: React.FC<IProps> = ({ className }) => {
             <span className={'text-xs'}>{t('market')}</span>
           </Link>
         </li>
-        <li>
-          <Link
-            href={'/favorites'}
-            className={cn(currentPage === '/favorites' ? 'text-foreground' : 'text-muted-foreground',
-              'flex flex-col items-center gap-1 font-semibold transition hover:text-foreground')}
-          >
-            <FavoritesIcon />
-            <span className={'text-xs'}>{t('favorites')}</span>
-          </Link>
-        </li>
+        {/*<li>*/}
+        {/*  <Link*/}
+        {/*    href={'/favorites'}*/}
+        {/*    className={cn(currentPage === '/favorites' ? 'text-foreground' : 'text-muted-foreground',*/}
+        {/*      'flex flex-col items-center gap-1 font-semibold transition hover:text-foreground')}*/}
+        {/*  >*/}
+        {/*    <FavoritesIcon />*/}
+        {/*    <span className={'text-xs'}>{t('favorites')}</span>*/}
+        {/*  </Link>*/}
+        {/*</li>*/}
         <li>
           <Link
             href={'/portfolio'}

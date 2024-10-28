@@ -7,6 +7,7 @@ interface DashboardState {
 }
 export const useGlobalDataStore = create<DashboardState>((set) => ({
   dashboardData: null,
+
   fetchGlobalData: async () => {
     try {
       const res = await fetch(`https://priceme.store/api/global`, {
