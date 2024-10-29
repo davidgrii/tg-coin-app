@@ -88,7 +88,7 @@ export const DashboardData: React.FC<IProps> = ({ className }) => {
 
         <CarouselItem>
           <Card
-            className={cn('flex py-4 pl-6 pr-9 relative items-center cursor-pointer justify-between rounded-xl border-0', className)}>
+            className={cn('flex py-4 pl-6 pr-9 relative h-[70px] items-center cursor-pointer justify-between rounded-xl border-0', className)}>
             <CardHeader className={'p-0 space-y-0.5'}>
               <CardTitle className={'text-xs text-muted-foreground'}>24h Trading Volume</CardTitle>
               <motion.div

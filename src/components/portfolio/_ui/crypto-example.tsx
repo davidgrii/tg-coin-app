@@ -55,14 +55,14 @@ export const CryptoExample: React.FC<IProps> = ({ className, onTriggerClick }) =
     >
       <div className={'fixed inset-0 h-screen -mt-60 bg-background/60 opacity-75 z-40'} />
 
-      <div className={'absolute -bottom-32  z-50'}>
+      <div className={'absolute -bottom-32 z-50'}>
         <div className={'flex items-center justify-center relative mb-7'}>
-          <button onClick={onTriggerClick} className={'bg-background/0'}>
+          <button onClick={onTriggerClick} className={'bg-background/0 animate-pulse'}>
             <CirclePlus
               className={'w-9 h-9 cursor-pointer text-foreground transition-colors hover:text-muted-foreground'} />
           </button>
 
-          <span className={'absolute top-2 right-20'}>
+          <span className={'absolute animate-pulse top-2 right-20'}>
             <ArrowEmptyIcon />
           </span>
         </div>
@@ -130,8 +130,8 @@ export const CryptoExample: React.FC<IProps> = ({ className, onTriggerClick }) =
             </CardContent>
           </AccordionTrigger>
 
-          <AccordionContent className={'flex gap-4 pl-0.5 items-start'}>
-            <span className={'w-6'}>
+          <AccordionContent className={'flex gap-[13px] pl-0.5 items-start'}>
+            <span className={'ml-1 flex justify-center'}>
               <EditIcon />
             </span>
 

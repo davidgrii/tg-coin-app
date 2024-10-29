@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { CATEGORIES_NAV_ITEMS } from '@/utils/constants'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/components/ui/utils'
-import { ScrollArea } from '@/components/ui/scroll-area'
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { PortfolioArrowIcon } from '@/components/icons/icons'
 
 interface IProps {
@@ -15,7 +15,7 @@ export const Categories: React.FC<IProps> = ({ className }) => {
   const currentPage = usePathname()
 
   return (
-    <ScrollArea>
+    <ScrollArea className={'select-none'}>
       <div className={cn('flex flex-row gap-1.5 text-sm mb-2 whitespace-nowrap', className)}>
         {CATEGORIES_NAV_ITEMS.map((item, index) => (
           <Link
@@ -32,7 +32,7 @@ export const Categories: React.FC<IProps> = ({ className }) => {
         ))}
       </div>
 
-      {/*<ScrollBar orientation="horizontal" />*/}
+      <ScrollBar orientation="horizontal" />
     </ScrollArea>
   )
 }
