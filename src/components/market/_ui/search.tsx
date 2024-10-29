@@ -27,7 +27,7 @@ export const SearchInput: React.FC<IProps> = ({ searchValue, setSearchValue, inp
 
   return (
     <div className="flex">
-      <div className={cn(className, 'relative w-full md:grow-0')}>
+      <div className={cn(className, 'relative w-full pb-2')}>
         <AnimatePresence>
           {searchValue !== undefined && (
             <motion.div

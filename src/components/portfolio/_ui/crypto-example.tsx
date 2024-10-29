@@ -7,6 +7,7 @@ import { CardContent } from '@/components/ui/card'
 import Image from 'next/image'
 import { formatPrice, formatPriceWithoutDecimals } from '@/components/utils/utils'
 import { PortfolioItemDetails } from '@/components/portfolio'
+import { useTranslation } from 'react-i18next'
 
 interface IProps {
   onTriggerClick?: () => void
@@ -41,7 +42,10 @@ const {
   notice: 'Bought during the dip'
 }
 
-export const CryptoExample: React.FC<IProps> = ({ className, onTriggerClick  }) => {
+export const CryptoExample: React.FC<IProps> = ({ className, onTriggerClick }) => {
+
+  const { t } = useTranslation()
+  
   return (
     <motion.div
       className={'w-full flex justify-center -mt-10'}
@@ -49,7 +53,7 @@ export const CryptoExample: React.FC<IProps> = ({ className, onTriggerClick  }) 
       animate={{ opacity: 1 }}
       transition={{ duration: 0.9 }}
     >
-      <div className={'fixed inset-0 h-screen -mt-60 bg-background/45 opacity-75 z-40'} />
+      <div className={'fixed inset-0 h-screen -mt-60 bg-background/60 opacity-75 z-40'} />
 
       <div className={'absolute -bottom-32  z-50'}>
         <div className={'flex items-center justify-center relative mb-7'}>
@@ -59,12 +63,12 @@ export const CryptoExample: React.FC<IProps> = ({ className, onTriggerClick  }) 
           </button>
 
           <span className={'absolute top-2 right-20'}>
-              <ArrowEmptyIcon />
-        </span>
+            <ArrowEmptyIcon />
+          </span>
         </div>
 
         <span className={'text-xs flex max-w-96 text-center px-5 font-medium'}>
-          Add the crypto you own to track your assets balance in USD and see how your profit changes with real-time updates
+          {t('add_crypto.add_coin_desc')}
         </span>
       </div>
 
@@ -126,8 +130,10 @@ export const CryptoExample: React.FC<IProps> = ({ className, onTriggerClick  }) 
             </CardContent>
           </AccordionTrigger>
 
-          <AccordionContent className={'flex gap-2.5 pl-0.5 items-start'}>
-            <EditIcon />
+          <AccordionContent className={'flex gap-4 pl-0.5 items-start'}>
+            <span className={'w-6'}>
+              <EditIcon />
+            </span>
 
             <PortfolioItemDetails
               notice={notice}

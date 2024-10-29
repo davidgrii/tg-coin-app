@@ -45,7 +45,7 @@ export const DashboardData: React.FC<IProps> = ({ className }) => {
   return (
     <Carousel plugins={[
       Autoplay({
-        delay: 4000,
+        delay: 8000,
       }),
     ]} opts={{
       loop: true
@@ -90,13 +90,13 @@ export const DashboardData: React.FC<IProps> = ({ className }) => {
           <Card
             className={cn('flex py-4 pl-6 pr-9 relative items-center cursor-pointer justify-between rounded-xl border-0', className)}>
             <CardHeader className={'p-0 space-y-0.5'}>
-              <CardTitle className={'text-sm text-muted-foreground'}>24h Trading Volume</CardTitle>
+              <CardTitle className={'text-xs text-muted-foreground'}>24h Trading Volume</CardTitle>
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1.1 }}
               >
-                <CardDescription className={'text-xs text-foreground font-bold'}>
+                <CardDescription className={'text-sm text-foreground font-bold'}>
                   {formatNumberWithCommas(totalVolume24hUSD)} $
                 </CardDescription>
               </motion.div>
@@ -109,9 +109,9 @@ export const DashboardData: React.FC<IProps> = ({ className }) => {
                 transition={{ duration: 1.1 }}
                 className={'text-right'}
               >
-                <span className={'text-sm text-muted-foreground'}>Dominance</span>
+                <span className={'text-xs text-muted-foreground'}>Dominance</span>
 
-                <p className={'text-xs text-foreground font-semibold'}>
+                <p className={'text-sm text-foreground font-semibold'}>
                   BTC {marketCapPercentageBTC.toFixed(2)} %
                 </p>
               </motion.div>

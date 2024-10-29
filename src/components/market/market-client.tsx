@@ -10,7 +10,7 @@ import { SearchInput } from '@/components/market/index'
 import { ICrypto } from '@/types'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useTelegramStore } from '@/store/telegram/telegram.store'
-import { Categories } from '@/components/market/_ui/categories'
+import { Categories } from '@/components/categories'
 
 interface ICryptoClientProps {
   initialCryptoData: ICrypto[]

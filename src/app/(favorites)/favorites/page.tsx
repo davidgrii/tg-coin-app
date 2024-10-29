@@ -9,7 +9,7 @@ import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { FavoritesTableHeader } from '@/components/favorites/_ui/favorites-table-header'
 import { useTelegramStore } from '@/store/telegram/telegram.store'
-import { Categories } from '@/components/market/_ui/categories'
+import { Categories } from '@/components/categories'
 
 export default function FavoritesPage() {
   const userId = useTelegramStore(state => state.userId)
