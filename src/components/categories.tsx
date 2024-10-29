@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { CATEGORIES_NAV_ITEMS } from '@/utils/constants'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/components/ui/utils'
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+import { ScrollArea } from '@/components/ui/scroll-area'
 import { PortfolioArrowIcon } from '@/components/icons/icons'
 
 interface IProps {
@@ -32,7 +32,7 @@ export const Categories: React.FC<IProps> = ({ className }) => {
         ))}
       </div>
 
-      <ScrollBar orientation="horizontal" />
+      {/*<ScrollBar orientation="horizontal" />*/}
     </ScrollArea>
   )
 }
