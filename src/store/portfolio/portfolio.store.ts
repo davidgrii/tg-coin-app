@@ -12,7 +12,7 @@ export const usePortfolioStore = create<IPortfolioStore>((set) => ({
   totalProfitLossPercentage: 0,
   totalProfitLoss: 0,
   isLoading: true,
-  sortOrder: 'asc',
+  sortOrder: 'desc',
 
   initializePortfolio: async (userId) => {
     set({ isLoading: true })

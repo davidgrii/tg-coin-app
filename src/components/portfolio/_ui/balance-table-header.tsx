@@ -34,7 +34,7 @@ export const BalanceTableHeader: React.FC<IProps> = ({ className }) => {
         <motion.span
           className="cursor-pointer flex items-center"
           initial={{ rotate: 0 }}
-          animate={{ rotate: sortOrder === 'desc' ? 180 : 0 }}
+          animate={{ rotate: sortOrder === 'asc' ? 0 : 180 }}
           transition={{ duration: 0.3 }}
           onClick={toggleSortDirection}
         >
