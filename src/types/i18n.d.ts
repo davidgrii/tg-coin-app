@@ -24,24 +24,26 @@ declare module 'i18next' {
         dashboard: {
           market_cap: string
           n_a: string
+          'trending': string
+          'dominance': string
         }
         dashboard_balance: {
           my_balance: string
           '24h': string
           'over_time': string
         }
-        "dashboard_friends": {
-          "coin": string
+        'dashboard_friends': {
+          'coin': string
         },
         empty_favorites: {
           no_coins: string
           add_first_tap: string
           add_first: string
         }
-        "empty_profile": {
-          "no_invited": string
-          "start_inviting": string
-          "share": string
+        'empty_profile': {
+          'no_invited': string
+          'start_inviting': string
+          'share': string
         },
         my_portfolio_page: {
           edit: string
@@ -53,17 +55,18 @@ declare module 'i18next' {
           'agree_btn': string,
           'disagree': string
         }
-        "my_friends_page": {
-          "invite": string
-          "leaderboard": string
-          "users": string
-          "you": string
-          "friends": string
-          "coin": string
-          "copy_text": string
-          "copy_link": string
-          "copied": string
-          "invite_button": string
+        'my_friends_page': {
+          'invite': string
+          'leaderboard': string
+          'tasks': string
+          'users': string
+          'you': string
+          'friends': string
+          'coin': string
+          'copy_text': string
+          'copy_link': string
+          'copied': string
+          'invite_button': string
         }
         add_crypto: {
           add_coin: string
@@ -83,21 +86,28 @@ declare module 'i18next' {
           search: string
           cancel: string
         }
-        "titles": {
-          "Beginner": string
-          "Explorer": string
-          "Expert": string
-          "Knight": string
-          "Leader": string
-          "Hero": string
-          "Master": string
-          "Legend": string
-          "Titan": string
-          "Immortal": string
-          "King": string
-          "Emperor": string
-          "Lord": string
-          "The Almighty": string
+        'titles': {
+          'Beginner': string
+          'Explorer': string
+          'Expert': string
+          'Knight': string
+          'Leader': string
+          'Hero': string
+          'Master': string
+          'Legend': string
+          'Titan': string
+          'Immortal': string
+          'King': string
+          'Emperor': string
+          'Lord': string
+          'The Almighty': string
+        }
+        'CATEGORIES_NAV_ITEMS': {
+          'market': string
+          'favorites': string
+          'gainers': string
+          'losers': string
+          'trending': string
         }
       }
     }

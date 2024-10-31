@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import { SearchV2Icon } from '@/components/icons'
 import clsx from 'clsx'
 import { useSearchStore } from '@/store'
-import Link from 'next/link'
 import { motion } from 'framer-motion'
 
 
@@ -28,20 +27,17 @@ export const MarketTableHeader: React.FC<IProps> = ({ className }) => {
           <span className="w-12 text-right">{t('table_header.change')}</span>
         </div>
 
-        <motion.div
+        <motion.span
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8 }}
+          className={clsx(isSearchOpen ? 'hidden' : 'visible', 'transform transition-all cursor-pointer')}
+          onClick={() => toggleSearch(true)}
         >
-          <Link
-            className={clsx(isSearchOpen ? 'hidden' : 'visible', 'transform transition-all hover:scale-105')}
-            onClick={() => toggleSearch(true)} href={''}
-          >
-            <SearchV2Icon />
-          </Link>
-        </motion.div>
+          <SearchV2Icon />
+        </motion.span>
       </div>
     </div>
-)
+  )
 }

@@ -9,8 +9,8 @@ import { ICrypto } from '@/types'
 import { useTranslation } from 'react-i18next'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { CryptoExample } from '@/components/portfolio/_ui/crypto-example'
-import { formatNumber } from '@/components/utils/utils'
+import { formatNumber } from '@/utils/formatters'
+import { CryptoExample } from '@/components/portfolio'
 
 interface IProps {
   isOpen: boolean

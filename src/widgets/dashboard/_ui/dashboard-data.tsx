@@ -90,7 +90,7 @@ export const DashboardData: React.FC<IProps> = ({ className }) => {
           <Card
             className={cn('flex py-4 pl-6 pr-9 relative h-[70px] items-center cursor-pointer justify-between rounded-xl border-0', className)}>
             <CardHeader className={'p-0 space-y-0.5'}>
-              <CardTitle className={'text-xs text-muted-foreground'}>24h Trading Volume</CardTitle>
+              <CardTitle className={'text-xs text-muted-foreground'}>{t('dashboard.trending')}</CardTitle>
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -107,9 +107,9 @@ export const DashboardData: React.FC<IProps> = ({ className }) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1.1 }}
-                className={'text-right'}
+                className={'text-right leading-none'}
               >
-                <span className={'text-xs text-muted-foreground'}>Dominance</span>
+                <span className={'text-xs text-muted-foreground'}>{t('dashboard.dominance')}</span>
 
                 <p className={'text-sm text-foreground font-semibold'}>
                   BTC {marketCapPercentageBTC.toFixed(2)} %

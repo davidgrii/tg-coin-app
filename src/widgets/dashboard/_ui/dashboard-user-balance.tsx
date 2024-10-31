@@ -6,7 +6,7 @@ import { cn } from '@/components/ui/utils'
 import { usePortfolioStore } from '@/store'
 import { useTranslation } from 'react-i18next'
 import { Separator } from '@/components/ui/separator'
-import { formatPrice } from '@/components/utils/utils'
+import { formatPrice } from '@/utils/formatters'
 import { motion } from 'framer-motion'
 
 export const DashboardUserBalance: React.FC<IProps> = ({ className }) => {

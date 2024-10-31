@@ -7,7 +7,7 @@ import Image from 'next/image'
 import { useTranslation } from 'react-i18next'
 import { IPortfolioItem } from '@/types/crypto.types'
 import { X } from 'lucide-react'
-import { formatNumber } from '@/components/utils/utils'
+import { formatNumber } from '@/utils/formatters'
 
 interface IProps {
   isOpen: boolean

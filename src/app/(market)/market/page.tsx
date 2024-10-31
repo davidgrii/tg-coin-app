@@ -1,38 +1,25 @@
 'use client'
 
-import MarketClient from '@/components/market/market-client'
-import { ICrypto } from '@/types'
-import React, { useEffect, useState } from 'react'
+import MarketClient from '@/components/market/_ui/market-client'
+import React from 'react'
+import { useCryptoData } from '@/hooks'
 
-const fetchCryptoData = async (): Promise<ICrypto[]> => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/cryptos`, {
-    cache: 'no-store',
-  })
-
-  if (!res.ok) {
-    throw new Error('Ошибка при загрузке данных')
-  }
-  return res.json()
-}
-
-const MemoizedMarketClient = React.memo(MarketClient, (prevProps, nextProps) => {
-  return JSON.stringify(prevProps.initialCryptoData) === JSON.stringify(nextProps.initialCryptoData)
-})
+// const isAuth = true
 
 export default function MarketPage() {
-  const [cryptoData, setCryptoData] = useState<ICrypto[]>([])
+const { data: cryptoData, isLoading } = useCryptoData()
 
-  useEffect(() => {
-    const loadCryptoData = async () => {
-      try {
-        const data = await fetchCryptoData()
-        setCryptoData(data)
-      } catch (error) {
-        console.error('Ошибка при загрузке данных', error)
-      }
-    }
-    loadCryptoData()
-  }, [])
+  // if (isLoading) {
+  //   return <div className={'flex justify-center items-center'}>Loading...</div>
+  // }
+  //
+  // if (isFetching) {
+  //   return <div>isFetching</div>
+  // }
 
-  return <MemoizedMarketClient initialCryptoData={cryptoData} />
+  if (!cryptoData) {
+    return
+  }
+
+  return <MarketClient initialCryptoData={cryptoData} />
 }

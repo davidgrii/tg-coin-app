@@ -41,7 +41,7 @@ export default function FriendsPage() {
         onValueChange={setSelectedTab}
         className="w-full flex flex-col items-start"
       >
-        <TabsList className="grid grid-cols-3 gap-1.5">
+        <TabsList className="grid grid-cols-3 gap-1.5 text-nowrap">
           <TabsTrigger
             className={'border px-6 py-2 rounded-lg'}
             value="invited"
@@ -59,7 +59,7 @@ export default function FriendsPage() {
             className={'border px-6 py-2 rounded-lg opacity-45 cursor-not-allowed'}
             value="tasks"
           >
-            Tasks
+            {t('my_friends_page.tasks')}
           </TabsTrigger>
         </TabsList>
 

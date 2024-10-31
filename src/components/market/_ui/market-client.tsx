@@ -3,10 +3,10 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useCryptoStore, useInitializeCryptoStore, useSearchStore } from '@/store'
 import { useCryptoFilter } from '@/hooks'
-import { Container, CryptoItem, CryptoSkeleton, MarketTableHeader } from '@/components'
+import { Container, CryptoItem, CryptoSkeleton } from '@/components'
 import { motion } from 'framer-motion'
 import { Card } from '@/components/ui/card'
-import { SearchInput } from '@/components/market/index'
+import { MarketTableHeader, SearchInput } from '@/components/market'
 import { ICrypto } from '@/types'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useTelegramStore } from '@/store/telegram/telegram.store'
@@ -92,6 +92,8 @@ export default function MarketClient({ initialCryptoData }: ICryptoClientProps) 
 
   return (
     <Container className={'pt-0 mb-20'}>
+      <Categories/>
+
       {isSearchOpen && (
         <SearchInput
           searchValue={searchValue}
@@ -99,8 +101,6 @@ export default function MarketClient({ initialCryptoData }: ICryptoClientProps) 
           inputRef={inputRef}
         />
       )}
-
-      <Categories/>
 
       <MarketTableHeader />
 

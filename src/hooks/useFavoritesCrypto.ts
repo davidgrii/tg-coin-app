@@ -11,7 +11,7 @@ export const useFavoritesCrypto = () => {
 
     if (favorites.length === 0) {
       setFavoriteCryptoData([])
-      return;
+      return
     }
 
     const filteredFavorites = cryptoData.filter((crypto: ICrypto) => favorites.includes(crypto.id))

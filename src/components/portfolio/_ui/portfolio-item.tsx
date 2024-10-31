@@ -1,5 +1,5 @@
 import { CardContent } from '@/components/ui/card'
-import { formatPrice, formatPriceWithoutDecimals } from '@/components/utils/utils'
+import { formatPrice, formatPriceWithoutDecimals } from '@/utils/formatters'
 import { AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import React, { useState } from 'react'
 import Image from 'next/image'

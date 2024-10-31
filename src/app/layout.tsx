@@ -3,6 +3,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { cn } from '@/components/ui/utils'
+import QueryProvider from '@/app/providers/query-provider'
 
 const inter = Inter({
   weight: ['200', '300', '400', '500', '600', '700', '800'],
@@ -21,6 +22,7 @@ export default function RootLayout(
   }: Readonly<{
     children: React.ReactNode;
   }>) {
+
   return (
     <html lang="en">
     <head>
@@ -28,9 +30,11 @@ export default function RootLayout(
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     </head>
     <body
-      className={cn(`bg-background  ${inter.className}`)}
+      className={cn(`bg-background ${inter.className}`)}
     >
+    <QueryProvider>
       {children}
+    </QueryProvider>
     </body>
     </html>
   )

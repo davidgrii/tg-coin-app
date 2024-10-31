@@ -1,10 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
-import { CATEGORIES_NAV_ITEMS } from '@/utils/constants'
+import { CATEGORIES_NAV_ITEMS } from '../constants'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/components/ui/utils'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { PortfolioArrowIcon } from '@/components/icons/icons'
+import { useTranslation } from 'react-i18next'
 
 interface IProps {
   className?: string
@@ -12,6 +13,7 @@ interface IProps {
 
 export const Categories: React.FC<IProps> = ({ className }) => {
 
+  const { t } = useTranslation()
   const currentPage = usePathname()
 
   return (
@@ -27,7 +29,7 @@ export const Categories: React.FC<IProps> = ({ className }) => {
               'flex items-center gap-1.5 px-6 py-2 font-bold rounded-lg border h-10'
             )}
           >
-            {item.label} {item.label === 'Gainers' && <PortfolioArrowIcon width={10} height={10}/>}
+            {t(`CATEGORIES_NAV_ITEMS.${item.key}`)} {item.label === 'Gainers' && <PortfolioArrowIcon width={10} height={10} />}
           </Link>
         ))}
       </div>

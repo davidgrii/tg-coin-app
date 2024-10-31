@@ -5,7 +5,7 @@ import { ArrowEmptyIcon, EditIcon } from '@/components/icons/icons'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { CardContent } from '@/components/ui/card'
 import Image from 'next/image'
-import { formatPrice, formatPriceWithoutDecimals } from '@/components/utils/utils'
+import { formatPrice, formatPriceWithoutDecimals } from '@/utils/formatters'
 import { PortfolioItemDetails } from '@/components/portfolio'
 import { useTranslation } from 'react-i18next'
 

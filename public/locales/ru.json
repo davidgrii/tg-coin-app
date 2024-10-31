@@ -17,7 +17,9 @@
   },
   "dashboard": {
     "market_cap": "Рыночная капитализация",
-    "n_a": "Н/Д"
+    "n_a": "Н/Д",
+    "trending": "24ч объем торгов",
+    "dominance": "Доминирование"
   },
   "dashboard_balance": {
     "my_balance": "Мой Баланс",
@@ -48,8 +50,9 @@
     "disagree": "Нет"
   },
   "my_friends_page": {
-    "invite": "Приглашенные",
-    "leaderboard": "Таблица лидеров",
+    "invite": "Друзья",
+    "leaderboard": "Лидеры",
+    "tasks": "Задания",
     "users": "Пользователей",
     "you": "Вы",
     "friends": "друзей",
@@ -92,5 +95,13 @@
     "Emperor": "Император",
     "Lord": "Лорд",
     "The Almighty": "Всемогущий"
+  },
+  "CATEGORIES_NAV_ITEMS": {
+    "market": "Рынок",
+    "favorites": "Избранное",
+    "gainers": "Памп",
+    "losers": "Дамп",
+    "trending": "Популярно"
   }
 }
+

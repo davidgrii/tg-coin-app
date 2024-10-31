@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { titles } from '@/utils/constants'
+import { titles } from '../../constants'
 
 
 interface IInvitedUser {

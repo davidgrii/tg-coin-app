@@ -17,7 +17,9 @@
   },
   "dashboard": {
     "market_cap": "Market Cap",
-    "n_a": "N/A"
+    "n_a": "N/A",
+    "trending": "24h Trading Volume",
+    "dominance": "Dominance"
   },
   "dashboard_balance": {
     "my_balance": "My Balance",
@@ -50,6 +52,7 @@
   "my_friends_page": {
     "invite": "Invite",
     "leaderboard": "Leaderboard",
+    "tasks": "Tasks",
     "users": "Users",
     "you": "You",
     "friends": "friends",
@@ -92,5 +95,12 @@
     "Emperor": "Emperor",
     "Lord": "Lord",
     "The Almighty": "The Almighty"
+  },
+  "CATEGORIES_NAV_ITEMS": {
+    "market": "Market",
+    "favorites": "Favorites",
+    "gainers": "Pump",
+    "losers": "Dump",
+    "trending": "Trending"
   }
 }

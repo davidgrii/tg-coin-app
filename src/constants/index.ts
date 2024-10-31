@@ -1,11 +1,19 @@
-interface Title {
+interface ITitle {
   title: string;
   coins: { min: number; max: number };
   color: string;
-  key: 'Beginner' | 'Explorer' | 'Expert' | 'Knight' | 'Leader' | 'Hero' | 'Master' | 'Legend' | 'Titan' | 'Immortal' | 'King' | 'Emperor' | 'Lord' | 'The Almighty';
+  key: 'Beginner' | 'Explorer' | 'Expert' | 'Knight' | 'Leader' | 'Hero' | 'Master' | 'Legend' | 'Titan' | 'Immortal' | 'King' | 'Emperor' | 'Lord' | 'The Almighty'
 }
 
-export const titles: Title[] = [
+interface INavItems {
+  label: string
+  href: string
+  exact: boolean
+  active: boolean
+  key: 'market' | 'favorites' | 'gainers' | 'trending'
+}
+
+export const titles: ITitle[] = [
   { title: 'Beginner', coins: { min: 0, max: 3000 }, color: '#808080', key: 'Beginner' },
   { title: 'Explorer', coins: { min: 3101, max: 6000 }, color: '#90EE90', key: 'Explorer' },
   { title: 'Expert', coins: { min: 6001, max: 10000 }, color: '#f88f07', key: 'Expert' },
@@ -22,29 +30,33 @@ export const titles: Title[] = [
   { title: 'The Almighty', coins: { min: 10000001, max: Infinity }, color: '#FFD700', key: 'The Almighty' }
 ]
 
-export const CATEGORIES_NAV_ITEMS = [
+export const CATEGORIES_NAV_ITEMS: INavItems[] = [
   {
     label: 'Market',
     href: '/market',
     exact: false,
-    active: true
+    active: true,
+    key: 'market'
   },
   {
     label: 'Favorites',
     href: '/favorites',
     exact: false,
-    active: true
+    active: true,
+    key: 'favorites'
   },
   {
     label: 'Gainers',
     href: '',
     exact: false,
-    active: false
+    active: false,
+    key: 'gainers'
   },
   {
     label: 'Trending',
     href: '',
     exact: false,
-    active: false
+    active: false,
+    key: 'trending'
   }
 ]

@@ -37,6 +37,8 @@ export interface IPortfolioStore {
   calculateTotalProfitLossPercentage: () => void
   calculateTotalProfitLoss: () => void
   calculateTotalPriceChange24h: () => void
+  sortOrder: 'asc' | 'desc'
+  sortPortfolio: (direction: 'asc' | 'desc') => void
 }
 
 export interface IGlobalMarketData {

@@ -9,9 +9,9 @@ import { LogoIcon } from '@/components/icons/icons'
 import { UserAvatar } from '@/components/friends/_ui/avatar'
 import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select'
 import { useUserStore } from '@/store'
-import { titles } from '@/utils/constants'
+import { titles } from '../../../constants'
 import { useTranslation } from 'react-i18next'
-import { formatWitDecimals } from '@/components/utils/utils'
+import { formatWitDecimals } from '@/utils/formatters'
 
 interface IProps {
   className?: string

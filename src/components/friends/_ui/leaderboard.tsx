@@ -6,7 +6,7 @@ import { TabsContent } from '@/components/ui/tabs'
 import { useLeaderboardStore, useUserStore } from '@/store'
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
-import { formatWitDecimals } from '@/components/utils/utils'
+import { formatWitDecimals } from '@/utils/formatters'
 
 interface IProps {
   className?: string

@@ -1,7 +1,8 @@
 import React from 'react'
-import { formatPrice } from '@/components/utils/utils'
+import { formatPrice } from '@/utils/formatters'
 import { cn } from '@/components/ui/utils'
 import { useTranslation } from 'react-i18next'
+import { NoticeIcon } from '@/components/icons/icons'
 
 interface IProps {
   notice?: string
@@ -43,8 +44,8 @@ export const PortfolioItemDetails: React.FC<IProps> = ({notice, purchasePrice, i
       </div>
 
       {notice &&
-        <span className={'bg-accent block w-full text-foreground font-medium rounded-sm mt-2  p-1 pl-2 text-[12px]'}>
-          {notice}
+        <span className={'-ml-11 flex items-center gap-5 text-foreground border-[#282828] border font-medium rounded-sm mt-1 p-1 pl-2.5 pr-4 text-[12px]'}>
+          <NoticeIcon/> {notice}
         </span>
       }
     </div>

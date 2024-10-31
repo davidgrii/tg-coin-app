@@ -12,6 +12,7 @@ export const usePortfolioStore = create<IPortfolioStore>((set) => ({
   totalProfitLossPercentage: 0,
   totalProfitLoss: 0,
   isLoading: true,
+  sortOrder: 'asc',
 
   initializePortfolio: async (userId) => {
     set({ isLoading: true })
@@ -184,6 +185,16 @@ export const usePortfolioStore = create<IPortfolioStore>((set) => ({
 
     return { totalPriceChange24h }
   }),
+
+  sortPortfolio: (direction: 'asc' | 'desc') =>
+    set((state) => {
+      const sortedPortfolio = [...state.portfolio].sort((a, b) => {
+        const aValue = a.quantity * a.crypto.current_price
+        const bValue = b.quantity * b.crypto.current_price
+        return direction === 'asc' ? aValue - bValue : bValue - aValue
+      })
+      return { portfolio: sortedPortfolio, sortOrder: direction }
+    }),
 }))
 
 export const useInitializePortfolioStore = (userId: string) => {

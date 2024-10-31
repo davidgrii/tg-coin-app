@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { CardContent } from '@/components/ui/card'
 import { StarFavoriteIcon, StarIcon } from '@/components/icons'
 import { ICrypto } from '@/types'
-import { formatPrice, getDynamicFontSize } from '@/components/utils/utils'
+import { formatPrice, getDynamicFontSize } from '@/utils/formatters'
 import Image from 'next/image'
 
 interface IProps {
