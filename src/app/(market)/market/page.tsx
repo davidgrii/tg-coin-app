@@ -4,21 +4,15 @@ import MarketClient from '@/components/market/_ui/market-client'
 import React from 'react'
 import { useCryptoData } from '@/hooks'
 
-// const isAuth = true
-
 export default function MarketPage() {
-const { data: cryptoData, isLoading } = useCryptoData()
+const { data: cryptoData = [], isLoading, isFetching } = useCryptoData()
 
-  // if (isLoading) {
-  //   return <div className={'flex justify-center items-center'}>Loading...</div>
-  // }
-  //
-  // if (isFetching) {
-  //   return <div>isFetching</div>
-  // }
+  if (isLoading) {
+    return <div className={'flex justify-center items-center'}>Loading...</div>
+  }
 
-  if (!cryptoData) {
-    return
+  if (isFetching) {
+    return <div>isFetching</div>
   }
 
   return <MarketClient initialCryptoData={cryptoData} />

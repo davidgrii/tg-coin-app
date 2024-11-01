@@ -18,7 +18,7 @@ export const BalanceTableHeader: React.FC<IProps> = ({ className }) => {
       <h2>{t('balance_table_header.coin')}</h2>
 
       <div className={'flex'}>
-        <div className={'flex gap-8 mr-5'}>
+        <div className={'flex gap-8 mr-4'}>
           <span>
             {t('balance_table_header.price')}
           </span>
@@ -28,7 +28,7 @@ export const BalanceTableHeader: React.FC<IProps> = ({ className }) => {
         </div>
 
         <motion.span
-          className="cursor-pointer flex items-center"
+          className="cursor-pointer flex items-center p-2 -m-2 "
           initial={{ rotate: 0 }}
           animate={{ rotate: isSorted ? 0 : 180 }}
           transition={{ duration: 0.3 }}

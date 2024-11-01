@@ -205,7 +205,6 @@ export const usePortfolioStore = create<IPortfolioStore>((set) => ({
       return { portfolio: newPortfolio, isSorted: newSorted }
     })
   }
-
 }))
 
 export const useInitializePortfolioStore = (userId: string) => {

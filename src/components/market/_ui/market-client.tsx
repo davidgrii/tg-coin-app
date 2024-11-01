@@ -13,7 +13,7 @@ import { useTelegramStore } from '@/store/telegram/telegram.store'
 import { Categories } from '@/components/categories'
 
 interface ICryptoClientProps {
-  initialCryptoData: ICrypto[]
+  initialCryptoData: ICrypto[] | []
 }
 
 export default function MarketClient({ initialCryptoData }: ICryptoClientProps) {
