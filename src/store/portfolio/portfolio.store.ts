@@ -5,6 +5,7 @@ import { IPortfolioItem, IPortfolioStore } from '@/types/crypto.types'
 
 export const usePortfolioStore = create<IPortfolioStore>((set) => ({
   portfolio: [],
+  initialPortfolio: [],
   cryptoData: [],
   totalBalance: 0,
   totalPercentageChange24h: 0,
@@ -12,7 +13,7 @@ export const usePortfolioStore = create<IPortfolioStore>((set) => ({
   totalProfitLossPercentage: 0,
   totalProfitLoss: 0,
   isLoading: true,
-  sortOrder: 'desc',
+  isSorted: false,
 
   initializePortfolio: async (userId) => {
     set({ isLoading: true })
@@ -31,7 +32,7 @@ export const usePortfolioStore = create<IPortfolioStore>((set) => ({
         profitLoss: (item.crypto.current_price - item.purchasePrice) * item.quantity
       }))
 
-      set({ portfolio, isLoading: false })
+      set({ portfolio, initialPortfolio: portfolio, isLoading: false })
     } catch (error) {
       console.error('Ошибка при загрузке портфолио:', error)
       set({ isLoading: false })
@@ -136,20 +137,20 @@ export const usePortfolioStore = create<IPortfolioStore>((set) => ({
   calculateTotalProfitLossPercentage: () => set((state) => {
     const totalInvested = state.portfolio.reduce((acc, crypto) => {
       if (crypto.purchasePrice && crypto.quantity) {
-        return acc + crypto.purchasePrice * crypto.quantity;
+        return acc + crypto.purchasePrice * crypto.quantity
       }
-      return acc;
-    }, 0);
+      return acc
+    }, 0)
 
     const totalProfitLoss = state.portfolio.reduce((acc, crypto) => {
       if (crypto.crypto && crypto.quantity) {
-        return acc + ((crypto.crypto.current_price - crypto.purchasePrice) * crypto.quantity);
+        return acc + ((crypto.crypto.current_price - crypto.purchasePrice) * crypto.quantity)
       }
-      return acc;
-    }, 0);
+      return acc
+    }, 0)
 
-    const profitLossPercentage = totalInvested > 0 ? (totalProfitLoss / totalInvested) * 100 : 0;
-    return { totalProfitLossPercentage: profitLossPercentage };
+    const profitLossPercentage = totalInvested > 0 ? (totalProfitLoss / totalInvested) * 100 : 0
+    return { totalProfitLossPercentage: profitLossPercentage }
   }),
 
   calculateTotalPercentageChange24h: () => set((state) => {
@@ -178,7 +179,7 @@ export const usePortfolioStore = create<IPortfolioStore>((set) => ({
     const totalPriceChange24h = state.portfolio.reduce((acc, crypto) => {
       if (crypto.crypto && crypto.quantity) {
         const priceChange = crypto.crypto.price_change_24h * crypto.quantity
-        return acc + priceChange;
+        return acc + priceChange
       }
       return acc
     }, 0)
@@ -186,15 +187,25 @@ export const usePortfolioStore = create<IPortfolioStore>((set) => ({
     return { totalPriceChange24h }
   }),
 
-  sortPortfolio: (direction: 'asc' | 'desc') =>
+  sortPortfolio: () => {
     set((state) => {
-      const sortedPortfolio = [...state.portfolio].sort((a, b) => {
-        const aValue = a.quantity * a.crypto.current_price
-        const bValue = b.quantity * b.crypto.current_price
-        return direction === 'asc' ? aValue - bValue : bValue - aValue
-      })
-      return { portfolio: sortedPortfolio, sortOrder: direction }
-    }),
+      let newPortfolio
+      let newSorted
+
+      if (state.isSorted) {
+        newPortfolio = [...state.initialPortfolio]
+        newSorted = false
+      } else {
+        newPortfolio = [...state.portfolio].sort((a, b) =>
+          (b.quantity * b.crypto.current_price) - (a.quantity * a.crypto.current_price)
+        )
+        newSorted = true
+      }
+
+      return { portfolio: newPortfolio, isSorted: newSorted }
+    })
+  }
+
 }))
 
 export const useInitializePortfolioStore = (userId: string) => {

@@ -10,12 +10,8 @@ interface IProps {
 
 export const BalanceTableHeader: React.FC<IProps> = ({ className }) => {
   const { t } = useTranslation()
-  const { sortOrder, sortPortfolio } = usePortfolioStore()
+  const { sortPortfolio, isSorted } = usePortfolioStore()
 
-  const toggleSortDirection = () => {
-    const newDirection = sortOrder === 'asc' ? 'desc' : 'asc'
-    sortPortfolio(newDirection)
-  }
 
   return (
     <div className={'flex justify-between text-[12.5px] font-medium text-muted-foreground mt-3'}>
@@ -34,9 +30,9 @@ export const BalanceTableHeader: React.FC<IProps> = ({ className }) => {
         <motion.span
           className="cursor-pointer flex items-center"
           initial={{ rotate: 0 }}
-          animate={{ rotate: sortOrder === 'asc' ? 0 : 180 }}
+          animate={{ rotate: isSorted ? 0 : 180 }}
           transition={{ duration: 0.3 }}
-          onClick={toggleSortDirection}
+          onClick={() => sortPortfolio()}
         >
           <SortedPortfolioIcon />
         </motion.span>

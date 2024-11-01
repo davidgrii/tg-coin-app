@@ -20,6 +20,7 @@ export interface IPortfolioItem {
 
 export interface IPortfolioStore {
   portfolio: IPortfolioItem[]
+  initialPortfolio: IPortfolioItem[]
   cryptoData: ICrypto[]
   totalBalance: number
   totalProfitLoss: number
@@ -37,8 +38,8 @@ export interface IPortfolioStore {
   calculateTotalProfitLossPercentage: () => void
   calculateTotalProfitLoss: () => void
   calculateTotalPriceChange24h: () => void
-  sortOrder: 'asc' | 'desc'
-  sortPortfolio: (direction: 'asc' | 'desc') => void
+  isSorted: boolean
+  sortPortfolio: () => void
 }
 
 export interface IGlobalMarketData {
