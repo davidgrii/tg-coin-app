@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useCryptoStore, useInitializeCryptoStore, useSearchStore } from '@/store'
-import { useCryptoFilter } from '@/hooks'
+import { useCryptoData, useCryptoFilter } from '@/hooks'
 import { Container, CryptoItem, CryptoSkeleton } from '@/components'
 import { motion } from 'framer-motion'
 import { Card } from '@/components/ui/card'
@@ -13,16 +13,18 @@ import { useTelegramStore } from '@/store/telegram/telegram.store'
 import { Categories } from '@/components/categories'
 
 interface ICryptoClientProps {
-  initialCryptoData: ICrypto[] | []
+  initialCryptoData: ICrypto[]
 }
 
-export default function MarketClient({ initialCryptoData }: ICryptoClientProps) {
+export default function MarketClient() {
+
+  const { data: initialCryptoData = [], isLoading: isLoad } = useCryptoData()
 
   const { bot, userId, initializeBot, recordVisit } = useTelegramStore()
 
   useInitializeCryptoStore(userId)
 
-  const setCryptoData = useCryptoStore((state) => state.setCryptoData)
+  // const setCryptoData = useCryptoStore((state) => state.setCryptoData)
 
   const [searchValue, setSearchValue] = useState('')
   const inputRef = useRef<HTMLInputElement | null>(null)
@@ -61,11 +63,11 @@ export default function MarketClient({ initialCryptoData }: ICryptoClientProps) 
     return () => window.removeEventListener('scroll', handleScroll)
   }, [itemsToShow, filteredCryptoData.length, handleScroll])
 
-  useEffect(() => {
-    if (initialCryptoData) {
-      setCryptoData(initialCryptoData)
-    }
-  }, [initialCryptoData, setCryptoData])
+  // useEffect(() => {
+  //   if (initialCryptoData) {
+  //     setCryptoData(initialCryptoData)
+  //   }
+  // }, [initialCryptoData, setCryptoData])
 
   // Логика для Telegram WebApp
   useEffect(() => {
@@ -89,6 +91,8 @@ export default function MarketClient({ initialCryptoData }: ICryptoClientProps) 
       console.error('Ошибка при записи визита:', error)
     })
   }, [bot, userId, recordVisit])
+
+  if (isLoad) return <div> Loading </div>
 
   return (
     <Container className={'pt-0 mb-20'}>

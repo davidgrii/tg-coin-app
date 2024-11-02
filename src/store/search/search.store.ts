@@ -1,10 +1,5 @@
 import { create } from 'zustand'
-
-interface ISearchStore {
-  isSearchOpen: boolean
-  toggleSearch: (state: boolean) => void
-  closeSearch: () => void
-}
+import { ISearchStore } from '@/types'
 
 export const useSearchStore = create<ISearchStore>((set) => ({
   isSearchOpen: false,

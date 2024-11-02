@@ -12,7 +12,6 @@ interface ILeaderboardStore {
   fetchLeaderboard: () => void
 }
 
-
 export const useLeaderboardStore = create<ILeaderboardStore>((set) => ({
   users: [],
   totalUsers: 0,

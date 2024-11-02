@@ -1,13 +1,19 @@
 import { useEffect, useState } from 'react'
 import { ICrypto } from '@/types'
 import { useCryptoStore } from '@/store'
+import { useCryptoData } from '@/hooks/useCryptoData'
 
 export const useFavoritesCrypto = () => {
-  const { cryptoData, favorites, isLoading } = useCryptoStore()
+  const { favorites, isLoading: storeLoading } = useCryptoStore()
+  const { data: cryptoData, isLoading: queryLoading } = useCryptoData()
+  const isLoading = storeLoading || queryLoading
   const [favoriteCryptoData, setFavoriteCryptoData] = useState<ICrypto[]>([])
 
   useEffect(() => {
-    if (isLoading) return
+    if (isLoading || !cryptoData) {
+      console.log('Loading data, returning early...');
+      return;
+    }
 
     if (favorites.length === 0) {
       setFavoriteCryptoData([])

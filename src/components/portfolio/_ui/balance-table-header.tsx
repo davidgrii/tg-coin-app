@@ -28,7 +28,7 @@ export const BalanceTableHeader: React.FC<IProps> = ({ className }) => {
         </div>
 
         <motion.span
-          className="cursor-pointer flex items-center p-2 -m-2 "
+          className="cursor-pointer flex items-center p-2 -m-2"
           initial={{ rotate: 0 }}
           animate={{ rotate: isSorted ? 0 : 180 }}
           transition={{ duration: 0.3 }}

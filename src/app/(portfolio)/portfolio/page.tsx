@@ -7,13 +7,14 @@ import { motion } from 'framer-motion'
 import { AddCrypto, BalanceTableHeader, EditCrypto, PortfolioItem } from '@/components/portfolio'
 import { useInitializePortfolioStore, usePortfolioStore } from '@/store/portfolio/portfolio.store'
 import i18n from '@/i18n'
-import { useCryptoStore } from '@/store'
 import { IPortfolioItem } from '@/types/crypto.types'
 import { Accordion } from '@/components/ui/accordion'
-import { useTelegramStore } from '@/store/telegram/telegram.store'
+import { useTelegramUser } from '@/hooks/useTelegramUser'
+import { useCryptoData } from '@/hooks'
 
 export default function PortfolioPage() {
-  const userId = useTelegramStore(state => state.userId)
+  const { data, isLoading } = useTelegramUser()
+  const userId = data?.userId || ''
 
   useInitializePortfolioStore(userId)
 
@@ -22,9 +23,9 @@ export default function PortfolioPage() {
   const [activeCryptoId, setActiveCryptoId] = useState<string | null>(null)
 
   const [showSkeletons, setShowSkeletons] = useState<boolean>(false)
+  const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false)
 
   const {
-    isLoading,
     portfolio,
     addCrypto,
     updateCrypto,
@@ -37,7 +38,7 @@ export default function PortfolioPage() {
     calculateTotalPriceChange24h
   } = usePortfolioStore()
 
-  const { cryptoData } = useCryptoStore()
+  const { data: cryptoData = [], isLoading: isLoadingData } = useCryptoData()
 
   useEffect(() => {
       if (portfolio.length > 0) {
@@ -113,12 +114,6 @@ export default function PortfolioPage() {
     i18n.changeLanguage(userLanguage)
   }, [])
 
-  // useEffect(() => {
-  //   if (!isLoading && portfolio.length === 0) {
-  //     setIsAddCryptoOpen(true)
-  //   }
-  // }, [portfolio.length, isLoading])
-
   useEffect(() => {
     let timer: NodeJS.Timeout;
 
@@ -132,7 +127,13 @@ export default function PortfolioPage() {
 
     return () => {
       clearTimeout(timer)
-    };
+    }
+  }, [isLoading])
+
+  useEffect(() => {
+    if (!isLoading) {
+      setIsDataLoaded(true)
+    }
   }, [isLoading])
 
   return (
@@ -193,7 +194,7 @@ export default function PortfolioPage() {
           onAddCrypto={handleAddCrypto}
           isOpen={isAddCryptoOpen}
           setIsOpen={setIsAddCryptoOpen}
-          isEmpty={portfolio.length === 0}
+          isEmpty={!isLoadingData && portfolio.length === 0}
         />
       </div>
     </Container>

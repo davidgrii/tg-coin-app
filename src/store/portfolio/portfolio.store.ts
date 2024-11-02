@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { useEffect } from 'react'
 import { useCryptoStore } from '@/store'
-import { IPortfolioItem, IPortfolioStore } from '@/types/crypto.types'
+import { IPortfolioItem, IPortfolioStore } from '@/types'
 
 export const usePortfolioStore = create<IPortfolioStore>((set) => ({
   portfolio: [],

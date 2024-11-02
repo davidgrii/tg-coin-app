@@ -7,24 +7,27 @@ import { useFavoritesCrypto } from '@/hooks'
 import { EmptyFavorites, FavoritesTableHeader } from '@/components/favorites'
 import { motion } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import { useTelegramStore } from '@/store/telegram/telegram.store'
 import { Categories } from '@/components/categories'
+import { useTelegramUser } from '@/hooks/useTelegramUser'
 
 export default function FavoritesPage() {
-  const userId = useTelegramStore(state => state.userId)
+  const { data, isLoading: isLoadingUser } = useTelegramUser()
+  const userId = data?.userId || ''
 
   useInitializeCryptoStore(userId)
 
-  const { favorites, addFavorite, removeFavorite, isLoading } = useCryptoStore()
+  const { favorites, addFavorite, removeFavorite, isLoading: isLoadingStore } = useCryptoStore()
   const { favoriteCryptoData } = useFavoritesCrypto()
 
   const [showEmptyMessage, setShowEmptyMessage] = useState(false)
+
+  const isLoading = isLoadingUser || isLoadingStore
 
   useEffect(() => {
     if (!isLoading && favoriteCryptoData.length === 0) {
       const timer = setTimeout(() => {
         setShowEmptyMessage(true)
-      }, 300)
+      }, 400)
 
       return () => clearTimeout(timer)
     }
@@ -34,7 +37,7 @@ export default function FavoritesPage() {
 
   return (
     <Container className={'pt-0'}>
-      <Categories/>
+      <Categories />
 
       <FavoritesTableHeader />
 

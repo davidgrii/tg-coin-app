@@ -1,11 +1,7 @@
 import { create } from 'zustand'
-import { IGlobalMarketData } from '@/types'
+import { IDashboardStore } from '@/types'
 
-interface DashboardState {
-  dashboardData: IGlobalMarketData | null
-  fetchGlobalData: () => Promise<void>
-}
-export const useGlobalDataStore = create<DashboardState>((set) => ({
+export const useGlobalDataStore = create<IDashboardStore>((set) => ({
   dashboardData: null,
 
   fetchGlobalData: async () => {

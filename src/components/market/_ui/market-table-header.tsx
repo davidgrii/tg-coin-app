@@ -32,7 +32,7 @@ export const MarketTableHeader: React.FC<IProps> = ({ className }) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8 }}
-          className={clsx(isSearchOpen ? 'hidden' : 'visible', 'transform transition-all cursor-pointer')}
+          className={clsx(isSearchOpen ? 'hidden' : 'visible', 'cursor-pointer')}
           onClick={() => toggleSearch(true)}
         >
           <SearchV2Icon />

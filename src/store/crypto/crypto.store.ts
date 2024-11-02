@@ -2,17 +2,7 @@
 
 import { create } from 'zustand'
 import { useEffect } from 'react'
-import { ICrypto } from '@/types'
-
-interface ICryptoStore {
-  favorites: string[]
-  isLoading: boolean
-  cryptoData: ICrypto[]
-  addFavorite: (userId: string, id: string) => Promise<void>
-  removeFavorite: (userId: string, id: string) => Promise<void>
-  initializeFavorites: (userId: string) => Promise<void>
-  setCryptoData: (data: ICrypto[]) => void
-}
+import { ICrypto, ICryptoStore } from '@/types'
 
 export const useCryptoStore = create<ICryptoStore>((set) => ({
   favorites: [],
@@ -27,7 +17,8 @@ export const useCryptoStore = create<ICryptoStore>((set) => ({
 
       if (res.ok) {
         const data = await res.json()
-        set({ favorites: data.favorites, isLoading: false })
+        console.log('Fetched favorites:', data)
+        set({ favorites: data.favorites || [], isLoading: false })
       } else {
         console.error('Error fetching favorites:', res.statusText)
         set({ isLoading: false })

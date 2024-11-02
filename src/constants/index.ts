@@ -54,9 +54,9 @@ export const CATEGORIES_NAV_ITEMS: INavItems[] = [
   },
   {
     label: 'Trending',
-    href: '',
+    href: '/trending',
     exact: false,
-    active: false,
+    active: true,
     key: 'trending'
   }
 ]
