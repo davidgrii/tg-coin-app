@@ -18,7 +18,7 @@ export const Categories: React.FC<IProps> = ({ className }) => {
   const { t } = useTranslation()
   const currentPage = usePathname()
 
-  const isMobile = typeof window !== 'undefined' && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+  // const isMobile = typeof window !== 'undefined' && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
 
   return (
     <div className="overflow-x-auto">
@@ -40,7 +40,7 @@ export const Categories: React.FC<IProps> = ({ className }) => {
           ))}
         </div>
 
-        <ScrollBar className={cn(!isMobile ? 'h-[5]' : 'h-0')} orientation="horizontal" />
+        <ScrollBar orientation="horizontal" />
       </ScrollArea>
     </div>
   )
