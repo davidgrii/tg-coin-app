@@ -40,7 +40,7 @@ export const Categories: React.FC<IProps> = ({ className }) => {
           ))}
         </div>
 
-         <ScrollBar className={cn(!isMobile && 'h-0')} orientation="horizontal" />
+        <ScrollBar className={cn(isMobile ? 'scrollbar-hidden' : '')} orientation="horizontal" />
       </ScrollArea>
     </div>
   )
