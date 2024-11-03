@@ -3,11 +3,11 @@
 import { Categories, Container } from '@/components'
 import { motion } from 'framer-motion'
 import { useTelegramUser } from '@/hooks/useTelegramUser'
-import { useCryptoStore } from '@/store'
 import { TrendingCryptoItem, TrendingTableHeader } from '@/components/trending'
 import { EmptyFavorites } from '@/components/favorites'
 import { Card } from '@/components/ui/card'
 import { useTrendingCryptoData } from '@/hooks'
+import { useCryptoStore } from '@/store'
 
 export default function TrendingPage() {
 

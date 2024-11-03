@@ -120,7 +120,7 @@ export default function PortfolioPage() {
     if (isLoading) {
       timer = setTimeout(() => {
         setShowSkeletons(true)
-      }, 500);
+      }, 500)
     } else {
       setShowSkeletons(false)
     }
@@ -135,6 +135,8 @@ export default function PortfolioPage() {
       setIsDataLoaded(true)
     }
   }, [isLoading])
+
+  if (isLoadingData) return <div>Loading</div>
 
   return (
     <Container className={'pt-0'}>

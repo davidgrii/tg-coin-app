@@ -47,9 +47,9 @@ export const CATEGORIES_NAV_ITEMS: INavItems[] = [
   },
   {
     label: 'Gainers',
-    href: '',
+    href: '/pamp',
     exact: false,
-    active: false,
+    active: true,
     key: 'gainers'
   },
   {

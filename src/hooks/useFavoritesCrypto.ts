@@ -11,8 +11,7 @@ export const useFavoritesCrypto = () => {
 
   useEffect(() => {
     if (isLoading || !cryptoData) {
-      console.log('Loading data, returning early...');
-      return;
+      return
     }
 
     if (favorites.length === 0) {

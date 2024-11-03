@@ -2,21 +2,22 @@ import { ICrypto } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 
 const fetchCryptoData = async (): Promise<ICrypto[]> => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/cryptos`, {
-    cache: 'no-store'
-  })
+  console.log('Fetching crypto data...');
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/cryptos`)
 
   if (!res.ok) {
     throw new Error('Ошибка при загрузке данных')
   }
-  return res.json()
+
+  const data = await res.json()
+  console.log('Data loaded:', data)
+  return data
 }
 
 export const useCryptoData = () => {
   return useQuery<ICrypto[], Error>({
     queryKey: ['cryptos'],
     queryFn: fetchCryptoData,
-    staleTime: 2 * 60 * 1000,
-    refetchInterval: 2 * 60 * 1000
+    staleTime: 3 * 60 * 1000,
   })
 }

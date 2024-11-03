@@ -1,32 +1,22 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { cn } from '@/components/ui/utils'
 import { useTranslation } from 'react-i18next'
 import { motion } from 'framer-motion'
-import { useGlobalDataStore } from '@/store/global-data/global-data.store'
 import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 import Autoplay from 'embla-carousel-autoplay'
+import { useGlobalData } from '@/hooks/useGlobalData'
 
 interface IProps {
   className?: string
 }
 
 export const DashboardData: React.FC<IProps> = ({ className }) => {
-  const { dashboardData, fetchGlobalData } = useGlobalDataStore()
+  const { data: dashboardData, isLoading } = useGlobalData()
 
   const { t } = useTranslation()
-
-  useEffect(() => {
-    fetchGlobalData()
-
-    const interval = setInterval(() => {
-      fetchGlobalData()
-    }, 60000)
-
-    return () => clearInterval(interval)
-  }, [fetchGlobalData])
 
   const totalMarketCapUSD = Math.floor(dashboardData?.total_market_cap?.usd || 0)
   const totalVolume24hUSD = Math.floor(dashboardData?.total_volume?.usd || 0)
@@ -41,6 +31,8 @@ export const DashboardData: React.FC<IProps> = ({ className }) => {
   const formatNumberWithCommas = (num: number) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
   }
+  
+  // if (isLoading) return <div>Loading</div>
 
   return (
     <Carousel plugins={[
@@ -109,7 +101,7 @@ export const DashboardData: React.FC<IProps> = ({ className }) => {
                 transition={{ duration: 1.1 }}
                 className={'text-right leading-none'}
               >
-                <span className={'text-xs text-muted-foreground'}>{t('dashboard.dominance')}</span>
+                <span className={'flex justify-end items-center text-xs text-muted-foreground h-4'}>{t('dashboard.dominance')}</span>
 
                 <p className={'text-sm text-foreground font-semibold'}>
                   BTC {marketCapPercentageBTC.toFixed(2)} %

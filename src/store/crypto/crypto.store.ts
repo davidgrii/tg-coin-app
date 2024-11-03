@@ -13,11 +13,10 @@ export const useCryptoStore = create<ICryptoStore>((set) => ({
     set({ isLoading: true })
 
     try {
-      const res = await fetch(`https://priceme.store/api/users/${userId}/favorites`, {})
+      const res = await fetch(`https://priceme.store/api/users/${userId}/favorites`)
 
       if (res.ok) {
         const data = await res.json()
-        console.log('Fetched favorites:', data)
         set({ favorites: data.favorites || [], isLoading: false })
       } else {
         console.error('Error fetching favorites:', res.statusText)
