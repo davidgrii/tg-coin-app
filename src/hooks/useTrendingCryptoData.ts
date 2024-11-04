@@ -10,10 +10,11 @@ const fetchTrendingCrypto = async () => {
   }
 }
 
-export const useTrendingCryptoData = () => {
+export const useTrendingCryptoData = (initialData: ITrendingCrypto[]) => {
   return useQuery<ITrendingCrypto[]>({
     queryKey: ['trending-crypto'],
     queryFn: fetchTrendingCrypto,
-    staleTime: 24 * 60 * 60 * 1000,
+    initialData,
+    staleTime: 30 * 60 * 1000,
   })
 }

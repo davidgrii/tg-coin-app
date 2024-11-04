@@ -1,33 +1,32 @@
-'use client'
-
 import React, { useState } from 'react'
 import { CardContent } from '@/components/ui/card'
 import { StarFavoriteIcon, StarIcon } from '@/components/icons'
-import { ICrypto } from '@/types'
-import { formatPrice, getDynamicFontSize } from '@/utils/formatters'
 import Image from 'next/image'
+import { ICrypto } from '@/types/crypto.types'
+import { formatPrice, getDynamicFontSize } from '@/utils/formatters'
 
 interface IProps {
   userId: string
   index: number
-  crypto: ICrypto
   favorites: string[]
+  crypto: ICrypto
   addFavorite: (userId: string, id: string) => Promise<void>
   removeFavorite: (userId: string, id: string) => Promise<void>
   className?: string
 }
 
-export const CryptoItem: React.FC<IProps> = (
+export const DumpCryptoItem: React.FC<IProps> = (
   {
     userId,
-    crypto,
     index,
+    crypto,
     favorites,
     addFavorite,
     removeFavorite
   }) => {
 
   const [loading, setLoading] = useState(false)
+
   const isFavorite = favorites.includes(crypto.id)
   const priceChange = crypto.price_change_percentage_24h ?? 0
   const isPricePositive = !priceChange.toString().includes('-')
@@ -51,7 +50,7 @@ export const CryptoItem: React.FC<IProps> = (
   return (
     <CardContent className="p-0 flex justify-between items-center">
 
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2.5">
         <span className="w-5 text-sm text-muted-foreground">{index + 1}</span>
 
         <Image
@@ -81,7 +80,7 @@ export const CryptoItem: React.FC<IProps> = (
         <div
           className={`w-16 text-[13px] text-right ${isPricePositive ? 'text-primary' : 'text-secondary'}`}
         >
-          <span className="font-semibold">{priceChange.toFixed(2)} %</span>
+          <span className="font-semibold">{priceChange.toFixed(1)} %</span>
         </div>
 
         <button

@@ -47,7 +47,9 @@ export const DashboardData: React.FC<IProps> = ({ className }) => {
           <Card
             className={cn('flex py-4 pl-6 pr-9 items-center cursor-pointer relative justify-between rounded-xl border-0', className)}>
             <CardHeader className={'p-0 space-y-0.5'}>
-              <CardTitle className={'text-xs text-muted-foreground'}>{t('dashboard.market_cap')}</CardTitle>
+              <CardTitle className={'text-xs text-muted-foreground'}>
+                {t('dashboard.market_cap')}
+              </CardTitle>
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -82,7 +84,9 @@ export const DashboardData: React.FC<IProps> = ({ className }) => {
           <Card
             className={cn('flex py-4 pl-6 pr-9 relative h-[70px] items-center cursor-pointer justify-between rounded-xl border-0', className)}>
             <CardHeader className={'p-0 space-y-0.5'}>
-              <CardTitle className={'text-xs text-muted-foreground'}>{t('dashboard.trending')}</CardTitle>
+              <CardTitle className={'text-xs text-muted-foreground'}>
+                {t('dashboard.trending')}
+              </CardTitle>
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -101,7 +105,9 @@ export const DashboardData: React.FC<IProps> = ({ className }) => {
                 transition={{ duration: 1.1 }}
                 className={'text-right leading-none'}
               >
-                <span className={'flex justify-end items-center text-xs text-muted-foreground h-4'}>{t('dashboard.dominance')}</span>
+                <span className={'flex justify-end items-center text-xs text-muted-foreground h-4'}>
+                  {t('dashboard.dominance')}
+                </span>
 
                 <p className={'text-sm text-foreground font-semibold'}>
                   BTC {marketCapPercentageBTC.toFixed(2)} %

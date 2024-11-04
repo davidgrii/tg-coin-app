@@ -10,7 +10,7 @@ interface INavItems {
   href: string
   exact: boolean
   active: boolean
-  key: 'market' | 'favorites' | 'gainers' | 'trending'
+  key: 'market' | 'favorites' | 'pump' | 'trending' | 'dump'
 }
 
 export const titles: ITitle[] = [
@@ -46,17 +46,25 @@ export const CATEGORIES_NAV_ITEMS: INavItems[] = [
     key: 'favorites'
   },
   {
-    label: 'Gainers',
-    href: '/pamp',
-    exact: false,
-    active: true,
-    key: 'gainers'
-  },
-  {
     label: 'Trending',
     href: '/trending',
     exact: false,
     active: true,
     key: 'trending'
-  }
+  },
+  {
+    label: 'Pump',
+    href: '/pump',
+    exact: false,
+    active: true,
+    key: 'pump'
+  },
+  {
+    label: 'Dump',
+    href: '/dump',
+    exact: false,
+    active: true,
+    key: 'dump'
+  },
+
 ]

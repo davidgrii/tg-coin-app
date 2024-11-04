@@ -4,7 +4,7 @@ import { NavMenu } from '@/widgets/main-nav'
 
 
 export default function Layout({ children }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <section className={'h-screen overflow-x-hidden overflow-y-hidden'}>
@@ -15,4 +15,4 @@ export default function Layout({ children }: {
       </div>
     </section>
   )
-}
+};

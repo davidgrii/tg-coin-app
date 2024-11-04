@@ -1,5 +1,6 @@
 import React from 'react'
 import { Skeleton } from '@/components/ui/skeleton'
+import { cn } from '@/components/ui/utils'
 
 interface IProps {
   className?: string
@@ -7,7 +8,7 @@ interface IProps {
 
 export const CryptoSkeleton: React.FC<IProps> = ({ className }) => {
   return (
-    <div className="flex items-center justify-center space-x-3">
+    <div className={cn("flex items-center justify-center space-x-3", className)}>
       <Skeleton className="h-[40px] w-[40px] rounded-full" />
 
       <div className={'flex flex-col gap-1'}>

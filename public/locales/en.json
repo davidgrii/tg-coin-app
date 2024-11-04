@@ -99,8 +99,8 @@
   "CATEGORIES_NAV_ITEMS": {
     "market": "Market",
     "favorites": "Favorites",
-    "gainers": "Pump",
-    "losers": "Dump",
+    "pump": "Pump",
+    "dump": "Dump",
     "trending": "Trending"
   }
 }

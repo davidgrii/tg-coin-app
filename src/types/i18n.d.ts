@@ -105,8 +105,8 @@ declare module 'i18next' {
         'CATEGORIES_NAV_ITEMS': {
           'market': string
           'favorites': string
-          'gainers': string
-          'losers': string
+          'pump': string
+          'dump': string
           'trending': string
         }
       }
