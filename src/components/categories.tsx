@@ -22,8 +22,8 @@ export const Categories: React.FC<IProps> = ({ className }) => {
     if (currentCategoryIndex !== -1 && categoryRefs.current[currentCategoryIndex]) {
       categoryRefs.current[currentCategoryIndex]?.scrollIntoView({
         behavior: 'smooth',
-        inline: 'nearest',
-        block: 'nearest'
+        inline: 'center',
+        block: 'center',
       })
     }
   }, [currentPage])
