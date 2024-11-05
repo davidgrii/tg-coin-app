@@ -1,6 +1,5 @@
-import { Categories, Container } from '@/components'
+import { Container } from '@/components'
 import TrendingClientPage from '@/app/(trending)/trending/trending-client-page'
-
 
 const fetchTrendingCrypto = async () => {
   try {
@@ -16,10 +15,6 @@ export default async function TrendingPage() {
 
   return (
     <Container className={'pt-0'}>
-
-      <Categories />
-
-      {/*<TrendingTableHeader />*/}
 
       <TrendingClientPage initialData={trendingCryptoData} />
     </Container>

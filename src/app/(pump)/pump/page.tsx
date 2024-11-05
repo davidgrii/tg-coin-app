@@ -1,4 +1,4 @@
-import { Categories, Container } from '@/components'
+import { Container } from '@/components'
 import { ICrypto } from '@/types'
 import React from 'react'
 import PumpClientPage from '@/app/(pump)/pump/pump-client-page'
@@ -27,8 +27,6 @@ export default async function PumpPage() {
 
   return (
     <Container className={'pt-0'}>
-      <Categories />
-      {/*<PumpTableHeader />*/}
 
       <PumpClientPage initialData={pumpCryptoData} />
     </Container>

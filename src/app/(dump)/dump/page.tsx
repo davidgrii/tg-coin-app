@@ -1,4 +1,4 @@
-import { Categories, Container } from '@/components'
+import { Container } from '@/components'
 import { ICrypto } from '@/types'
 import React from 'react'
 import DumpClientPage from '@/app/(dump)/dump/dump-client-page'
@@ -19,17 +19,12 @@ const fetchDumpCryptoData = async (): Promise<ICrypto[]> => {
 }
 
 export default async function DumpPage() {
-
-const dumpCryptoData = await fetchDumpCryptoData()
+  const dumpCryptoData = await fetchDumpCryptoData()
 
   return (
     <Container className={'pt-0'}>
 
-      <Categories />
-
-      {/*<DumpTableHeader />*/}
-      <DumpClientPage initialData={dumpCryptoData}/>
-
+      <DumpClientPage initialData={dumpCryptoData} />
     </Container>
   )
 }
