@@ -2,7 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link'
-import { CATEGORIES_NAV_ITEMS } from '../constants'
+import { CATEGORIES_NAV_ITEMS } from '@/constants'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/components/ui/utils'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
@@ -21,7 +21,7 @@ export const Categories: React.FC<IProps> = ({ className }) => {
 
   return (
     <div className="overflow-x-auto">
-      <ScrollArea className={'select-none'}>
+      <ScrollArea scrollHideDelay={10} className={'select-none'}>
         <div className={cn('flex flex-row gap-1.5 text-sm mb-3 -pb-3 whitespace-nowrap', className)}>
           {CATEGORIES_NAV_ITEMS.map((item, index) => (
             <Link
