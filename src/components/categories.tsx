@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { CATEGORIES_NAV_ITEMS } from '@/constants'
 import { usePathname } from 'next/navigation'
@@ -13,11 +13,20 @@ interface IProps {
 }
 
 export const Categories: React.FC<IProps> = ({ className }) => {
-
   const { t } = useTranslation()
   const currentPage = usePathname()
+  const categoryRefs = useRef<(HTMLAnchorElement | null)[]>([])
 
-  // const isMobile = typeof window !== 'undefined' && /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+  useEffect(() => {
+    const currentCategoryIndex = CATEGORIES_NAV_ITEMS.findIndex(item => item.href === currentPage)
+    if (currentCategoryIndex !== -1 && categoryRefs.current[currentCategoryIndex]) {
+      categoryRefs.current[currentCategoryIndex]?.scrollIntoView({
+        behavior: 'smooth',
+        inline: 'nearest',
+        block: 'nearest'
+      })
+    }
+  }, [currentPage])
 
   return (
     <div className="overflow-x-auto">
@@ -25,6 +34,7 @@ export const Categories: React.FC<IProps> = ({ className }) => {
         <div className={cn('flex flex-row gap-1.5 text-sm mb-3 -pb-3 whitespace-nowrap', className)}>
           {CATEGORIES_NAV_ITEMS.map((item, index) => (
             <Link
+              ref={el => {categoryRefs.current[index] = el}}
               key={index}
               href={item.href}
               className={cn(

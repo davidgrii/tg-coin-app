@@ -99,8 +99,8 @@
   "CATEGORIES_NAV_ITEMS": {
     "market": "Рынок",
     "favorites": "Избранное",
-    "gainers": "Памп",
-    "losers": "Дамп",
+    "pump": "Памп",
+    "dump": "Дамп",
     "trending": "Популярно"
   }
 }

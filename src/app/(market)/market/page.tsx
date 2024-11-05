@@ -79,7 +79,7 @@ export default function MarketPage() {
     })
   }, [bot, userId, recordVisit])
 
-  if (isLoad) return <div> Loading </div>
+  // if (isLoad) return <div> Loading </div>
 
   return (
     <Container className={'pt-0 mb-20'}>

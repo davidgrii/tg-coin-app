@@ -103,9 +103,9 @@ export const DashboardData: React.FC<IProps> = ({ className }) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1.1 }}
-                className={'text-right leading-none'}
+                className={'text-right leading-none space-y-0.5'}
               >
-                <span className={'flex justify-end items-center text-xs text-muted-foreground h-4'}>
+                <span className={'flex justify-end font-semibold tracking-tight text-xs text-muted-foreground h-4'}>
                   {t('dashboard.dominance')}
                 </span>
 
