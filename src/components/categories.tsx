@@ -23,10 +23,9 @@ export const Categories: React.FC<IProps> = ({ className }) => {
       const activeCategory = categoryRefs.current[currentCategoryIndex]
       const container = containerRef.current
 
-      // Рассчитываем позицию элемента и прокручиваем так, чтобы он был по центру контейнера
-      const activeCategoryLeft = activeCategory.offsetLeft
-      const activeCategoryWidth = activeCategory.offsetWidth
-      const containerWidth = container.clientWidth
+      const activeCategoryLeft = activeCategory?.offsetLeft
+      const activeCategoryWidth = activeCategory?.offsetWidth
+      const containerWidth = container?.clientWidth
 
       const scrollPosition = activeCategoryLeft - containerWidth / 2 + activeCategoryWidth / 2
 

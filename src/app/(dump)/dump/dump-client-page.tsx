@@ -30,7 +30,6 @@ interface IProps {
 }
 
 export default function DumpClientPage({ initialData }: IProps) {
-
   const { data: dumpCryptoData = initialData, isLoading, isFetching } = useQuery<ICrypto[], Error>({
     queryKey: ['dump-cryptos'],
     queryFn: fetchDumpCryptoData,
