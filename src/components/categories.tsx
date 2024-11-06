@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { CATEGORIES_NAV_ITEMS } from '@/constants'
 import { usePathname } from 'next/navigation'
 import { cn } from '@/components/ui/utils'
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { useTranslation } from 'react-i18next'
 
 interface IProps {
@@ -16,40 +15,46 @@ export const Categories: React.FC<IProps> = ({ className }) => {
   const { t } = useTranslation()
   const currentPage = usePathname()
   const categoryRefs = useRef<(HTMLAnchorElement | null)[]>([])
+  const containerRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     const currentCategoryIndex = CATEGORIES_NAV_ITEMS.findIndex(item => item.href === currentPage)
-    if (currentCategoryIndex !== -1 && categoryRefs.current[currentCategoryIndex]) {
-      categoryRefs.current[currentCategoryIndex]?.scrollIntoView({
-        behavior: 'smooth',
-        inline: 'center',
-        block: 'center',
+    if (currentCategoryIndex !== -1 && categoryRefs.current[currentCategoryIndex] && containerRef.current) {
+      const activeCategory = categoryRefs.current[currentCategoryIndex]
+      const container = containerRef.current
+
+      // Рассчитываем позицию элемента и прокручиваем так, чтобы он был по центру контейнера
+      const activeCategoryLeft = activeCategory.offsetLeft
+      const activeCategoryWidth = activeCategory.offsetWidth
+      const containerWidth = container.clientWidth
+
+      const scrollPosition = activeCategoryLeft - containerWidth / 2 + activeCategoryWidth / 2
+
+      container.scrollTo({
+        left: scrollPosition,
+        behavior: 'smooth'
       })
     }
   }, [currentPage])
 
   return (
-    <div className="overflow-x-auto">
-      <ScrollArea scrollHideDelay={10} className={'select-none'}>
-        <div className={cn('flex flex-row gap-1.5 text-sm mb-3 -pb-3 whitespace-nowrap', className)}>
-          {CATEGORIES_NAV_ITEMS.map((item, index) => (
-            <Link
-              ref={el => {categoryRefs.current[index] = el}}
-              key={index}
-              href={item.href}
-              className={cn(
-                currentPage === item.href ? 'bg-foreground text-background' : 'bg-background',
-                !item.active && 'opacity-45 cursor-not-allowed',
-                'flex items-center gap-1.5 px-6 py-2 font-bold rounded-lg border h-10'
-              )}
-            >
-              {t(`CATEGORIES_NAV_ITEMS.${item.key}`)}
-            </Link>
-          ))}
-        </div>
-
-        <ScrollBar orientation="horizontal" />
-      </ScrollArea>
+    <div ref={containerRef} className="overflow-x-auto select-none">
+      <div className={cn('flex flex-row gap-1.5 text-sm mb-3 -pb-3 whitespace-nowrap', className)}>
+        {CATEGORIES_NAV_ITEMS.map((item, index) => (
+          <Link
+            ref={el => { categoryRefs.current[index] = el }}
+            key={index}
+            href={item.href}
+            className={cn(
+              currentPage === item.href ? 'bg-foreground text-background' : 'bg-background',
+              !item.active && 'opacity-45 cursor-not-allowed',
+              'flex items-center gap-1.5 px-6 py-2 font-bold rounded-lg border h-10'
+            )}
+          >
+            {t(`CATEGORIES_NAV_ITEMS.${item.key}`)}
+          </Link>
+        ))}
+      </div>
     </div>
   )
 }
