@@ -31,7 +31,7 @@ export const Categories: React.FC<IProps> = ({ className }) => {
 
       container.scrollTo({
         left: scrollPosition,
-        behavior: 'smooth'
+        behavior: 'auto'
       })
     }
   }, [currentPage])
