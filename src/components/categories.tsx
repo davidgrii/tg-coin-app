@@ -38,7 +38,7 @@ export const Categories: React.FC<IProps> = ({ className }) => {
 
   return (
     <div ref={containerRef} className="overflow-x-auto select-none">
-      <div className={cn('flex flex-row gap-1.5 text-sm mb-3 -pb-3 whitespace-nowrap', className)}>
+      <div className={cn('flex flex-row gap-1.5 text-sm mb-2.5  whitespace-nowrap', className)}>
         {CATEGORIES_NAV_ITEMS.map((item, index) => (
           <Link
             ref={el => { categoryRefs.current[index] = el }}
