@@ -3,7 +3,7 @@ import TrendingClientPage from '@/app/(trending)/trending/trending-client-page'
 
 const fetchTrendingCrypto = async () => {
   try {
-    const res = await fetch('http://localhost:5000/api/trending')
+    const res = await fetch('https://priceme.store/api/trending')
     return await res.json()
   } catch (error) {
     console.error('Ошибка при загрузке трендовых данных:', error)
