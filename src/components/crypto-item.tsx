@@ -88,7 +88,17 @@ export const CryptoItem: React.FC<IProps> = (
           className="p-1 pb-[6px]"
           onClick={handleFavoriteToggle}
         >
-          {isFavorite ? <StarFavoriteIcon /> : <StarIcon />}
+          {isFavorite ?
+            <StarFavoriteIcon
+              width={16}
+              height={16}
+            /> 
+            :
+            <StarIcon
+              width={16}
+              height={16}
+            />
+          }
         </button>
       </div>
     </CardContent>

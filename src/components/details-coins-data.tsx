@@ -7,10 +7,10 @@ interface IProps {
 export const DetailsCoinsData: React.FC<IProps> = ({ className }) => {
   return (
     <div className={'flex flex-col items-center justify-center w-full mt-4'}>
-      <h3 className={'text-xs mb-0.5'}>COINS DATA</h3>
+      <h3 className={'text-sm mb-0.5'}>COINS DATA</h3>
 
       <div
-        className={'bg-accent w-full rounded-xl px-7 py-3.5 text-xs font-medium text-foreground'}
+        className={'bg-accent w-full rounded-xl px-7 py-3.5 text-sm font-medium text-foreground'}
       >
 
         <div className={'flex justify-between mb-0.5 border-b border-border/30'}>

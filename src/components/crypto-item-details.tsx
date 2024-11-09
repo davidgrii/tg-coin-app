@@ -44,11 +44,11 @@ export const CryptoItemDetails: React.FC<IProps> = ({ index, crypto, className }
 
               <div className="flex flex-col items-start">
                 <div className={'flex gap-2'}>
-                  <p className="text-[10px] font-semibold text-muted-foreground truncate">
+                  <p className="text-[11px] font-semibold text-muted-foreground truncate">
                     {crypto.name.length > 10 ? `${crypto.name.slice(0, 14)}...` : crypto.name}
                   </p>
 
-                  <span className="w-5 text-[10px] text-muted-foreground font-medium">#{index + 1}</span>
+                  <span className="w-5 text-[11px] text-muted-foreground font-medium">#{index + 1}</span>
                 </div>
 
                 <p
@@ -59,16 +59,16 @@ export const CryptoItemDetails: React.FC<IProps> = ({ index, crypto, className }
             </div>
 
             <div className={'flex gap-5'}>
-              { <StarIcon />}
-              <NotificationIcon />
+              {<StarIcon width={19} height={19} />}
+              <NotificationIcon width={19} height={19} />
             </div>
           </div>
 
-          <DetailsCryptoChart/>
+          <DetailsCryptoChart />
 
-          <DetailsCoinsData/>
+          <DetailsCoinsData />
 
-          <DetailsMarketsData/>
+          <DetailsMarketsData />
         </div>
 
 
