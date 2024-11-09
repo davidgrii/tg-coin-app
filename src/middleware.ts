@@ -1,16 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server'
 
 export function middleware(req: NextRequest) {
-  const url = req.nextUrl
+  const { pathname } = req.nextUrl
 
- if (url.pathname === '/') {
-   url.pathname = '/market'
-   return NextResponse.redirect(new URL('/market', req.url))
- }
+  if (pathname === '/') {
+    return NextResponse.redirect(new URL('/market', req.url))
+  }
 
- return NextResponse.next()
+  return NextResponse.next()
 }
 
 export const config = {
-  matcher: ['/'], 
+  matcher: ['/'],
 }

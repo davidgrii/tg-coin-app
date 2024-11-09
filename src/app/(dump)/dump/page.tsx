@@ -7,7 +7,8 @@ const fetchDumpCryptoData = async (): Promise<ICrypto[]> => {
   const res = await fetch(`https://priceme.store/api/pumpdump`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-cache'
     },
     body: JSON.stringify({
       type: 'dump',
