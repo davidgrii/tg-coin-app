@@ -9,11 +9,13 @@ export const DetailsCryptoChart: React.FC<IProps> = ({ className }) => {
     <div className={'flex flex-col items-center mt-4'}>
       <h3 className={'text-sm mb-0.5'}>CHART</h3>
 
-      <div className={'flex justify-center w-full h-52 border-[4px] border-chart rounded-xl relative'}>
+      <div className={'flex flex-col justify-end w-full h-52 border-[4px] border-chart rounded-xl relative'}>
+        <div className={'border-chart border w-[90%] mx-auto px-5'}>
 
+        </div>
 
-        <div className={'absolute flex justify-between text-sm bottom-6 border-chart border-t w-full'}>
-          <div>
+        <div className={'flex justify-between text-sm border-chart  mx-7 py-1.5'}>
+          <div className={'flex gap-3.5 font-medium text-muted-foreground'}>
             <span>1D</span>
             <span>7D</span>
             <span>1M</span>

@@ -8,12 +8,12 @@ const fetchPumpCryptoData = async (): Promise<ICrypto[]> => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Cache-Control': 'no-cache'
     },
     body: JSON.stringify({
       type: 'pump',
       limit: 50
-    })
+    }),
+    cache: 'no-store'
   })
 
   if (!res.ok) {

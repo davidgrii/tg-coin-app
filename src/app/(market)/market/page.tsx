@@ -10,7 +10,6 @@ import { MarketTableHeader, SearchInput } from '@/components/market'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useTelegramStore } from '@/store/telegram/telegram.store'
 import { Categories } from '@/components/categories'
-import { CryptoItemDetails } from '@/components/crypto-item-details'
 import { ICrypto } from '@/types'
 
 export default function MarketPage() {
@@ -123,10 +122,6 @@ export default function MarketPage() {
           scrollThreshold={0.9}
         >
           <Card className={'bg-background grid gap-8 border-0'}>
-            <CryptoItemDetails
-              crypto={crypto[0]}
-              index={1}
-            />
             {filteredCryptoData.slice(0, itemsToShow).map((crypto, index) => (
               <CryptoItem
                 userId={userId}

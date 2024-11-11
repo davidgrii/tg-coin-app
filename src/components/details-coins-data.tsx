@@ -10,7 +10,7 @@ export const DetailsCoinsData: React.FC<IProps> = ({ className }) => {
       <h3 className={'text-sm mb-0.5'}>COINS DATA</h3>
 
       <div
-        className={'bg-accent w-full rounded-xl px-7 py-3.5 text-sm font-medium text-foreground'}
+        className={'bg-accent w-full rounded-xl px-6 py-3.5 text-sm font-medium text-foreground'}
       >
 
         <div className={'flex justify-between mb-0.5 border-b border-border/30'}>
@@ -20,13 +20,13 @@ export const DetailsCoinsData: React.FC<IProps> = ({ className }) => {
           </p>
         </div>
         <div className={'flex justify-between mb-0.5 border-b border-border/30'}>
-          <p>Fully Diluted Valuation</p>
+          <p>FD Valuation</p>
           <p>
-            1,420,809,705,000 $
+            1,420,809,705,00 $
           </p>
         </div>
         <div className={'flex justify-between mb-0.5 border-b border-border/30'}>
-          <p>24 Hour Trading Vol</p>
+          <p>24H Volume</p>
           <p>
             40,116,074,054 $
           </p>

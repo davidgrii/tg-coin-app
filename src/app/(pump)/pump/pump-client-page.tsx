@@ -19,7 +19,8 @@ const fetchPumpCryptoData = async (): Promise<ICrypto[]> => {
     body: JSON.stringify({
       type: 'pump',
       limit: 50
-    })
+    }),
+    cache: 'no-store'
   })
 
   if (!res.ok) {

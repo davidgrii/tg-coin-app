@@ -8,12 +8,12 @@ const fetchDumpCryptoData = async (): Promise<ICrypto[]> => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Cache-Control': 'no-cache'
     },
     body: JSON.stringify({
       type: 'dump',
       limit: 50
-    })
+    }),
+    cache: 'no-store'
   })
 
   return await res.json()
