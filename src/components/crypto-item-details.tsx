@@ -9,6 +9,7 @@ import { useCryptoModalStore } from '@/store/crypto/crypto-modal.store'
 import { useQuery } from '@tanstack/react-query'
 import { ICryptoDetails } from '@/types'
 import { DetailsCoinsData, DetailsCryptoChart, DetailsMarketsData } from '@/components'
+import { ChartSkeleton } from '@/components/chart-skeleton'
 
 const fetchCryptoDetailsData = async (id: string | undefined): Promise<ICryptoDetails> => {
   if (!id) throw new Error('No crypto ID provided')
@@ -23,19 +24,19 @@ const fetchCryptoDetailsData = async (id: string | undefined): Promise<ICryptoDe
 
 interface IProps {
   favorites: string[]
+  index: number
   className?: string
 }
 
 export const CryptoItemDetails: React.FC<IProps> = ({ favorites, className }) => {
-  const { isOpen, closeModal, selectedCrypto } = useCryptoModalStore()
+  const { isOpen, closeModal, selectedCrypto, index } = useCryptoModalStore()
 
-  const { data: detailsData } = useQuery({
+  const { data: detailsData, isLoading } = useQuery({
     queryKey: ['cryptoDetails', selectedCrypto?.id],
     queryFn: () => fetchCryptoDetailsData(selectedCrypto?.id),
+    staleTime: 30 * 60 * 1000,
     enabled: !!selectedCrypto
   })
-
-  const index = 1
 
   if (!isOpen || !selectedCrypto || !detailsData) return null
 
@@ -93,11 +94,12 @@ export const CryptoItemDetails: React.FC<IProps> = ({ favorites, className }) =>
             </div>
           </div>
 
-          <DetailsCryptoChart chartCoinData={detailsData.chart_data} />
+
+          {isLoading ? <ChartSkeleton />: <DetailsCryptoChart chartCoinData={detailsData.chart_data} />}
 
           <DetailsCoinsData cryptoMarketCoinData={detailsData.markets_coin_data} />
 
-          <DetailsMarketsData cryptoMarketsData={detailsData.markets} />
+          {isLoading ? <div>Loading...</div>: <DetailsMarketsData cryptoMarketsData={detailsData.markets} />}
         </AlertDialogTitle>
 
       </AlertDialogContent>

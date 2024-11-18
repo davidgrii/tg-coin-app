@@ -73,7 +73,7 @@
   },
   "edit_crypto": {
     "edit_coin": "Редагувати вашу монету",
-    "quantity": "Quantity",
+    "quantity": "Кількість",
     "btn": "Редагувати"
   },
   "input_search": {
@@ -97,8 +97,8 @@
     "The Almighty": "Всемогутній"
   },
   "CATEGORIES_NAV_ITEMS": {
-    "market": "Рынок",
-    "favorites": "Избранное",
+    "market": "Ринок",
+    "favorites": "Обране",
     "pump": "Памп",
     "dump": "Дамп",
     "trending": "Популярне"

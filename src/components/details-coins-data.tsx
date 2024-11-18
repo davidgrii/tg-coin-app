@@ -19,37 +19,37 @@ export const DetailsCoinsData: React.FC<IProps> = ({ cryptoMarketCoinData, class
         <div className={'flex justify-between mb-0.5 border-b border-border/30'}>
           <p>Market Cap</p>
           <p>
-            {formatPrice(cryptoMarketCoinData.market_cap)} $
+            {formatPrice(cryptoMarketCoinData?.market_cap)} $
           </p>
         </div>
         <div className={'flex justify-between mb-0.5 border-b border-border/30'}>
           <p>FD Valuation</p>
           <p>
-            {formatPrice(cryptoMarketCoinData.fdv)} $
+            {formatPrice(cryptoMarketCoinData?.fdv)} $
           </p>
         </div>
         <div className={'flex justify-between mb-0.5 border-b border-border/30'}>
           <p>24H Volume</p>
           <p>
-            {formatPrice(cryptoMarketCoinData.volume_24h)} $
+            {formatPrice(cryptoMarketCoinData?.volume_24h)} $
           </p>
         </div>
         <div className={'flex justify-between mb-0.5 border-b border-border/30'}>
           <p>Circulation supply</p>
           <p>
-            {formatPrice(cryptoMarketCoinData.circulating_supply)} $
+            {formatPrice(cryptoMarketCoinData?.circulating_supply)} $
           </p>
         </div>
         <div className={'flex justify-between mb-0.5 border-b border-border/30'}>
           <p>Total Supply</p>
           <p>
-            {formatPrice(cryptoMarketCoinData.total_supply)} $
+            {formatPrice(cryptoMarketCoinData?.total_supply)} $
           </p>
         </div>
         <div className={'flex justify-between'}>
           <p>All Time High</p>
           <p>
-            {formatPrice(cryptoMarketCoinData.all_time_high)} $
+            {formatPrice(cryptoMarketCoinData?.all_time_high)} $
           </p>
         </div>
       </div>
