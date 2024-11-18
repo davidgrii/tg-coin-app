@@ -9,6 +9,7 @@ interface ICryptoModalStore {
   closeModal: () => void
 }
 export const useCryptoModalStore = create<ICryptoModalStore>((set) => ({
+  index: 0,
   isOpen: false,
   selectedCrypto: null,
   openModal: (crypto, index) => set({ isOpen: true, selectedCrypto: crypto, index: index + 1 }),
