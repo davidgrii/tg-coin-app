@@ -11,7 +11,7 @@ import { DumpCryptoItem, DumpTableHeader } from '@/components/dump'
 import React from 'react'
 
 const fetchDumpCryptoData = async (): Promise<ICrypto[]> => {
-  const res = await fetch(`https://priceme.store/api/pumpdump`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/pumpdump`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

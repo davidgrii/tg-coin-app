@@ -1,10 +1,15 @@
 import React from 'react'
+import { formatPrice } from '@/utils/formatters'
+import { ICoinGlobalMarketsData } from '@/types'
+
 
 interface IProps {
+  cryptoMarketsData: ICoinGlobalMarketsData[]
   className?: string
 }
 
-export const DetailsMarketsData: React.FC<IProps> = ({ className }) => {
+export const DetailsMarketsData: React.FC<IProps> = ({ cryptoMarketsData, className }) => {
+
   return (
     <div className={'flex flex-col items-center justify-center w-full mt-4'}>
       <div className={'flex justify-between items-center w-full text-xs text-muted-foreground font-medium px-6'}>
@@ -16,49 +21,14 @@ export const DetailsMarketsData: React.FC<IProps> = ({ className }) => {
       <div
         className={'w-full rounded-xl px-5 py-3 text-sm font-medium text-foreground border-[4px] border-chart'}
       >
-
-        <div className={'flex justify-between mb-0.5 border-b border-border/30'}>
-          <p>Binance</p>
-          <p>
-            1,338,113,505,849 $
-          </p>
-        </div>
-        <div className={'flex justify-between mb-0.5 border-b border-border/30'}>
-          <p>Bybit</p>
-          <p>
-            21,809,705,000 $
-          </p>
-        </div>
-        <div className={'flex justify-between mb-0.5 border-b border-border/30'}>
-          <p>WhiteBit</p>
-          <p>
-            1,809,705,000 $
-          </p>
-        </div>
-        <div className={'flex justify-between mb-0.5 border-b border-border/30'}>
-          <p>Okx</p>
-          <p>
-            1,609,705,000 $
-          </p>
-        </div>
-        <div className={'flex justify-between mb-0.5 border-b border-border/30'}>
-          <p>Kucoin</p>
-          <p>
-            1,409,705,000 $
-          </p>
-        </div>
-        <div className={'flex justify-between mb-0.5 border-b border-border/30'}>
-          <p>BitGet</p>
-          <p>
-            1,309,705,000 $
-          </p>
-        </div>
-        <div className={'flex justify-between'}>
-          <p>BitStamp</p>
-          <p>
-            1,209,705,000 $
-          </p>
-        </div>
+        {cryptoMarketsData.map((item, index) => (
+          <div key={index} className={'flex justify-between mb-0.5 border-b border-border/30'}>
+            <p>{item.exchange}</p>
+            <p>
+              {formatPrice(item.volume_24h)} $
+            </p>
+          </div>
+        ))}
       </div>
     </div>
   )

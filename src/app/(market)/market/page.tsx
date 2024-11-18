@@ -10,7 +10,6 @@ import { MarketTableHeader, SearchInput } from '@/components/market'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { useTelegramStore } from '@/store/telegram/telegram.store'
 import { Categories } from '@/components/categories'
-import { ICrypto } from '@/types'
 
 export default function MarketPage() {
 
@@ -81,17 +80,6 @@ export default function MarketPage() {
   }, [bot, userId, recordVisit])
 
   // if (isLoad) return <div> Loading </div>
-
-  const crypto: ICrypto[] = [{
-    "_id": "bitcoin",
-    "id": "bitcoin",
-    "current_price": 76610,
-    "image": "https://coin-images.coingecko.com/coins/images/1/large/bitcoin.png?1696501400",
-    "price_change_percentage_24h": 0.97866,
-    "name": "Bitcoin",
-    "symbol": "btc",
-    "price_change_24h": 742.48
-  }]
 
   return (
     <Container className={'pt-0 mb-20'}>

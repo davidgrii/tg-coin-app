@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query'
 import { IGlobalMarketData } from '@/types'
 
 const fetchGlobalData = async (): Promise<IGlobalMarketData> => {
-  const res = await fetch(`https://priceme.store/api/global`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/global`, {
     cache: 'no-store'
   })
 

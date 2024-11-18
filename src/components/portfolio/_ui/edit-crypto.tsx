@@ -114,7 +114,7 @@ export const EditCrypto: React.FC<IProps> = ({ isOpen, setIsOpen, item, onEditCr
 
         <Input
           type={'text'}
-          inputMode={'decimal'}
+          inputMode={'text'}
           placeholder={t('add_crypto.note')}
           value={notice ? notice : ''}
           onChange={(e) => setNotice(e.target.value)}

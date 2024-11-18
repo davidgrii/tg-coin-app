@@ -4,7 +4,7 @@ import React from 'react'
 import DumpClientPage from '@/app/(dump)/dump/dump-client-page'
 
 const fetchDumpCryptoData = async (): Promise<ICrypto[]> => {
-  const res = await fetch(`https://priceme.store/api/pumpdump`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/pumpdump`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

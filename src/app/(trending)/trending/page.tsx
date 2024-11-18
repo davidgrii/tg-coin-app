@@ -3,7 +3,7 @@ import TrendingClientPage from '@/app/(trending)/trending/trending-client-page'
 
 const fetchTrendingCrypto = async () => {
   try {
-    const res = await fetch('https://priceme.store/api/trending', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/trending`, {
       headers: {
         'Content-Type': 'application/json',
       },

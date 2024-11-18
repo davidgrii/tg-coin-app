@@ -3,7 +3,7 @@ import { ITrendingCrypto } from '@/types'
 
 const fetchTrendingCrypto = async () => {
   try {
-    const res = await fetch('https://priceme.store/api/trending')
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/trending`)
     return await res.json()
   } catch (error) {
     console.error('Ошибка при загрузке трендовых данных:', error)

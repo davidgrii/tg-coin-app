@@ -2,8 +2,8 @@ import { ICrypto } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 
 const fetchCryptoData = async (): Promise<ICrypto[]> => {
-  console.log('Fetching crypto data...');
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_API_URL}/api/cryptos`)
+  console.log('Fetching crypto data...')
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/cryptos`)
 
   if (!res.ok) {
     throw new Error('Ошибка при загрузке данных')

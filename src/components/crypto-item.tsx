@@ -7,6 +7,7 @@ import { ICrypto } from '@/types'
 import { formatPrice, getDynamicFontSize } from '@/utils/formatters'
 import Image from 'next/image'
 import { useCryptoModalStore } from '@/store/crypto/crypto-modal.store'
+import { CryptoItemDetails } from '@/components/crypto-item-details'
 
 
 interface IProps {
@@ -111,7 +112,7 @@ export const CryptoItem: React.FC<IProps> = (
 
       </CardContent>
 
-      {/*{isOpen && <CryptoItemDetails favorites={favorites} />}*/}
+      {isOpen && <CryptoItemDetails favorites={favorites} />}
     </>
   )
 }

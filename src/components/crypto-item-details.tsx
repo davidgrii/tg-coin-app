@@ -5,22 +5,39 @@ import Image from 'next/image'
 import { formatPrice, getDynamicFontSize } from '@/utils/formatters'
 import { StarFavoriteIcon, StarIcon } from '@/components/icons'
 import { NotificationIcon } from '@/components/icons/icons'
-import { DetailsCoinsData } from '@/components/details-coins-data'
-import { DetailsMarketsData } from '@/components/details-markets-data'
-import { DetailsCryptoChart } from '@/components/details-crypto-chart'
 import { useCryptoModalStore } from '@/store/crypto/crypto-modal.store'
+import { useQuery } from '@tanstack/react-query'
+import { ICryptoDetails } from '@/types'
+import { DetailsCoinsData, DetailsCryptoChart, DetailsMarketsData } from '@/components'
+
+const fetchCryptoDetailsData = async (id: string | undefined): Promise<ICryptoDetails> => {
+  if (!id) throw new Error('No crypto ID provided')
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/cryptos/${id}`)
+
+  if (!res.ok) {
+    console.log('Failed to fetch crypto details')
+  }
+
+  return res.json()
+}
 
 interface IProps {
   favorites: string[]
-
   className?: string
 }
 
 export const CryptoItemDetails: React.FC<IProps> = ({ favorites, className }) => {
-  const { isOpen, closeModal, selectedCrypto} = useCryptoModalStore()
+  const { isOpen, closeModal, selectedCrypto } = useCryptoModalStore()
+
+  const { data: detailsData } = useQuery({
+    queryKey: ['cryptoDetails', selectedCrypto?.id],
+    queryFn: () => fetchCryptoDetailsData(selectedCrypto?.id),
+    enabled: !!selectedCrypto
+  })
+
   const index = 1
 
-  if (!isOpen || !selectedCrypto) return null
+  if (!isOpen || !selectedCrypto || !detailsData) return null
 
   const isFavorite = favorites.includes(selectedCrypto.id)
 
@@ -76,11 +93,11 @@ export const CryptoItemDetails: React.FC<IProps> = ({ favorites, className }) =>
             </div>
           </div>
 
-          <DetailsCryptoChart />
+          <DetailsCryptoChart chartCoinData={detailsData.chart_data} />
 
-          <DetailsCoinsData />
+          <DetailsCoinsData cryptoMarketCoinData={detailsData.markets_coin_data} />
 
-          <DetailsMarketsData />
+          <DetailsMarketsData cryptoMarketsData={detailsData.markets} />
         </AlertDialogTitle>
 
       </AlertDialogContent>
