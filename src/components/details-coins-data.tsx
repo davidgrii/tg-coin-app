@@ -16,31 +16,31 @@ export const DetailsCoinsData: React.FC<IProps> = ({ cryptoMarketCoinData, class
         className={'bg-accent w-full rounded-xl px-6 py-3.5 text-sm font-medium text-foreground'}
       >
 
-        <div className={'flex justify-between mb-0.5 border-b border-border/30'}>
+        <div className={'flex justify-between mb-1 pb-1 border-b border-border/30'}>
           <p>Market Cap</p>
           <p>
             {formatPrice(cryptoMarketCoinData?.market_cap)} $
           </p>
         </div>
-        <div className={'flex justify-between mb-0.5 border-b border-border/30'}>
+        <div className={'flex justify-between mb-1 pb-1 border-b border-border/30'}>
           <p>FD Valuation</p>
           <p>
             {formatPrice(cryptoMarketCoinData?.fdv)} $
           </p>
         </div>
-        <div className={'flex justify-between mb-0.5 border-b border-border/30'}>
+        <div className={'flex justify-between mb-1 pb-1 border-b border-border/30'}>
           <p>24H Volume</p>
           <p>
             {formatPrice(cryptoMarketCoinData?.volume_24h)} $
           </p>
         </div>
-        <div className={'flex justify-between mb-0.5 border-b border-border/30'}>
+        <div className={'flex justify-between mb-1 pb-1 border-b border-border/30'}>
           <p>Circulation supply</p>
           <p>
             {formatPrice(cryptoMarketCoinData?.circulating_supply)} $
           </p>
         </div>
-        <div className={'flex justify-between mb-0.5 border-b border-border/30'}>
+        <div className={'flex justify-between mb-1 pb-1 border-b border-border/30'}>
           <p>Total Supply</p>
           <p>
             {formatPrice(cryptoMarketCoinData?.total_supply)} $

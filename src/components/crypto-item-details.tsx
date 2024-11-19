@@ -1,5 +1,11 @@
 import React from 'react'
-import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogTitle } from '@/components/ui/alert-dialog'
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogTitle
+} from '@/components/ui/alert-dialog'
 import { CloseIcon } from 'next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon'
 import Image from 'next/image'
 import { formatPrice, getDynamicFontSize } from '@/utils/formatters'
@@ -8,8 +14,7 @@ import { NotificationIcon } from '@/components/icons/icons'
 import { useCryptoModalStore } from '@/store/crypto/crypto-modal.store'
 import { useQuery } from '@tanstack/react-query'
 import { ICryptoDetails } from '@/types'
-import { DetailsCoinsData, DetailsCryptoChart, DetailsMarketsData } from '@/components'
-import { ChartSkeleton } from '@/components/chart-skeleton'
+import { DetailsCoinsData, DetailsMarketsData } from '@/components'
 
 const fetchCryptoDetailsData = async (id: string | undefined): Promise<ICryptoDetails> => {
   if (!id) throw new Error('No crypto ID provided')
@@ -62,7 +67,7 @@ export const CryptoItemDetails: React.FC<IProps> = ({ favorites, className }) =>
               />
 
               <div className="flex flex-col items-start">
-                <div className={'flex gap-1'}>
+                <div className={'flex gap-1 h-4'}>
                   <p className="text-[11px] font-semibold text-muted-foreground truncate">
                     {selectedCrypto.name.length > 10 ? `${selectedCrypto.name.slice(0, 14)}...` : selectedCrypto.name}
                   </p>
@@ -94,13 +99,11 @@ export const CryptoItemDetails: React.FC<IProps> = ({ favorites, className }) =>
             </div>
           </div>
 
+          {detailsData.markets_coin_data ? <DetailsCoinsData cryptoMarketCoinData={detailsData.markets_coin_data} /> : null}
 
-          {isLoading ? <ChartSkeleton />: <DetailsCryptoChart chartCoinData={detailsData.chart_data} />}
-
-          <DetailsCoinsData cryptoMarketCoinData={detailsData.markets_coin_data} />
-
-          {isLoading ? <div>Loading...</div>: <DetailsMarketsData cryptoMarketsData={detailsData.markets} />}
+          {detailsData.markets.length > 0 ? <DetailsMarketsData cryptoMarketsData={detailsData.markets} /> : null}
         </AlertDialogTitle>
+        <AlertDialogDescription/>
 
       </AlertDialogContent>
     </AlertDialog>

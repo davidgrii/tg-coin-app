@@ -22,7 +22,7 @@ export const DetailsMarketsData: React.FC<IProps> = ({ cryptoMarketsData, classN
         className={'w-full rounded-xl px-5 py-3 text-sm font-medium text-foreground border-[4px] border-chart'}
       >
         {cryptoMarketsData.map((item, index) => (
-          <div key={index} className={'flex justify-between mb-0.5 border-b border-border/30'}>
+          <div key={index} className={'flex justify-between mb-1 pb-1 border-b border-border/30'}>
             <p>{item.exchange}</p>
             <p>
               {formatPrice(item.volume_24h)} $

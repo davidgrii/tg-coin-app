@@ -4,6 +4,8 @@ import { StarFavoriteIcon, StarIcon } from '@/components/icons'
 import Image from 'next/image'
 import { ICrypto } from '@/types/crypto.types'
 import { formatPrice, getDynamicFontSize } from '@/utils/formatters'
+import { useCryptoModalStore } from '@/store/crypto/crypto-modal.store'
+import { CryptoItemDetails } from '@/components'
 
 interface IProps {
   userId: string
@@ -31,6 +33,8 @@ export const DumpCryptoItem: React.FC<IProps> = (
   const priceChange = crypto.price_change_percentage_24h ?? 0
   const isPricePositive = !priceChange.toString().includes('-')
 
+  const { openModal, isOpen } = useCryptoModalStore()
+
   const handleFavoriteToggle = async () => {
     setLoading(true)
     try {
@@ -48,48 +52,52 @@ export const DumpCryptoItem: React.FC<IProps> = (
   }
 
   return (
-    <CardContent className="p-0 flex justify-between items-center">
+    <>
+      <CardContent onClick={() => openModal(crypto, index)} className={'p-0 flex justify-between items-center cursor-pointer'}>
 
-      <div className="flex items-center gap-2.5">
-        <span className="w-5 text-sm text-muted-foreground">{index + 1}</span>
+        <div className="flex items-center gap-2.5">
+          <span className="w-5 text-sm text-muted-foreground">{index + 1}</span>
 
-        <Image
-          width={36}
-          height={36}
-          className="h-9 w-9"
-          src={crypto.image}
-          alt={crypto.name}
-        />
+          <Image
+            width={36}
+            height={36}
+            className="h-9 w-9"
+            src={crypto.image}
+            alt={crypto.name}
+          />
 
-        <div className="grid gap-0.5">
-          <p className="text-sm leading-none">
-            {crypto.symbol.toUpperCase()}
-          </p>
-          <p className="text-[8.5px] font-semibold text-muted-foreground truncate">
-            {crypto.name.length > 10 ? `${crypto.name.slice(0, 14)}...` : crypto.name}
-          </p>
-        </div>
-      </div>
-
-      <div className="flex items-center gap-4">
-        <p
-          className={`${getDynamicFontSize(crypto.current_price.toString().length)} text-foreground font-bold whitespace-nowrap`}>
-          {formatPrice(crypto.current_price)} $
-        </p>
-
-        <div
-          className={`w-16 text-[13px] text-right ${isPricePositive ? 'text-primary' : 'text-secondary'}`}
-        >
-          <span className="font-semibold">{priceChange.toFixed(1)} %</span>
+          <div className="grid gap-0.5">
+            <p className="text-sm leading-none">
+              {crypto.symbol.toUpperCase()}
+            </p>
+            <p className="text-[8.5px] font-semibold text-muted-foreground truncate">
+              {crypto.name.length > 10 ? `${crypto.name.slice(0, 14)}...` : crypto.name}
+            </p>
+          </div>
         </div>
 
-        <button
-          className="p-1 pb-[6px]"
-          onClick={handleFavoriteToggle}
-        >
-          {isFavorite ? <StarFavoriteIcon /> : <StarIcon />}
-        </button>
-      </div>
-    </CardContent>
+        <div className="flex items-center gap-4">
+          <p
+            className={`${getDynamicFontSize(crypto.current_price.toString().length)} text-foreground font-bold whitespace-nowrap`}>
+            {formatPrice(crypto.current_price)} $
+          </p>
+
+          <div
+            className={`w-16 text-[13px] text-right ${isPricePositive ? 'text-primary' : 'text-secondary'}`}
+          >
+            <span className="font-semibold">{priceChange.toFixed(1)} %</span>
+          </div>
+
+          <button
+            className="p-1 pb-[6px]"
+            onClick={handleFavoriteToggle}
+          >
+            {isFavorite ? <StarFavoriteIcon /> : <StarIcon />}
+          </button>
+        </div>
+      </CardContent>
+
+      {isOpen && <CryptoItemDetails favorites={favorites} index={index} />}
+    </>
   )
 }
