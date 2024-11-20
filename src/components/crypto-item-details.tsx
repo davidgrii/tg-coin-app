@@ -10,7 +10,6 @@ import { CloseIcon } from 'next/dist/client/components/react-dev-overlay/interna
 import Image from 'next/image'
 import { formatPrice, getDynamicFontSize } from '@/utils/formatters'
 import { StarFavoriteIcon, StarIcon } from '@/components/icons'
-import { NotificationIcon } from '@/components/icons/icons'
 import { useCryptoModalStore } from '@/store/crypto/crypto-modal.store'
 import { useQuery } from '@tanstack/react-query'
 import { ICryptoDetails } from '@/types'
@@ -51,7 +50,7 @@ export const CryptoItemDetails: React.FC<IProps> = ({ favorites, className }) =>
     <AlertDialog open={isOpen} onOpenChange={closeModal}>
       <AlertDialogContent className={'w-full h-full overflow-y-auto rounded-none bg-[#1C1C1E] px-4'}>
         <AlertDialogCancel
-          className={'absolute right-2.5 top-1 text-muted-foreground border-0 bg-background/0 px-0 py-0 h-8 w-8 hover:bg-background/0 hover:text-foreground'}>
+          className={'absolute right-2.5 top-1 text-muted-foreground border-0 bg-background/0 px-0 py-0 h-8 w-8 hover:bg-background/0 hover:text-foreground active:border-none'}>
           <CloseIcon />
         </AlertDialogCancel>
 
@@ -82,28 +81,29 @@ export const CryptoItemDetails: React.FC<IProps> = ({ favorites, className }) =>
               </div>
             </div>
 
-            <div className={'flex gap-6'}>
-              {isFavorite ?
-                <StarFavoriteIcon
-                  width={18}
-                  height={18}
-                />
-                :
-                <StarIcon
-                  width={18}
-                  height={18}
-                />
-              }
-
-              <NotificationIcon width={18} height={18} />
-            </div>
+            {isFavorite ?
+              <StarFavoriteIcon
+                width={16}
+                height={16}
+              />
+              :
+              <StarIcon
+                width={16}
+                height={16}
+              />
+            }
           </div>
 
-          {detailsData.markets_coin_data ? <DetailsCoinsData cryptoMarketCoinData={detailsData.markets_coin_data} /> : null}
+          {detailsData.markets_coin_data ?
+            <DetailsCoinsData cryptoMarketCoinData={detailsData.markets_coin_data} /> : null
+          }
 
-          {detailsData.markets.length > 0 ? <DetailsMarketsData cryptoMarketsData={detailsData.markets} /> : null}
+          {detailsData.markets.length > 0
+            ? <DetailsMarketsData cryptoMarketsData={detailsData.markets} /> : null
+          }
+
         </AlertDialogTitle>
-        <AlertDialogDescription/>
+        <AlertDialogDescription />
 
       </AlertDialogContent>
     </AlertDialog>

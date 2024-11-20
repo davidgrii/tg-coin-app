@@ -76,6 +76,20 @@
     "quantity": "Кількість",
     "btn": "Редагувати"
   },
+  "crypto_details_popup": {
+    "coins_data": "Дані монети",
+    "coin_data_table": {
+      "market_cap": "Ринкова оцінка",
+      "fdv": "Повна оцінка",
+      "volume_24h": "Обсяг 24г",
+      "circulation_supply": "В обігу",
+      "total_supply": "Пропозиція",
+      "ath": "Максимум"
+    },
+    "markets": "Ринки",
+    "exchange": "Біржи",
+    "volume_24h": "Обсяг 24г"
+  },
   "input_search": {
     "search": "Знайти монету...",
     "cancel": "Скасувати"

@@ -82,6 +82,20 @@ declare module 'i18next' {
           quantity: string
           btn: string
         }
+        "crypto_details_popup": {
+          "coins_data": string
+          "coin_data_table": {
+            "market_cap": string
+            "fdv": string
+            "volume_24h": string
+            "circulation_supply": string
+            "total_supply": string
+            "ath": string
+          },
+          "markets": string
+          "exchange": string
+          "volume_24h": string
+        },
         input_search: {
           search: string
           cancel: string

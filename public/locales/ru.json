@@ -76,6 +76,20 @@
     "quantity": "Количество",
     "btn": "Изменить"
   },
+  "crypto_details_popup": {
+    "coins_data": "Данные монеты",
+    "coin_data_table": {
+      "market_cap": "Рыночная оценка",
+      "fdv": "Полная оценка",
+      "volume_24h": "Объем 24ч",
+      "circulation_supply": "В обращении",
+      "total_supply": "Предложение",
+      "ath": "Максимум"
+    },
+    "markets": "Рынки",
+    "exchange": "Биржи",
+    "volume_24h": "Объем 24ч"
+  },
   "input_search": {
     "search": "Найти монету...",
     "cancel": "Отмена"

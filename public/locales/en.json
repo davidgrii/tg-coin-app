@@ -76,6 +76,20 @@
     "quantity": "Quantity",
     "btn": "Edit"
   },
+  "crypto_details_popup": {
+    "coins_data": "COINS DATA",
+    "coin_data_table": {
+      "market_cap": "Market Сap",
+      "fdv": "FD Valuation",
+      "volume_24h": "24H Volume",
+      "circulation_supply": "Circulation supply",
+      "total_supply": "Total Supply",
+      "ath": "All Time High"
+    },
+    "markets": "MARKETS",
+    "exchange": "Exchanges",
+    "volume_24h": "Volume 24h"
+  },
   "input_search": {
     "search": "Search coin...",
     "cancel": "Cancel"
