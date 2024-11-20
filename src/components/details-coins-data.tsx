@@ -41,13 +41,13 @@ export const DetailsCoinsData: React.FC<IProps> = ({ cryptoMarketCoinData, class
         <div className={'flex justify-between mb-1 pb-1 border-b border-border/30'}>
           <p>{t('crypto_details_popup.coin_data_table.circulation_supply')}</p>
           <p>
-            {formatPrice(cryptoMarketCoinData?.circulating_supply)} $
+            {formatPrice(Number(cryptoMarketCoinData?.circulating_supply.toFixed()))}
           </p>
         </div>
         <div className={'flex justify-between mb-1 pb-1 border-b border-border/30'}>
           <p>{t('crypto_details_popup.coin_data_table.total_supply')}</p>
           <p>
-            {formatPrice(cryptoMarketCoinData?.total_supply)} $
+            {formatPrice(Number(cryptoMarketCoinData?.total_supply.toFixed()))}
           </p>
         </div>
         <div className={'flex justify-between'}>

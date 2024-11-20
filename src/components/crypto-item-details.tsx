@@ -1,4 +1,6 @@
-import React from 'react'
+'use client'
+
+import React, { useState } from 'react'
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -28,12 +30,16 @@ const fetchCryptoDetailsData = async (id: string | undefined): Promise<ICryptoDe
 
 interface IProps {
   favorites: string[]
+  userId: string
   index: number
+  addFavorite: (userId: string, id: string) => Promise<void>
+  removeFavorite: (userId: string, id: string) => Promise<void>
   className?: string
 }
 
-export const CryptoItemDetails: React.FC<IProps> = ({ favorites, className }) => {
+export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeFavorite, addFavorite, className }) => {
   const { isOpen, closeModal, selectedCrypto, index } = useCryptoModalStore()
+  const [loading, setLoading] = useState(false)
 
   const { data: detailsData, isLoading } = useQuery({
     queryKey: ['cryptoDetails', selectedCrypto?.id],
@@ -43,6 +49,24 @@ export const CryptoItemDetails: React.FC<IProps> = ({ favorites, className }) =>
   })
 
   if (!isOpen || !selectedCrypto || !detailsData) return null
+
+  const handleFavoriteToggle = async (event: React.MouseEvent) => {
+    event.stopPropagation()
+    setLoading(true)
+
+    try {
+      if (isFavorite) {
+        await removeFavorite(userId, selectedCrypto.id)
+      } else {
+        await addFavorite(userId, selectedCrypto.id)
+      }
+
+    } catch (error) {
+      console.error('Error toggling favorite:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const isFavorite = favorites.includes(selectedCrypto.id)
 
@@ -81,17 +105,22 @@ export const CryptoItemDetails: React.FC<IProps> = ({ favorites, className }) =>
               </div>
             </div>
 
-            {isFavorite ?
-              <StarFavoriteIcon
-                width={16}
-                height={16}
-              />
-              :
-              <StarIcon
-                width={16}
-                height={16}
-              />
-            }
+            <button
+              className="p-1"
+              onClick={handleFavoriteToggle}
+            >
+              {isFavorite ?
+                <StarFavoriteIcon
+                  width={16}
+                  height={16}
+                />
+                :
+                <StarIcon
+                  width={16}
+                  height={16}
+                />
+              }
+            </button>
           </div>
 
           {detailsData.markets_coin_data ?
