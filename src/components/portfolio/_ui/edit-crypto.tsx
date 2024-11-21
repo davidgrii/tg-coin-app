@@ -37,19 +37,19 @@ export const EditCrypto: React.FC<IProps> = ({ isOpen, setIsOpen, item, onEditCr
   }
 
   const handleSubmit = () => {
-    if (!selectedCrypto) return
+    if (selectedCrypto && quantity && purchase) {
+      const updatedCrypto = {
+        _id: selectedCrypto._id,
+        cryptoId: selectedCrypto.cryptoId,
+        quantity: Number(quantity.replace(/\s/g, '').replace(',', '.')),
+        purchasePrice: Number(purchase.replace(/\s/g, '').replace(',', '.')),
+        notice: notice.trim() || '',
+        crypto: selectedCrypto.crypto
+      }
 
-    const updatedCrypto = {
-      _id: selectedCrypto._id,
-      cryptoId: selectedCrypto.cryptoId,
-      quantity: Number(quantity?.replace(/,/g, '')) || 0,
-      purchasePrice: Number(purchase?.replace(/,/g, '')),
-      notice: notice.trim() || '',
-      crypto: selectedCrypto.crypto
+      onEditCrypto(updatedCrypto)
+      setIsOpen(false)
     }
-
-    onEditCrypto(updatedCrypto)
-    setIsOpen(false)
   }
 
   useEffect(() => {
