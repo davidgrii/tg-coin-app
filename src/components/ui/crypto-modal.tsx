@@ -17,14 +17,29 @@ export const CryptoModal: React.FC<ModalProps> = ({ isOpen, onClose, children })
       if (event.key === 'Escape') onClose()
     }
     window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+    }
   }, [onClose])
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isOpen])
 
   if (!isOpen) return null
 
   return ReactDOM.createPortal(
     <div
-      className="fixed w-full h-full inset-0 z-50 flex items-start justify-center bg-[#1C1C1E]"
+      className="fixed w-full h-full inset-0 z-50 flex items-start justify-center bg-[#1C1C1E] bg-opacity-70"
       onClick={onClose}
     >
       <div
@@ -35,7 +50,7 @@ export const CryptoModal: React.FC<ModalProps> = ({ isOpen, onClose, children })
           className="absolute right-3 top-2.5 text-gray-500 hover:text-white"
           onClick={onClose}
         >
-          <CloseIcon/>
+          <CloseIcon />
         </button>
         {children}
       </div>
