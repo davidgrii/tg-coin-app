@@ -68,7 +68,7 @@ export const DashboardUserBalance: React.FC<IProps> = ({ className }) => {
           <CarouselContent className={'select-none'}>
             <CarouselItem>
               <Card
-                className={'py-4 pl-6 pr-9 items-center justify-between rounded-xl border-0 cursor-pointer relative'}>
+                className={'py-5 pl-6 pr-9 items-center justify-between rounded-xl border-0 cursor-pointer relative'}>
                 <CardContent className={'flex flex-col gap-1 p-0'}>
                   <div className={'flex justify-between items-end'}>
                     <p className={'text-sm text-foreground font-semibold'}>
@@ -92,7 +92,7 @@ export const DashboardUserBalance: React.FC<IProps> = ({ className }) => {
 
                   <div className={'flex justify-between items-end'}>
                     <p className={'text-sm text-foreground font-semibold'}>
-                      Invested USD
+                      {t('dashboard_balance.invested')}
                     </p>
 
                     <motion.div
@@ -118,7 +118,7 @@ export const DashboardUserBalance: React.FC<IProps> = ({ className }) => {
 
             <CarouselItem>
               <Card
-                className={'py-4 pl-6 pr-9 items-center justify-between rounded-xl border-0 cursor-pointer relative'}>
+                className={'py-5 pl-6 pr-9 items-center justify-between rounded-xl border-0 cursor-pointer relative'}>
                 <CardContent className={'flex flex-col gap-1 p-0'}>
                   <div className={'flex justify-between items-end'}>
                     <p className={'text-sm text-foreground font-semibold'}>

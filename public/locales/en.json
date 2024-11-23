@@ -23,6 +23,7 @@
   },
   "dashboard_balance": {
     "my_balance": "My Balance",
+    "invested": "Invested USD",
     "24h": "Profit 24h",
     "over_time": "Total Profit"
   },

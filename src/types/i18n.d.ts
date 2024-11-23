@@ -29,6 +29,7 @@ declare module 'i18next' {
         }
         dashboard_balance: {
           my_balance: string
+          invested: string
           '24h': string
           'over_time': string
         }

@@ -23,6 +23,7 @@
   },
   "dashboard_balance": {
     "my_balance": "Мой Баланс",
+    "invested": "Инвестировано USD",
     "24h": "Прибыль 24ч",
     "over_time": "Общая Прибыль"
   },

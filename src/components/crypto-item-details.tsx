@@ -50,7 +50,7 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
 
   if (!isOpen || !selectedCrypto || !detailsData) return null
 
-  const cryptoPrice = selectedCrypto?.current_price?.toString().length || selectedCrypto?.price?.toString().length || 0
+  const cryptoPrice = selectedCrypto?.current_price || selectedCrypto?.price || 0
 
   const handleFavoriteToggle = async (event: React.MouseEvent) => {
     event.stopPropagation()
@@ -134,7 +134,7 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
           }
 
         </AlertDialogTitle>
-        <AlertDialogDescription />
+        <AlertDialogDescription></AlertDialogDescription>
 
       </AlertDialogContent>
     </AlertDialog>
