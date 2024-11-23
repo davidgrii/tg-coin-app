@@ -2,7 +2,7 @@ import { ICrypto } from '@/types'
 import { useQuery } from '@tanstack/react-query'
 
 const fetchCryptoData = async (): Promise<ICrypto[]> => {
-  console.log('Fetching crypto data...')
+  // console.log('Fetching crypto data...')
   const page = 1
   const limit = 1000
   const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/cryptos?page=${page}&limit=${limit}`)
@@ -12,7 +12,7 @@ const fetchCryptoData = async (): Promise<ICrypto[]> => {
   }
 
   const data = await res.json()
-  console.log('Data loaded:', data)
+  // console.log('Data loaded:', data)
   return data
 }
 
