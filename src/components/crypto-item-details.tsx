@@ -50,6 +50,8 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
 
   if (!isOpen || !selectedCrypto || !detailsData) return null
 
+  const cryptoPrice = selectedCrypto?.current_price?.toString().length || selectedCrypto?.price?.toString().length || 0
+
   const handleFavoriteToggle = async (event: React.MouseEvent) => {
     event.stopPropagation()
     setLoading(true)
@@ -99,7 +101,7 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
                 </div>
 
                 <p
-                  className={`${getDynamicFontSize(selectedCrypto.current_price.toString().length)} text-foreground font-bold whitespace-nowrap`}>
+                  className={`${getDynamicFontSize(cryptoPrice)} text-foreground font-bold whitespace-nowrap`}>
                   {formatPrice(selectedCrypto.current_price)} $
                 </p>
               </div>

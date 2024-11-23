@@ -4,6 +4,8 @@ import { StarFavoriteIcon, StarIcon } from '@/components/icons'
 import Image from 'next/image'
 import { formatPrice, getDynamicFontSize } from '@/utils/formatters'
 import { ITrendingCrypto } from '@/types/crypto.types'
+import { CryptoItemDetails } from '@/components'
+import { useCryptoModalStore } from '@/store/crypto/crypto-modal.store'
 
 interface IProps {
   userId: string
@@ -29,6 +31,8 @@ export const TrendingCryptoItem: React.FC<IProps> = (
   const priceChange = crypto.price_change_percentage_24h_usd ?? 0
   const isPricePositive = !priceChange.toString().includes('-')
 
+  const { openModal, isOpen } = useCryptoModalStore()
+
   const handleFavoriteToggle = async () => {
     setLoading(true)
     try {
@@ -48,7 +52,9 @@ export const TrendingCryptoItem: React.FC<IProps> = (
   return (
     <>
       <CardContent
-        className={'p-0 flex justify-between items-center cursor-pointer'}>
+        className={'p-0 flex justify-between items-center cursor-pointer'}
+        onClick={() => openModal(crypto, crypto.market_cap_rank)}
+      >
 
         <div className="flex items-center gap-2.5">
           <span className="w-5 text-sm text-muted-foreground">{crypto.market_cap_rank}</span>
@@ -91,6 +97,16 @@ export const TrendingCryptoItem: React.FC<IProps> = (
           </button>
         </div>
       </CardContent>
+
+      {isOpen &&
+        <CryptoItemDetails
+          addFavorite={addFavorite}
+          removeFavorite={removeFavorite}
+          favorites={favorites}
+          userId={userId}
+          index={crypto.market_cap_rank}
+        />
+      }
     </>
   )
 }
