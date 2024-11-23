@@ -31,8 +31,6 @@ export const DashboardData: React.FC<IProps> = ({ className }) => {
   const formatNumberWithCommas = (num: number) => {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
   }
-  
-  // if (isLoading) return <div>Loading</div>
 
   return (
     <Carousel plugins={[

@@ -136,8 +136,6 @@ export default function PortfolioPage() {
     }
   }, [isLoading])
 
-  // if (isLoadingData) return <div>Loading</div>
-
   return (
     <Container className={'pt-0'}>
       <BalanceTableHeader />

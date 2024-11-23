@@ -23,6 +23,7 @@ export const SearchInput: React.FC<IProps> = ({ searchValue, setSearchValue, inp
   const clearInput = () => {
     setSearchValue('')
     inputRef.current?.focus()
+    toggleSearch(false)
   }
 
   return (
@@ -68,7 +69,7 @@ export const SearchInput: React.FC<IProps> = ({ searchValue, setSearchValue, inp
         {searchValue !== undefined && (
           <motion.span
             className="p-2.5 text-sm text-[#007BFF] font-medium cursor-pointer"
-            onClick={() => toggleSearch(false)}
+            onClick={() => clearInput()}
             initial={{ opacity: 0, y: -15 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}

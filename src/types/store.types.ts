@@ -15,6 +15,7 @@ export interface IPortfolioStore {
   initialPortfolio: IPortfolioItem[]
   cryptoData: ICrypto[]
   totalBalance: number
+  totalInvestedUSD: number
   totalProfitLoss: number
   totalPriceChange24h: number
   totalProfitLossPercentage: number
@@ -26,6 +27,7 @@ export interface IPortfolioStore {
   deleteCrypto: (userId: string, cryptoId: string) => Promise<void>
   updateCryptoData: (data: ICrypto[]) => void
   calculateTotalBalance: () => void
+  calculateTotalInvestedUSD: () => void
   calculateTotalPercentageChange24h: () => void
   calculateTotalProfitLossPercentage: () => void
   calculateTotalProfitLoss: () => void

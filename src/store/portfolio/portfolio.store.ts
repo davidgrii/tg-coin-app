@@ -8,10 +8,11 @@ export const usePortfolioStore = create<IPortfolioStore>((set) => ({
   initialPortfolio: [],
   cryptoData: [],
   totalBalance: 0,
-  totalPercentageChange24h: 0,
-  totalPriceChange24h: 0,
-  totalProfitLossPercentage: 0,
   totalProfitLoss: 0,
+  totalInvestedUSD: 0,
+  totalPriceChange24h: 0,
+  totalPercentageChange24h: 0,
+  totalProfitLossPercentage: 0,
   isLoading: true,
   isSorted: false,
 
@@ -121,6 +122,18 @@ export const usePortfolioStore = create<IPortfolioStore>((set) => ({
       }, 0
     )
     return { totalBalance: total }
+  }),
+
+  calculateTotalInvestedUSD: () => set((state) => {
+    const totalInvestedUSD = state.portfolio.reduce(
+      (acc, crypto) => {
+        if (crypto.purchasePrice && crypto.quantity) {
+          return acc + crypto.purchasePrice * crypto.quantity
+        }
+        return acc
+      }, 0
+    )
+    return { totalInvestedUSD: totalInvestedUSD }
   }),
 
   calculateTotalProfitLoss: () => set((state) => {

@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { cn } from '@/components/ui/utils'
 import { usePortfolioStore } from '@/store'
@@ -8,6 +8,12 @@ import { useTranslation } from 'react-i18next'
 import { Separator } from '@/components/ui/separator'
 import { formatPrice } from '@/utils/formatters'
 import { motion } from 'framer-motion'
+import Autoplay from 'embla-carousel-autoplay'
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
+
+interface IProps {
+  className?: string
+}
 
 export const DashboardUserBalance: React.FC<IProps> = ({ className }) => {
   const {
@@ -16,12 +22,14 @@ export const DashboardUserBalance: React.FC<IProps> = ({ className }) => {
     totalProfitLoss,
     totalProfitLossPercentage,
     totalPercentageChange24h,
-    totalPriceChange24h
+    totalPriceChange24h,
+    totalInvestedUSD,
+    calculateTotalInvestedUSD
   } = usePortfolioStore()
 
   const { t } = useTranslation()
 
-  const getClassedBasedOnValue = (value: number, isPercentage: boolean = false) => {
+  const getClassedBasedOnValue = (value: number) => {
     if (value === 0) return 'text-muted'
     return value < 0 ? 'text-secondary' : 'text-primary'
   }
@@ -31,76 +39,138 @@ export const DashboardUserBalance: React.FC<IProps> = ({ className }) => {
     maximumFractionDigits: 2
   })
 
+  useEffect(() => {
+      if (portfolio.length > 0) {
+        calculateTotalInvestedUSD()
+      }
+    },
+    [portfolio, calculateTotalInvestedUSD]
+  )
+
   return (
     <>
       {portfolio.length > 0 ?
-        <Card className={'py-4 pl-6 pr-9 items-center justify-between rounded-xl border-0'}>
-          <CardHeader className={'flex flex-row items-center justify-between p-0 space-y-0 mb-3.5'}>
-            <CardTitle className={'text-sm text-muted-foreground font-bold'}>
-              {t('dashboard_balance.my_balance')}
-            </CardTitle>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 1.1 }}
-            >
-              <CardDescription className={'text-sm text-foreground font-bold mr-[85px]'}>
-                {formattedBalance} $
-              </CardDescription>
-            </motion.div>
-          </CardHeader>
+        <Carousel plugins={[
+          Autoplay({
+            delay: 8000
+          })
+        ]} opts={{
+          loop: true
+        }}>
+          <CarouselContent className={'select-none'}>
+            <CarouselItem>
+              <Card
+                className={'py-4 pl-6 pr-9 items-center justify-between rounded-xl border-0 cursor-pointer relative'}>
+                <CardContent className={'flex flex-col gap-1 p-0'}>
+                  <div className={'flex justify-between items-end'}>
+                    <p className={'text-sm text-foreground font-semibold'}>
+                      {t('dashboard_balance.my_balance')}
+                    </p>
 
-          <CardContent className={'flex flex-col gap-1 p-0'}>
-            <div className={'flex justify-between items-end'}>
-              <p className={'text-xs w-24 text-muted-foreground font-medium'}>
-                {t('dashboard_balance.24h')}
-              </p>
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 1.1 }}
+                      className={'flex gap-1.5'}
+                    >
+                      <p
+                        className={'text-sm font-semibold transition-colors'}>
+                        {formattedBalance} $
+                      </p>
+                    </motion.div>
+                  </div>
 
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1.1 }}
-                className={'flex gap-1.5'}
-              >
-                <p className={cn(getClassedBasedOnValue(totalPriceChange24h), 'text-sm font-semibold transition-colors')}>
-                  {formatPrice(Number(totalPriceChange24h.toFixed(2)))} $
-                </p>
-                <p
-                  className={cn(getClassedBasedOnValue(totalPercentageChange24h, true), 'text-sm font-semibold w-20 text-right transition-colors')}>
-                  {totalPercentageChange24h !== null ? totalPercentageChange24h.toFixed(2) : 'N/A'} %
-                </p>
-              </motion.div>
-            </div>
+                  <Separator className={'opacity-30'} />
 
-            <Separator className={'opacity-30'} />
+                  <div className={'flex justify-between items-end'}>
+                    <p className={'text-sm text-foreground font-semibold'}>
+                      Invested USD
+                    </p>
 
-            <div className={'flex justify-between items-end'}>
-              <p className={'text-xs w-24 text-muted-foreground font-medium text-nowrap'}>
-                {t('dashboard_balance.over_time')}
-              </p>
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 1.1 }}
+                      className={'flex gap-1.5'}
+                    >
+                      <p className={'text-sm font-semibold transition-colors'}>
+                        {formatPrice(Number(totalInvestedUSD.toFixed(2)))} $
+                      </p>
+                    </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 1.1 }}
-                className={'flex gap-1.5'}
-              >
-                <p className={cn(getClassedBasedOnValue(totalProfitLoss),
-                  'text-sm font-semibold transition-colors')}
-                >
-                  {formatPrice(Number(totalProfitLoss.toFixed(2)))} $
-                </p>
-                <p
-                  className={cn(getClassedBasedOnValue(totalProfitLossPercentage, true),
-                    'text-sm font-semibold w-20 text-right transition-colors')}
-                >
-                  {totalProfitLossPercentage !== null ? totalProfitLossPercentage.toFixed(2) : 'N/A'} %
-                </p>
-              </motion.div>
+                  </div>
+                </CardContent>
 
-            </div>
-          </CardContent>
-        </Card>
+                <div className={'flex gap-2 absolute bottom-1.5 left-1/2 -translate-x-1/2'}>
+                  <span className={'w-1.5 h-1.5 rounded-full bg-[#D9D9D9]'}></span>
+                  <span className={'w-1.5 h-1.5 rounded-full border-[#D9D9D9]/65 border'}></span>
+                </div>
+              </Card>
+            </CarouselItem>
+
+            <CarouselItem>
+              <Card
+                className={'py-4 pl-6 pr-9 items-center justify-between rounded-xl border-0 cursor-pointer relative'}>
+                <CardContent className={'flex flex-col gap-1 p-0'}>
+                  <div className={'flex justify-between items-end'}>
+                    <p className={'text-sm text-foreground font-semibold'}>
+                      {t('dashboard_balance.24h')}
+                    </p>
+
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 1.1 }}
+                      className={'flex gap-1.5'}
+                    >
+                      <p
+                        className={cn(getClassedBasedOnValue(totalPriceChange24h), 'text-sm font-semibold transition-colors')}>
+                        {formatPrice(Number(totalPriceChange24h.toFixed(2)))} $
+                      </p>
+                      <p
+                        className={cn(getClassedBasedOnValue(totalPercentageChange24h), 'text-sm font-semibold w-20 text-right transition-colors')}>
+                        {totalPercentageChange24h !== null ? totalPercentageChange24h.toFixed(2) : 'N/A'} %
+                      </p>
+                    </motion.div>
+                  </div>
+
+                  <Separator className={'opacity-30'} />
+
+                  <div className={'flex justify-between items-end'}>
+                    <p className={'text-sm text-foreground font-semibold text-nowrap'}>
+                      {t('dashboard_balance.over_time')}
+                    </p>
+
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 1.1 }}
+                      className={'flex gap-1.5'}
+                    >
+                      <p className={cn(getClassedBasedOnValue(totalProfitLoss),
+                        'text-sm font-semibold transition-colors')}
+                      >
+                        {formatPrice(Number(totalProfitLoss.toFixed(2)))} $
+                      </p>
+                      <p
+                        className={cn(getClassedBasedOnValue(totalProfitLossPercentage),
+                          'text-sm font-semibold w-20 text-right transition-colors')}
+                      >
+                        {totalProfitLossPercentage !== null ? totalProfitLossPercentage.toFixed(2) : 'N/A'} %
+                      </p>
+                    </motion.div>
+
+                  </div>
+                </CardContent>
+
+                <div className={'flex gap-2 absolute bottom-1.5 left-1/2 -translate-x-1/2'}>
+                  <span className={'w-1.5 h-1.5 rounded-full border-[#D9D9D9]/65 border'}></span>
+                  <span className={'w-1.5 h-1.5 rounded-full bg-[#D9D9D9]'}></span>
+                </div>
+              </Card>
+            </CarouselItem>
+          </CarouselContent>
+        </Carousel>
 
         : <Card className={'py-4 pl-6 pr-9 items-center justify-between rounded-xl border-0'}>
           <CardHeader className={'flex flex-row items-center justify-between p-0 space-y-0 mb-3.5'}>
@@ -165,11 +235,6 @@ export const DashboardUserBalance: React.FC<IProps> = ({ className }) => {
           </CardContent>
         </Card>
       }
-
     </>
   )
-}
-
-interface IProps {
-  className?: string
 }
