@@ -34,6 +34,14 @@ export const DashboardUserBalance: React.FC<IProps> = ({ className }) => {
     return value < 0 ? 'text-secondary' : 'text-primary'
   }
 
+  const getClassesBalance = () => {
+    if (totalBalance > totalInvestedUSD) {
+      return 'text-primary'
+    } else {
+      return 'text-secondary'
+    }
+  }
+
   const formattedBalance = totalBalance.toLocaleString('en-US', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
@@ -74,7 +82,7 @@ export const DashboardUserBalance: React.FC<IProps> = ({ className }) => {
                       className={'flex gap-1.5'}
                     >
                       <p
-                        className={'text-sm font-semibold transition-colors'}>
+                        className={cn(getClassesBalance(), 'text-sm font-semibold transition-colors')}>
                         {formattedBalance} $
                       </p>
                     </motion.div>

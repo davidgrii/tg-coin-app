@@ -53,8 +53,10 @@ export const DumpCryptoItem: React.FC<IProps> = (
 
   return (
     <>
-      <CardContent onClick={() => openModal(crypto, index)}
-                   className={'p-0 flex justify-between items-center cursor-pointer'}>
+      <CardContent
+        onClick={() => openModal(crypto, index)}
+        className={'p-0 flex justify-between items-center cursor-pointer'}
+      >
 
         <div className="flex items-center gap-2.5">
           <span className="w-5 text-sm text-muted-foreground">{index + 1}</span>

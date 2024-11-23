@@ -6,7 +6,6 @@ import { StarFavoriteIcon, StarIcon } from '@/components/icons'
 import Image from 'next/image'
 import { ICrypto } from '@/types/crypto.types'
 import { formatPrice, getDynamicFontSize } from '@/utils/formatters'
-import { CryptoItemDetails } from '@/components'
 import { useCryptoModalStore } from '@/store/crypto/crypto-modal.store'
 
 interface IProps {
@@ -55,8 +54,10 @@ export const PumpCryptoItem: React.FC<IProps> = (
 
   return (
     <>
-      <CardContent onClick={() => openModal(crypto, index)}
-                   className={'p-0 flex justify-between items-center cursor-pointer'}>
+      <CardContent
+        onClick={() => openModal(crypto, index)}
+        className={'p-0 flex justify-between items-center cursor-pointer'}
+      >
 
         <div className="flex items-center gap-2.5">
           <span className="w-5 text-sm text-muted-foreground">{index + 1}</span>
@@ -100,15 +101,15 @@ export const PumpCryptoItem: React.FC<IProps> = (
         </div>
       </CardContent>
 
-      {isOpen &&
-        <CryptoItemDetails
-          addFavorite={addFavorite}
-          removeFavorite={removeFavorite}
-          favorites={favorites}
-          userId={userId}
-          index={index}
-        />
-      }
+      {/*{isOpen &&*/}
+      {/*  <CryptoItemDetails*/}
+      {/*    addFavorite={addFavorite}*/}
+      {/*    removeFavorite={removeFavorite}*/}
+      {/*    favorites={favorites}*/}
+      {/*    userId={userId}*/}
+      {/*    index={index}*/}
+      {/*  />*/}
+      {/*}*/}
     </>
   )
 }
