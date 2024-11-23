@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { ICrypto } from '@/types/crypto.types'
 import { formatPrice, getDynamicFontSize } from '@/utils/formatters'
 import { useCryptoModalStore } from '@/store/crypto/crypto-modal.store'
+import { CryptoItemDetails } from '@/components'
 
 interface IProps {
   userId: string
@@ -101,15 +102,15 @@ export const PumpCryptoItem: React.FC<IProps> = (
         </div>
       </CardContent>
 
-      {/*{isOpen &&*/}
-      {/*  <CryptoItemDetails*/}
-      {/*    addFavorite={addFavorite}*/}
-      {/*    removeFavorite={removeFavorite}*/}
-      {/*    favorites={favorites}*/}
-      {/*    userId={userId}*/}
-      {/*    index={index}*/}
-      {/*  />*/}
-      {/*}*/}
+      {isOpen &&
+        <CryptoItemDetails
+          addFavorite={addFavorite}
+          removeFavorite={removeFavorite}
+          favorites={favorites}
+          userId={userId}
+          index={index}
+        />
+      }
     </>
   )
 }
