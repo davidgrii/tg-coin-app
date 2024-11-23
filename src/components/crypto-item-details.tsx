@@ -29,7 +29,7 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
-  if (!isOpen) return null
+
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -38,6 +38,8 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
   }, [onClose])
+
+  if (!isOpen) return null
 
   return ReactDOM.createPortal(
     <div
