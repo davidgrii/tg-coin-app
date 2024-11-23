@@ -1,7 +1,5 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import ReactDOM from 'react-dom'
 import Image from 'next/image'
 import { formatPrice, getDynamicFontSize } from '@/utils/formatters'
 import { StarFavoriteIcon, StarIcon } from '@/components/icons'
@@ -9,6 +7,8 @@ import { useCryptoModalStore } from '@/store/crypto/crypto-modal.store'
 import { useQuery } from '@tanstack/react-query'
 import { ICryptoDetails } from '@/types'
 import { DetailsCoinsData, DetailsMarketsData } from '@/components'
+import React, { useState } from 'react'
+import { CryptoModal } from '@/components/ui/crypto-modal'
 
 const fetchCryptoDetailsData = async (id: string | undefined): Promise<ICryptoDetails> => {
   if (!id) throw new Error('No crypto ID provided')
@@ -21,48 +21,6 @@ const fetchCryptoDetailsData = async (id: string | undefined): Promise<ICryptoDe
   return res.json()
 }
 
-// Модальное окно
-interface ModalProps {
-  isOpen: boolean
-  onClose: () => void
-  children: React.ReactNode
-}
-
-const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
-  
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onClose()
-    }
-    window.addEventListener('keydown', handleKeyDown)
-    return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [onClose])
-
-  if (!isOpen) return null
-
-  return ReactDOM.createPortal(
-    <div
-      className="fixed w-full h-full inset-0 z-50 flex items-center justify-center bg-[#1C1C1E] "
-      onClick={onClose}
-    >
-      <div
-        className="w-full max-w-3xl rounded-lg overflow-hidden relative p-4"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
-          className="absolute right-2.5 top-2.5 text-gray-500 hover:text-white"
-          onClick={onClose}
-        >
-          ×
-        </button>
-        {children}
-      </div>
-    </div>,
-    document.body
-  )
-}
-
-// Основной компонент
 interface IProps {
   favorites: string[]
   userId: string
@@ -106,7 +64,7 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={closeModal}>
+    <CryptoModal isOpen={isOpen} onClose={closeModal}>
       <div className="flex justify-between w-full bg-accent items-center gap-3 px-6 py-4 rounded-[10px]">
         <div className={'flex items-center gap-2'}>
           <Image
@@ -150,6 +108,6 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
       {detailsData.markets.length > 0 && (
         <DetailsMarketsData cryptoMarketsData={detailsData.markets} />
       )}
-    </Modal>
+    </CryptoModal>
   )
 }
