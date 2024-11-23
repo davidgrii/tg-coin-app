@@ -102,7 +102,7 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
 
                 <p
                   className={`${getDynamicFontSize(cryptoPrice)} text-foreground font-bold whitespace-nowrap`}>
-                  {formatPrice(selectedCrypto.current_price)} $
+                  {formatPrice(cryptoPrice)} $
                 </p>
               </div>
             </div>
