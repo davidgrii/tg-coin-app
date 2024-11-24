@@ -1,28 +1,23 @@
-'use client'
-
+import Image from 'next/image'
 import { formatPrice, getDynamicFontSize } from '@/utils/formatters'
 import { StarFavoriteIcon, StarIcon } from '@/components/icons'
 import { useCryptoModalStore } from '@/store/crypto/crypto-modal.store'
 import { useQuery } from '@tanstack/react-query'
+import { ICryptoDetails } from '@/types'
+import { DetailsCoinsData, DetailsMarketsData } from '@/components'
 import React, { useState } from 'react'
 import { CryptoModal } from '@/components/ui/crypto-modal'
 
-// const fetchCryptoDetailsData = async (id: string | undefined): Promise<ICryptoDetails> => {
-//   if (!id) throw new Error('No crypto ID provided');
-//   const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/cryptos/${id}`, { method: 'GET' });
-//
-//   if (!res.ok) {
-//     console.error(`Error fetching details: ${res.status}`);
-//     throw new Error('Failed to fetch crypto details');
-//   }
-//
-//   const data = await res.json();
-//   if (!data || typeof data !== 'object') {
-//     throw new Error('Invalid response format');
-//   }
-//
-//   return data;
-// }
+const fetchCryptoDetailsData = async (id: string | undefined): Promise<ICryptoDetails> => {
+  if (!id) throw new Error('No crypto ID provided')
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/cryptos/${id}`)
+
+  if (!res.ok) {
+    console.log('Failed to fetch crypto details')
+  }
+
+  return res.json()
+}
 
 interface IProps {
   favorites: string[]
@@ -39,12 +34,12 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
 
   const { data: detailsData } = useQuery({
     queryKey: ['cryptoDetails', selectedCrypto?.id],
-    // queryFn: () => fetchCryptoDetailsData(selectedCrypto?.id),
+    queryFn: () => fetchCryptoDetailsData(selectedCrypto?.id),
     staleTime: 30 * 60 * 1000,
     enabled: !!selectedCrypto
   })
 
-  if (!isOpen || !selectedCrypto) return null
+  if (!isOpen || !selectedCrypto || !detailsData) return null
 
   const cryptoPrice = selectedCrypto?.current_price || selectedCrypto?.price || 0
   const isFavorite = favorites.includes(selectedCrypto.id)
@@ -68,9 +63,9 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
 
   return (
     <CryptoModal isOpen={isOpen} onClose={closeModal}>
-      <div className="modal flex justify-between w-full bg-accent items-center gap-3 px-6 py-4 rounded-[10px]">
+      <div className="flex justify-between w-full bg-accent items-center gap-3 px-6 py-4 rounded-[10px]">
         <div className={'flex items-center gap-2'}>
-          <img
+          <Image
             width={36}
             height={36}
             className="h-9 w-9"
@@ -105,12 +100,12 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
         </button>
       </div>
 
-      {/*{detailsData.markets_coin_data && (*/}
-      {/*  <DetailsCoinsData cryptoMarketCoinData={detailsData.markets_coin_data} />*/}
-      {/*)}*/}
-      {/*{detailsData.markets.length > 0 && (*/}
-      {/*  <DetailsMarketsData cryptoMarketsData={detailsData.markets} />*/}
-      {/*)}*/}
+      {detailsData.markets_coin_data && (
+        <DetailsCoinsData cryptoMarketCoinData={detailsData.markets_coin_data} />
+      )}
+      {detailsData.markets.length > 0 && (
+        <DetailsMarketsData cryptoMarketsData={detailsData.markets} />
+      )}
     </CryptoModal>
   )
 }
