@@ -5,7 +5,7 @@ import { useCryptoModalStore } from '@/store/crypto/crypto-modal.store'
 import { useQuery } from '@tanstack/react-query'
 import { ICryptoDetails } from '@/types'
 import { DetailsCoinsData, DetailsMarketsData } from '@/components'
-import React, { useState } from 'react'
+import React from 'react'
 import { CryptoModal } from '@/components/ui/crypto-modal'
 
 const fetchCryptoDetailsData = async (id: string | undefined): Promise<ICryptoDetails> => {
@@ -30,7 +30,6 @@ interface IProps {
 
 export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeFavorite, addFavorite, className }) => {
   const { isOpen, closeModal, selectedCrypto, index } = useCryptoModalStore()
-  const [loading, setLoading] = useState(false)
 
   const { data: detailsData } = useQuery({
     queryKey: ['cryptoDetails', selectedCrypto?.id],
@@ -46,7 +45,6 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
 
   const handleFavoriteToggle = async (event: React.MouseEvent) => {
     event.stopPropagation()
-    setLoading(true)
 
     try {
       if (isFavorite) {
@@ -56,8 +54,6 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
       }
     } catch (error) {
       console.error('Error toggling favorite:', error)
-    } finally {
-      setLoading(false)
     }
   }
 
