@@ -6,6 +6,7 @@ import { StarFavoriteIcon, StarIcon } from '@/components/icons'
 import { useCryptoModalStore } from '@/store/crypto/crypto-modal.store'
 import { useQuery } from '@tanstack/react-query'
 import { ICryptoDetails } from '@/types'
+import { DetailsCoinsData, DetailsMarketsData } from '@/components'
 import React, { useState } from 'react'
 import { CryptoModal } from '@/components/ui/crypto-modal'
 
@@ -33,7 +34,7 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
   const { isOpen, closeModal, selectedCrypto, index } = useCryptoModalStore()
   const [loading, setLoading] = useState(false)
 
-  const { data: detailsData } = useQuery({
+  const { data: detailsData, isLoading } = useQuery({
     queryKey: ['cryptoDetails', selectedCrypto?.id],
     queryFn: () => fetchCryptoDetailsData(selectedCrypto?.id),
     staleTime: 30 * 60 * 1000,
@@ -62,9 +63,10 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
     }
   }
 
+
   return (
     <CryptoModal isOpen={isOpen} onClose={closeModal}>
-      <div className="flex justify-between w-full bg-accent items-center gap-3 px-6 py-4 rounded-[10px]">
+      {!isLoading && <div className="flex justify-between w-full bg-accent items-center gap-3 px-6 py-4 rounded-[10px]">
         <div className={'flex items-center gap-2'}>
           <Image
             width={36}
@@ -99,14 +101,18 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
             <StarIcon width={16} height={16} />
           )}
         </button>
-      </div>
+      </div>}
 
-      {/*{detailsData.markets_coin_data && (*/}
-      {/*  <DetailsCoinsData cryptoMarketCoinData={detailsData.markets_coin_data} />*/}
-      {/*)}*/}
-      {/*{detailsData.markets.length > 0 && (*/}
-      {/*  <DetailsMarketsData cryptoMarketsData={detailsData.markets} />*/}
-      {/*)}*/}
+
+
+      {!isLoading && detailsData.markets_coin_data && (
+        <DetailsCoinsData cryptoMarketCoinData={detailsData.markets_coin_data} />
+      )}
+      {!isLoading && detailsData.markets.length > 0 && (
+        <DetailsMarketsData cryptoMarketsData={detailsData.markets} />
+      )}
+
     </CryptoModal>
   )
+
 }
