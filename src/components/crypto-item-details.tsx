@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { formatPrice, getDynamicFontSize } from '@/utils/formatters'
 import { StarFavoriteIcon, StarIcon } from '@/components/icons'
 import { useCryptoModalStore } from '@/store/crypto/crypto-modal.store'
@@ -73,7 +72,7 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
     <CryptoModal isOpen={isOpen} onClose={closeModal}>
       <div className="flex justify-between w-full bg-accent items-center gap-3 px-6 py-4 rounded-[10px]">
         <div className={'flex items-center gap-2'}>
-          <Image
+          <img
             width={36}
             height={36}
             className="h-9 w-9"
