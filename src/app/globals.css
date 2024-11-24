@@ -119,3 +119,9 @@ body {
 *::-webkit-scrollbar-corner {
     background-color: transparent;
 }
+
+.modal {
+    -webkit-overflow-scrolling: touch;
+    will-change: transform;
+    backface-visibility: hidden;
+}

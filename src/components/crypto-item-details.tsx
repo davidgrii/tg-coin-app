@@ -70,7 +70,7 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
 
   return (
     <CryptoModal isOpen={isOpen} onClose={closeModal}>
-      <div className="flex justify-between w-full bg-accent items-center gap-3 px-6 py-4 rounded-[10px]">
+      <div className="modal flex justify-between w-full bg-accent items-center gap-3 px-6 py-4 rounded-[10px]">
         <div className={'flex items-center gap-2'}>
           <img
             width={36}
