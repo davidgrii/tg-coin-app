@@ -3,10 +3,9 @@ import { formatPrice, getDynamicFontSize } from '@/utils/formatters'
 import { StarFavoriteIcon, StarIcon } from '@/components/icons'
 import { useCryptoModalStore } from '@/store/crypto/crypto-modal.store'
 import { useQuery } from '@tanstack/react-query'
-import { ICryptoDetails } from '@/types'
-import { DetailsCoinsData, DetailsMarketsData } from '@/components'
 import React from 'react'
 import { CryptoModal } from '@/components/ui/crypto-modal'
+import { ICryptoDetails } from '@/types'
 
 const fetchCryptoDetailsData = async (id: string | undefined): Promise<ICryptoDetails> => {
   if (!id) throw new Error('No crypto ID provided')
@@ -37,7 +36,8 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
     enabled: !!selectedCrypto?.id && isOpen
   })
 
-  if (!isOpen || !selectedCrypto || !detailsData) return null
+  // if (!isOpen || !selectedCrypto || !detailsData) return null
+  if (!isOpen || !selectedCrypto) return null
 
   const cryptoPrice = selectedCrypto?.current_price || selectedCrypto?.price || 0
   const isFavorite = favorites.includes(selectedCrypto.id)
@@ -54,14 +54,6 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
     } catch (error) {
       console.error('Error toggling favorite:', error)
     }
-  }
-
-  if (isLoading) {
-    return (
-      <CryptoModal isOpen={isOpen} onClose={closeModal}>
-        <p>Loading...</p>
-      </CryptoModal>
-    )
   }
 
   return (
@@ -103,12 +95,12 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
         </button>
       </div>
 
-      {detailsData.markets_coin_data && (
-        <DetailsCoinsData cryptoMarketCoinData={detailsData.markets_coin_data} />
-      )}
-      {detailsData.markets.length > 0 && (
-        <DetailsMarketsData cryptoMarketsData={detailsData.markets} />
-      )}
+      {/*{detailsData.markets_coin_data && (*/}
+      {/*  <DetailsCoinsData cryptoMarketCoinData={detailsData.markets_coin_data} />*/}
+      {/*)}*/}
+      {/*{detailsData.markets.length > 0 && (*/}
+      {/*  <DetailsMarketsData cryptoMarketsData={detailsData.markets} />*/}
+      {/*)}*/}
     </CryptoModal>
   )
 }
