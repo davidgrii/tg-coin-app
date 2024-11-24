@@ -1,5 +1,3 @@
-'use client'
-
 import React, { useState } from 'react'
 import { CardContent } from '@/components/ui/card'
 import { StarFavoriteIcon, StarIcon } from '@/components/icons'
