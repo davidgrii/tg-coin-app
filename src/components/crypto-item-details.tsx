@@ -38,7 +38,7 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
     enabled: !!selectedCrypto
   })
 
-  if (!isOpen || !selectedCrypto || isLoading || detailsData) return null
+  if (!isOpen || !selectedCrypto || !detailsData || !isLoading) return null
 
   const cryptoPrice = selectedCrypto?.current_price || selectedCrypto?.price || 0
   const isFavorite = favorites.includes(selectedCrypto.id)
