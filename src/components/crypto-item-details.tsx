@@ -30,12 +30,11 @@ interface IProps {
 
 export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeFavorite, addFavorite, className }) => {
   const { isOpen, closeModal, selectedCrypto, index } = useCryptoModalStore()
-
-  const { data: detailsData } = useQuery({
+  const { data: detailsData, isLoading } = useQuery({
     queryKey: ['cryptoDetails', selectedCrypto?.id],
     queryFn: () => fetchCryptoDetailsData(selectedCrypto?.id),
     staleTime: 30 * 60 * 1000,
-    enabled: !!selectedCrypto
+    enabled: !!selectedCrypto?.id && isOpen
   })
 
   if (!isOpen || !selectedCrypto || !detailsData) return null
@@ -55,6 +54,14 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
     } catch (error) {
       console.error('Error toggling favorite:', error)
     }
+  }
+
+  if (isLoading) {
+    return (
+      <CryptoModal isOpen={isOpen} onClose={closeModal}>
+        <p>Loading...</p>
+      </CryptoModal>
+    )
   }
 
   return (
