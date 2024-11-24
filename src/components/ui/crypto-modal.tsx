@@ -40,6 +40,24 @@ export const CryptoModal: React.FC<ModalProps> = ({ isOpen, onClose, children })
     }
   }, [isOpen])
 
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.position = 'fixed'
+      document.body.style.top = `-${window.scrollY}px`
+    }
+
+    return () => {
+      const scrollY = document.body.style.top
+      document.body.style.position = ''
+      document.body.style.top = ''
+      window.scrollTo(0, parseInt(scrollY || '0') * -1)
+    }
+  }, [isOpen])
+
+  const safeOnClose = () => {
+    if (isOpen) onClose()
+  }
+
   if (!isOpen) return null
 
   if (typeof window === 'undefined') return null
@@ -47,7 +65,7 @@ export const CryptoModal: React.FC<ModalProps> = ({ isOpen, onClose, children })
   return ReactDOM.createPortal(
     <div
       className="fixed w-full h-full inset-0 z-50 flex items-start justify-center bg-[#1C1C1E] bg-opacity-70"
-      onClick={onClose}
+      onClick={safeOnClose}
       onTouchStart={(e) => e.stopPropagation()}
     >
       <div
@@ -56,7 +74,7 @@ export const CryptoModal: React.FC<ModalProps> = ({ isOpen, onClose, children })
       >
         <button
           className="absolute right-3 top-2.5 text-gray-500 hover:text-white"
-          onClick={onClose}
+          onClick={safeOnClose}
         >
           <CloseIcon />
         </button>
