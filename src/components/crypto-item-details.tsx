@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 import { formatPrice, getDynamicFontSize } from '@/utils/formatters'
 import { StarFavoriteIcon, StarIcon } from '@/components/icons'
@@ -5,18 +7,24 @@ import { useCryptoModalStore } from '@/store/crypto/crypto-modal.store'
 import { useQuery } from '@tanstack/react-query'
 import { ICryptoDetails } from '@/types'
 import { DetailsCoinsData, DetailsMarketsData } from '@/components'
-import React from 'react'
+import React, { useState } from 'react'
 import { CryptoModal } from '@/components/ui/crypto-modal'
 
 const fetchCryptoDetailsData = async (id: string | undefined): Promise<ICryptoDetails> => {
-  if (!id) throw new Error('No crypto ID provided')
-  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/cryptos/${id}`)
+  if (!id) throw new Error('No crypto ID provided');
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/cryptos/${id}`, { method: 'GET' });
 
   if (!res.ok) {
-    console.log('Failed to fetch crypto details')
+    console.error(`Error fetching details: ${res.status}`);
+    throw new Error('Failed to fetch crypto details');
   }
 
-  return res.json()
+  const data = await res.json();
+  if (!data || typeof data !== 'object') {
+    throw new Error('Invalid response format');
+  }
+
+  return data;
 }
 
 interface IProps {
@@ -30,21 +38,23 @@ interface IProps {
 
 export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeFavorite, addFavorite, className }) => {
   const { isOpen, closeModal, selectedCrypto, index } = useCryptoModalStore()
+  const [loading, setLoading] = useState(false)
 
-  const { data: detailsData, isLoading } = useQuery({
+  const { data: detailsData } = useQuery({
     queryKey: ['cryptoDetails', selectedCrypto?.id],
     queryFn: () => fetchCryptoDetailsData(selectedCrypto?.id),
     staleTime: 30 * 60 * 1000,
     enabled: !!selectedCrypto
   })
 
-  if (!isOpen || !selectedCrypto || !detailsData || isLoading) return null
+  if (!isOpen || !selectedCrypto || !detailsData) return null
 
   const cryptoPrice = selectedCrypto?.current_price || selectedCrypto?.price || 0
   const isFavorite = favorites.includes(selectedCrypto.id)
 
   const handleFavoriteToggle = async (event: React.MouseEvent) => {
     event.stopPropagation()
+    setLoading(true)
 
     try {
       if (isFavorite) {
@@ -54,12 +64,14 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
       }
     } catch (error) {
       console.error('Error toggling favorite:', error)
+    } finally {
+      setLoading(false)
     }
   }
 
   return (
     <CryptoModal isOpen={isOpen} onClose={closeModal}>
-      {!isLoading && <div className="flex justify-between w-full bg-accent items-center gap-3 px-6 py-4 rounded-[10px]">
+      <div className="flex justify-between w-full bg-accent items-center gap-3 px-6 py-4 rounded-[10px]">
         <div className={'flex items-center gap-2'}>
           <Image
             width={36}
@@ -94,12 +106,12 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
             <StarIcon width={16} height={16} />
           )}
         </button>
-      </div>}
+      </div>
 
-      {!isLoading && detailsData.markets_coin_data && (
+      {detailsData.markets_coin_data && (
         <DetailsCoinsData cryptoMarketCoinData={detailsData.markets_coin_data} />
       )}
-      {!isLoading && detailsData.markets.length > 0 && (
+      {detailsData.markets.length > 0 && (
         <DetailsMarketsData cryptoMarketsData={detailsData.markets} />
       )}
     </CryptoModal>

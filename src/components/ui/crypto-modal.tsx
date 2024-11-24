@@ -37,10 +37,13 @@ export const CryptoModal: React.FC<ModalProps> = ({ isOpen, onClose, children })
 
   if (!isOpen) return null
 
+  if (typeof window === 'undefined') return null
+
   return ReactDOM.createPortal(
     <div
       className="fixed w-full h-full inset-0 z-50 flex items-start justify-center bg-[#1C1C1E] bg-opacity-70"
       onClick={onClose}
+      onTouchStart={(e) => e.stopPropagation()}
     >
       <div
         className="w-full max-w-3xl rounded-lg overflow-hidden relative p-4 pt-11"
