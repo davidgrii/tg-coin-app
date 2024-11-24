@@ -38,7 +38,7 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
     enabled: !!selectedCrypto
   })
 
-  if (!isOpen || !selectedCrypto || !detailsData) return null
+  if (!isOpen || !selectedCrypto || isLoading || detailsData) return null
 
   const cryptoPrice = selectedCrypto?.current_price || selectedCrypto?.price || 0
   const isFavorite = favorites.includes(selectedCrypto.id)
@@ -59,7 +59,7 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
 
   return (
     <CryptoModal isOpen={isOpen} onClose={closeModal}>
-      {!isLoading && <div className="flex justify-between w-full bg-accent items-center gap-3 px-6 py-4 rounded-[10px]">
+       <div className="flex justify-between w-full bg-accent items-center gap-3 px-6 py-4 rounded-[10px]">
         <div className={'flex items-center gap-2'}>
           <Image
             width={36}
@@ -94,7 +94,7 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
             <StarIcon width={16} height={16} />
           )}
         </button>
-      </div>}
+      </div>
 
       {!isLoading && detailsData.markets_coin_data && (
         <DetailsCoinsData cryptoMarketCoinData={detailsData.markets_coin_data} />
@@ -102,8 +102,6 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
       {!isLoading && detailsData.markets.length > 0 && (
         <DetailsMarketsData cryptoMarketsData={detailsData.markets} />
       )}
-
     </CryptoModal>
   )
-
 }
