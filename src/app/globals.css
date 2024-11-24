@@ -121,9 +121,7 @@ body {
 }
 
 .modal {
-    position: relative;
     -webkit-overflow-scrolling: touch;
     will-change: transform;
     backface-visibility: hidden;
-    z-index: 100;
 }
