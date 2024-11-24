@@ -27,7 +27,9 @@ export const CryptoModal: React.FC<ModalProps> = ({ isOpen, onClose, children })
     if (isOpen) {
       document.body.style.overflow = 'hidden'
     } else {
-      document.body.style.overflow = ''
+      setTimeout(() => {
+        document.body.style.overflow = ''
+      }, 300)
     }
 
     return () => {
