@@ -18,6 +18,22 @@ export const useCryptoModalStore = create<ICryptoModalStore>((set) => ({
   index: 0,
   isOpen: false,
   selectedCrypto: null,
-  openModal: (crypto, index) => set({ isOpen: true, selectedCrypto: crypto, index: index + 1 }),
-  closeModal: () => set({ isOpen: false, selectedCrypto: null })
-}))
+  openModal: (crypto, index) => {
+    console.log("Open modal:", crypto, index);
+    set((state) => {
+      if (state.selectedCrypto?.id === crypto.id) {
+        // Не обновляем состояние, если объект не изменился
+        return state;
+      }
+      return {
+        isOpen: true,
+        selectedCrypto: { ...crypto },
+        index: index + 1,
+      }
+    })
+  },
+  closeModal: () => {
+    console.log("Close modal");
+    set({ isOpen: false, selectedCrypto: null });
+  },
+}));
