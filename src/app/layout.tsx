@@ -29,12 +29,12 @@ export default function RootLayout(
       <script src="https://telegram.org/js/telegram-web-app.js" defer></script>
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
     </head>
-    <body
-      className={cn(`bg-background ${inter.className}`)}
-    >
-    <QueryProvider>
-      {children}
-    </QueryProvider>
+    <body className={cn(`bg-background ${inter.className}`)}>
+    <React.StrictMode>
+      <QueryProvider>
+        {children}
+      </QueryProvider>
+    </React.StrictMode>
     </body>
     </html>
   )
