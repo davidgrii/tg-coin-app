@@ -4,6 +4,8 @@ import { useCryptoModalStore } from '@/store/crypto/crypto-modal.store'
 import React, { useState } from 'react'
 import { CryptoModal } from '@/components/ui/crypto-modal'
 import { useCryptoModal } from '@/hooks/useCryptoModalData'
+import { DetailsCoinsData } from '@/components/details-coins-data'
+import { DetailsMarketsData } from '@/components/details-markets-data'
 
 interface IProps {
   favorites: string[]
@@ -82,17 +84,17 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
         {/*</button>*/}
       </div>
 
-      {/*{detailsData.markets_coin_data && (*/}
-      {/*  <React.Suspense fallback={<div>Loading Coin Data...</div>}>*/}
-      {/*    <DetailsCoinsData cryptoMarketCoinData={detailsData.markets_coin_data} />*/}
-      {/*  </React.Suspense>*/}
-      {/*)}*/}
+      {detailsData.markets_coin_data && (
+        <React.Suspense fallback={<div>Loading Coin Data...</div>}>
+          <DetailsCoinsData cryptoMarketCoinData={detailsData.markets_coin_data} />
+        </React.Suspense>
+      )}
 
-      {/*{detailsData.markets?.length > 0 && (*/}
-      {/*  <React.Suspense fallback={<div>Loading Market Data...</div>}>*/}
-      {/*    <DetailsMarketsData cryptoMarketsData={detailsData.markets} />*/}
-      {/*  </React.Suspense>*/}
-      {/*)}*/}
+      {detailsData.markets?.length > 0 && (
+        <React.Suspense fallback={<div>Loading Market Data...</div>}>
+          <DetailsMarketsData cryptoMarketsData={detailsData.markets} />
+        </React.Suspense>
+      )}
     </CryptoModal>
   )
 }
