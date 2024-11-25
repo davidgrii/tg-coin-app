@@ -2,6 +2,7 @@
 
 import { useCryptoModalStore } from '@/store/crypto/crypto-modal.store'
 import React, { useState } from 'react'
+import Image from 'next/image'
 import { CryptoModal } from '@/components/ui/crypto-modal'
 import { useCryptoModal } from '@/hooks/useCryptoModalData'
 import { DetailsCoinsData } from '@/components/details-coins-data'
@@ -49,13 +50,13 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
     <CryptoModal isOpen={isOpen} onClose={closeModal}>
       <div className="flex justify-between w-full bg-accent items-center gap-3 px-6 py-4 rounded-[10px]">
         <div className={'flex items-center gap-2'}>
-          {/*<Image*/}
-          {/*  width={36}*/}
-          {/*  height={36}*/}
-          {/*  className="h-9 w-9"*/}
-          {/*  src={selectedCrypto.image}*/}
-          {/*  alt={selectedCrypto.name}*/}
-          {/*/>*/}
+          <Image
+            width={36}
+            height={36}
+            className="h-9 w-9"
+            src={selectedCrypto.image}
+            alt={selectedCrypto.name}
+          />
 
           <div className="flex flex-col items-start">
             <div className={'flex gap-1 h-4'}>
