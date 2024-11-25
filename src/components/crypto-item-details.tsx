@@ -1,13 +1,15 @@
+'use client'
+
 import Image from 'next/image'
 import { formatPrice, getDynamicFontSize } from '@/utils/formatters'
 import { StarFavoriteIcon, StarIcon } from '@/components/icons'
 import { useCryptoModalStore } from '@/store/crypto/crypto-modal.store'
 import { useQuery } from '@tanstack/react-query'
-import React from 'react'
+import { DetailsCoinsData, DetailsMarketsData } from '@/components'
+import React, { useState } from 'react'
 import { CryptoModal } from '@/components/ui/crypto-modal'
-import { ICryptoDetails } from '@/types'
 
-const fetchCryptoDetailsData = async (id: string | undefined): Promise<ICryptoDetails> => {
+const fetchCryptoDetailsData = async (id: string | undefined) => {
   if (!id) throw new Error('No crypto ID provided')
   const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/cryptos/${id}`)
 
@@ -29,21 +31,23 @@ interface IProps {
 
 export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeFavorite, addFavorite, className }) => {
   const { isOpen, closeModal, selectedCrypto, index } = useCryptoModalStore()
-  const { data: detailsData, isLoading } = useQuery({
+  const [loading, setLoading] = useState(false)
+
+  const { data: detailsData } = useQuery({
     queryKey: ['cryptoDetails', selectedCrypto?.id],
     queryFn: () => fetchCryptoDetailsData(selectedCrypto?.id),
     staleTime: 30 * 60 * 1000,
-    enabled: !!selectedCrypto?.id && isOpen
+    enabled: !!selectedCrypto
   })
 
-  // if (!isOpen || !selectedCrypto || !detailsData) return null
-  if (!isOpen || !selectedCrypto) return null
+  if (!isOpen || !selectedCrypto || !detailsData) return null
 
   const cryptoPrice = selectedCrypto?.current_price || selectedCrypto?.price || 0
   const isFavorite = favorites.includes(selectedCrypto.id)
 
   const handleFavoriteToggle = async (event: React.MouseEvent) => {
     event.stopPropagation()
+    setLoading(true)
 
     try {
       if (isFavorite) {
@@ -53,6 +57,8 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
       }
     } catch (error) {
       console.error('Error toggling favorite:', error)
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -95,12 +101,12 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
         </button>
       </div>
 
-      {/*{detailsData.markets_coin_data && (*/}
-      {/*  <DetailsCoinsData cryptoMarketCoinData={detailsData.markets_coin_data} />*/}
-      {/*)}*/}
-      {/*{detailsData.markets.length > 0 && (*/}
-      {/*  <DetailsMarketsData cryptoMarketsData={detailsData.markets} />*/}
-      {/*)}*/}
+      {detailsData.markets_coin_data && (
+        <DetailsCoinsData cryptoMarketCoinData={detailsData.markets_coin_data} />
+      )}
+      {detailsData.markets.length > 0 && (
+        <DetailsMarketsData cryptoMarketsData={detailsData.markets} />
+      )}
     </CryptoModal>
   )
 }
