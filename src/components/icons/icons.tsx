@@ -46,7 +46,7 @@ export const SearchIcon = () => (
   </svg>
 )
 
-export const StarIcon = ({ width = 16, height = 16 }: { width?: number, height?: number }) => (
+export const StarIconV2 = ({ width = 16, height = 16 }: { width?: number, height?: number }) => (
   <motion.svg
     width={width}
     height={height}
@@ -66,6 +66,43 @@ export const StarIcon = ({ width = 16, height = 16 }: { width?: number, height?:
       strokeLinejoin="round"
     />
   </motion.svg>
+)
+
+export const StarIcon = ({ width = 16, height = 16 }: { width?: number, height?: number }) => (
+  <svg
+    width={width}
+    height={height}
+    viewBox="0 0 35 36"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M27.9921 34.6662L17.7131 29.0537L7.59696 35L9.37211 22.7272L1 14.1932L12.3761 12.2206L17.318 1L22.5736 12.0537L34 13.653L25.8721 22.4571L27.9921 34.6662Z"
+      stroke="#9D9D9D"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+)
+
+export const StarFavoriteIconV2 = ({ width = 16, height = 16 }: { width?: number, height?: number }) => (
+  <svg
+    width={width}
+    height={height}
+    viewBox="0 0 36 36"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M28.81 34.6662L18.2196 29.0537L7.79686 35L9.62581 22.7272L1 14.1932L12.7208 12.2206L17.8125 1L23.2274 12.0537L35 13.653L26.6258 22.4571L28.81 34.6662Z"
+      fill="#FFB364"
+      stroke="#FFB364"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
 )
 
 export const StarFavoriteIcon = ({ width = 16, height = 16 }: { width?: number, height?: number }) => (

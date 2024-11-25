@@ -8,8 +8,7 @@ import { useCryptoModal } from '@/hooks/useCryptoModalData'
 import { DetailsCoinsData } from '@/components/details-coins-data'
 import { DetailsMarketsData } from '@/components/details-markets-data'
 import { formatPrice, getDynamicFontSize } from '@/utils/formatters'
-import { StarFavoriteIcon } from '@/components/icons'
-import { StarIcon } from 'lucide-react'
+import { StarFavoriteIconV2, StarIconV2 } from '@/components/icons/icons'
 
 interface IProps {
   favorites: string[]
@@ -79,9 +78,9 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
           className="p-1"
         >
           {isFavorite ? (
-            <StarFavoriteIcon width={16} height={16} />
+            <StarFavoriteIconV2 width={16} height={16} />
           ) : (
-            <StarIcon width={16} height={16} />
+            <StarIconV2 width={16} height={16} />
           )}
         </button>
       </div>
