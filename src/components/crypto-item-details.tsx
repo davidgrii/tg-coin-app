@@ -5,20 +5,19 @@ import { formatPrice, getDynamicFontSize } from '@/utils/formatters'
 import { StarFavoriteIcon, StarIcon } from '@/components/icons'
 import { useCryptoModalStore } from '@/store/crypto/crypto-modal.store'
 import { useQuery } from '@tanstack/react-query'
-import { DetailsCoinsData, DetailsMarketsData } from '@/components'
 import React, { useState } from 'react'
 import { CryptoModal } from '@/components/ui/crypto-modal'
 
-const fetchCryptoDetailsData = async (id: string | undefined) => {
-  if (!id) throw new Error('No crypto ID provided')
-  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/cryptos/${id}`)
-
-  if (!res.ok) {
-    console.log('Failed to fetch crypto details')
-  }
-
-  return res.json()
-}
+// const fetchCryptoDetailsData = async (id: string | undefined) => {
+//   if (!id) throw new Error('No crypto ID provided')
+//   const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/cryptos/${id}`)
+//
+//   if (!res.ok) {
+//     console.log('Failed to fetch crypto details')
+//   }
+//
+//   return res.json()
+// }
 
 interface IProps {
   favorites: string[]
@@ -35,7 +34,7 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
 
   const { data: detailsData } = useQuery({
     queryKey: ['cryptoDetails', selectedCrypto?.id],
-    queryFn: () => fetchCryptoDetailsData(selectedCrypto?.id),
+    // queryFn: () => fetchCryptoDetailsData(selectedCrypto?.id),
     staleTime: 30 * 60 * 1000,
     enabled: !!selectedCrypto
   })
@@ -101,12 +100,12 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
         </button>
       </div>
 
-      {detailsData.markets_coin_data && (
-        <DetailsCoinsData cryptoMarketCoinData={detailsData.markets_coin_data} />
-      )}
-      {detailsData.markets.length > 0 && (
-        <DetailsMarketsData cryptoMarketsData={detailsData.markets} />
-      )}
+      {/*{detailsData.markets_coin_data && (*/}
+      {/*  <DetailsCoinsData cryptoMarketCoinData={detailsData.markets_coin_data} />*/}
+      {/*)}*/}
+      {/*{detailsData.markets.length > 0 && (*/}
+      {/*  <DetailsMarketsData cryptoMarketsData={detailsData.markets} />*/}
+      {/*)}*/}
     </CryptoModal>
   )
 }
