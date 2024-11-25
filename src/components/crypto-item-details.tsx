@@ -29,22 +29,22 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
   const cryptoPrice = selectedCrypto?.current_price || selectedCrypto?.price || 0
   const isFavorite = favorites.includes(selectedCrypto.id)
 
-  // const handleFavoriteToggle = async (event: React.MouseEvent) => {
-  //   event.stopPropagation()
-  //   setLoading(true)
-  //
-  //   try {
-  //     if (isFavorite) {
-  //       await removeFavorite(userId, selectedCrypto.id)
-  //     } else {
-  //       await addFavorite(userId, selectedCrypto.id)
-  //     }
-  //   } catch (error) {
-  //     console.error('Error toggling favorite:', error)
-  //   } finally {
-  //     setLoading(false)
-  //   }
-  // }
+  const handleFavoriteToggle = async (event: React.MouseEvent) => {
+    event.stopPropagation()
+    setLoading(true)
+
+    try {
+      if (isFavorite) {
+        await removeFavorite(userId, selectedCrypto.id)
+      } else {
+        await addFavorite(userId, selectedCrypto.id)
+      }
+    } catch (error) {
+      console.error('Error toggling favorite:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   return (
 
@@ -76,6 +76,7 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
 
         <button
           className="p-1"
+          onClick={handleFavoriteToggle}
         >
           {isFavorite ? (
             <StarFavoriteIconV2 width={16} height={16} />
