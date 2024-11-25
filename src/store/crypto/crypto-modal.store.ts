@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { ICrypto } from '@/types'
 
-interface ISelectedCrypto extends ICrypto {
+export interface ISelectedCrypto extends ICrypto {
   price?: number
   market_cap_rank?: number
 }

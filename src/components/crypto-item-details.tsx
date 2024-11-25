@@ -4,22 +4,10 @@ import Image from 'next/image'
 import { formatPrice, getDynamicFontSize } from '@/utils/formatters'
 import { StarFavoriteIcon, StarIcon } from '@/components/icons'
 import { useCryptoModalStore } from '@/store/crypto/crypto-modal.store'
-import { useQuery } from '@tanstack/react-query'
-import { ICryptoDetails } from '@/types'
 import { DetailsCoinsData, DetailsMarketsData } from '@/components'
 import React, { useState } from 'react'
 import { CryptoModal } from '@/components/ui/crypto-modal'
-
-const fetchCryptoDetailsData = async (id: string | undefined): Promise<ICryptoDetails> => {
-  if (!id) throw new Error('No crypto ID provided')
-  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/cryptos/${id}`)
-
-  if (!res.ok) {
-    console.log('Failed to fetch crypto details')
-  }
-
-  return res.json()
-}
+import { useCryptoModal } from '@/hooks/useCryptoModalData'
 
 interface IProps {
   favorites: string[]
@@ -33,13 +21,9 @@ interface IProps {
 export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeFavorite, addFavorite, className }) => {
   const { isOpen, closeModal, selectedCrypto, index } = useCryptoModalStore()
   const [loading, setLoading] = useState(false)
+  const { data: detailsData } = useCryptoModal(selectedCrypto)
 
-  const { data: detailsData } = useQuery({
-    queryKey: ['cryptoDetails', selectedCrypto?.id],
-    queryFn: () => fetchCryptoDetailsData(selectedCrypto?.id),
-    staleTime: 30 * 60 * 1000,
-    enabled: !!selectedCrypto
-  })
+  console.log(detailsData)
 
   if (!isOpen || !selectedCrypto || !detailsData) return null
 
@@ -64,6 +48,7 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
   // }
 
   return (
+    <React.Suspense fallback={<div>Loading details...</div>}>
     <CryptoModal isOpen={isOpen} onClose={closeModal}>
       <div className="flex justify-between w-full bg-accent items-center gap-3 px-6 py-4 rounded-[10px]">
         <div className={'flex items-center gap-2'}>
@@ -113,5 +98,6 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
         </React.Suspense>
       )}
     </CryptoModal>
+    </React.Suspense>
   )
 }
