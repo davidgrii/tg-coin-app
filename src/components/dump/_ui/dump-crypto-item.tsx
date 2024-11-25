@@ -37,8 +37,10 @@ export const DumpCryptoItem: React.FC<IProps> = (
 
   const { openModal, isOpen } = useCryptoModalStore()
 
-  const handleFavoriteToggle = async () => {
+  const handleFavoriteToggle = async (event: React.MouseEvent) => {
+    event.stopPropagation()
     setLoading(true)
+
     try {
       if (isFavorite) {
         await removeFavorite(userId, crypto.id)

@@ -33,7 +33,8 @@ export const TrendingCryptoItem: React.FC<IProps> = (
 
   const { openModal, isOpen } = useCryptoModalStore()
 
-  const handleFavoriteToggle = async () => {
+  const handleFavoriteToggle = async (event: React.MouseEvent) => {
+    event.stopPropagation()
     setLoading(true)
     try {
       if (isFavorite) {
