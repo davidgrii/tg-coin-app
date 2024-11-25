@@ -6,6 +6,7 @@ import { CryptoModal } from '@/components/ui/crypto-modal'
 import { useCryptoModal } from '@/hooks/useCryptoModalData'
 import { DetailsCoinsData } from '@/components/details-coins-data'
 import { DetailsMarketsData } from '@/components/details-markets-data'
+import { StarFavoriteIcon, StarIcon } from '@/components/icons'
 
 interface IProps {
   favorites: string[]
@@ -20,8 +21,6 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
   const { isOpen, closeModal, selectedCrypto, index } = useCryptoModalStore()
   const [loading, setLoading] = useState(false)
   const { data: detailsData } = useCryptoModal(selectedCrypto)
-
-  console.log(detailsData)
 
   if (!isOpen || !selectedCrypto || !detailsData) return null
 
@@ -73,15 +72,15 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
         {/*  </div>*/}
         {/*</div>*/}
 
-        {/*<button*/}
-        {/*  className="p-1"*/}
-        {/*>*/}
-        {/*  {isFavorite ? (*/}
-        {/*    <StarFavoriteIcon width={16} height={16} />*/}
-        {/*  ) : (*/}
-        {/*    <StarIcon width={16} height={16} />*/}
-        {/*  )}*/}
-        {/*</button>*/}
+        <button
+          className="p-1"
+        >
+          {isFavorite ? (
+            <StarFavoriteIcon width={16} height={16} />
+          ) : (
+            <StarIcon width={16} height={16} />
+          )}
+        </button>
       </div>
 
       {detailsData.markets_coin_data && (
