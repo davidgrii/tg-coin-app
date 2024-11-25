@@ -23,12 +23,10 @@ interface IProps {
   favorites: string[]
   userId: string
   index: number
-  addFavorite: (userId: string, id: string) => Promise<void>
-  removeFavorite: (userId: string, id: string) => Promise<void>
   className?: string
 }
 
-export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeFavorite, addFavorite, className }) => {
+export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, className }) => {
   const { isOpen, closeModal, selectedCrypto, index } = useCryptoModalStore()
   const [loading, setLoading] = useState(false)
 
@@ -44,22 +42,22 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
   const cryptoPrice = selectedCrypto?.current_price || selectedCrypto?.price || 0
   const isFavorite = favorites.includes(selectedCrypto.id)
 
-  const handleFavoriteToggle = async (event: React.MouseEvent) => {
-    event.stopPropagation()
-    setLoading(true)
-
-    try {
-      if (isFavorite) {
-        await removeFavorite(userId, selectedCrypto.id)
-      } else {
-        await addFavorite(userId, selectedCrypto.id)
-      }
-    } catch (error) {
-      console.error('Error toggling favorite:', error)
-    } finally {
-      setLoading(false)
-    }
-  }
+  // const handleFavoriteToggle = async (event: React.MouseEvent) => {
+  //   event.stopPropagation()
+  //   setLoading(true)
+  //
+  //   try {
+  //     if (isFavorite) {
+  //       await removeFavorite(userId, selectedCrypto.id)
+  //     } else {
+  //       await addFavorite(userId, selectedCrypto.id)
+  //     }
+  //   } catch (error) {
+  //     console.error('Error toggling favorite:', error)
+  //   } finally {
+  //     setLoading(false)
+  //   }
+  // }
 
   return (
     <CryptoModal isOpen={isOpen} onClose={closeModal}>
@@ -90,7 +88,6 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
 
         <button
           className="p-1"
-          onClick={handleFavoriteToggle}
         >
           {isFavorite ? (
             <StarFavoriteIcon width={16} height={16} />
