@@ -44,43 +44,43 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
   // }
 
   return (
-    <React.Suspense fallback={<div>Loading details...</div>}>
-    <CryptoModal isOpen={isOpen} onClose={closeModal}>
-      {/*<div className="flex justify-between w-full bg-accent items-center gap-3 px-6 py-4 rounded-[10px]">*/}
-      {/*  /!*<div className={'flex items-center gap-2'}>*!/*/}
-      {/*  /!*  <Image*!/*/}
-      {/*  /!*    width={36}*!/*/}
-      {/*  /!*    height={36}*!/*/}
-      {/*  /!*    className="h-9 w-9"*!/*/}
-      {/*  /!*    src={selectedCrypto.image}*!/*/}
-      {/*  /!*    alt={selectedCrypto.name}*!/*/}
-      {/*  /!*  />*!/*/}
-      {/*  */}
-      {/*  /!*  <div className="flex flex-col items-start">*!/*/}
-      {/*  /!*    <div className={'flex gap-1 h-4'}>*!/*/}
-      {/*  /!*      <p className="text-[11px] font-semibold text-muted-foreground truncate">*!/*/}
-      {/*  /!*        {selectedCrypto.name.length > 10 ? `${selectedCrypto.name.slice(0, 14)}...` : selectedCrypto.name}*!/*/}
-      {/*  /!*      </p>*!/*/}
-      {/*  /!*      <span className="w-5 text-[11px] text-muted-foreground font-medium">#{index}</span>*!/*/}
-      {/*  /!*    </div>*!/*/}
-      {/*  */}
-      {/*  /!*    <p*!/*/}
-      {/*  /!*      className={`${getDynamicFontSize(cryptoPrice)} text-foreground font-bold whitespace-nowrap`}>*!/*/}
-      {/*  /!*      {formatPrice(cryptoPrice)} $*!/*/}
-      {/*  /!*    </p>*!/*/}
-      {/*  /!*  </div>*!/*/}
-      {/*  /!*</div>*!/*/}
 
-      {/*  <button*/}
-      {/*    className="p-1"*/}
-      {/*  >*/}
-      {/*    {isFavorite ? (*/}
-      {/*      <StarFavoriteIcon width={16} height={16} />*/}
-      {/*    ) : (*/}
-      {/*      <StarIcon width={16} height={16} />*/}
-      {/*    )}*/}
-      {/*  </button>*/}
-      {/*</div>*/}
+    <CryptoModal isOpen={isOpen} onClose={closeModal}>
+      <div className="flex justify-between w-full bg-accent items-center gap-3 px-6 py-4 rounded-[10px]">
+        {/*<div className={'flex items-center gap-2'}>*/}
+        {/*  <Image*/}
+        {/*    width={36}*/}
+        {/*    height={36}*/}
+        {/*    className="h-9 w-9"*/}
+        {/*    src={selectedCrypto.image}*/}
+        {/*    alt={selectedCrypto.name}*/}
+        {/*  />*/}
+
+        {/*  <div className="flex flex-col items-start">*/}
+        {/*    <div className={'flex gap-1 h-4'}>*/}
+        {/*      <p className="text-[11px] font-semibold text-muted-foreground truncate">*/}
+        {/*        {selectedCrypto.name.length > 10 ? `${selectedCrypto.name.slice(0, 14)}...` : selectedCrypto.name}*/}
+        {/*      </p>*/}
+        {/*      <span className="w-5 text-[11px] text-muted-foreground font-medium">#{index}</span>*/}
+        {/*    </div>*/}
+
+        {/*    <p*/}
+        {/*      className={`${getDynamicFontSize(cryptoPrice)} text-foreground font-bold whitespace-nowrap`}>*/}
+        {/*      {formatPrice(cryptoPrice)} $*/}
+        {/*    </p>*/}
+        {/*  </div>*/}
+        {/*</div>*/}
+
+        {/*<button*/}
+        {/*  className="p-1"*/}
+        {/*>*/}
+        {/*  {isFavorite ? (*/}
+        {/*    <StarFavoriteIcon width={16} height={16} />*/}
+        {/*  ) : (*/}
+        {/*    <StarIcon width={16} height={16} />*/}
+        {/*  )}*/}
+        {/*</button>*/}
+      </div>
 
       {/*{detailsData.markets_coin_data && (*/}
       {/*  <React.Suspense fallback={<div>Loading Coin Data...</div>}>*/}
@@ -94,6 +94,5 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
       {/*  </React.Suspense>*/}
       {/*)}*/}
     </CryptoModal>
-    </React.Suspense>
   )
 }
