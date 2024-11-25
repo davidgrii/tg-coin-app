@@ -46,7 +46,7 @@ export const SearchIcon = () => (
   </svg>
 )
 
-export const StarIconV2 = ({ width = 16, height = 16 }: { width?: number, height?: number }) => (
+export const StarIcon = ({ width = 16, height = 16 }: { width?: number, height?: number }) => (
   <motion.svg
     width={width}
     height={height}
@@ -68,7 +68,7 @@ export const StarIconV2 = ({ width = 16, height = 16 }: { width?: number, height
   </motion.svg>
 )
 
-export const StarIcon = ({ width = 16, height = 16 }: { width?: number, height?: number }) => (
+export const StarIconV2 = ({ width = 16, height = 16 }: { width?: number, height?: number }) => (
   <svg
     width={width}
     height={height}
