@@ -23,10 +23,12 @@ interface IProps {
   favorites: string[]
   userId: string
   index: number
+  addFavorite: (userId: string, id: string) => Promise<void>
+  removeFavorite: (userId: string, id: string) => Promise<void>
   className?: string
 }
 
-export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, className }) => {
+export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeFavorite, addFavorite, className }) => {
   const { isOpen, closeModal, selectedCrypto, index } = useCryptoModalStore()
   const [loading, setLoading] = useState(false)
 
