@@ -58,7 +58,7 @@ export const DumpCryptoItem: React.FC<IProps> = (
   return (
     <>
       <CardContent
-        onClick={() => openModal(crypto, index)}
+        onClick={() => openModal(crypto, crypto.market_cap_rank)}
         className={'p-0 flex justify-between items-center cursor-pointer'}
       >
         <div className="flex items-center gap-2.5">

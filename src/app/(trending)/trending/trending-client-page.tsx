@@ -39,6 +39,7 @@ export default function TrendingClientPage({ initialData }: IProps) {
             trendingCrypto.map((crypto, index) => (
               <TrendingCryptoItem
                 userId={userId}
+                index={index}
                 key={crypto.id}
                 crypto={crypto}
                 favorites={favorites}

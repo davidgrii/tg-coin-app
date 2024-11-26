@@ -25,7 +25,7 @@ export const DetailsMarketsData: React.FC<IProps> = ({ cryptoMarketsData, classN
       </div>
 
       <div
-        className={'w-full rounded-xl px-5 py-3 text-sm font-medium text-foreground border-[4px] border-chart'}
+        className={'w-full rounded-xl px-5 py-3 pb-1.5 text-sm font-medium text-foreground border-[4px] border-chart'}
       >
         {cryptoMarketsData.map((item, index) => (
           <div

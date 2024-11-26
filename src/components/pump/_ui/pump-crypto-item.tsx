@@ -58,7 +58,7 @@ export const PumpCryptoItem: React.FC<IProps> = (
   return (
     <>
       <CardContent
-        onClick={() => openModal(crypto, index)}
+        onClick={() => openModal(crypto, crypto.market_cap_rank)}
         className={'p-0 flex justify-between items-center cursor-pointer'}
       >
 

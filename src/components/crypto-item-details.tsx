@@ -20,7 +20,7 @@ interface IProps {
 }
 
 export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeFavorite, addFavorite, className }) => {
-  const { isOpen, closeModal, selectedCrypto, index } = useCryptoModalStore()
+  const { isOpen, closeModal, selectedCrypto } = useCryptoModalStore()
   const [loading, setLoading] = useState(false)
   const { data: detailsData } = useCryptoModal(selectedCrypto)
 
@@ -64,7 +64,7 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
               <p className="text-[11px] font-semibold text-muted-foreground truncate">
                 {selectedCrypto.name.length > 10 ? `${selectedCrypto.name.slice(0, 14)}...` : selectedCrypto.name}
               </p>
-              <span className="w-5 text-[11px] text-muted-foreground font-medium">#{index}</span>
+              <span className="w-5 text-[11px] text-muted-foreground font-medium">#{selectedCrypto.market_cap_rank}</span>
             </div>
 
             <p

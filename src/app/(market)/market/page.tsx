@@ -14,7 +14,6 @@ import { Categories } from '@/components/categories'
 export default function MarketPage() {
 
   const { data: initialCryptoData = [], isLoading: isLoad } = useCryptoData()
-
   const { bot, userId, initializeBot, recordVisit } = useTelegramStore()
 
   useInitializeCryptoStore(userId)
@@ -79,8 +78,6 @@ export default function MarketPage() {
     })
   }, [bot, userId, recordVisit])
 
-  // if (isLoad) return <div> Loading </div>
-
   return (
     <Container className={'pt-0 mb-20'}>
       <Categories />
@@ -106,7 +103,6 @@ export default function MarketPage() {
           next={loadMoreItems}
           hasMore={itemsToShow < filteredCryptoData.length}
           loader={<div className="grid justify-start gap-8">{isLoading && <CryptoSkeleton />}</div>}
-          endMessage={<p>No more items to load</p>}
           scrollThreshold={0.9}
         >
           <Card className={'bg-background grid gap-8 border-0'}>

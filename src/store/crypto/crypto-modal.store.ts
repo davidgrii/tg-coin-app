@@ -3,21 +3,20 @@ import { ICrypto } from '@/types'
 
 export interface ISelectedCrypto extends ICrypto {
   price?: number
-  market_cap_rank?: number
 }
 
 interface ICryptoModalStore {
+  rank: number
   isOpen: boolean
   selectedCrypto: ISelectedCrypto | null
-  index: number
-  openModal: (crypto: ICrypto, index: number) => void
+  openModal: (crypto: ICrypto, rank: number) => void
   closeModal: () => void
 }
 
 export const useCryptoModalStore = create<ICryptoModalStore>((set) => ({
-  index: 0,
+  rank: 0,
   isOpen: false,
   selectedCrypto: null,
-  openModal: (crypto, index) => set({ isOpen: true, selectedCrypto: crypto, index: index + 1 }),
+  openModal: (crypto, rank) => set({ isOpen: true, selectedCrypto: crypto, rank: rank + 1 }),
   closeModal: () => set({ isOpen: false, selectedCrypto: null })
 }))

@@ -10,6 +10,7 @@ import { useCryptoModalStore } from '@/store/crypto/crypto-modal.store'
 interface IProps {
   userId: string
   favorites: string[]
+  index: number
   crypto: ITrendingCrypto
   addFavorite: (userId: string, id: string) => Promise<void>
   removeFavorite: (userId: string, id: string) => Promise<void>
@@ -19,6 +20,7 @@ interface IProps {
 export const TrendingCryptoItem: React.FC<IProps> = (
   {
     userId,
+    index,
     crypto,
     favorites,
     addFavorite,
@@ -58,7 +60,7 @@ export const TrendingCryptoItem: React.FC<IProps> = (
       >
 
         <div className="flex items-center gap-2.5">
-          <span className="w-5 text-sm text-muted-foreground">{crypto.market_cap_rank}</span>
+          <span className="w-5 text-sm text-muted-foreground">{index + 1}</span>
 
           <Image
             width={36}
