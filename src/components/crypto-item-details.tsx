@@ -9,6 +9,7 @@ import { DetailsCoinsData } from '@/components/details-coins-data'
 import { DetailsMarketsData } from '@/components/details-markets-data'
 import { formatPrice, getDynamicFontSize } from '@/utils/formatters'
 import { StarFavoriteIconV2, StarIconV2 } from '@/components/icons/icons'
+import { MoreCryptoInfo } from '@/components/more-crypto-info'
 
 interface IProps {
   favorites: string[]
@@ -22,6 +23,7 @@ interface IProps {
 export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeFavorite, addFavorite, className }) => {
   const { isOpen, closeModal, selectedCrypto } = useCryptoModalStore()
   const [loading, setLoading] = useState(false)
+  const [agree, setAgree] = useState(false)
   const { data: detailsData } = useCryptoModal(selectedCrypto)
 
   if (!isOpen || !selectedCrypto || !detailsData) return null
@@ -47,7 +49,6 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
   }
 
   return (
-
     <CryptoModal isOpen={isOpen} onClose={closeModal}>
       <div className="flex justify-between w-full bg-accent items-center gap-3 px-6 py-4 rounded-[10px]">
         <div className={'flex items-center gap-2'}>
@@ -64,7 +65,8 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
               <p className="text-[11px] font-semibold text-muted-foreground truncate">
                 {selectedCrypto.name.length > 10 ? `${selectedCrypto.name.slice(0, 14)}...` : selectedCrypto.name}
               </p>
-              <span className="w-5 text-[11px] text-muted-foreground font-medium">#{selectedCrypto.market_cap_rank}</span>
+              <span
+                className="w-5 text-[11px] text-muted-foreground font-medium">#{selectedCrypto.market_cap_rank}</span>
             </div>
 
             <p
@@ -74,16 +76,20 @@ export const CryptoItemDetails: React.FC<IProps> = ({ userId, favorites, removeF
           </div>
         </div>
 
-        <button
-          className="p-1"
-          onClick={handleFavoriteToggle}
-        >
-          {isFavorite ? (
-            <StarFavoriteIconV2 width={16} height={16} />
-          ) : (
-            <StarIconV2 width={16} height={16} />
-          )}
-        </button>
+        <div className={'flex gap-4 items-center'}>
+         <MoreCryptoInfo cryptoId={selectedCrypto.id}/>
+
+          <button
+            className="p-1"
+            onClick={handleFavoriteToggle}
+          >
+            {isFavorite ? (
+              <StarFavoriteIconV2 width={16} height={16} />
+            ) : (
+              <StarIconV2 width={16} height={16} />
+            )}
+          </button>
+        </div>
       </div>
 
       {detailsData.markets_coin_data && (
