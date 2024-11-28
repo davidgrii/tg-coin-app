@@ -89,7 +89,12 @@
     },
     "markets": "Ринки",
     "exchange": "Біржи",
-    "volume_24h": "Обсяг 24г"
+    "volume_24h": "Обсяг 24г",
+    "coingeko_info": {
+      "title": "Дивитися детальніше на Coingecko?",
+      "agree": "Продовжити",
+      "disagree": "Відмінити"
+    }
   },
   "input_search": {
     "search": "Знайти монету...",

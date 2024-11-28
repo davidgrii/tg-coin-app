@@ -96,6 +96,11 @@ declare module 'i18next' {
           "markets": string
           "exchange": string
           "volume_24h": string
+          "coingeko_info": {
+            "title": string
+            "agree": string
+            "disagree": string
+          }
         },
         input_search: {
           search: string

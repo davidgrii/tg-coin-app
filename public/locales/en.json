@@ -89,7 +89,12 @@
     },
     "markets": "MARKETS",
     "exchange": "Exchanges",
-    "volume_24h": "Volume 24h"
+    "volume_24h": "Volume 24h",
+    "coingeko_info": {
+      "title": "View details on Coingecko?",
+      "agree": "Continue",
+      "disagree": "Cancel"
+    }
   },
   "input_search": {
     "search": "Search coin...",

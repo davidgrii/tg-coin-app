@@ -31,14 +31,14 @@ export const MoreCryptoInfo: React.FC<IProps> = ({ cryptoId }) => {
       <AlertDialogContent className={'max-w-80 -mr-5 pl-5'}>
         <AlertDialogHeader>
           <AlertDialogTitle className={'text-center text-[16px]'}>
-            View details on Coingecko?
+            {t('crypto_details_popup.coingeko_info.title')}
           </AlertDialogTitle>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel
             className={'bg-[#1C1C1E] border-0 text-foreground w-20 h-9 hover:bg-card focus-visible:ring-0 active:border-0 hover:text-foreground rounded-lg'}
           >
-            Cancel
+            {t('crypto_details_popup.coingeko_info.agree')}
           </AlertDialogCancel>
 
           <AlertDialogAction
@@ -49,7 +49,7 @@ export const MoreCryptoInfo: React.FC<IProps> = ({ cryptoId }) => {
               href={`https://www.coingecko.com/en/coins/${cryptoId}`}
               target={'_blank'}
             >
-              Continue
+              {t('crypto_details_popup.coingeko_info.disagree')}
               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
                    className="icon icon-tabler icons-tabler-outline icon-tabler-external-link">
