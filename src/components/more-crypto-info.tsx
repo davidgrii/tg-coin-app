@@ -31,12 +31,12 @@ export const MoreCryptoInfo: React.FC<IProps> = ({ cryptoId }) => {
       <AlertDialogContent className={'max-w-80 -mr-5 pl-5'}>
         <AlertDialogHeader>
           <AlertDialogTitle className={'text-center text-[16px]'}>
-            View details on Coingeck?
+            View details on Coingecko?
           </AlertDialogTitle>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel
-            className={'bg-[#1C1C1E] border-0 text-foreground w-20 h-9 hover:bg-card hover:text-foreground rounded-lg'}
+            className={'bg-[#1C1C1E] border-0 text-foreground w-20 h-9 hover:bg-card focus:border-none hover:text-foreground rounded-lg'}
           >
             Cancel
           </AlertDialogCancel>
