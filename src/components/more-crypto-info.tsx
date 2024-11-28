@@ -36,7 +36,7 @@ export const MoreCryptoInfo: React.FC<IProps> = ({ cryptoId }) => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel
-            className={'bg-[#1C1C1E] border-0 text-foreground w-20 h-9 hover:bg-card focus:border-none hover:text-foreground rounded-lg'}
+            className={'bg-[#1C1C1E] border-0 text-foreground w-20 h-9 hover:bg-card focus:border-0 active:border-0 hover:text-foreground rounded-lg'}
           >
             Cancel
           </AlertDialogCancel>
