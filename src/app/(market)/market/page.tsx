@@ -27,7 +27,12 @@ export default function MarketPage() {
   const [isLoading, setIsLoading] = useState(false)
   const [isEndOfList, setIsEndOfList] = useState(false)
 
-  const { filteredCryptoData } = useCryptoFilter(initialCryptoData, searchValue)
+  const { filteredCryptoData } = useCryptoFilter(
+    initialCryptoData
+      .filter(crypto => crypto.market_cap_rank >= 1 && crypto.market_cap_rank <= 1000) 
+      .sort((a, b) => a.market_cap_rank - b.market_cap_rank),
+    searchValue
+  )
 
   const handleScroll = useCallback(() => {
     if (

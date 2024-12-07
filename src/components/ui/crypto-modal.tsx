@@ -1,5 +1,6 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import React, { useEffect } from 'react'
 import ReactDOM from 'react-dom'
 import { CloseIcon } from 'next/dist/client/components/react-dev-overlay/internal/icons/CloseIcon'
@@ -63,7 +64,11 @@ export const CryptoModal: React.FC<ModalProps> = ({ isOpen, onClose, children })
   if (typeof window === 'undefined') return null
 
   return ReactDOM.createPortal(
-    <div
+    <motion.div
+      initial={{ scale: 0.6, opacity: 0.5 }}
+      animate={{ scale: 1, opacity: 1 }}
+      exit={{ scale: 0.1, opacity: 0 }}
+      transition={{ duration: 0.2 }}
       className="fixed w-full h-full inset-0 z-50 flex items-start justify-center bg-[#1C1C1E] bg-opacity-70"
       onClick={safeOnClose}
       onTouchStart={(e) => e.stopPropagation()}
@@ -80,7 +85,7 @@ export const CryptoModal: React.FC<ModalProps> = ({ isOpen, onClose, children })
         </button>
         {children}
       </div>
-    </div>,
+    </motion.div>,
     document.body
   )
 }
