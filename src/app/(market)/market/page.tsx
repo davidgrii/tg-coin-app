@@ -12,8 +12,7 @@ import { useTelegramStore } from '@/store/telegram/telegram.store'
 import { Categories } from '@/components/categories'
 
 export default function MarketPage() {
-
-  const { data: initialCryptoData = [], isLoading: isLoad } = useCryptoData()
+  const { data: initialCryptoData = [], isLoading: isLoadingCrypto } = useCryptoData()
   const { bot, userId, initializeBot, recordVisit } = useTelegramStore()
 
   useInitializeCryptoStore(userId)
@@ -82,6 +81,10 @@ export default function MarketPage() {
       console.error('Ошибка при записи визита:', error)
     })
   }, [bot, userId, recordVisit])
+
+  if (isLoadingCrypto) {
+    return 'Loading'
+  }
 
   return (
     <Container className={'pt-0 mb-20'}>

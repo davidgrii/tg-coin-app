@@ -66,5 +66,4 @@ export const CATEGORIES_NAV_ITEMS: INavItems[] = [
     active: true,
     key: 'dump'
   },
-
 ]
