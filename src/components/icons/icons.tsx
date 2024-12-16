@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import React from 'react'
 
 export const MarketIcon = () => (
   <svg width="21" height="21" viewBox="0 0 62 52" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -264,6 +265,15 @@ export const MarketDetailsIcon = ({ width, height }: { width: number, height: nu
       d="m182.45 118.32a61.75 61.75 0 0 1 -14.52 9.31 92.3 92.3 0 0 1 -16.3 5.94c-5.6 1.45-11.46 2.54-17.39 2s-12-2.56-15.91-7l.19-.22c4.84 3.13 10.37 4.23 15.89 4.39a75 75 0 0 0 16.71-1.39 91.3 91.3 0 0 0 16.24-5 61 61 0 0 0 14.91-8.24z"
       fill="#58595b" />
     <path d="m0 0h762.77v229.79h-762.77z" fill="none" />
+  </svg>
+)
+
+export const SpinnerIcon = ({ width, height }: { width: number, height: number }) => (
+  <svg className="animate-spin" width="23" height="23" viewBox="0 0 36 36" fill="none"
+       xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M18 4C20.4335 4 22.825 4.63432 24.9386 5.84041C27.0522 7.0465 28.815 8.7827 30.053 10.8778C31.291 12.9729 31.9615 15.3544 31.9984 17.7877C32.0353 20.2209 31.4373 22.6218 30.2634 24.7534C29.0895 26.8851 27.3803 28.6739 25.3042 29.9436C23.2281 31.2132 20.857 31.9198 18.4246 31.9936C15.9922 32.0674 13.5826 31.5059 11.4333 30.3644C9.28412 29.223 7.46955 27.541 6.16858 25.4845"
+      stroke="#007AFF" strokeWidth="3" strokeLinecap="round" />
   </svg>
 )
 

@@ -2,22 +2,22 @@
 
 import { create } from 'zustand'
 import { useEffect } from 'react'
-import { ICrypto, ICryptoStore } from '@/types'
+import { ICryptoStore } from '@/types'
 
 export const useCryptoStore = create<ICryptoStore>((set) => ({
-  favorites: [],
+  favorites: [''],
+  favoritesCryptoData: [],
   isLoading: true,
-  cryptoData: [],
 
   initializeFavorites: async (userId: string) => {
     set({ isLoading: true })
 
     try {
-      const res = await fetch(`https://priceme.store/api/users/${userId}/favorites`)
+      const res = await fetch(`http://localhost:5000/api/users/${userId}/favorites`)
 
       if (res.ok) {
-        const data = await res.json()
-        set({ favorites: data.favorites || [], isLoading: false })
+        const { data, favorites } = await res.json()
+        set({ favoritesCryptoData: data, favorites: favorites || [], isLoading: false })
       } else {
         console.error('Error fetching favorites:', res.statusText)
         set({ isLoading: false })
@@ -63,6 +63,10 @@ export const useCryptoStore = create<ICryptoStore>((set) => ({
       if (res.ok) {
         const updatedUser = await res.json()
         set({ favorites: updatedUser.favorites })
+
+        set((state) => ({
+          favoritesCryptoData: state.favoritesCryptoData.filter(crypto => crypto.id !== id)
+        }))
       } else {
         console.error('Error removing favorite:', res.statusText)
       }
@@ -70,8 +74,6 @@ export const useCryptoStore = create<ICryptoStore>((set) => ({
       console.error('Error removing favorite:', error)
     }
   },
-
-  setCryptoData: (data: ICrypto[]) => set({ cryptoData: data })
 }))
 
 export const useInitializeCryptoStore = (userId: string) => {

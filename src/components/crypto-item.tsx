@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React from 'react'
 import { CardContent } from '@/components/ui/card'
 import { StarFavoriteIcon, StarIcon } from '@/components/icons'
 import { ICrypto } from '@/types'
@@ -8,7 +8,7 @@ import { formatPrice, getDynamicFontSize } from '@/utils/formatters'
 import Image from 'next/image'
 import { useCryptoModalStore } from '@/store/crypto/crypto-modal.store'
 import { CryptoItemDetails } from '@/components/crypto-item-details'
-
+import { AnimatePresence } from 'framer-motion'
 
 interface IProps {
   userId: string
@@ -30,7 +30,6 @@ export const CryptoItem: React.FC<IProps> = (
     removeFavorite
   }) => {
 
-  const [loading, setLoading] = useState(false)
   const isFavorite = favorites.includes(crypto.id)
   const priceChange = crypto.price_change_percentage_24h ?? 0
   const isPricePositive = !priceChange.toString().includes('-')
@@ -39,7 +38,6 @@ export const CryptoItem: React.FC<IProps> = (
 
   const handleFavoriteToggle = async (event: React.MouseEvent) => {
     event.stopPropagation()
-    setLoading(true)
 
     try {
       if (isFavorite) {
@@ -50,13 +48,13 @@ export const CryptoItem: React.FC<IProps> = (
 
     } catch (error) {
       console.error('Error toggling favorite:', error)
-    } finally {
-      setLoading(false)
     }
   }
 
+  if (!crypto.current_price) return null
+
   return (
-    <>
+    <AnimatePresence>
       <CardContent
         onClick={() => openModal(crypto, crypto.market_cap_rank)}
         className={'p-0 flex justify-between items-center cursor-pointer'}>
@@ -111,7 +109,6 @@ export const CryptoItem: React.FC<IProps> = (
             }
           </button>
         </div>
-
       </CardContent>
 
       {isOpen &&
@@ -123,6 +120,6 @@ export const CryptoItem: React.FC<IProps> = (
           index={index}
         />
       }
-    </>
+    </AnimatePresence>
   )
 }

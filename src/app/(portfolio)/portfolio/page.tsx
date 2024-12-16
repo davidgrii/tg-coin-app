@@ -23,7 +23,6 @@ export default function PortfolioPage() {
   const [activeCryptoId, setActiveCryptoId] = useState<string | null>(null)
 
   const [showSkeletons, setShowSkeletons] = useState<boolean>(false)
-  const [isDataLoaded, setIsDataLoaded] = useState<boolean>(false)
 
   const {
     portfolio,
@@ -115,7 +114,7 @@ export default function PortfolioPage() {
   }, [])
 
   useEffect(() => {
-    let timer: NodeJS.Timeout;
+    let timer: NodeJS.Timeout
 
     if (isLoading) {
       timer = setTimeout(() => {
@@ -130,27 +129,12 @@ export default function PortfolioPage() {
     }
   }, [isLoading])
 
-  useEffect(() => {
-    if (!isLoading) {
-      setIsDataLoaded(true)
-    }
-  }, [isLoading])
-
   return (
     <Container className={'pt-0'}>
       <BalanceTableHeader />
 
       {showSkeletons ? (
-        <motion.div
-          className={'grid justify-start gap-8 pt-4'}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          {new Array(10).fill(null).map((_, index) => (
-            <CryptoSkeleton key={index} />
-          ))}
-        </motion.div>
+        <CryptoSkeleton itemsCount={10} />
       ) : (
         <motion.div
           initial={{ opacity: 0 }}

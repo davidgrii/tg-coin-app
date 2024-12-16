@@ -14,7 +14,7 @@ const fetchDumpCryptoData = async (): Promise<ICrypto[]> => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/pumpdump`, {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({
       type: 'dump',
@@ -55,9 +55,10 @@ export default function DumpClientPage({ initialData }: IProps) {
       >
         <Card className={'bg-background grid gap-8 border-0'}>
           {isFetching && isLoading ? (
-            new Array(10).fill(null).map((_, index) => (
-              <CryptoSkeleton className={'justify-start'} key={index} />
-            ))
+            <CryptoSkeleton
+              className={'justify-start'}
+              itemsCount={10}
+            />
           ) : (
             dumpCryptoData.map((crypto, index) => (
               <DumpCryptoItem

@@ -107,7 +107,7 @@ export const usePortfolioStore = create<IPortfolioStore>((set) => ({
 
   updateCryptoData: (data) => set((state) => ({
     portfolio: state.portfolio.map((crypto) => {
-      const updatedCrypto = data.find(c => c._id === crypto._id)
+      const updatedCrypto = data?.find(c => c._id === crypto._id)
       return updatedCrypto ? { ...crypto, ...updatedCrypto } : crypto
     })
   })),

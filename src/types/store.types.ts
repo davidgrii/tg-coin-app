@@ -2,12 +2,11 @@ import { ICrypto, IGlobalMarketData, IPortfolioItem } from '@/types/crypto.types
 
 export interface ICryptoStore {
   favorites: string[]
+  favoritesCryptoData: ICrypto[]
   isLoading: boolean
-  cryptoData: ICrypto[]
   addFavorite: (userId: string, id: string) => Promise<void>
   removeFavorite: (userId: string, id: string) => Promise<void>
   initializeFavorites: (userId: string) => Promise<void>
-  setCryptoData: (data: ICrypto[]) => void
 }
 
 export interface IPortfolioStore {

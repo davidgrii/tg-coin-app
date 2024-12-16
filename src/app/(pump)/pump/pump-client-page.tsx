@@ -49,7 +49,7 @@ export default function PumpClientPage({ initialData }: IProps) {
   return (
     <>
       <Categories />
-      
+
       <PumpTableHeader />
 
       <motion.div
@@ -60,9 +60,10 @@ export default function PumpClientPage({ initialData }: IProps) {
       >
         <Card className={'bg-background grid gap-8 border-0'}>
           {isLoading ? (
-            new Array(10).fill(null).map((_, index) => (
-              <CryptoSkeleton className={'justify-start'} key={index} />
-            ))
+            <CryptoSkeleton
+              className={'justify-start'}
+              itemsCount={10}
+            />
           ) : (
             pumpCryptoData.map((crypto, index) => (
               <PumpCryptoItem
